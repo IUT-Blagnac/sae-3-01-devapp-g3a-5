@@ -3,12 +3,15 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Chasse au trésor : interface administrateur</title>
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	jfdsifjidsfjdisjfsjfdofisjo
+	<br> je ne suis littééralement pas up to date
 		<h2>Bienvenue sur l'interface administrateur !</h2>
 		<button> Message </button>
 
-		<table>
+		<table border="1">
 			<tr>
 				<td rowspan ="4"> Equipe A </td>
 				<td> Id Capteur </td>
