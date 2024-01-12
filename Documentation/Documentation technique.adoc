@@ -1,3 +1,17 @@
-= Documentation technique
+
+= Documentation Technique
+:toc: macro
+:toclevels: 3
+:toc-title: 
+
+Réalisé par *Thomas Duppi, Loïs Pacqueteau, Vincent Barette, Loélia Demany*
+
+Documentation technique pour le projet de chasse au trésor LocuraIoT
+
+== Sommaire
 
 toc::[]
+
+== PRÉSENTATION DE L'APPLICATION
+
+== ...
