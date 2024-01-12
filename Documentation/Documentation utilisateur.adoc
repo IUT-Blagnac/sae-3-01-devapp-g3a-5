@@ -1,3 +1,30 @@
+
 = Documentation utilisateur
+:toc: macro
+:toclevels: 3
+:toc-title: 
+
+Réalisé par *Thomas Duppi, Loïs Pacqueteau, Vincent Barette, Loélia Demany*
+
+Documentation utilisateur pour le projet de chasse au trésor LocuraIoT
+
+== Sommaire
 
 toc::[]
+
+== PRÉSENTATION GÉNÉRALE
+
+== RÔLE DE APPLICATION
+
+== INSTALLATION ET UTILISATION DE L'APPLICATION
+
+=== Installation de l'application
+
+=== Utilisation de l'application
+
+
+==== 1. Index
+
+==== 2. Interface administrateur
+
+==== 1. Interface utilisateur
