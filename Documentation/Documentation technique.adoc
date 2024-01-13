@@ -14,4 +14,56 @@ toc::[]
 
 == PRÉSENTATION DE L'APPLICATION
 
-== ...
+== Architecture Système
+
+=== Dossier du Code Source (`CodeSource`)
+
+Ce dossier contient l'ensemble du code source de votre application.
+
+=== Fichiers PHP
+
+==== `IHM_admin.php`
+
+Fichier PHP responsable de l'interface utilisateur administrateur.
+Gère l'affichage des informations administratives et des statistiques du jeu. 
+
+==== `IHM_User.php`
+
+Fichier PHP responsable de l'interface utilisateur pour les joueurs.
+Gère l'affichage de l'interface de jeu, de la progression globale des joueurs, etc.
+
+=== Dossier `assets`
+
+Ce dossier contient des ressources utilisées par l'application.
+
+==== `style.scss`
+
+Fichier SCSS contenant les styles de votre application.
+Doit être compilé en CSS pour être utilisé dans les pages PHP.
+
+=== Dossier `images`
+
+Contient les images utilisées dans l'IHM, telles que des icônes, des logos, etc.
+
+=== Dossier `js`
+
+Ce dossier contient les fichiers JavaScript nécessaires pour l'IHM.
+
+==== `admin.js`
+
+Fichier JavaScript spécifique à l'IHM administrateur.
+Gère les fonctionnalités administratives et les interactions avec l'IHM_admin.php.
+
+==== `user.js`
+
+Fichier JavaScript spécifique à l'IHM utilisateur.
+Gère les fonctionnalités du jeu et les interactions avec l'IHM_User.php.
+
+==== Communication avec les Données du Jeu via Web Serial
+
+Les fichiers JavaScript (`admin.js` et `user.js`) utilisent la Web Serial API pour établir une communication avec le matériel du jeu.
+
+
+== Protocole de communication
+
+== Evolutivité
