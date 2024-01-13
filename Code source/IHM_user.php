@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div class="nav-bar">
-		<h1>Bienvenue sur la carte de la course</h1>
+		<h2>Bienvenue sur la carte de la course</h2>
 	</div>
         
         <div class="centered-div">
@@ -41,7 +41,7 @@
 					<td class="corner-bottom-right"></td>
 				</tr> -->
 				<?php
-    			$tab = array("j1", "j2", "j3", "j4", "j5", "j6", "j7","j8","j9","j10","j11","j12");
+    			$tab = array("j0","j1", "j2", "j3", "j4","j5");
 				$cpt = 0;
 
 				// Utilisation de la fonction count pour obtenir la taille de la liste
@@ -61,28 +61,37 @@
 					if($i%2 == 0){
 						if($j == 0 && $i==0){
 							return "rounded-left";
-						}if ($j == 0 && $i!=0){
+						}else if($j == 0 && position($i,$j) == $liste_size-1){
+							return "rounded-down";
+						}
+						else if ($j == 0 && $i!=0){
 							return "corner-bottom-left";
 						}
-						else if($j == 4 ){
+						else if($j == 4 && position($i,$j) != $liste_size-1){
 							return "corner-top-right";
 						}
 						else if($i % 2 == 0 && position($i,$j) == $liste_size-1){
 							return "rounded-right";
 						}
+						
 						else{
 							return "";
 						}
 					}
 					else{
-						if($j == 0){
-							return "corner-top-left";
+						if($j == 4 && position($i,$j) == $liste_size-1){
+							return "rounded-down";
 						}
-						else if($j == 4){
+						else if($j == 0 && position($i,$j) < $liste_size-1){
+							return "corner-top-left";
+						} 
+						else if($j == 4 && position($i,$j) != $liste_size-1){
 							return "corner-bottom-right";
 						}
 						else if($i % 2 != 0 && position($i,$j) == $liste_size-1){
 							return "rounded-left";
+						}else if($i % 2 != 0 && position($i,$j) > $liste_size-1){
+							return "hidden";
 						}
 
 						else{
@@ -98,27 +107,30 @@
 				$rep_max=ceil($rep_max);
 				// var_dump($rep_max);
     
-				for($i = 0; $i <1000; $i++) {
+				for($i = 0; $i <$rep_max; $i++) {
+					
 					echo "<tr id=' $i'>";
 					for ($j = 0; $j <$liste_size ; $j++) {
+						
 						if($i%2 == 0){
 							if($j < 5){
 								if($cpt < $liste_size){	
 									$corner_class = attributeCLass($i, $j,$liste_size);
-									// var_dump($i,$j);							
+									// var_dump($cpt,$liste_size,"j=".$j);	
+															
 									echo "<td id=".position($i,$j)." class=".$corner_class.">".position($i,$j)."</td>";
 									$cpt++;
+									
 								}
 							}
 						}
 						else{
 							if($j < 5){
-								if($cpt < $liste_size){	
-									$corner_class = attributeCLass($i, $j,$liste_size);
-									// var_dump($i,$j);							
-									echo "<td id=".position($i,$j)." class=".$corner_class.">".position($i,$j)."</td>";
-									
+								$corner_class = attributeCLass($i, $j,$liste_size);
+								if($cpt < $liste_size){
+									$cpt++;
 								}
+								echo "<td id=".position($i,$j)." class=".$corner_class.">".position($i,$j)."</td>";
 							}
 						}
 						
