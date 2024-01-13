@@ -18,7 +18,7 @@ toc::[]
 
 === Dossier du Code Source (`CodeSource`)
 
-Ce dossier contient l'ensemble du code source de votre application.
+Ce dossier contient l'ensemble du code source de l'app.
 
 === Fichiers PHP
 
@@ -67,3 +67,6 @@ Les fichiers JavaScript (`admin.js` et `user.js`) utilisent la Web Serial API po
 == Protocole de communication
 
 == Evolutivité
+le code php est réalisé de maniere a s'adapter a une liste de balise plus il y a de balise plus le plateau de 
+jeu sera grand. Pour l'instant on utilise une liste quelquonque mais lorsque la communication en webserial sera 
+realisé on mettra une vrai liste de balise au deuxieme
