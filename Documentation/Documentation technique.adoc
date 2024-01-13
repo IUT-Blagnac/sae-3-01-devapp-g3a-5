@@ -67,6 +67,7 @@ Les fichiers JavaScript (`admin.js` et `user.js`) utilisent la Web Serial API po
 == Protocole de communication
 
 == Evolutivité
-le code php est réalisé de maniere a s'adapter a une liste de balise plus il y a de balise plus le plateau de 
+Le code php est réalisé de maniere a s'adapter a la taille d'une liste de balise. Plus il y a de balise, plus le plateau de 
 jeu sera grand. Pour l'instant on utilise une liste quelquonque mais lorsque la communication en webserial sera 
-realisé on mettra une vrai liste de balise au deuxieme
+réalisé on mettra une veritable liste de balise au deuxieme sprint. Si a l'avenir on souhaite faire un jeu comme ca avec beauucoup de 
+balise, l'ihm sera fonctionnel!
