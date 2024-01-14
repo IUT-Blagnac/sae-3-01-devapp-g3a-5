@@ -1,30 +1,50 @@
+= Documentation Utilisateur - Interface Web de Chasse aux Trésors Numériques
+:toc:
+:toc-title: Sommaire
 
-= Documentation utilisateur
-:toc: macro
-:toclevels: 3
-:toc-title: 
+Créé par : Pacqueteau Loïs, Duppi Thomas, Demany Loelia, Barette Vincent
 
-Réalisé par *Thomas Duppi, Loïs Pacqueteau, Vincent Barette, Loélia Demany*
+== I. Introduction
+[.text-justify]
+Cette documentation a pour but de vous aider à comprendre le fonctionnement du site de jeu.
 
-Documentation utilisateur pour le projet de chasse au trésor LocuraIoT
+== II. Règle du Jeu
+[.text-justify]
 
-== Sommaire
+=== 1. Localisation des Objets
+Les équipes s'affrontent pour retrouver des objets connectés disséminés sur la plateforme. Les informations de localisation des objets sont fournies par la plateforme LocURa4IoT.
 
-toc::[]
+=== 2. Règles de Recherche
+Chaque équipe possède doit trouver tous les checkpoints dans un ordre définit aléatoirement. Chaque équipe doit trouver les checkpoints dans l'ordre qui lui est attribué. Les boities de recherches changent de couleurs et clignotent de plus en plus vite lorsque l'équipe se rapproche de la balise.
 
-== PRÉSENTATION GÉNÉRALE
+=== 3. Conditions de Victoire
+Un chronomètre permet de mesurer le temps que chaque équipe mets pour trouver toutes les balises. L'équipe qui trouve toutes les balises en le moins de temps possible remporte la partie.
 
-== RÔLE DE APPLICATION
+=== 4. Déroulement du Jeu
+1. Les équipes se rassemblent à la balise de départ.
+2. Chaque équipe reçoit un boitié qui détecte les balises.
+3. Les équipes partent ensuite à la recherche des objets dans la zone désignée.
+4. Les équipes doivent signaler chaque objet trouvé à la plateforme LocURa4IoT pour validation.
+5. La plateforme met à jour régulièrement les informations de localisation pour maintenir le défi.
+6. Une fois que toutes les équipes ont trouvées tout les checkpoints, les équipes retournent à la balise de départ pour la déclaration des résultats.
+7. L'équipe avec le temps le plus court remporte la partie.
 
-== INSTALLATION ET UTILISATION DE L'APPLICATION
+== III. Pre-Requis :
+[.text-justify]
+Pour utiliser le jeu, vous devez posséder un ordinateur avec un navigateur web. Vous devez également posséder les boitiers de recherche de balises ainsi que les balises.  Il est aussi nécessaire d'avoir le pont qui permet de lire les données des balises et de les envoyer sur le site web.
 
-=== Installation de l'application
+== IV. Utilisation de l'application
+[.text-justify]
 
-=== Utilisation de l'application
+=== 1. Lancement du Site web
+Fonctionnalité en cours de développement.
+Rendez vous sur le site web à l'adresse suivante :
 
+=== 2. Navigation sur le Site
+Fonctionnalité en cours de développement.
 
-==== 1. Index
+=== 3. Interactions sur le Jeu
+Fonctionnalité en cours de développement.
 
-==== 2. Interface administrateur
-
-==== 1. Interface utilisateur
+=== 4. Personnalisation des Paramètres
+Fonctionnalité en cours de développement.
