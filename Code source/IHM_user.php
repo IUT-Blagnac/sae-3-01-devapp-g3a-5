@@ -2,6 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	  <script src="assets/js/user.js"> </script>
     <link rel="stylesheet" href="./assets/style.scss" />
     <title>Chasse au trésor : interface utilisateur</title>
 </head>
@@ -12,39 +14,11 @@
         
         <div class="centered-div">
             <table>
-                <!-- <tr id="1">
-                    <td class="rounded-left"></td>
-                    <td></td>
-                    <td></td>
-					<td></td>
-					<td class="corner-top-right"></td>
-                </tr>	
-				<tr id="2">
-					<td class="corner-top-left"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td class="corner-bottom-right"></td>
-				</tr>
-				<tr id="3">
-                    <td class="corner-bottom-left"></td>
-                    <td></td>
-                    <td></td>
-					<td></td>
-					<td class="corner-top-right"></td>
-                </tr>
-				<tr id="4">
-					<td class="rounded-left"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td class="corner-bottom-right"></td>
-				</tr> -->
+              
 				<?php
     			$tab = array("j0","j1", "j2", "j3", "j4","j5");
 				$cpt = 0;
 
-				// Utilisation de la fonction count pour obtenir la taille de la liste
 				$liste_size = count($tab);
 
 				function position($i,$j){
@@ -98,14 +72,11 @@
 							return "";
 						}
 					}
-
-
-					
 				};
-				// liste-size on le divise par cinq et on l'arrondi au superieur
+				
 				$rep_max=$liste_size/5;
 				$rep_max=ceil($rep_max);
-				// var_dump($rep_max);
+				
     
 				for($i = 0; $i <$rep_max; $i++) {
 					
@@ -132,20 +103,12 @@
 								}
 								echo "<td id=".position($i,$j)." class=".$corner_class."></td>";
 							}
-						}
-						
-						
+						}					
 					}
-
-					
-
 					echo "</tr>";
 				}
 				?>
             </table>
         </div>
-        <?php
-         echo"";
-         ?>
 </body>
 </html>

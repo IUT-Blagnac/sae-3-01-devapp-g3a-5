@@ -107,14 +107,11 @@ De plus ce fichier `README.adoc` devra être à jour des informations suivantes 
 - Indicateurs de qualité du code (dette technique)
 - ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
 
-Voici un exemple d'évaluation :
+== evaluation hebdomadaire
 
 ifdef::env-github[]
-image:https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1850914734&amp;format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1850914734&amp;format=image]
+image:https://docs.google.com/spreadsheets/d/e/2PACX-1vRtGk-4u-mv4RE4q76-qFY-Iy48o1WzcqSP-upBv9doa23kDXzFfHmnZaux3pDt5g/pubchart?oid=1421946479&format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vRtGk-4u-mv4RE4q76-qFY-Iy48o1WzcqSP-upBv9doa23kDXzFfHmnZaux3pDt5g/pubchart?oid=1421946479&format=image]
 endif::[]
 
-ifndef::env-github[]
-++++
-<iframe width="786" height="430" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1850914734&amp;format=image"></iframe>
-++++
-endif::[]
+Sprint 1 : Adapter le template du readme je n'ai aucun lien vers votre projet ! Pas de release, mettre au moins un état d'avancement. Je n'ai pas de backlog produit avec liste des US (priorité et complexité). Tâches sans label ni milestone non rattachées à une US. Pas de backlog sprint 2. Pas de bilan sprint 1 !
+

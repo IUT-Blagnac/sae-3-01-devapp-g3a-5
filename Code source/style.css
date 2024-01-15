@@ -1,0 +1,122 @@
+@font-face {
+    font-family: ArialRounded;
+    src: url(ArialRounded.ttf);
+  }
+
+body {
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    font-family: ArialRounded;
+}
+
+table {
+    border: 3;
+    border-style: double;
+    width: 90%;
+    margin: auto;
+    margin-top: 5%;
+    padding: 5px;
+}
+
+tr, td {
+    border: 1px solid;
+    text-align: center;
+    padding: 5px;
+}
+
+.overlaycenter {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.dark {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998; 
+}
+
+button {
+    padding: 15px;
+    margin: 10px;
+    margin-left: 10%;
+    border-radius: 20px;
+    width: 100px;
+    background-color: chocolate;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: coral;
+    transition: 0.5s;
+}
+
+.icon {
+    margin: auto;
+    width: 20px;
+}
+
+.label {
+    text-align: center;
+    font-weight: bold;
+    font-family: ArialRounded;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.tabEquipes {
+    margin-top: 70px;
+}
+
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+
+@keyframes deplacementInformation {
+    0% {
+        opacity: 0;
+        transform: translateX(-600px);
+    }
+    20%{
+        opacity: 0.8;
+    }
+    40%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+    60%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(600px);
+    }
+}

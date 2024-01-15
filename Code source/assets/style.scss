@@ -1,9 +1,7 @@
 .centered-div{
     display: flex;
     justify-content: center;
-//     padding: 30%;
    padding-top: 5%;
-//    padding-bottom: 10%;
 }
 body{
     background-image: url("./images/background.jpg");
@@ -83,7 +81,5 @@ td.rounded-down{
 }
 
 td.position-right{
-    //mettre la position à droite du tableau
     text-align: right;
-    
 }

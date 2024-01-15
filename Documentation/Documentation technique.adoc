@@ -1,3 +1,83 @@
-= Documentation technique
+
+= Documentation Technique
+:toc: macro
+:toclevels: 3
+:toc-title: 
+
+Réalisé par *Thomas Duppi, Loïs Pacqueteau, Vincent Barette, Loélia Demany*
+
+Documentation technique pour le projet de chasse au trésor LocuraIoT
+
+== Sommaire
 
 toc::[]
+
+== Présentation de l'application
+
+=== 1. Contexte
+
+LocURa4IoT a développé un jeu de chasse au trésor : Des joueurs doivent trouver des checkpoints à l'aide d'un noeud, le tout se basant sur la technologie des flux mqtt. Le jeu est actuellement fonctionnel mais manque d'une interface pour faciliter son déroulement. C'est ainsi que nous intervenons :  Nous sommes une équipe de 4 développeurs en alternance chargé de créer une interface destinée aux administrateur, pour visualiser son déroulement et intervenir si besoin, et une interface utilisateur qui sera diffusée à tous les joueurs pour qu'ils aient une idée de l'avancement de la partie.
+
+=== 2. Use cases généraux
+
+image::img/doc_tech_usecase_admingen.png[]
+
+image::img/doc_tech_usecase_usergen.png[]
+
+== Architecture Système
+
+=== Dossier du Code Source (`CodeSource`)
+
+Ce dossier contient l'ensemble du code source de l'app.
+
+=== Fichiers PHP
+
+==== `IHM_admin.php`
+
+Fichier PHP responsable de l'interface utilisateur administrateur.
+Gère l'affichage des informations administratives et des statistiques du jeu. 
+
+==== `IHM_User.php`
+
+Fichier PHP responsable de l'interface utilisateur pour les joueurs.
+Gère l'affichage de l'interface de jeu, de la progression globale des joueurs, etc.
+
+=== Dossier `assets`
+
+Ce dossier contient des ressources utilisées par l'application.
+
+==== `style.scss`
+
+Fichier SCSS contenant les styles de votre application.
+Doit être compilé en CSS pour être utilisé dans les pages PHP.
+
+=== Dossier `images`
+
+Contient les images utilisées dans l'IHM, telles que des icônes, des logos, etc.
+
+=== Dossier `js`
+
+Ce dossier contient les fichiers JavaScript nécessaires pour l'IHM.
+
+==== `admin.js`
+
+Fichier JavaScript spécifique à l'IHM administrateur.
+Gère les fonctionnalités administratives et les interactions avec l'IHM_admin.php.
+
+==== `user.js`
+
+Fichier JavaScript spécifique à l'IHM utilisateur.
+Gère les fonctionnalités du jeu et les interactions avec l'IHM_User.php.
+
+==== Communication avec les Données du Jeu via Web Serial
+
+Les fichiers JavaScript (`admin.js` et `user.js`) utilisent la Web Serial API pour établir une communication avec le matériel du jeu.
+
+
+== Protocole de communication
+
+== Evolutivité
+Le code php est réalisé de maniere a s'adapter a la taille d'une liste de balise. Plus il y a de balise, plus le plateau de 
+jeu sera grand. Pour l'instant on utilise une liste quelquonque mais lorsque la communication en webserial sera 
+réalisé on mettra une veritable liste de balise au deuxieme sprint. Si a l'avenir on souhaite faire un jeu comme ca avec beauucoup de 
+balise, l'ihm sera fonctionnel!
