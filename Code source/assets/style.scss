@@ -14,15 +14,19 @@ body{
     margin: 0;
 }
 div.nav-bar{
-    background-color: rgb(255, 246, 246);
+    background-color: rgba(70, 70, 70, 0.503);
     padding: 0px;
+    color: aliceblue;
+    
     margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 td.hidden{
     visibility: hidden;
+    border: 0;
 }
 
 table{

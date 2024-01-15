@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div class="nav-bar">
-		<h2>Bienvenue sur la carte de la course</h2>
+		<p>Bienvenue sur la carte de la course</p>
 	</div>
         
         <div class="centered-div">
@@ -118,7 +118,7 @@
 									$corner_class = attributeCLass($i, $j,$liste_size);
 									// var_dump($cpt,$liste_size,"j=".$j);	
 															
-									echo "<td id=".position($i,$j)." class=".$corner_class.">".position($i,$j)."</td>";
+									echo "<td id=".position($i,$j)." class=".$corner_class."></td>";
 									$cpt++;
 									
 								}
@@ -130,7 +130,7 @@
 								if($cpt < $liste_size){
 									$cpt++;
 								}
-								echo "<td id=".position($i,$j)." class=".$corner_class.">".position($i,$j)."</td>";
+								echo "<td id=".position($i,$j)." class=".$corner_class."></td>";
 							}
 						}
 						
