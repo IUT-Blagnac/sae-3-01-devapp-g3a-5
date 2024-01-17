@@ -67,6 +67,7 @@ Tuteurices de l'équipe::
 :is_o: image:{badge}Issue-WIP-brightgreen.svg[link="{baseURL}/issues/
 :is_c: image:{badge}Issue-Done-purple.svg[link="{baseURL}/issues/
 :uc_: image:{badge}UseCase-gold.svg[link="{baseURL}/issues/
+:us_: image:{badge}UserStory-orange.svg[link="{baseURL}/issues/
 
 :doc_t_o: image:{badge}D.%20Tech-WIP-brightgreen.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
 :doc_u_o: image:{badge}D.%20Util-WIP-brightgreen.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
@@ -77,8 +78,9 @@ Tuteurices de l'équipe::
 
 [options="header"]
 |=======================
-|Respo|UseCases  |Issues                |Docs                        | Tests
-|{vt} |{uc_}21"] |{is_o}2  "]{is_c}2  "]|{doc_t_o}sommaire "]{doc_u_o}i-introduction"]|
+|Respo|US/UC  |Issues                |Docs                        | Tests
+|{vt} |{us_}15"] |{is_o}2  "]{is_c}2  "]|{doc_t_c}ihm_userphp "]{doc_u_o}i-introduction"]|
+|{ts} |{uc_}21"] |{is_o}2  "]{is_c}2  "]|{doc_t_o}fichiers-php "]{doc_u_o}i-introduction"]|
 
 
 |=======================
