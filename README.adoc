@@ -14,6 +14,7 @@
 :git: http://git-scm.com/[{icongit}]
 :plantuml: https://plantuml.com/fr/[plantUML]
 :vscode: https://code.visualstudio.com/[VS Code]
+:badge: https://img.shields.io/badge/
 
 ifndef::env-github[:icons: font]
 // Specific to GitHub
@@ -28,22 +29,7 @@ ifdef::env-github[]
 :icongit: Git
 endif::[]
 
-// /!\ A MODIFIER !!!
-:baseURL: https://github.com/IUT-Blagnac/sae3-01-template
-
-// Tags
-image:{baseURL}/actions/workflows/blank.yml/badge.svg[Bidon] 
-image:{baseURL}/actions/workflows/build.yml/badge.svg[Build] 
-image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests] 
-image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License: MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
-//---------------------------------------------------------------
-
-TIP: Pensez à mettre à jour les infos dans ce fichier pour que les badges pointent sur les résultats effectifs de vos intégrations continue ou sur la bonne licence logicielle.
-
-WARNING: Ce dépôt présente le projet à développer dans le cadre de la SAÉ 3.01 du BUT1 Informatique de l'IUT de Blagnac.
-
-Ce fichier `README.adoc` (dont vous lisez sûrement le rendu HTML automatiquement effectué par GitHUb), fait partie du dépôt initial cloné à partir du lien GitHub classroom qui vous a été donné en cours (https://classroom.github.com/a/fePVlfpN).
-Vous trouverez le dépôt "template" qui a servi de base ici : https://github.com/IUT-Blagnac/sae3-01-template. En complément du cours Moodle de la SAE 3.01 (cf. <<liensUtiles>>), ce dépôt template vous permet d'accéder à des exemples d'https://github.com/IUT-Blagnac/sae3-01-template/issues[issues], de https://github.com/IUT-Blagnac/sae3-01-template/releases[releases], ou d'autres artefacts à venir.
+:baseURL: https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5
 
 toc::[]
 
@@ -51,67 +37,70 @@ toc::[]
 
 Projet est réalisé par::
 
-- https://github.com/thomasduppi[Thomas DUPPI]
-- https://github.com/loisPacqueteau[Loïs PACQUETEAU]
-- https://github.com/vincentEnRoueLibre[Vincent BARETTE]
-- https://github.com/L-Demany[Loélia DEMANY]
-...
+- https://github.com/thomasduppi[Thomas Duppy]
+- https://github.com/loisPacqueteau[Loïs Pacqueteau]
+- https://github.com/vincentEnRoueLibre[Vincent Barette]
+- https://github.com/L-Demany[Loélia Demany]
 
-Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
 
-== Contexte général
+Tuteurices de l'équipe::
+- RB
+- EP
+- Quentin Vey
+- Adrien Van
 
-TIP: Cette partie de votre `README.adoc` peut être supprimée ou mise ailleurs.
+== Répartition des tâches et état d'avancement
 
-=== Dépôt initial
+=== Sprint 1
 
-Ce dépôt initial a été créé pour que tous les groupes de 2ème année aient les mêmes informations de départ.
+=== Sprint 2
 
-Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pas utiles :
+:sp: 2
 
-- `.gitignore` => un fichier minimaliste des éléments à ne pas pousser en général sur vos dépôts (utiliser la commande `git add -f` pour forcer l'ajout d'un fichier Jar qui ne bougera plus, pour archive par exemple).
-- `.github` => le répertoire qui contient des éléments de gestion de projet :
-** `workflows` => le repertoire qui contient les actions à lancer à chaque push sur votre repo. 
-*** `blank.yml` => un exemple bidon mais dont vous pourrez vérifier l’exécution correcte (1er tag)
-** `ISSUE_TEMPLATE` => le repertoire qui contient quelques templates pour vos issues.
-*** `us.yml` => Exemple de template pour les User Stories
-*** `bug.yml` => Exemple de template pour les issues de bug report
+:vt: Vincent
+:la: Loélia
+:ts: Thomas
+:lo: Loïs
 
-TIP: Adaptez ces fichiers à votre projet et à votre organisation. Et inspirez-vous en pour en ajouter.
+:branch: master
 
-[[liensUtiles]]
-=== Liens utiles
+:is_o: image:{badge}Issue-WIP-brightgreen.svg[link="{baseURL}/issues/
+:is_c: image:{badge}Issue-Done-purple.svg[link="{baseURL}/issues/
+:uc_: image:{badge}UseCase-gold.svg[link="{baseURL}/issues/
 
-- Le https://webetud.iut-blagnac.fr/course/view.php?id=841[cours Moodle] sur la SAE
-- Le dépôt https://github.com/IUT-Blagnac/sae3-01-template[template] qui sert de base à tous les dépôts étudiants.
-- Le lien https://classroom.github.com/a/OUF7gxEa[classroom] si besoin.
+:doc_t_o: image:{badge}D.%20Tech-WIP-brightgreen.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
+:doc_u_o: image:{badge}D.%20Util-WIP-brightgreen.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
 
-TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
+:doc_t_c: image:{badge}D.%20Tech-Done-purple.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
+:doc_u_c: image:{badge}D.%20Util-Done-purple.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
 
-== Réalisations 
 
-TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre dépôt (comment on installe votre application, où sont les docs, etc.)
+[options="header"]
+|=======================
+|Respo|UseCases  |Issues                |Docs                        | Tests
+|{vt} |{uc_}21"] |{is_o}2  "]{is_c}2  "]|{doc_t_o}sommaire "]{doc_u_o}i-introduction"]|
+
+
+|=======================
+
 
 == Gestion de projet & Qualité
 
-Chaque sprint (semaine) vous devrez livrer une nouvelle version de votre application (release).
-Utilisez pour cela les fonctionnalités de GitHub pour les https://docs.github.com/en/repositories/releasing-projects-on-github[Releases].
+:release: 0.1.0
 
-De plus ce fichier `README.adoc` devra être à jour des informations suivantes :
+- Version courante : image:{badge}Version-{release}-purple.svg[link="https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/releases/tag/{release} "]
+- link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20technique.adoc[Lien vers la doc technique]
+- link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20utilisateur.adoc[Lien vers la doc utilisateur]
+- link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Cahier%20de%20tests.adoc[Lien vers le cahier de recettes]
+- Les UserStories se trouvent dans *Répartition des tâches et état d'avancement*
 
-- Version courante : https://github.com/IUT-Blagnac/sae3-01-template/releases/tag/v0.1.2[v0.1.2]
-- Lien vers la doc technique
-- Lien vers la doc utilisateur
-- Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant
-- Tests unitaires et plans de test
-- Indicateurs de qualité du code (dette technique)
-- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
-
-== evaluation hebdomadaire
+== Evaluation hebdomadaire
 
 ifdef::env-github[]
 image:https://docs.google.com/spreadsheets/d/e/2PACX-1vRtGk-4u-mv4RE4q76-qFY-Iy48o1WzcqSP-upBv9doa23kDXzFfHmnZaux3pDt5g/pubchart?oid=1421946479&format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vRtGk-4u-mv4RE4q76-qFY-Iy48o1WzcqSP-upBv9doa23kDXzFfHmnZaux3pDt5g/pubchart?oid=1421946479&format=image]
 endif::[]
 
 Sprint 1 : Adapter le template du readme je n'ai aucun lien vers votre projet ! Pas de release, mettre au moins un état d'avancement. Je n'ai pas de backlog produit avec liste des US (priorité et complexité). Tâches sans label ni milestone non rattachées à une US. Pas de backlog sprint 2. Pas de bilan sprint 1 !
+
+
 
