@@ -42,10 +42,19 @@ Ordinateur sous Windows ou OS équivalent.
 
 
 == Cas de test :
-=== Fonctionnalités des guichetiers :
-==== Gestion des clients :
+=== Fonctionnalités Panel Administrateur :
+:lvl1: 01
+> Ces tests ne regardent que le panel des administrateurs.
+
+==== Gestion des joueurs :
+:lvl2: 01
+
 
 |====
+
+/////////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:lvl3: 01 // Numéro du test 🟦
 
 >|Cas de test 4+|Test-01-01-01
 >|Titre 4+|Création d'un nouveau client
@@ -304,7 +313,8 @@ Un prélèvement est sélectionné. ^| OK
 
 
 
-===  Fonctionnalités des chefs d'agence :
+=== Fonctionnalités Utilisateur :
+> Les fonctionnalités "utilisateur" regardent principalement les affichages simples d'information à l'écran.
 [.text-justify]
 Les chefs d'agence ont accès aux mêmes fonctionnalités que les guichetiers, ainsi que d'autres qui leur sont réservées.
 
