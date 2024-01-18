@@ -9,6 +9,23 @@
 	<div class="nav-bar">
 		<h1> Bienvenue sur la carte de la course LocURa4IoT!</h1>
 	</div>
+	<div class="classMere">
+		<div class="centered-div">
+			<table>
+				<tr>
+					<td class="joueur"></td>
+					<td class="joueur-name">nom du joueur</td>	
+				</tr>
+				<tr>
+					<td class="joueur"></td>
+					<td class="joueur-name">nom du joueur</td>	
+				</tr>
+				<tr>
+					<td class="joueur"></td>
+					<td class="joueur-name">nom du joueur</td>	
+				</tr>
+			</table>
+		</div>
         <div class="centered-div">
             <table>
 				<?php
@@ -134,8 +151,7 @@
 				?>
             </table>
         </div>
-        <?php
-         echo"";
-         ?>
+	</div>
+        
 </body>
 </html>
