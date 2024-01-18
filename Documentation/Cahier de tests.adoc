@@ -5,8 +5,12 @@
 :title-page:
 :sectnums:
 :stem: asciimath
-:Entreprise: DailyBank
+:Entreprise: Chasse au Trésor
 :Equipe:
+:badge: https://img.shields.io/badge/
+:test_ok: image:{badge}Test-Passed-blue.svg[]
+:test_ko: image:{badge}Test-Failed-red.svg[]
+
 
 * Thomas Duppi
 * Loélia Demany
@@ -43,457 +47,41 @@ Ordinateur sous Windows ou OS équivalent.
 
 == Cas de test :
 === Fonctionnalités Panel Administrateur :
-:lvl1: 01
+:lvl1: 1
 > Ces tests ne regardent que le panel des administrateurs.
 
 ==== Gestion des joueurs :
-:lvl2: 01
+:lvl2: 1
 
 
-|====
-
-/////////// DEBUT DE NOUVEAU TEST ///////////
+// ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
-:lvl3: 01 // Numéro du test 🟦
+:num_test: 1
+:nom_test: Création d'un nouveau client
+:objectif: Vérifier qu'il est possible de créer un nouveau client
 
->|Cas de test 4+|Test-01-01-01
->|Titre 4+|Création d'un nouveau client
->|Objectif 4+| Vérifier qu'il est possible de créer un nouveau client
 
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-orange.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
 5+|
+|====
+
+
+|====
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_C.1 ^|Cliquer sur le bouton "Nouveau client". ^|La fenêtre de création des clients s'ouvre. ^| aucune ^|OK
-^|All_G_C.2 ^|Compléter les champs spécifiés et valider. ^|Un nouveau client est créé. ^|aucune ^|OK
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Cliquer sur le bouton "Nouveau client". ^|La fenêtre de création des clients s'ouvre. ^| Aucune ^|{test_ko}
 
 
 5+|
 
-5+|Commentaire :
+5+|Commentaire : blabla
 |====
-
-
-|====
-
->|Cas de test 4+|Test-01-01-02
->|Titre 4+|Modification d'un client
->|Objectif 4+| Vérifier qu'il est possible de modifier un client
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_C.3 ^|Cliquer sur le bouton "Modifier client". ^|La fenêtre de modification des données du client s'ouvre. ^|Le client est sélectionné. ^|OK
-^|All_G_C.4 ^|Modifier les champs souhaités et confirmer. ^|Retour sur les informations du client. Le client est modifié. ^|La fenêtre « modifier » client est active ^|OK
-^|All_G_C.5 ^|Modifier les champs souhaités et annuler. ^|Retour sur les informations du client. Le client est inchangé. ^|La fenêtre « modifier » client est active ^|OK
-
-|====
-
-
-==== Gestion des comptes bancaires :
-
-
-|====
-
->|Cas de test 4+|Test-01-02-03
->|Titre 4+|Consultation d'un compte
->|Objectif 4+| Vérifier qu'il est possible de consulter un compte
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur le bouton "Comptes client". ^|La page des comptes du client s’affiche. ^|Un client actif est sélectionné. ^|OK
-^|All_G_CB.2 ^|Sélectionner le bouton "Voir opérations". ^|La page des opérations du compte s’affiche. ^|Un compte actif est sélectionné. ^|OK
-
-
-
-|====
-
-|====
-
->|Cas de test 4+|Test-01-02-03
->|Titre 4+|Clôturer un compte
->|Objectif 4+| Vérifier qu'il est possible de clôturer un compte
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CB.1 ^|Cliquer sur le bouton "Comptes client". ^|La page des comptes du client s’affiche. ^|Un client actif est sélectionné. ^|OK
-^|All_G_CB.3 ^|Sélectionner le bouton "Clôturer compte". ^|Une alerte nous indiquant que le compte est clôturé s'affiche et le compte est en mode clôturé ^|Un compte actif est sélectionné, son solde doit être à 0 et seulement les chefs d'agence peuvent clôturer. ^|OK
-
-|====
-
-|====
-
->|Cas de test 4+|Test-01-02-04
->|Titre 4+|Création d'un compte
->|Objectif 4+| Vérifier qu'il est possible de créer un compte
-
-5+|
-
-^|All_G_CB.1 ^|Sélectionner le bouton "Nouveau compte". ^|La fenêtre de création des comptes s'ouvre. ^|Le découvert autorisé doit être inférieur à 0. ^|OK
-^|All_G_CB.2 ^|Compléter les champs spécifiés et valider. ^|Un nouveau compte est créé. ^|Un client actif doit être selectionné et tous les champs doivent être remplis ^|OK
-
-|====
-
-
-==== Gestion des opérations :
-
-|====
-
->|Cas de test 4+|Test-01-03-01
->|Titre 4+|Débiter un compte
->|Objectif 4+| Vérifier qu'il est possible de débiter un compte
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_COP.1 ^|Cliquer sur le bouton "Enregistrer Débit". ^|La page des débits du compte s’affiche. ^| Un compte actif est sélectionné. ^|OK
-^|All_G_COP.2  ^|Rentrer un montant 50 dans le champ "Montant". ^|Le sole du compte est décrémenté de 50euros. On a créé une nouvelle opération dans la liste des opérations avec le bon montant et la bonne date ^| Le compte sélectionné a un solde de +100 euros
-^|OK
-^|All_G_COP.3  ^|Rentrer un montant 150 dans le champ "Montant". ^|Le nouveau solde est -50 euros. On a créé une nouvelle opération dans la liste des opérations avec le bon montant et la bonne date ^| Le compte sélectionné a un solde de +100 euros, le découvert
-autorisé est de -100 euros.
-^|OK
-^|All_G_COP.4  ^|Rentrer un montant 250 dans le champ "Montant". ^|Blocage ! + pop-up ^| Le compte sélectionné a un solde de +100 euros, le découvert
-autorisé est de -100 euros.
-^|OK
-
-|====
-
-
-
-|====
-
->|Cas de test 4+|Test-01-03-02
->|Titre 4+|Créditer un compte
->|Objectif 4+| Vérifier qu'il est possible de créditer un compte
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CCB.1 ^|Cliquer sur le bouton "Enregistrer Crédit". ^|La page des crédits du compte s’affiche. ^| Un compte actif est sélectionné. ^|OK
-^|All_G_CCB.2  ^|Rentrer un montant 50 dans le champ "Montant". ^|Le sole du compte est incrémenté de 50euros. On a créé une nouvelle opération dans la liste des opérations avec le bon montant et la bonne date ^| Aucune
-^|OK
-^|All_G_CCB.3  ^|Rentrer un montant 50 dans le champ "Montant". Modifier le type d'opération par "Dépôt Chèque". ^| Cette opération de crédit est enregistrée comme "Dépôt Chèque". ^| Aucune
-^|OK
-
-
-|====
-
-
-|====
-
->|Cas de test 4+|Test-01-03-03
->|Titre 4+|Effectuer un virement
->|Objectif 4+| Vérifier qu'il est possible de virer de l'argent d'un compte à un autre
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|All_G_CCB.1 ^|Cliquer sur le bouton "Enregistrer Virement". ^|La page d'enregistrement d'une opération du compte s’affiche. ^| Un compte actif est sélectionné. ^|OK
-^|All_G_CCB.2  ^|Rentrer un montant 50 dans le champ "Montant", et l'identifiant du compte qui va recevoir le virement (12). ^|Le sole du compte est décrémenté de 50euros. Le solde du compte 12 est incrémenté de 50euors ^| Le solde du compte doit être suffisant.
-
-Il faut connaître l'identifiant du compte cible.
-^|OK
-^|All_G_CCB.3  ^|Rentrer un montant et saisir un identifiant dont le compte est cloturé. ^| L'opération doit être refusée. ^| Aucune
-^|Test non passé, à implémenter
-
-
-|====
-
-==== Génération d’un relevé de compte :
-
-|====
->|Cas de test 4+|Test-01-04-01
->|Titre 4+|Génération d’un relevé de compte
->|Objectif 4+| Vérifier qu'il est possible de générer un relevé de compte
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-
-^|All_G_GRC.1 ^|Sélectionner un compte et cliquer sur le bouton « Générer relevé ». ^|Une page s'ouvre demandant la date du relevé ^|aucune ^|OK
-
-^|All_G_GRC.2 ^|Rentrer une date et valider. ^|Une fenêtre de sélection de l’emplacement du relevé s’ouvre ^|La date n’est pas dans le futur ^|OK
-
-^|All_G_GRC.3 ^|Sélectionner un emplacement et valider. ^|Le relevé est généré et enregistré à l’emplacement sélectionné ^|l’emplacement est valide ^|OK
-
-|====
-
-==== Gestion des prélèvements automatiques
-
-|====
-
->|Cas de test 4+|Test-01-05-01
->|Titre 4+| Ajouter un prélèvement
->|Objectif 4+| Vérifier qu'il est possible de créer un nouveau prélèvement automatique
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_GPA.1    ^|Cliquer sur le bouton "Nouveau prélèvement" ^|La fenêtre de création de prélèvement s’ouvre  ^| Un compte bancaire de l'un des clients a été selectionné ^| OK
-^|C_G_GPA.2   ^|Compléter les champs et valider ^|Un nouveau prélèvement est créé. ^| aucune ^| OK
-
-|====
-
-|====
-
->|Cas de test 4+|Test-01-05-02
->|Titre 4+| Modifier un prélèvement
->|Objectif 4+| Vérifier qu'il est possible de modifier un prélèvement existant
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_GPA.3    ^|Cliquer sur le bouton "Modifier prélèvement" ^|La fenêtre de modification de prélèvement s’ouvre avec les informations du prélèvement selectionné ^| Un compte bancaire de l'un des clients a été selectionné
-
-Un prélèvement est sélectionné. ^| OK
-^|C_G_GPA.4   ^|Modifier un ou plusieurs champ·s et valider ^|Le prélèvement sélectionné a été modifié  ^| Aucune ^| OK
-
-|====
-
-|====
-
->|Cas de test 4+|Test-01-05-03
->|Titre 4+| Affichage des prélèvements
->|Objectif 4+| Vérifier qu'il est possible d’afficher la liste des prélèvements
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_GPA.5    ^|Cliquer sur le bouton « Rechercher »  ^|La liste se remplit avec tous les prélèvements du compte bancaire ^| Un compte bancaire de l'un des clients a été selectionné
-
-Les champs de recherche sont vides.
-^| OK
-|====
-
-|====
-
->|Cas de test 4+|Test-01-05-04
->|Titre 4+| Recherche d’un prélèvement par son numéro
->|Objectif 4+| Vérifier qu'il est possible de rechercher un prélèvement par son identifiant
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_GPA.6    ^|Remplir le champ numéro avec le numéro d’un prélèvement existant.
-
-Cliquer ensuite sur le bouton « Rechercher »  ^|La liste affiche l’prélèvement recherché ^| Un compte bancaire de l'un des clients a été selectionné
-
-le prélèvement saisi existe
-^| OK
-|====
-
-|====
-
->|Cas de test 4+|Test-01-05-05
->|Titre 4+| Recherche de tous les prélèvements d'un compte
->|Objectif 4+| Vérifier qu'il est possible d'afficher tous les prélèvements d'un compte
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_GPA.7    ^|Cliquer ensuite sur le bouton « Rechercher » sans taper de numéro de recherche. ^|La liste affiche les prélèvements du compte selectionné ^| Un compte bancaire de l'un des clients a été selectionné
-^| OK
-|====
-
-|====
-
->|Cas de test 4+|Test-01-05-06
->|Titre 4+| Supprimer un prélèvement
->|Objectif 4+| Vérifier qu'il est possible de supprimer un prélèvement existant
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_GPA.8    ^|Cliquer sur le bouton "Supprimer prélèvement" ^|Une fenêtre de validation doit s’ouvrir^| Un compte bancaire de l'un des clients a été selectionné
-
-Un prélèvement est sélectionné. ^| OK
-^|C_G_GPA.9   ^|Cliquer sur le bouton de validation ^|le prélèvement sélectionné a été modifié  ^| aucune ^| OK
-
-|====
-
-
-
-=== Fonctionnalités Utilisateur :
-> Les fonctionnalités "utilisateur" regardent principalement les affichages simples d'information à l'écran.
-[.text-justify]
-Les chefs d'agence ont accès aux mêmes fonctionnalités que les guichetiers, ainsi que d'autres qui leur sont réservées.
-
-==== Gestion des clients :
-
-|====
->|Cas de test 4+|Test-02-01-01
->|Titre 4+|Rendre inactif un client
->|Objectif 4+| Vérifier qu'il est possible de rendre un client inactif
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_C.1    ^|Sélectionner le bouton "Inactif" et confirmer. ^|...  ^|Un client actif est sélectionné ... ^| ...
-
-5+|
-
-5+|Commentaire : REVOIR AVEC
-*clôturés*.|
-|====
-
-==== Gestion des Employés
-
-|====
-
->|Cas de test 4+|Test-02-02-01
->|Titre 4+| Ajouter un employé
->|Objectif 4+| Vérifier qu'il est possible de créer un nouvel employé
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_E.1    ^|Cliquer sur le bouton "Nouvel employé" ^|La fenêtre de création d’employé s’ouvre  ^|L’utilisateur est connecté en tant que chef d’agence ^| OK
-^|C_G_E.2   ^|Compléter les champs et valider ^|Un nouvel employé est créé.  ^| aucune ^| OK
-
-|====
-
-|====
-
->|Cas de test 4+|Test-02-02-02
->|Titre 4+| Modifier un employé
->|Objectif 4+| Vérifier qu'il est possible de modifier un employé existant
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_E.3    ^|Cliquer sur le bouton "Modifier employé" ^|La fenêtre de modification d’employé s’ouvre avec les informations de l’employé selection ^|L’utilisateur est connecté en tant que chef d’agence
-
-Un employé est sélectionné. ^| OK
-^|C_G_E.4   ^|Modifier un ou plusieurs champ·s et valider ^|L’employé sélectionné a été modifié  ^| aucune ^| OK
-
-|====
-
-|====
-
->|Cas de test 4+|Test-02-02-03
->|Titre 4+| Affichage des employés
->|Objectif 4+| Vérifier qu'il est possible d’afficher la liste des employés
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_E.5    ^|Cliquer sur le bouton « Rechercher »  ^|La liste se remplit avec tous les employés de l’agence ^|L’utilisateur est connecté en tant que chef d’agence
-
-Les champs de recherche sont vides.
-^| OK
-|====
-
-|====
-
->|Cas de test 4+|Test-02-02-04
->|Titre 4+| Recherche d’un employé par son numéro
->|Objectif 4+| Vérifier qu'il est possible de rechercher un employé par son numéro
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_E.6    ^|Remplir le champ numéro avec le numéro d’un Employé existant.
-
-Cliquer ensuite sur le bouton « Rechercher »  ^|La liste affiche l’employé recherché ^|L’utilisateur est connecté en tant que chef d’agence
-
-L’employé saisi existe
-^| OK
-|====
-
-|====
-
->|Cas de test 4+|Test-02-02-05
->|Titre 4+| Recherche d’employé par le début de leur nom prénom
->|Objectif 4+| Vérifier qu'il est possible de rechercher des employés par leurs noms et prénoms
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_E.7    ^|Remplir le champ nom avec le début du nom d’un employé et remplir le champ prénom avec le début du prénom de l’employé.
-
-Cliquer ensuite sur le bouton « Rechercher »  ^|La liste affiche l’employé recherché ^|L’utilisateur est connecté en tant que chef d’agence
-
-L’employé saisi existe
-^| OK
-|====
-
-|====
-
->|Cas de test 4+|Test-02-02-06
->|Titre 4+| Supprimer un employé
->|Objectif 4+| Vérifier qu'il est possible de supprimer un employé existant
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_G_E.3    ^|Cliquer sur le bouton "Supprimer employé" ^|Une fenêtre de validation doit s’ouvrir^|L’utilisateur est connecté en tant que chef d’agence
-
-Un employé est sélectionné. ^| OK
-^|C_G_E.4   ^|Cliquer sur le bouton « Ok » ^|L’employé sélectionné a été modifié  ^| aucune ^| OK
-
-|====
-
-==== Débits exceptionnels
-
-|====
-
->|Cas de test 4+|Test-02-03-01
->|Titre 4+| Ajouter un débit exceptionnel
->|Objectif 4+| Vérifier qu'il est possible de faire un débit exceptionnel
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|C_D_E.1    ^| Selectioner un compte et cliquer sur le bouton « Débit » ^|La fenêtre de création d’un débit s’ouvre  ^|L’utilisateur est connecté en tant que chef d’agence, le compte selectionné n’est pas cloturé ^| OK
-
-^|C_D_E.2   ^|Compléter les champs avec un montant supérieur a la limite de découvert et valider ^|Une fenetre de confirmation s’ouvre ^| aucune ^| OK
-
-^|C_D_E.3   ^|Cliquer sur le bouton « Ok » ^|Le débit est effectué en dépassant la limite de découvert du compte  ^| aucune ^| OK
-
-|====
-
-=== Fonctionnalités en Batch
-
-==== Génération des relevés de compte mensuels pour tous les clients
-
-|====
->|Cas de test 4+|Test-03-01-01
->|Titre 4+| Génération des relevés de compte mensuels pour tous les clients
->|Objectif 4+| Vérifier qu'il est possible de générer les relevés de compte mensuels pour tous les clients automatiquement
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|B_R_C.1    ^| Se connecter a l’application ^|Une fenêtre s’ouvre pour demander si l’utilisateur veut générer les relevés de tous les utilisateurs ^|Les relevés n’ont pas déja été généré sur la machine de l’utilisateur ^| OK
-
-^|B_R_C.2   ^|Cliquer sur le bouton « Ok » ^|Les relevés de tous les clients sont générés dans le dossier releves/<annee>_<mois>  ^| aucune ^| OK
-
-|====
-
-=== Simulations
-
-|====
->|Cas de test 4+|Test-03-05-01
->|Titre 4+| Simulation emprunt
->|Objectif 4+| Vérifier qu'il est possible de simuler un emprunt
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|S_E.1  ^| Cliquer sur "simuler un emprunt" dans la page des opérations d'un compte ^| Une fenêtre s'ouvre pour saisir les informations de l'emprunt ^| Aucune ^| OK
-^|S_E.2  ^| Dans la barre "Simuler un emprunt", saisir le montant, le nombre d'années de l'emprunt ainsi que le taux. ^| Un tableau s'affiche en-dessous avec les informations de l'emprunt selon l'année. ^| Les saisies doivent être des entiers sauf pour le taux qui peut être un float. ^| OK
-
-|====
-
-|====
->|Cas de test 4+|Test-03-05-01
->|Titre 4+| Simulation assurance d'emprunt
->|Objectif 4+| Vérifier qu'il est possible de simuler une assurance d'emprunt
-
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|S_E.1  ^| Cliquer sur "simuler un emprunt" dans la page des opérations d'un compte ^| Une fenêtre s'ouvre pour saisir les informations de l'assurance d'emprunt ^| Aucune ^| OK
-^|S_E.2  ^| Dans la barre "Simuler une assurance d'emprunt", saisir le montant, le nombre de mois de l'assurance d'emprunt ainsi que le taux. ^| Un tableau s'affiche en-dessous avec les informations de l'assurance d'emprunt selon le mois. ^| Les saisies doivent être des entiers sauf pour le taux qui peut être un float. ^| OK
-
-|====
+// ///////////////////////////////////////////
