@@ -82,8 +82,12 @@ Tuteurices de l'équipe::
 
 [options="header"]
 |=======================
-|Respo|UserStory |Issues                                 |Docs                                        | Tests
-|{vt} |{us_}29"] |{is_c_o}30 "]{is_d_o}31 "]{is_d_o}32 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|
+|Respo|UserStory |Issues                                 |Docs                                        | Tests |ID
+|{la} |{us_}29"] |{is_c_o}30 "]{is_d_o}31 "]{is_d_o}32 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Equipe Connexion
+|{la} |{us_}33"] |{is_c_o}34 "]{is_d_o}35 "]{is_d_o}36 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Rafraichir Equipes
+|{la} |{us_}33"] |{is_c_o}34 "]{is_d_o}35 "]{is_d_o}36 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |
+|{la} |{us_}33"] |{is_c_o}34 "]{is_d_o}35 "]{is_d_o}36 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |
+|{la} |{us_}33"] |{is_c_o}34 "]{is_d_o}35 "]{is_d_o}36 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |
 
 
 |=======================
