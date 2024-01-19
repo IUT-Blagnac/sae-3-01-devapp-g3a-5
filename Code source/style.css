@@ -1,15 +1,30 @@
-@font-face {
-    font-family: ArialRounded;
-    src: url(ArialRounded.ttf);
-  }
+  
+body{
+    margin: 0; 
+    padding: 0; 
+    background-image: url("./assets/images/background.jpg");
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
 
-body {
-    overflow: hidden;
+
+    font-family: muli,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+    overflow-x: hidden;
+    height: 100%;
 }
 
 h1 {
     text-align: center;
-    font-family: ArialRounded;
+    font-family: 'montserrat', sans-serif;
+    font-weight: 900;
+}
+
+h4 {
+    text-align: left;
+    margin-left: 10%;
+    font-family: 'montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 25px;
 }
 
 table {
@@ -19,6 +34,7 @@ table {
     margin: auto;
     margin-top: 5%;
     padding: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 tr, td {
@@ -26,6 +42,14 @@ tr, td {
     text-align: center;
     padding: 5px;
 }
+
+.deconnecte {
+    background: #5b5255cb;
+}
+.equipe.deconnecte {
+    background-color: #458a8b;
+}
+
 
 .overlaycenter {
     display: none;
@@ -49,20 +73,32 @@ tr, td {
 
 button {
     padding: 15px;
-    margin: 10px;
-    margin-left: 10%;
     border-radius: 20px;
-    width: 100px;
-    background-color: chocolate;
-    color: white;
+    background-color: #5CBDBF;
+    color: #242729;
     font-family: 'Trebuchet MS', sans-serif;
     font-weight: bolder;
     font-size: 15px;
 }
 
 button:hover {
-    background-color: coral;
+    background-color: #458a8b;
+    color: #ffffff;
     transition: 0.5s;
+}
+
+.littlebutton {
+    margin-left: 10%;
+    width: 100px;
+}
+
+.mainbutton {
+    margin: auto;
+    margin-bottom: 10px;
+    display: block;
+    width: 70%;
+    border-radius: 10px;
+    font-size: 20px;
 }
 
 .icon {
@@ -72,14 +108,25 @@ button:hover {
 
 .label {
     text-align: center;
-    font-weight: bold;
-    font-family: ArialRounded;
-    font-size: 24px;
+    font-family: 'muli', sans-serif;
+    font-weight: 700; 
     padding: 10px;
+    background-color: #5B5255;
+    color: white;
+}
+
+.equipe {
+    background-color: #5CBDBF;
+    /* Remplacer par la couleur de l'equipe si possible */
+    color: white;
+    width: 15%;
+    font-family: 'montserrat', sans-serif;
+    font-weight: 700;
 }
 
 .tabEquipes {
     margin-top: 70px;
+    color: #242729;
 }
 
 
@@ -119,4 +166,167 @@ button:hover {
         opacity: 0;
         transform: translateX(600px);
     }
+}
+
+.rotate {
+    transition: transform 0.5s;
+    display: inline-block;
+  }
+
+#listJoueurs {
+    display: none;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+
+
+
+/*.rotated {
+    transform: rotate(180deg);
+}*/
+
+#toggleJoueurs {
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* FONTS */
+
+
+@font-face {
+    font-family: montserrat;
+    src: url(./assets/fonts/Montserrat-Regular.ttf);
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
+}
+
+@font-face {
+    font-family: montserrat;
+    src: url(./assets/fonts/Montserrat-Bold.ttf);
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: montserrat;
+    src: url(./assets/fonts/Montserrat-Black.ttf);
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: muli;
+    font-style: normal;
+    font-display: swap;
+    font-weight: 200;
+    src: url(./assets/fonts/Muli-Extra-Light.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: italic;
+    font-display: swap;
+    font-weight: 200;
+    src: url(./assets/fonts/Muli-Extra-Light-italic.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: normal;
+    font-display: swap;
+    font-weight: 300;
+    src: url(./assets/fonts/Muli-Light.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: italic;
+    font-display: swap;
+    font-weight: 300;
+    src: url(./assets/fonts/Muli-Light-italic.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: normal;
+    font-display: swap;
+    font-weight: 400;
+    src: url(./assets/fonts/Muli-Regular.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: italic;
+    font-display: swap;
+    font-weight: 400;
+    src: url(./assets/fonts/Muli-Regular-italic.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: normal;
+    font-display: swap;
+    font-weight: 600;
+    src: url(./assets/fonts/Muli-SemiBold.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: italic;
+    font-display: swap;
+    font-weight: 600;
+    src: url(./assets/fonts/Muli-SemiBold-italic.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: normal;
+    font-display: swap;
+    font-weight: 700;
+    src: url(./assets/fonts/Muli-Bold.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: italic;
+    font-display: swap;
+    font-weight: 700;
+    src: url(./assets/fonts/Muli-Bold-italic.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: normal;
+    font-display: swap;
+    font-weight: 800;
+    src: url(./assets/fonts/Muli-ExtraBold.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: italic;
+    font-display: swap;
+    font-weight: 800;
+    src: url(./assets/fonts/Muli-ExtraBold-italic.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: normal;
+    font-display: swap;
+    font-weight: 900;
+    src: url(./assets/fonts/Muli-Black.ttf)
+}
+
+@font-face {
+    font-family: muli;
+    font-style: italic;
+    font-display: swap;
+    font-weight: 900;
+    src: url(./assets/fonts/Muli-Black-italic.ttf)
 }

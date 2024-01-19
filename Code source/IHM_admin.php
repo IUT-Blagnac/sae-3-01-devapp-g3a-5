@@ -1,21 +1,48 @@
+<?php
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+		// Récupère les données du corps de la requête
+		
+		$data = json_decode(file_get_contents('php://input'), true);
+	
+		// Appelle la fonction pour récupérer les données
+		recupererDonnees($data);
+
+		echo json_encode($result);
+	}
+	
+	function recupererDonnees($data) {
+
+		createTableau($data);
+		return $data;
+	}
+?>	
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8"/>
 	<title>Chasse au trésor : interface administrateur</title>
 	<link rel="stylesheet" href="style.css">
-	<script src="admin.js" defer></script>
+	<script src="assets/js/locura4iot.js" defer></script>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-		<h1>Bienvenue sur l'interface administrateur !</h1>
 
-		<button onclick="afficherPopup('contenu', false)"> MESSAGE </button>
-		<button> FIN </button>
-		<button onclick="togglepause()"> PAUSE </button>
-		<button onclick="window.open('IHM_user.php', '_blank', 'noopener noreferrer')">IHM User</button>
+	<header>
 
 		
+		<h1>LocURa4IoT - Interface Administrateur</h1>
+
+		<button class="littlebutton" onclick="afficherPopup('contenu', false)"> MESSAGE </button>
+		<button class="littlebutton" > FIN </button>
+		<button class="littlebutton"  onclick="togglepause()"> PAUSE </button>
+		<button class="littlebutton"  onclick="window.open('IHM_user.php', '_blank', 'noopener noreferrer')">IHM User</button>
+		
+		<button class="littlebutton" onclick="createTableau()"> Test tab </button>
+		<button class="littlebutton donnee"> test </button>
+	</header>
+
+
 		<!-- Pour mettre en pause -->
 		<div class="dark" id="dark"></div>
 
@@ -33,11 +60,19 @@
 
 		<!-- Tableau des équipes -->
 		<div class="tabEquipes">
+			<p> aaaa </p>
+			<?php
+
+				
 			
-			<table>
+			?>
+
+			
+		
+			<table id="0XFD43">
 				<tr>
 					<b>
-					<td rowspan ="4" style="width:15%"> <center> Equipe A </center> </td>
+					<td class="equipe"  rowspan ="4" style="width:15%"> <center> Equipe A </center> </td>
 					<td class = "label" > Id Capteur </td>
 					<td class = "label" > Trouvé ? </td>
 					<td class = "label" > Tps </td>
@@ -60,10 +95,11 @@
 				</tr>
 			</table>
 
-			<table>
+			<!-- TABLEAUX EN DUR 
+			<table  >
 				<tr>
 					<b>
-					<td rowspan ="4" style="width:15%"> <center> Equipe B </center> </td>
+					<td  class="equipe"  rowspan ="4" style="width:15%"> <center> Equipe B </center> </td>
 					<td class = "label" > Id Capteur </td>
 					<td class = "label" > Trouvé ? </td>
 					<td class = "label" > Tps </td>
@@ -85,6 +121,36 @@
 					<td> --:-- </td>
 				</tr>
 			</table>
+
+			<table class="deconnecte">
+				<tr>
+					<b>
+					<td  class="equipe"  rowspan ="4" style="width:15%"> <center> Equipe C </center> </td>
+					<td class = "label" > Id Capteur </td>
+					<td class = "label" > Trouvé ? </td>
+					<td class = "label" > Tps </td>
+					</b>
+				</tr>
+				<tr>
+					<td> 123 </td>
+					<td> <img class= "icon" src="assets/images/check.png"> </td>
+					<td> 00:32 </td>
+				</tr>
+				<tr>
+					<td> 456 </td>
+					<td>   </td>
+					<td> --:-- </td>
+				</tr>
+				<tr>
+					<td> 789 </td>
+					<td>  </td>
+					<td> --:-- </td>
+				</tr>
+			</table>
+		
+			-->
+			
+
 		</div>
 </body>
 </html>
