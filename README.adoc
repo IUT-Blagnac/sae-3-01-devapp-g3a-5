@@ -77,18 +77,20 @@ Tuteurices de l'équipe::
 :doc_t: image:{badge}Doc-Tech-white.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
 :doc_u: image:{badge}Doc-Util-white.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
 
-{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
+:tst_ok: image:{badge}Tests-Passés-brightgreen.svg[link="{baseURL}/blob/{branch}/Documentation/Cahier%20de%20tests.adoc#
+:tst_ko: image:{badge}Tests-Echoués-red.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
+:tst_wt: image:{badge}Tests-WIP-orange.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
 
 
 [options="header"]
 |=======================
 |Respo|UserStory |Issues                                 |Docs                                        | Tests |ID
-|{la} |{us_}29"] |{is_t_o}30 "]{is_c_o}31 "]{is_d_o}32 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Equipe Connexion
-|{la} |{us_}33"] |{is_t_o}34 "]{is_c_o}35 "]{is_d_o}36 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Rafraichir Equipes
-|{la} |{us_}37"] |{is_t_o}38 "]{is_c_o}39 "]{is_d_o}40 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Accès Interface Admin
-|{la} |{us_}41"] |{is_t_o}42 "]{is_c_o}43 "]{is_d_o}44 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Voir Checkpoints Connectés
-|{la} |{us_}45"] |{is_t_o}46 "]{is_c_o}47 "]{is_d_o}48 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Afficher Broadcast
-|{la} |{us_}49"] |{is_t_o}50 "]{is_c_o}51 "]{is_d_o}52 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Voir Données Equipes
+|{la} |{us_}29"] |{is_t_o}30 "]{is_c_o}31 "]{is_d_o}32 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|{tst_wt}aaa"]|Equipe Connexion
+|{la} |{us_}33"] |{is_t_o}34 "]{is_c_o}35 "]{is_d_o}36 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|{tst_ok}aaa"]|Rafraichir Equipes
+|{la} |{us_}37"] |{is_t_o}38 "]{is_c_o}39 "]{is_d_o}40 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|{tst_ko}aaa"]|Accès Interface Admin
+|{la} |{us_}41"] |{is_t_o}42 "]{is_c_o}43 "]{is_d_o}44 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|{tst_wt}aaa"]|Voir Checkpoints Connectés
+|{la} |{us_}45"] |{is_t_o}46 "]{is_c_o}47 "]{is_d_o}48 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|{tst_wt}aaa"]|Afficher Broadcast
+|{la} |{us_}49"] |{is_t_o}50 "]{is_c_o}51 "]{is_d_o}52 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|{tst_wt}aaa"]|Voir Données Equipes
 
 
 |=======================
