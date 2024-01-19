@@ -1,22 +1,3 @@
-<?php
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		// Récupère les données du corps de la requête
-		
-		$data = json_decode(file_get_contents('php://input'), true);
-	
-		// Appelle la fonction pour récupérer les données
-		recupererDonnees($data);
-
-		echo json_encode($result);
-	}
-	
-	function recupererDonnees($data) {
-
-		createTableau($data);
-		return $data;
-	}
-?>	
-
 <!DOCTYPE html>
 <html>
 <head>

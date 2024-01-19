@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	  <script src="assets/js/user.js"> </script>
+	  <script src="assets/js/locura4iot.js"> </script>
     <link rel="stylesheet" href="./assets/style.scss" />
     <title>Chasse au trésor : interface utilisateur</title>
 </head>
