@@ -74,8 +74,8 @@ Tuteurices de l'équipe::
 
 :us_: image:{badge}UserStory-blue.svg[link="{baseURL}/issues/
 
-:doc_t: image:{badge}D.%20Doc-Tech-white.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
-:doc_u: image:{badge}D.%20Doc-Util-white.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
+:doc_t: image:{badge}Doc-Tech-white.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
+:doc_u: image:{badge}Doc-Util-white.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
 
 {baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
 
