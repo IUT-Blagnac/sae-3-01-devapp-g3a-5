@@ -30,10 +30,10 @@
 		</div>
         <div class="centered-div">
             <table>
+
 				<?php
     			$tab = array("j0","j1", "j2", "j3", "j4","j5");
-				$cpt = 0;   
-    			
+				$cpt = 0; 
 				$liste_size = count($tab);
 				static $color = 0;
 				function position($i,$j){
