@@ -60,8 +60,6 @@ Ordinateur sous Windows ou OS équivalent.
 :nom_test: Création d'un nouveau client
 :objectif: Vérifier qu'il est possible de créer un nouveau client
 
-
-
 // Ne pas toucher ⬇️
 :test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-orange.svg[link=""]
 // Ne pas toucher ⬆️
@@ -72,14 +70,9 @@ Ordinateur sous Windows ou OS équivalent.
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
-|====
 
-
-|====
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|{lvl1}.{lvl2}.*{num_test}.1* ^|Cliquer sur le bouton "Nouveau client". ^|La fenêtre de création des clients s'ouvre. ^| Aucune ^|{test_ko}
-
-
 5+|
 
 5+|Commentaire : blabla
