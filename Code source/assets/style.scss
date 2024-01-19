@@ -1,0 +1,139 @@
+.centered-div{
+    display: inline-block;
+    width: 48%; /* Vous pouvez ajuster la largeur en fonction de vos besoins */
+    box-sizing: border-box;
+    border: 0;
+    margin: 1%; /* Espace entre les boîtes, ajustez selon vos préférences */
+    display: flex;
+    justify-content: center;
+   padding-top: 5%;
+}
+
+body{
+    background-image: url("./images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-family: muli,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+    margin: 0;
+    // mettre la taille a 100% de la page
+    height: 100%;
+}
+
+html{
+    height: 100%;
+}
+
+div.nav-bar{
+    background-color: rgba(70, 70, 70, 0.503);
+    padding: 0px;
+    color: aliceblue;
+    
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+td.hidden{
+    visibility: hidden;
+    border: 0;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td{
+    // background-color: rgb(29, 194, 175);
+    padding: 35px;
+    border-bottom: 1px solid rgb(183, 255, 247);
+}
+
+td:hover{
+    // background-color: rgb(22, 152, 137);
+}
+
+td.corner-top-right{
+    border-color: 0;
+    border: 0;
+    border-top-right-radius: 100%;
+}
+
+td.corner-top-left{
+    border-color: 0;
+    border: 0;
+    border-top-left-radius: 100%;
+}
+
+td.corner-bottom-right{
+    border-color: 0;
+    border: 0;
+    border-bottom-right-radius: 100%;
+}
+
+td.corner-bottom-left{
+    border-color: 0;
+    border: 0;
+    border-bottom-left-radius: 100%;
+}
+
+td.rounded-left{
+    border-bottom-left-radius: 50%;
+    border: 0;
+    border-top-left-radius: 50%;
+}
+
+td.rounded-right{
+    border-bottom-right-radius: 50%;
+    border: 0;
+    border-top-right-radius: 50%;
+}
+
+td.rounded-down{
+    border-bottom-right-radius: 50%;
+    border: 0;
+    border-bottom-left-radius: 50%;
+}
+
+td.joueur{
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    background-color: #1DC2AF;
+    border: 0;
+}
+
+td.position-right{
+    text-align: right;
+}
+
+td.color-1{
+    background-color: #1DC2AF;
+}
+
+td.color-2{
+    background-color: #18A090;
+}
+
+td.color-3{
+    background-color: #137C70;
+}
+
+td.color-4{
+    background-color: #0E5850;
+}
+td.color-5{
+    background-color: #083530;
+}
+td.joueur-name{
+    border: 0;
+}
+
+.classMere {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: flex-start;
+}
