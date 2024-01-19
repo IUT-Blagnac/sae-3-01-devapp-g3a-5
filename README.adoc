@@ -86,7 +86,7 @@ Tuteurices de l'équipe::
 |{la} |{us_}29"] |{is_t_o}30 "]{is_c_o}31 "]{is_d_o}32 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Equipe Connexion
 |{la} |{us_}33"] |{is_t_o}34 "]{is_c_o}35 "]{is_d_o}36 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Rafraichir Equipes
 |{la} |{us_}37"] |{is_t_o}38 "]{is_c_o}39 "]{is_d_o}40 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Accès Interface Admin
-
+|{la} |{us_}41"] |{is_t_o}42 "]{is_c_o}43 "]{is_d_o}44 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|       |Voir Checkpoints Connectés
 |=======================
 
 
