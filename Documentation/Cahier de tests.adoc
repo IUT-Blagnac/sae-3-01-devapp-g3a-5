@@ -1,3 +1,87 @@
-= Cahier de tests
+= Cahier De Recette - SAE Chasse au Trésor
+:toc:
+:toc-position: preamble
+:toc-title: Sommaire
+:title-page:
+:sectnums:
+:stem: asciimath
+:Entreprise: Chasse au Trésor
+:Equipe:
+:badge: https://img.shields.io/badge/
+:test_ok: image:{badge}Test-Passed-blue.svg[]
+:test_ko: image:{badge}Test-Failed-red.svg[]
 
-toc::[]
+
+* Thomas Duppi
+* Loélia Demany
+* Loïs Pacqueteau
+* Vincent Barette
+
+Sprint 2, Janvier 2024, Groupe G3A-5
+
+== Introduction
+=== Objet :
+[.text-justify]
+Ce document a été produit dans le cadre d'un projet d'élaboration d'une vue pour le jeu de Chasse au trésor de Quentin Vey et Adrien van den Bossche.
+
+
+== Pre-Requis :
+[.text-justify]
+L'exécution des tests spécifiés au chapitre suivant requiert :
+
+* Un sniffeur de la chasse au trésor.
+* L'environnement de test tel que spécifié dans la partie "Environnement de test" de ce document.
+* Les fiches de tests. *À vérifier*
+
+
+=== Éléments à tester :
+[.text-justify]
+Les éléments testés concernent les Use-Cases spécifiées dans la https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20technique.adoc[documentation technique] et le https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5[README.md] du projet.
+
+
+=== Environnement de test :
+[.text-justify]
+Ordinateur sous Windows ou OS équivalent.
+
+
+
+== Cas de test :
+=== Fonctionnalités Panel Administrateur :
+:lvl1: 1
+> Ces tests ne regardent que le panel des administrateurs.
+
+==== Gestion des joueurs :
+:lvl2: 1
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Création d'un nouveau client
+:objectif: Vérifier qu'il est possible de créer un nouveau client
+
+
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-orange.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+|====
+
+
+|====
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Cliquer sur le bouton "Nouveau client". ^|La fenêtre de création des clients s'ouvre. ^| Aucune ^|{test_ko}
+
+
+5+|
+
+5+|Commentaire : blabla
+|====
+// ///////////////////////////////////////////

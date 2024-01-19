@@ -1,4 +1,3 @@
-
 = Documentation Technique
 :toc: macro
 :toclevels: 3
@@ -81,3 +80,4 @@ Le code php est réalisé de maniere a s'adapter a la taille d'une liste de bali
 jeu sera grand. Pour l'instant on utilise une liste quelquonque mais lorsque la communication en webserial sera 
 réalisé on mettra une veritable liste de balise au deuxieme sprint. Si a l'avenir on souhaite faire un jeu comme ca avec beauucoup de 
 balise, l'ihm sera fonctionnel!
+
