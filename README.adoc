@@ -64,23 +64,27 @@ Tuteurices de l'équipe::
 
 :branch: master
 
-:is_o: image:{badge}Issue-WIP-orange.svg[link="{baseURL}/issues/
-:is_c: image:{badge}Issue-Done-purple.svg[link="{baseURL}/issues/
+:is_c_o: image:{badge}Code-WIP-orange.svg[link="{baseURL}/issues/
+:is_c_c: image:{badge}Code-Done-purple.svg[link="{baseURL}/issues/
+:is_d_o: image:{badge}Doc-WIP-orange.svg[link="{baseURL}/issues/
+:is_d_c: image:{badge}Doc-Done-purple.svg[link="{baseURL}/issues/
+:is_t_o: image:{badge}Test-WIP-orange.svg[link="{baseURL}/issues/
+:is_t_c: image:{badge}Test-Done-purple.svg[link="{baseURL}/issues/
+
+
 :uc_: image:{badge}UseCase-pink.svg[link="{baseURL}/issues/
 :us_: image:{badge}UserStory-blue.svg[link="{baseURL}/issues/
 
-:doc_t_o: image:{badge}D.%20Tech-WIP-orange.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
-:doc_u_o: image:{badge}D.%20Util-WIP-orange.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
+:doc_t: image:{badge}D.%20Doc-Tech-orange.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
+:doc_u: image:{badge}D.%20Doc-Util-orange.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
 
-:doc_t_c: image:{badge}D.%20Tech-Done-purple.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
-:doc_u_c: image:{badge}D.%20Util-Done-purple.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
+{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
 
 
 [options="header"]
 |=======================
-|Respo|US/UC  |Issues                |Docs                        | Tests
-|{vt} |{us_}16"] |{is_o}2  "]{is_c}2  "]|{doc_t_c}ihm_userphp "]{doc_u_o}i-introduction"]|
-|{ts} |{uc_}21"] |{is_o}2  "]{is_c}2  "]|{doc_t_o}fichiers-php "]{doc_u_c}i-introduction"]|
+|Respo|UserStory |Issues                                 |Docs                                        | Tests
+|{vt} |{us_}29"] |{is_c_o}30 "]{is_d_o}31 "]{is_d_o}32 "]|{doc_t}ihm_userphp "]{doc_u}i-introduction"]|
 
 
 |=======================
