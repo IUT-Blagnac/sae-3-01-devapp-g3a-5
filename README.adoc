@@ -104,6 +104,7 @@ Tuteurices de l'équipe::
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20technique.adoc[Lien vers la doc technique]
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20utilisateur.adoc[Lien vers la doc utilisateur]
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Cahier%20de%20tests.adoc[Lien vers le cahier de recettes]
+- link:https://github.com/orgs/IUT-Blagnac/projects/172[Lien vers le projet]
 - Les UserStories se trouvent dans *Répartition des tâches et état d'avancement*
 
 == Evaluation hebdomadaire
