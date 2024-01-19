@@ -74,6 +74,12 @@ Ordinateur sous Windows ou OS équivalent.
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 ^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter un sniffeur ^|Le joueur apparaît après https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/33[raffraichissement]. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter plusieurs sniffeurs ^|Les joueurs apparaissent après https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/33[raffraichissement]. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter un sniffeur avant de se rendre sur la page index. ^|Le sniffeur se lance sans problème, et apparait sur la page. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
 5+|
 
 5+|Commentaire : Aucun commentaire.
