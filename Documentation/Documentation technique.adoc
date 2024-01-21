@@ -83,6 +83,11 @@ Le plateau de jeu depends du nombre de balises cachées, il fonctionne avec un t
 or notre plateau doit avoir une forme en serpentin si on a beaucoup de balise donc les lignes pair se gererait mal avec se fonctionnement, la fonction *position* sert donc a attribué l'ordre des 
 balises td correctement pour pouvoir donner le bon style a chaque td.
 
+==Couleur du plateau
+
+
+== Couleur aléatoire des joueurs
+
 == Protocole de communication
 La Web Serial API permet aux navigateurs web d'établir une communication série avec des périphériques matériels connectés via USB, tels que des microcontrôleurs Arduino.
 L'utilisateur autorise l'accès à la Web Serial API, puis la page web peut ouvrir un port série, le configurer, établir une connexion, transmettre et recevoir des données. 
