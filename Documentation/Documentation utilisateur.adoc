@@ -117,15 +117,12 @@ Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
 
 Lorsqu'un sniffeur se connecte, il peut être vu depuis :
 - l'interface admin (comme une équipe) ;
-image::adminteamconnection.png[Interface administrateur]
-
 - l'interface utilisateur (comme un pion) ;
-image::userteamconnection.png[Interface utilisateur]
-
 - la page d'index (dans la liste).
+
+image::adminteamconnection.png[Interface administrateur]
+image::userteamconnection.png[Interface utilisateur]
 image::indexteamconnection.png[Index]
-
-
 
 === Personnalisation des Paramètres
 Fonctionnalité en cours de développement.
