@@ -83,7 +83,7 @@ Tuteurices de l'équipe::
 [options="header"]
 |=======================
 |Respo|UserStory |Issues                                 |Docs                                        | Tests | Nom
-|{la} |{us_}33"] |{is_t_o}34 "] {is_c_o}35 "] {is_d_o}36 "]|{doc_t}ihm_userphp "] {doc_u}i-introduction"]|{tst_wt}rafraîchir-equipes"]|Rafraîchir Equipes
+|{la} |{us_}33"] |{is_t_o}34 "] {is_c_o}35 "] {is_d_o}36 "]|{doc_t}ihm_userphp "] {doc_u}i-introduction"]|{tst}rafraîchir-equipes"]|Rafraîchir Equipes
 |{la} |{us_}37"] |{is_t_o}38 "] {is_c_o}39 "] {is_d_o}40 "]|{doc_t}ihm_userphp "] {doc_u}i-introduction"]|{tst}accès-interface-admin"]|Accès Interface Admin
 |{la} |{us_}41"] |{is_t_o}42 "] {is_c_o}43 "] {is_d_o}44 "]|{doc_t}ihm_userphp "] {doc_u}i-introduction"]|{tst}voir-checkpoints-connectés"]|Voir Checkpoints Connectés
 |{la} |{us_}45"] |{is_t_o}46 "] {is_c_o}47 "] {is_d_o}48 "]|{doc_t}ihm_userphp "] {doc_u}i-introduction"]|{tst}afficher-message"]|Afficher Message
