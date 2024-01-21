@@ -8,9 +8,9 @@
 :Entreprise: Chasse au Trésor
 :Equipe:
 :badge: https://img.shields.io/badge/
-:test_ok: image:{badge}Test-Passed-blue.svg[]
-:test_ko: image:{badge}Test-Failed-red.svg[]
-:test_wt: image:{badge}Test-WIP-orange.svg[]
+:test_ok: image:{badge}Test-Passé-blue.svg[]
+:test_ko: image:{badge}Test-Echoué-red.svg[]
+:test_wt: image:{badge}Test-En%20Attente-orange.svg[]
 
 
 * Thomas Duppi
@@ -73,13 +73,35 @@ Ordinateur sous Windows ou OS équivalent.
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter un sniffeur ^|Le joueur apparaît après https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/33[raffraichissement]. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter un sniffeur. ^|Le joueur apparaît après https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/33[raffraichissement]. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter plusieurs sniffeurs. ^|Les joueurs apparaissent après https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/33[raffraichissement]. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.3* ^|Connecter un sniffeur ^|Le sniffeur se lance sans problème, et apparait sur la page lors du rafraichissement (automatique que la page se lance...). ^| Ne PAS être sur la page index, disposer d'un sniffeur. ^|{test_wt}
+5+|
+|====
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 2
+:nom_test: Le joueur peut se connecter pendant la partie
+:objectif: Vérifier qu'il est possible de rejoindre une partie en cours
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-orange.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter plusieurs sniffeurs ^|Les joueurs apparaissent après https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/33[raffraichissement]. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
 
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter un sniffeur avant de se rendre sur la page index. ^|Le sniffeur se lance sans problème, et apparait sur la page. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter un sniffeur. ^|Le joueur apparaît dès lors qu'il trouve le premier trésor. ^| Être sur la page admin ou user, disposer d'un sniffeur. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter plusieurs sniffeurs. ^|Les joueurs apparaissent dès lors qu'ils trouvent le premier trésor. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
 5+|
 
 5+|Commentaire : Aucun commentaire.
