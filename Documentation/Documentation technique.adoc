@@ -42,6 +42,11 @@ Gère l'affichage des informations administratives et des statistiques du jeu.
 Fichier PHP responsable de l'interface utilisateur pour les joueurs.
 Gère l'affichage de l'interface de jeu, de la progression globale des joueurs, etc.
 
+==== `index.php`
+
+Fichier PHP responsable du lancement du jeu.
+Gère l'affichage des sniffeurs et checkpoints connectés, bouton pour démarrer le jeu.
+
 === Dossier `assets`
 
 Ce dossier contient des ressources utilisées par l'application.
