@@ -52,7 +52,7 @@ Toutes les interactions sur le jeu sont réalisable à travers l'interface admin
 Vous trouverez un bouton "message". Si vous cliquez dessus, une pop-up vous demandera le contenu de votre message. Confirmez, et il sera affiché sur l'écran des utilisateurs.
 Cette fonction est utile pour informer les joueurs que la partie se termine bientôt ou alerter une équipe qu'elle s'est trop éloignée par exemple.
 
-image:: img/doc_user_fig1.PNG[]
+image:: logotempo.png[alt]
 
 ==== 3.2 Mettre en pause
 
