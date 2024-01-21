@@ -169,6 +169,6 @@ Ordinateur sous Windows ou OS équivalent.
 ^|{lvl1}.{lvl2}.*{num_test}.1* ^|Cliquer sur le bouton "Nouveau client". ^|La fenêtre de création des clients s'ouvre. ^| Aucune ^|{test_ko}
 5+|
 
-5+|Commentaire : blabla
+5+|Commentaire : Aucun commentaire.
 |====
 // ///////////////////////////////////////////
