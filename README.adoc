@@ -89,7 +89,7 @@ Tuteurices de l'équipe::
 |{la} |{us_}45"] |{is_t_o}46 "] {is_c_o}47 "] {is_d_o}48 "]|{doc_t}ihm_userphp "] {doc_u}afficher-message"]|{tst}aaa"]|Afficher Message
 |{la} |{us_}29"] |{is_t_c}30 "] {is_c_o}31 "] {is_d_o}32 "]|{doc_t}ihm_userphp "] {doc_u}equipe-connexion"]|{tst}equipe-connexion"]|Equipe Connexion
 |{la} |{us_}49"] |{is_t_o}50 "] {is_c_o}51 "] {is_d_o}52 "]|{doc_t}ihm_userphp "] {doc_u}voir-données-equipes"]|{tst}aaa"]|Voir Données Equipes
-|{lo} |{us_}2"] |{is_t_o}50 "] {is_c_o}51 "] {is_d_o}52 "]|{doc_t}ihm_userphp "] {doc_u}voir-données-equipes"]|{tst}aaa"]|Adapter le plateau de jeu
+|{lo} |{us_}2"] |{is_t_o}50 "] {is_c_o}51 "] {is_d_o}52 "]|{doc_t}protocole-de-communication "] {doc_u}voir-données-equipes"]|{tst}aaa"]|Adapter le plateau de jeu
 |{lo} |{us_}8"] |{is_t_o}50 "] {is_c_o}51 "] {is_d_o}52 "]|{doc_t}ihm_userphp "] {doc_u}voir-données-equipes"]|{tst}aaa"]|Couleur du plateau
 |{ts} |{us_}16"] |{is_t_o}50 "] {is_c_o}51 "] {is_d_o}52 "]|{doc_t}ihm_userphp "] {doc_u}voir-données-equipes"]|{tst}aaa"]|Connection au port serie
 
