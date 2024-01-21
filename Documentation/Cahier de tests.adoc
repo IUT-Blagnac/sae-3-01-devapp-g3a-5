@@ -3,7 +3,7 @@
 :toc-position: preamble
 :toc-title: Sommaire
 :title-page:
-:sectnums:
+// :sectnums: NE PAS REACTIVER SVP
 :stem: asciimath
 :Entreprise: Chasse au Trésor
 :Equipe:
