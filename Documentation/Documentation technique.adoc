@@ -83,12 +83,20 @@ Le plateau de jeu depends du nombre de balises cachées, il fonctionne avec un t
 or notre plateau doit avoir une forme en serpentin si on a beaucoup de balise donc les lignes pair se gererait mal avec se fonctionnement, la fonction *position* sert donc a attribué l'ordre des 
 balises td correctement pour pouvoir donner le bon style a chaque td.
 
+Code de la generation du tableau:
+
+image:img/adaptationtable.png[]
+
+(on peut voir ici que la boucle for depends de la valeur liste-size)
+
 == Couleur du plateau
 la fonction color retourne un string qui sert de classe dans le php afin que le css change la couleur du td  
 
 la fonction color: 
 
 image:img/fonction-color.png[]
+
+
 
 l'utilisation dans le code:
 
