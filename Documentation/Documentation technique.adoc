@@ -78,8 +78,16 @@ Gère les fonctionnalités du jeu et les interactions avec l'IHM_User.php.
 
 Les fichiers JavaScript (`admin.js` et `user.js`) utilisent la Web Serial API pour établir une communication avec le matériel du jeu.
 
+== Adaptabilité du plateau de jeu
+Le plateau de jeu depends du nombre de balises cachées, il fonctionne avec un tableau html adapté en php. Le seul soucis rencontré a été la génération du tableau car elle se fait de gauche a droite,
+or notre plateau doit avoir une forme en serpentin si on a beaucoup de balise donc les lignes pair se gererait mal avec se fonctionnement, la fonction *position* sert donc a attribué l'ordre des 
+balises td correctement pour pouvoir donner le bon style a chaque td.
 
 == Protocole de communication
+La Web Serial API permet aux navigateurs web d'établir une communication série avec des périphériques matériels connectés via USB, tels que des microcontrôleurs Arduino.
+L'utilisateur autorise l'accès à la Web Serial API, puis la page web peut ouvrir un port série, le configurer, établir une connexion, transmettre et recevoir des données. 
+Elle offre des méthodes pour envoyer et recevoir des données, ainsi que des événements pour la gestion asynchrone de la communication série. Une fois la communication terminée,
+le port est fermé. 
 
 == Evolutivité
 Le code php est réalisé de maniere a s'adapter a la taille d'une liste de balise. Plus il y a de balise, plus le plateau de 
