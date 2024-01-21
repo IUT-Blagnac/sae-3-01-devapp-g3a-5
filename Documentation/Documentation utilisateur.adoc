@@ -49,6 +49,20 @@ La majeure partie des interactions avec le jeu se réalisnet à travers l'interf
 
 ==== Interface Administrateur
 
+===== Rafraîchir Equipes
+
+Il est possible de rafraîchir les équipes de plusieurs manières, en fonction du souhait du client. Le rafraîchissement peut-être automatique, ou manuel (via un bouton).
+
+image::refeshbutton.png[Bouton de rafraîchissement]
+
+Exemple - Avant rafraîchissement
+image::beforerefresh.png[]
+// On ne voit que l'équipe A par exemple
+
+Exemple - Après rafraîchissement
+image::afterrefresh.png[]
+// On voit l'équipe A et B par exemple
+
 ===== Afficher Message
 
 Vous trouverez un bouton "message". Si vous cliquez dessus, une pop-up vous demandera le contenu de votre message. Confirmez, et il sera affiché sur l'écran des utilisateurs.
@@ -66,7 +80,16 @@ image::pausebutton.png[Bouton Pause]
 
 image::pausemode.png[Affichage du mode pause]
 
+==== Interface de lancement du jeu
 
+> AKA - index.php
+Il s'agit de l'interface utilisée pour s'assurer que le jeu est prêt à être lancé. Il contient principalement des informations en lecture.
+
+===== Accès Interface Admin
+
+On peut accéder à l'interface d'administrateur du jeu depuis la page d'index. Il suffit de cliquer sur un bouton.
+
+image::accessadmin.png[Bouton d'accès à l'interface admin]
 
 
 === 4. Personnalisation des Paramètres
