@@ -36,25 +36,36 @@ Pour utiliser le jeu, vous devez posséder un ordinateur avec un navigateur web.
 == IV. Utilisation de l'application
 [.text-justify]
 
-=== 1. Lancement du Site web
+=== Lancement du Site web
 Fonctionnalité en cours de développement.
 Rendez vous sur le site web à l'adresse suivante :
 
-=== 2. Navigation sur le Site
+=== Navigation sur le Site
 Fonctionnalité en cours de développement.
 
-=== 3. Interactions sur le Jeu
+=== Interactions sur le Jeu
 
-Toutes les interactions sur le jeu sont réalisable à travers l'interface administrateur
+La majeure partie des interactions avec le jeu se réalisnet à travers l'interface administrateur.
 
-==== 3.1 Envoyer un message
+==== Interface Administrateur
+
+===== Afficher Message
 
 Vous trouverez un bouton "message". Si vous cliquez dessus, une pop-up vous demandera le contenu de votre message. Confirmez, et il sera affiché sur l'écran des utilisateurs.
 Cette fonction est utile pour informer les joueurs que la partie se termine bientôt ou alerter une équipe qu'elle s'est trop éloignée par exemple.
 
-image::logotempo.png[]
+image::messagebutton.png[Bouton Message]
 
-==== 3.2 Mettre en pause
+image::messagedisplay.png[Affichage du message]
+
+===== Menu Pause
+
+Il est possible de mettre le jeu en pause grâce au bouton associé. Cela permet d'indiquer aux joueurs, sur l'interface utilisateur, qu'ils doivent arrêter leurs recherches, et de synchroniser le temps passé en pause correctement dans les leaderboards.
+
+image::pausebutton.png[Bouton Pause]
+
+image::pausemode.png[Affichage du mode pause]
+
 
 
 
