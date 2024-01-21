@@ -80,6 +80,12 @@ image::pausebutton.png[Bouton Pause]
 
 image::pausemode.png[Affichage du mode pause]
 
+===== Voir Données Equipes
+
+La liste des équipes étant disponibles depuis l'interface administrateur, il est possible facilement de s'intéresser à leur détails de progression. On peut notamment observer quels checkpoints ont été trouvés, et en combien de temps.
+
+image::viewteamdata.png[Données d'une équipe]
+
 ==== Interface de lancement du jeu
 
 > AKA - index.php
