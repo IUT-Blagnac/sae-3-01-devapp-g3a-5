@@ -62,7 +62,7 @@ Ordinateur sous Windows ou OS équivalent.
 :objectif: Vérifier qu'il est possible de rejoindre la partie avant son lancement
 
 // Ne pas toucher ⬇️
-:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-orange.svg[link=""]
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
 // Ne pas toucher ⬆️
 
 [width="300%"]
@@ -88,7 +88,7 @@ Ordinateur sous Windows ou OS équivalent.
 :objectif: Vérifier qu'il est possible de rejoindre une partie en cours
 
 // Ne pas toucher ⬇️
-:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-orange.svg[link=""]
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
 // Ne pas toucher ⬆️
 
 [width="300%"]
@@ -155,7 +155,7 @@ Ordinateur sous Windows ou OS équivalent.
 :objectif: Vérifier qu'il est possible de créer un nouveau client
 
 // Ne pas toucher ⬇️
-:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-orange.svg[link=""]
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
 // Ne pas toucher ⬆️
 
 [width="300%"]
