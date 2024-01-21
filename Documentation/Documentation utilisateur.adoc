@@ -91,6 +91,35 @@ On peut accéder à l'interface d'administrateur du jeu depuis la page d'index. 
 
 image::accessadmin.png[Bouton d'accès à l'interface admin]
 
+===== Voir Checkpoints Connectés
 
-=== 4. Personnalisation des Paramètres
+Il s'agit d'une fonctionnalité de lecture pour s'assurer que le jeu est prêt. En effet, elle permet de voir quels checkpoints sont connectés, avant de démarrer le jeu.
+
+image::viewcheckpoints.png[Exemple de liste de checkpoints]
+
+===== Voir Sniffeurs Connectés
+
+Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index/
+
+image::indexviewteams.png[Exemple de liste de sniffeurs connectés]
+
+==== Divers
+
+Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
+
+===== Equipe Connexion
+
+Lorsqu'un sniffeur se connecte, il peut être vu depuis :
+- l'interface admin (comme une équipe) ;
+image::adminteamconnection.png[Interface administrateur]
+
+- l'interface utilisateur (comme un pion) ;
+image::userteamconnection.png[Interface utilisateur]
+
+- la page d'index (dans la liste).
+image::indexteamconnection.png[Index]
+
+
+
+=== Personnalisation des Paramètres
 Fonctionnalité en cours de développement.
