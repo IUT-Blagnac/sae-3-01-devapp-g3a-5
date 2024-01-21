@@ -21,12 +21,12 @@
 Sprint 2, Janvier 2024, Groupe G3A-5
 
 == Introduction
-=== Objet :
+=== Objet
 [.text-justify]
 Ce document a été produit dans le cadre d'un projet d'élaboration d'une vue pour le jeu de Chasse au trésor de Quentin Vey et Adrien van den Bossche.
 
 
-== Pre-Requis :
+== Pre-Requis
 [.text-justify]
 L'exécution des tests spécifiés au chapitre suivant requiert :
 
@@ -35,19 +35,19 @@ L'exécution des tests spécifiés au chapitre suivant requiert :
 * Les fiches de tests. *À vérifier*
 
 
-=== Éléments à tester :
+=== Éléments à tester
 [.text-justify]
 Les éléments testés concernent les Use-Cases spécifiées dans la https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20technique.adoc[documentation technique] et le https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5[README.md] du projet.
 
 
-=== Environnement de test :
+=== Environnement de test
 [.text-justify]
 Ordinateur sous Windows ou OS équivalent.
 
 
 
-== Cas de test :
-=== Fonctionnalités Panel Spectateur :
+== Cas de test
+=== Fonctionnalités Panel Spectateur
 :lvl1: 1
 > Ces présents tests concernent l'IHM Spectateur - celle avec le parcours et les pions.
 
@@ -140,11 +140,11 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////////////////////////////////////////
 
 
-=== Fonctionnalités Panel Administrateur :
+=== Fonctionnalités Panel Administrateur
 :lvl1: 1
 > Ces tests ne regardent que le panel des administrateurs.
 
-==== Gestion des joueurs :
+==== Gestion des joueurs
 :lvl2: 2
 
 
