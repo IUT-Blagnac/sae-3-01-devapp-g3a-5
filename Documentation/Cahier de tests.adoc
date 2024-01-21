@@ -58,7 +58,7 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
 :num_test: 1
-:nom_test: Le joueur peut se connecter avant que la partie commence
+:nom_test: Connexion Avant Partie
 :objectif: Vérifier qu'il est possible de rejoindre la partie avant son lancement
 
 // Ne pas toucher ⬇️
@@ -84,7 +84,7 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
 :num_test: 2
-:nom_test: Le joueur peut se connecter pendant la partie
+:nom_test: Connexion Pendant Partie
 :objectif: Vérifier qu'il est possible de rejoindre une partie en cours
 
 // Ne pas toucher ⬇️
@@ -106,7 +106,39 @@ Ordinateur sous Windows ou OS équivalent.
 
 5+|Commentaire : Aucun commentaire.
 |====
+
+
 // ///////////////////////////////////////////
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 3
+:nom_test: Reset Joueur
+:objectif: S'assurer que le joueur se remette bien à 0 lorsque l'on veut rejouer
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Déconnecter et reconnecter un sniffeur, puis trouver le 1er trésor. ^| Les scores et les temps sont remis à 0. ^| Ce sniffeur était connecté, mais n'avait pas encore trouvé le 1er trésor. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Déconnecter et reconnecter un sniffeur, puis trouver le 1er trésor. ^| Les scores et les temps sont remis à 0. ^| Ce sniffeur était en train de jouer. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.3* ^|Déconnecter et reconnecter un sniffeur, puis trouver le 1er trésor. ^| Les scores et les temps sont remis à 0. ^| Ce sniffeur avait terminé sa partie. ^|{test_wt}
+5+|
+
+5+|Commentaire : Aucun commentaire.
+|====
+// ///////////////////////////////////////////
+
 
 === Fonctionnalités Panel Administrateur :
 :lvl1: 1
