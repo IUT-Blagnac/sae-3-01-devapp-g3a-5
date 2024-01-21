@@ -101,7 +101,7 @@ Ordinateur sous Windows ou OS équivalent.
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
 ^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter un sniffeur. ^|Le joueur apparaît dès lors qu'il trouve le premier trésor. ^| Être sur la page admin ou user, disposer d'un sniffeur. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter plusieurs sniffeurs. ^|Les joueurs apparaissent dès lors qu'ils trouvent le premier trésor. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter plusieurs sniffeurs. ^|Les joueurs apparaissent dès lors qu'ils trouvent le premier trésor. ^| Être sur la page admin ou user, disposer d'un sniffeur. ^|{test_wt}
 5+|
 
 5+|Commentaire : Aucun commentaire.
