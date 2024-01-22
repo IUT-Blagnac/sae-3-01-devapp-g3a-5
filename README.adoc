@@ -91,8 +91,8 @@ Tuteurices de l'équipe::
 |{la} |{us_}49"] |{is_t_o}50 "] {is_c_o}51 "] {is_d_o}52 "]|{doc_t}ihm_userphp "] {doc_u}voir-données-equipes"]|{tst}aaa"]|Voir Données Equipes
 |{lo} |{us_}54"] |{is_t_o}55 "] {is_c_c}56 "] {is_d_c}57 "]|{doc_t}couleur-du-plateau "] {doc_u}couleur-plateau"]|{tst}aaa"]|Couleur Plateau
 |{lo} |{us_}58"] |{is_t_o}59 "] {is_c_c}60 "] {is_d_c}61 "]|{doc_t}adaptabilité-du-plateau-de-jeu "] {doc_u}voir-données-equipes"]|{tst}aaa"]|Plateau Adaptation Taille
-|{ts} |{us_}66"] |{is_t_o}67 "] {is_c_c}68 "] {is_d_c}69 "]|{doc_t}protocole-de-communication "] {doc_u}voir-données-equipes"]|{tst}aaa"]|Accès Port Série
-|{ts} |{us_}62"] |{is_t_o}63 "] {is_c_c}64 "] {is_d_o}65 "]|{doc_t}"] {doc_u}voir-données-equipes"]|{tst}aaa"]|Données Admin
+|{ts} |{us_}66"] |{is_t_o}67 "] {is_c_c}68 "] {is_d_c}69 "]|{doc_t}protocole-de-communication "] {doc_u}"]|{tst}aaa"]|Accès Port Série
+|{ts} |{us_}62"] |{is_t_o}63 "] {is_c_c}64 "] {is_d_o}65 "]|{doc_t}données-admin"] {doc_u}"]|{tst}aaa"]|Données Admin
 
 
 |=======================
