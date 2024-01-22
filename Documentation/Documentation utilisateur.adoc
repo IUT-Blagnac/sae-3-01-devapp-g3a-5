@@ -56,11 +56,15 @@ Il est possible de rafraîchir les équipes de plusieurs manières, en fonction 
 image::img/refeshbutton.png[Bouton de rafraîchissement]
 
 Exemple - Avant rafraîchissement
+
 image::img/beforerefresh.png[]
+
 // On ne voit que l'équipe A par exemple
 
 Exemple - Après rafraîchissement
+
 image::img/afterrefresh.png[]
+
 // On voit l'équipe A et B par exemple
 
 ===== Afficher Message
