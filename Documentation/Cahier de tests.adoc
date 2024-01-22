@@ -200,6 +200,47 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////////////////////////////////////////
 
 
+
+
+
+==== https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/58[Plateau Adaptation Taille]
+:lvl2: 3
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Plateau Adaptation Taille
+:objectif: Vérifier que la taille du plateau s'adapte au nombre de checkpoints connectés ou simulés
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau dispose de 6 cases. ^| 6 checkpoints sont connectés ou simulés (pour 6 cases). ^|{test_ok}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau dispose de 11 cases. ^| 11 checkpoints sont connectés ou simulés (pour 11 cases). ^|{test_ok}
+5+|
+|====
+
+
+
+
+
+
+
+
+
+
+
 ////
 
 COMMENTAIRE
