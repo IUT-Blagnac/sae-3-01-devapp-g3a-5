@@ -200,7 +200,9 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////////////////////////////////////////
 
 
+////
 
+COMMENTAIRE
 
 === Fonctionnalités Panel Administrateur
 :lvl1: 1
@@ -234,3 +236,6 @@ Ordinateur sous Windows ou OS équivalent.
 5+|Commentaire : Aucun commentaire.
 |====
 // ///////////////////////////////////////////
+
+
+////
