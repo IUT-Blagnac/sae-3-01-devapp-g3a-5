@@ -109,6 +109,12 @@ Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index/
 
 image::indexviewteams.png[Exemple de liste de sniffeurs connectés]
 
+==== Interface Utilisateur/Spectateur
+
+===== Plateau Adaptation Taille
+
+La taille du plateau s'adapte automatiquement au nombre de checkpoints. En effet, lorsque l'on se trouve sur la page d'accueil (index), et qu'on souhaite accéder au plateau du jeu, le Javascript de la page d'accueil fournit au PHP de l'interface utilisateur le nombre de cases. Le plateau est en réalité un tableau PHP, dont l'apparance est modifiée avec du SCSS. Lorsque la page se charge, le PHP crée le tableau et lui attribue non seulement le bon nombre de case, mais aussi dans le bon ordre.
+
 ==== Divers
 
 Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
