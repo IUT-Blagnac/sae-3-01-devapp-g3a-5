@@ -82,6 +82,8 @@ Il est possible de mettre le jeu en pause grâce au bouton associé. Cela permet
 
 image::img/pausebutton.png[Bouton Pause]
 
+image::img/nopausemode.png[Sans mode pause]
+
 image::img/pausemode.png[Affichage du mode pause]
 
 ===== Voir Données Equipes
