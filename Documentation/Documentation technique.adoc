@@ -111,12 +111,16 @@ image:img/fonction-color3.png[]
 === Couleur aléatoire des joueurs
 Compare la node qui vient d'être récupéré avec un tableau contenant les nodes ayant déjà une couleur. Si la node est déjà existante il ne se passe rien. Sinon une couleur est générer de manière aléatoire. Ensuite cette couleur est ajouter au json de la node et la node est ajouté au tableau des nodes avec couleurs. 
 
+image:img/génération-couleur.png[]
+
 == Accès Port Série
 === Protocole de communication
 La Web Serial API permet aux navigateurs web d'établir une communication série avec des périphériques matériels connectés via USB, tels que des microcontrôleurs Arduino.
 L'utilisateur autorise l'accès à la Web Serial API, puis la page web peut ouvrir un port série, le configurer, établir une connexion, transmettre et recevoir des données. 
 Elle offre des méthodes pour envoyer et recevoir des données, ainsi que des événements pour la gestion asynchrone de la communication série. Une fois la communication terminée,
 le port est fermé. 
+
+image:img/lire-port-série.png[]
 
 == Evolutivité
 Le code php est réalisé de maniere a s'adapter a la taille d'une liste de balise. Plus il y a de balise, plus le plateau de 
