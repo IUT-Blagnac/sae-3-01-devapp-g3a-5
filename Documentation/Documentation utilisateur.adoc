@@ -53,7 +53,7 @@ La majeure partie des interactions avec le jeu se réalisnet à travers l'interf
 
 Il est possible de rafraîchir les équipes de plusieurs manières, en fonction du souhait du client. Le rafraîchissement peut-être automatique, ou manuel (via un bouton).
 
-image::img/refeshbutton.png[Bouton de rafraîchissement]
+image::img/refreshbutton.png[Bouton de rafraîchissement]
 
 Exemple - Avant rafraîchissement
 
