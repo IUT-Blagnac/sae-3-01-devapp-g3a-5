@@ -140,6 +140,68 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////////////////////////////////////////
 
 
+
+
+==== https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/54[Couleur Plateau]
+:lvl2: 2
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Vérification Couleur Plateau
+:objectif: S'assurer que les couleurs sont conformes à la charte graphique
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau tend vers le foncé et revient vers du clair sur la dernière case. ^| 6 checkpoints sont connectés ou simulés (pour 6 cases). ^|{test_ok}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau tend vers le foncé et revient vers du clair et repart sur du foncé. ^| 11 checkpoints sont connectés ou simulés (pour 11 cases). ^|{test_ok}
+5+|
+|====
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 2
+:nom_test: Intégrité Couleur Plateau
+:objectif: S'assurer que les couleurs du plateau ne changent jamais (qu'il n'y a pas d'aléatoire dans la fonction)
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Ouvrir plusieurs pages utilisateur/spectateur. ^|Le plateau ressemble toujours à la même chose. ^| Au moins 1 checkpoint est connecté ou simulé. ^|{test_ok}
+5+|
+
+5+|Commentaire : Aucun commentaire.
+|====
+
+
+// ///////////////////////////////////////////
+
+
+
+
 === Fonctionnalités Panel Administrateur
 :lvl1: 1
 > Ces tests ne regardent que le panel des administrateurs.
