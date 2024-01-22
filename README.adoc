@@ -110,6 +110,9 @@ Tuteurices de l'équipe::
 - link:https://github.com/orgs/IUT-Blagnac/projects/172[Lien vers le projet du Sprint {sp}]
 - Les UserStories se trouvent dans *Répartition des tâches et état d'avancement*
 
+Bilan du Sprint :
+La plupart des tâches ont été réalisées. Les tâches de dev de Loélia sont sprint2/sprint3, donc c'est OK. Discussions avec Quentin Vey, on lui a montré le proto. Quentin nous a donné plusieurs nouvelles tâches pour le sprint 3.
+
 == Evaluation hebdomadaire
 
 ifdef::env-github[]
