@@ -121,5 +121,6 @@ endif::[]
 
 Sprint 1 : Adapter le template du readme je n'ai aucun lien vers votre projet ! Pas de release, mettre au moins un état d'avancement. Je n'ai pas de backlog produit avec liste des US (priorité et complexité). Tâches sans label ni milestone non rattachées à une US. Pas de backlog sprint 2. Pas de bilan sprint 1 !
 
+Sprint 2 : Release à détailler : fait / reste à faire ! Pour Vincent : attention ... d'autant que la partie gestion de projet n'est pas bonne, ce qui pénalise toute l'équipe. Doc Tech:  les liens vers les UC ne marchent pas. La doc n'est pas versionnée, datée. Plan à revoir en séparant le back du front ... du code mais peu sigificatif. Doc user  : idem version et date manquantes, ce n'est pas clair, le site est utilisé par les équipes, un seul admin ? Cahier de tests ok mais confus, on ne sait pas à quelle version on en est ... idem séparer les tests partie back, de ceux du site. Je demande une sprint review j'ai juste un tableau de répartition des tâches ...ce n'est pas la même chose.  Revoir les US il manque les finalités.  Le plateau du jeu n'est pas un utilisateur !! à reformuler. Les tâches sont peu explicites : coder c'est vague !! Je n'ai pas le backlog sprint 3 dans les scrumboard du projet. Attention :  la note gestion de projet sera commune à tous les membres du groupe !!  
 
 
