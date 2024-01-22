@@ -107,7 +107,8 @@ le css:
 image:img/fonction-color3.png[]
 
 
-== Couleur aléatoire des joueurs
+== Données Admin
+=== Couleur aléatoire des joueurs
 Compare la node qui vient d'être récupéré avec un tableau contenant les nodes ayant déjà une couleur. Si la node est déjà existante il ne se passe rien. Sinon une couleur est générer de manière aléatoire. Ensuite cette couleur est ajouter au json de la node et la node est ajouté au tableau des nodes avec couleurs. 
 
 == Protocole de communication
