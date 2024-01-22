@@ -142,9 +142,9 @@ Lorsqu'un sniffeur se connecte, il peut être vu depuis :
  - l'interface utilisateur (comme un pion) ;
  - la page d'index (dans la liste).
 
-image::img/adminteamconnection.png[Interface administrateur]
-image::img/userteamconnection.png[Interface utilisateur]
-image::img/indexteamconnection.png[Index]
+image::img/viewteamdata.png[Interface administrateur]
+image::img/indexteamconnection.png[Interface utilisateur]
+image::img/afterrefresh.png[Index]
 
 === Personnalisation des Paramètres
 Fonctionnalité en cours de développement.
