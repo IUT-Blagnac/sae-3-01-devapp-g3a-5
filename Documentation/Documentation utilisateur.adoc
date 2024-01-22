@@ -113,7 +113,7 @@ image::img/viewcheckpoints.png[Exemple de liste de checkpoints]
 
 Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index/
 
-image::img/indexviewteams.png[Exemple de liste de sniffeurs connectés]
+image::img/afterrefresh.png[Exemple de liste de sniffeurs connectés]
 
 ==== Interface Utilisateur/Spectateur
 
