@@ -103,7 +103,7 @@ Tuteurices de l'équipe::
 
 :release: v0.2.0
 
-- Version courante : image:{badge}Version-{release}-purple.svg[link="https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/releases/tag/{release} "]
+- Lien de la release courante (Sprint {sp}) : image:{badge}Version-{release}-purple.svg[link="https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/releases/tag/{release} "]
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20technique.adoc[Lien vers la doc technique]
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20utilisateur.adoc[Lien vers la doc utilisateur]
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Cahier%20de%20tests.adoc[Lien vers le cahier de recettes]
