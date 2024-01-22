@@ -234,6 +234,67 @@ Ordinateur sous Windows ou OS équivalent.
 
 
 
+=== Fonctionnalités Diverses
+:lvl1: *
+> Ces présents tests sont divers car ils rentrent dans plusieurs ou aucune des catégories ci-dessus.
+
+==== https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/67[Accès Port Série]
+:lvl2: 1
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Accès Port Série
+:objectif: Accéder au port série et lire des données
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Démarrer l'outil de sélection de port série avec le bouton puis choisir le port série (généralement COM3). ^|Des données apparaissent dans la console JS. ^|Être sur la page index, utiliser Google Chrome. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Démarrer l'outil de sélection de port série et annuler l'opération. ^|Cela ne déclenche Aucune erreur n'apparait dans la console JS. ^|Être sur la page index, utiliser Google Chrome. ^|{test_wt}
+5+|
+|====
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 2
+:nom_test: Données Conformes
+:objectif: Vérifier que les données du port série sont conformes
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter le port série au site web et ouvrir la console JS. ^|Les données apparaissent sous la forme d'un tableau complet et conforme. ^|Être sur la page index, utiliser Google Chrome. ^|{test_wt}
+5+|
+
+5+|Commentaire : Aucun commentaire.
+|====
+
+
+// ///////////////////////////////////////////
+
 
 
 
