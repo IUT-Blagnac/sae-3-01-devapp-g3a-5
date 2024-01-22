@@ -273,7 +273,7 @@ Ordinateur sous Windows ou OS équivalent.
 
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
-:num_test: 2
+:num_test: 1
 :nom_test: Données Conformes
 :objectif: Vérifier que les données du port série sont conformes
 
