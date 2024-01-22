@@ -267,6 +267,10 @@ Ordinateur sous Windows ou OS équivalent.
 |====
 
 
+==== https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/62[Données Admin]
+:lvl2: 2
+
+
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
 :num_test: 2
