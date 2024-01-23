@@ -66,11 +66,11 @@ async function lirePortSerie() {
         await readableStreamClosed;
 
         // On effectue la conversion de listNodeWithColor en objet JSON
-        const listNodeWithColorJSON = {};
-        listNodeWithColor.forEach(item => {
-          listNodeWithColorJSON[item.node] = item;
-        });
-        console.log(listNodeWithColorJSON);
+        // const listNodeWithColorJSON = {};
+        // listNodeWithColor.forEach(item => {
+        //   listNodeWithColorJSON[item.node] = item;
+        // });
+        // console.log(listNodeWithColorJSON);
       } 
       catch (error) {
         console.error('Erreur lors de la demande ou de l\'ouverture du port série :', error);
