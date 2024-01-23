@@ -1,5 +1,5 @@
 let lectureDonneesEnCours = false;
-const listNodeWithColor = [];
+const listNodeWithColor = new Map();
 ///////////////////////
 ///////////////////////
 ////LECTURE DONNEES////
@@ -36,6 +36,8 @@ async function lirePortSerie() {
             try {
               const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
   
+              
+              //const nodeExistante = listNodeWithColor.has(jsonData.node);
               const nodeExistante = listNodeWithColor.some(item => item.node === jsonData.node);
   
               //SI C'EST UNE NOUVELLE EQUIPE
@@ -48,6 +50,9 @@ async function lirePortSerie() {
               else{
                 //modifierTableau(jsonData);
               }
+
+              //listNodeWithColor.set(jsonData.node, jsonData);
+
               console.log(listNodeWithColor);
             } catch (jsonError) {
               console.error('Erreur lors de l\'analyse JSON :', jsonError);
@@ -279,7 +284,7 @@ var CheckpointsCaches = true;
         joueurs = [];
         text = "";
 
-        for(var joueur of listNodeWithColor){
+        for(var joueur of listNodeWithColor.values){
           joueurs.push(joueur.node);
         }
         

@@ -17,18 +17,17 @@
 		<h1> LocURa4IoT - Chasse au trésor</h1>
 
 		<h4> Joueurs : <span id='nbJoueurs'>0</span> <span id="toggleJoueurs" class="rotate" onclick="afficherJoueurs()">▲</span>  </h4>
-		<div id="listJoueurs">
-			<p> aaaaa </p>
+		<div id="listJoueurs" class="listIndex">
 		</div>
 
 		<h4> Capteurs : <span id='nbCheckpoints'>0</span> <span id="toggleCheckpoints" class="rotate" onclick="afficherCheckpoints()">▲</span>  </h4>
-		<div id="listCheckpoints">
-			<p> aaaaa </p>
+		<div id="listCheckpoints" class="listIndex">
+			
 		</div>
 
 
-		<button class="mainbutton" onclick="window.open('IHM_admin.php')">Commencer la partie !</button>
-		<button class="mainbutton" onclick="rafraichir()">Rafraîchir</button>
+		<button class="mainbutton" style="display: none;" id="commencerPartie" onclick="window.open('IHM_admin.php')">Commencer la partie !</button>
+		<button class="mainbutton" onclick="rafraichir()" id="rafraichir">Lancer lecture des données</button>
 	
 </body>
 </html>
