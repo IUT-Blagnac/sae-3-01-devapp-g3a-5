@@ -44,6 +44,7 @@ async function lirePortSerie() {
                 jsonData.couleur = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
                 //admin : createTableau(jsonData);
                 listNodeWithColor.push(jsonData);
+                localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
               }
               console.log(listNodeWithColor);
             } catch (jsonError) {
@@ -289,3 +290,4 @@ var joueursCaches = true;
         document.getElementById('nbJoueurs').innerText = getNbJoueurs();
         document.getElementById('listJoueurs').innerText = getListJoueurs();
     }
+    
