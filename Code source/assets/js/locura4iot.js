@@ -1,5 +1,12 @@
 
 const listNodeWithColor = [];
+// Le listNodeWithColor est de la forme
+// [0:{node: "0xFD24", targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}]
+// Nous voulons le passer à la forme
+// {"0xFD24": {targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}}
+
+
+
 ///////////////////////
 ///////////////////////
 ////LECTURE DONNEES////
@@ -57,6 +64,13 @@ async function lirePortSerie() {
         
         textStreamReader.releaseLock(); // Ferme les flux après la lecture
         await readableStreamClosed;
+
+        // On effectue la conversion de listNodeWithColor en objet JSON
+        const listNodeWithColorJSON = {};
+        listNodeWithColor.forEach(item => {
+          listNodeWithColorJSON[item.node] = item;
+        });
+        console.log(listNodeWithColorJSON);
       } 
       catch (error) {
         console.error('Erreur lors de la demande ou de l\'ouverture du port série :', error);
