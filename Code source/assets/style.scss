@@ -137,3 +137,71 @@ td.joueur-name{
     justify-content: space-around;
     align-items: flex-start;
 }
+
+.modal-background {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Styles pour la fenêtre */
+.modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    width: 600px;
+    margin: auto;
+}
+@keyframes fadeInAndSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Appliquez l'animation à la fenêtre modale */
+.modal {
+    animation: fadeInAndSlide 0.2s ease-in-out;
+}
+
+button#genererPDF{
+    background-color: #8ab4af;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+// hover
+button#genererPDF:hover{
+    background-color: #597f7b;
+}
+
+
+/* Styles pour le bouton de fermeture de la fenêtre modale */
+.close-button {
+    cursor: pointer;
+    color: #555;
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}

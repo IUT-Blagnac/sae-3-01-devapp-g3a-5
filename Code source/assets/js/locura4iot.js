@@ -1,5 +1,13 @@
+
 let lectureDonneesEnCours = false;
-const listNodeWithColor = [];
+const listNodeWithColor = {};
+// Le listNodeWithColor est de la forme
+// [0:{node: "0xFD24", targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}]
+// Nous voulons le passer à la forme
+// {"0xFD24": {targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}}
+
+
+
 ///////////////////////
 ///////////////////////
 ////LECTURE DONNEES////
@@ -35,15 +43,21 @@ async function lirePortSerie() {
           for (let i = 0; i < lines.length - 1; i++) {
             try {
               const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
-  
-              const nodeExistante = listNodeWithColor.some(item => item.node === jsonData.node);
+
+              const nodeExistante = jsonData.node in listNodeWithColor ? true : false;
   
               //SI C'EST UNE NOUVELLE EQUIPE
               if (!nodeExistante) {
                 // Ajoute un attribut "couleur" avec une couleur générée
                 jsonData.couleur = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-                createTableau(jsonData);
-                listNodeWithColor.push(jsonData);
+
+
+                //admin : createTableau(jsonData);
+                listNodeWithColor[jsonData.node] = jsonData;
+                localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+              }
+              else{
+                //modifierTableau(jsonData);
               }
               else{
                 //modifierTableau(jsonData);
@@ -223,6 +237,13 @@ function gererDeconnection(id){
 }
 
 
+$(document).ready(function() {
+  $("#consoleJson").on("click", function() {
+    window.location.href = "consoleJson.php";
+  });
+});
+
+
 ///////////////////////////////
 ///////////////////////////////
 //Fonctionnalités pour l'user//
@@ -314,6 +335,31 @@ var CheckpointsCaches = true;
 
         return 4;
     }
+    
+
+  //   $(document).ready(function() {
+  //   $('#genererPDF').on('click', function() {
+  //     // Créez une instance de jsPDF
+  //     var doc = new jsPDF();
+  //     console.log("on cree le pdf");
+  //     // Ajoutez du contenu au PDF
+  //     doc.text('Compte rendu', 10, 10);
+  
+  //     // Ajoutez le reste du contenu ici
+  
+  //     // Sauvegardez le fichier PDF
+  //     doc.save('compte_rendu.pdf');
+  //   });
+  // });
+
+    function openModal() {
+      document.getElementById("myModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
+
+    
 
     function rafraichir(){
 
@@ -332,3 +378,27 @@ var CheckpointsCaches = true;
         document.getElementById('nbCheckpoints').innerText = getNbCheckpoints();
         document.getElementById('listCheckpoints').innerHTML = getListCheckpoints();
     }
+
+
+///////////////////////////////////
+///////////////////////////////////
+//Fonctionnalités pour la console//
+///////////////////////////////////
+///////////////////////////////////
+
+window.addEventListener('load', function() {
+  if (window.location.href.includes('consoleJson.php')){
+    // Récupérer les données depuis le stockage local
+      console.log(listNodeWithColor);
+    } else {
+      console.error('Aucune donnée disponible.');
+    }
+  });
+
+// a supprimer après
+$(document).ready(function() {
+  $(".donnee").on("click", function() {
+    lirePortSerie();
+  });
+});
+ 

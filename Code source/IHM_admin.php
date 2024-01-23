@@ -16,7 +16,8 @@
 		<button class="littlebutton" > FIN </button>
 		<button class="littlebutton"  onclick="togglepause()"> PAUSE </button>
 		<button class="littlebutton"  onclick="window.open('IHM_user.php', '_blank', 'noopener noreferrer')">IHM User</button>
-		
+		<button class="littlebutton" id="consoleJson"> Console </button>
+
 		<button class="littlebutton" onclick="createTableau()"> Test tab </button>
 		<button class="littlebutton donnee"> test </button>
 	</header>
