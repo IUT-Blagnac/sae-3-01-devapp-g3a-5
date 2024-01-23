@@ -292,6 +292,31 @@ var joueursCaches = true;
 
         return 10
     }
+    
+
+  //   $(document).ready(function() {
+  //   $('#genererPDF').on('click', function() {
+  //     // Créez une instance de jsPDF
+  //     var doc = new jsPDF();
+  //     console.log("on cree le pdf");
+  //     // Ajoutez du contenu au PDF
+  //     doc.text('Compte rendu', 10, 10);
+  
+  //     // Ajoutez le reste du contenu ici
+  
+  //     // Sauvegardez le fichier PDF
+  //     doc.save('compte_rendu.pdf');
+  //   });
+  // });
+
+    function openModal() {
+      document.getElementById("myModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
+
+    
 
     function rafraichir(){
         document.getElementById('nbJoueurs').innerText = getNbJoueurs();
