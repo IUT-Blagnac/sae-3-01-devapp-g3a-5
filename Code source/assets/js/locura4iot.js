@@ -200,6 +200,13 @@ function gererDeconnection(id){
 }
 
 
+$(document).ready(function() {
+  $("#consoleJson").on("click", function() {
+    window.location.href = "consoleJson.php";
+  });
+});
+
+
 ///////////////////////////////
 ///////////////////////////////
 //Fonctionnalités pour l'user//
@@ -289,3 +296,30 @@ var joueursCaches = true;
         document.getElementById('nbJoueurs').innerText = getNbJoueurs();
         document.getElementById('listJoueurs').innerText = getListJoueurs();
     }
+
+///////////////////////////////////
+///////////////////////////////////
+//Fonctionnalités pour la console//
+///////////////////////////////////
+///////////////////////////////////
+
+window.addEventListener('load', function() {
+  if (window.location.href.includes('consoleJson.php')){
+    // Récupérer les données depuis le stockage local
+      console.log(listNodeWithColor);
+    } else {
+      console.error('Aucune donnée disponible.');
+    }
+  });
+
+// a supprimer après
+$(document).ready(function() {
+  $(".donnee").on("click", function() {
+    lirePortSerie();
+  });
+});
+
+
+
+
+
