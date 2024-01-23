@@ -305,3 +305,9 @@ var joueursCaches = true;
         document.getElementById('listJoueurs').innerText = getListJoueurs();
     }
     
+    $(document).ready(function(){
+      $(".donnee").on("click", function(){
+        console.log(lirePortSerie());
+      });
+    });
+    
