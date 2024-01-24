@@ -1,99 +1,93 @@
+/////////////////////////////////////
+/////////////////////////////////////
+//Déclaration de variables globales//
+/////////////////////////////////////
+/////////////////////////////////////
 
 let lectureDonneesEnCours = false;
-const listNodeWithColor = {};
-
 let partieCommencee = false;
+let rotationJoueurs = 0;
+let joueursCaches = true;
+let rotationCheckpoints = 0;
+let CheckpointsCaches = true;
+const listNodeWithColor = {};
 // Le listNodeWithColor est de la forme
 // [0:{node: "0xFD24", targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}]
 // Nous voulons le passer à la forme
 // {"0xFD24": {targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}}
 
-
-const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-
-
-///////////////////
-///////////////////
-//LECTURE DONNEES//
-///////////////////
-///////////////////
+/////////////////////////
+/////////////////////////
+//Lecture du port série//
+/////////////////////////
+/////////////////////////
 
 async function lirePortSerie() {
-      try {
-        const port = await navigator.serial.requestPort(); // Demande la permission d'accéder au port série
-        
-        await port.open({ baudRate: 115200, dataBits: 8, stopBits: 1 }); // Ouvre le port série avec la configuration souhaitée
-        
-        // Configure le décodeur pour convertir les données JSON
-        const decoder = new TextDecoderStream('utf-8');
-        const readableStreamClosed = port.readable.pipeTo(decoder.writable);
-        const textStreamReader = decoder.readable.getReader();
-        
-  
-        let partialData = ''; // Stockage temporaire pour les fragments de données
-  
-        // Lis les données en continu
-        while (true) {
-          const { value, done } = await textStreamReader.read();
-          if (done) {
-            console.log('Décodage terminé !');
-            break;
+  try {
+    const port = await navigator.serial.requestPort(); // Demande la permission d'accéder au port série    
+    await port.open({ baudRate: 115200, dataBits: 8, stopBits: 1 }); // Ouvre le port série avec la configuration souhaitée  
+    // Configure le décodeur pour convertir les données JSON
+    const decoder = new TextDecoderStream('utf-8');
+    const readableStreamClosed = port.readable.pipeTo(decoder.writable);
+    const textStreamReader = decoder.readable.getReader();
+    let partialData = ''; // Stockage temporaire pour les fragments de données
+    // Lis les données en continu
+    while (true) {
+      const { value, done } = await textStreamReader.read();
+      if (done) {
+        console.log('Décodage terminé !');
+        break;
+      }
+      partialData += value; // Concatène les fragments de données
+      console.log(partialData);
+      const lines = partialData.split('\n'); // Sépare les données en lignes
+      // Traite chaque ligne (sauf la dernière, potentiellement incomplète)
+      for (let i = 0; i < lines.length - 1; i++) {
+        try {
+          const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
+          const nodeExistante = jsonData.node in listNodeWithColor ? true : false;
+          //SI C'EST UNE NOUVELLE EQUIPE
+          if (!nodeExistante) {
+            // Ajoute un attribut "couleur" avec une couleur générée
+            jsonData.couleur = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+            //admin : createTableau(jsonData);
+            listNodeWithColor[jsonData.node] = jsonData;
+            localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+            if (partieCommencee) {
+              createTableau(jsonData);
+            }
           }
-          
-          partialData += value; // Concatène les fragments de données
-          console.log(partialData);
-          const lines = partialData.split('\n'); // Sépare les données en lignes
-  
-          // Traite chaque ligne (sauf la dernière, potentiellement incomplète)
-          for (let i = 0; i < lines.length - 1; i++) {
-            try {
-              const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
-
-              const nodeExistante = jsonData.node in listNodeWithColor ? true : false;
-  
-              //SI C'EST UNE NOUVELLE EQUIPE
-              if (!nodeExistante) {
-                // Ajoute un attribut "couleur" avec une couleur générée
-                jsonData.couleur = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-                //admin : createTableau(jsonData);
-                listNodeWithColor[jsonData.node] = jsonData;
-                localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-                if (partieCommencee) {
-                  createTableau(jsonData);
-                }
+          else {
+            // si les valeurs dans times sont différentes, on met à jour
+            for (let j = 0; j < jsonData.times.length; j++) {
+              if (jsonData.times[j] !== listNodeWithColor[jsonData.node].times[j]) {
+                listNodeWithColor[jsonData.node].times[j] = jsonData.times[j];
               }
-              else {
-                // si les valeurs dans times sont différentes, on met à jour
-                for (let j = 0; j < jsonData.times.length; j++) {
-                  if (jsonData.times[j] !== listNodeWithColor[jsonData.node].times[j]) {
-                    listNodeWithColor[jsonData.node].times[j] = jsonData.times[j];
-                  }
-                }
-              }
-              console.log(listNodeWithColor);
-            } catch (jsonError) {
-              console.error('Erreur lors de l\'analyse JSON :', jsonError);
-          // else{
-          //   if(jsonData != listNodeWithColor.contai(jsonData.node)){
-          //     listNodeWithColor.set(jsonData.node, jsonData);
-          //     localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-          //     if(partieCommencee){
-          //       modifierTableau(jsonData);
-          //     }
-          //   }
-          // }
-
-
-      partialData = lines[lines.length - 1]; // Garde le dernier fragment potentiellement incomplet
+            }
+          }
+          console.log(listNodeWithColor);
+        } catch (jsonError) {
+          console.error('Erreur lors de l\'analyse JSON :', jsonError);
+        }
+        // else{
+        //   if(jsonData != listNodeWithColor.contai(jsonData.node)){
+        //     listNodeWithColor.set(jsonData.node, jsonData);
+        //     localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+        //     if(partieCommencee){
+        //       modifierTableau(jsonData);
+        //     }
+        //   }
+        // }
+        partialData = lines[lines.length - 1]; // Garde le dernier fragment potentiellement incomplet
+      }
     }
-
     textStreamReader.releaseLock(); // Ferme les flux après la lecture
     await readableStreamClosed;
   }
   catch (error) {
     console.error('Erreur lors de la demande ou de l\'ouverture du port série :', error);
   }
-}
+};
 
 ////////////////////////////////
 ////////////////////////////////
@@ -111,9 +105,7 @@ function afficherPopup(contenu, auto) {
 
   if (contenu.length > 0) {
     popupContent.innerHTML = contenu;
-
     popup.style.display = "block";
-
     popup.style.animation = "deplacementInformation 5s";
 
     setTimeout(function () {
@@ -123,10 +115,6 @@ function afficherPopup(contenu, auto) {
 }
 
 function togglepause() {
-
-  //stop timer si timer ?
-
-  //Block réception données ?
 
   var pause = document.getElementById("pause_icon");
   var dark = document.getElementById("dark");
@@ -141,27 +129,21 @@ function togglepause() {
   }
 }
 
-function finJeu() {
-  //TODO
-}
+window.addEventListener('load', function () {
+  if (window.location.href.includes("IHM_admin.php")) {
+    partieCommencee = true;
+    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
-function initialiserPartie() {
-  console.log("BBBBBBBBBBBBBBBB");
-  partieCommencee = true;
-
-  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-
-  for (var joueur of cacheCacheData) {
-    console.log(joueur);
-    createTableau(joueur);
+    for (var joueur of cacheCacheData) {
+      createTableau(joueur);
+    }
   }
-}
+});
 
 function createTableau(jsonData) {
   const obj1 = JSON.parse(JSON.stringify(
     jsonData
   ));
-
 
   $nbIndex = getNbCheckpoints();
 
@@ -197,7 +179,6 @@ function createTableau(jsonData) {
 
 
   //Contenu checkpoints
-
   for (var i = 0; i < $nbIndex; i++) {
     var rowCheckpoint = document.createElement("tr");
 
@@ -224,9 +205,7 @@ function createTableau(jsonData) {
     tbl.appendChild(rowCheckpoint);
   }
 
-
   //Afficher tableau
-
   var tabEquipesDiv = document.getElementById("tabEquipes");
   console.log(tabEquipesDiv);
   console.log(tbl);
@@ -250,6 +229,7 @@ function modifierTableau(jsonData) {
     }
   }
 }
+
 /**
 * Change l'apprence du noeud hors-connexion et informe les joueurs.
 * 
@@ -264,12 +244,9 @@ function gererDeconnection(id) {
   //Modifier pion sur interface user ?
 }
 
-
-
 function downloadJSON() {
-  // Récupérez le contenu du localStorage
+  // Récupérez les données du jeu
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-
   // Convertissez l'objet en chaîne JSON
   const jsonData = JSON.stringify(cacheCacheData, null, 2);
 
@@ -295,35 +272,67 @@ function downloadJSON() {
   URL.revokeObjectURL(url);
 }
 
-
-$(document).ready(function () {
-  $("#consoleJson").on("click", function () {
-
-    window.location.href = "consoleJson.php";
-  });
-});
-
-
 ///////////////////////////////
 ///////////////////////////////
 //Fonctionnalités pour l'user//
 ///////////////////////////////
 ///////////////////////////////
 
-// function creerPions(){
-  // event listener on load page
-  // window.addEventListener('load', function() {
-  //   var monElement = document.getElementById('0');
-  //   console.log(monElement);
+function creerClassementPopUp() {
+  // Récupérer l'objet depuis le localStorage
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
-  // });
-// }
+  // Calculer le score pour chaque joueur (nombre de balises trouvées)
+  const classement = [];
+  for (const joueurId in cacheCacheData) {
+    const joueurData = cacheCacheData[joueurId];
+    const balisesTrouvees = joueurData.times.filter(temps => temps === 0).length;
+    const tempsTotal = joueurData.times.reduce((total, temps) => total + temps, 0);
+    const couleur = joueurData.couleur;
+    classement.push({ joueurId, balisesTrouvees, tempsTotal, couleur });
+  }
+
+  // Trier les joueurs en fonction du nombre de balises trouvées et du temps total
+  classement.sort((a, b) => {
+    if (a.balisesTrouvees !== b.balisesTrouvees) {
+      return b.balisesTrouvees - a.balisesTrouvees; // Trie par nombre de balises trouvées décroissant
+    } else {
+      return a.tempsTotal - b.tempsTotal; // En cas d'égalité, trie par temps total croissant
+    }
+  });
+
+  // Afficher le classement
+  const classementContent = document.getElementById('classementContent');
+  classementContent.innerHTML += '<h2>Classement Cache-Cache</h2>';
+  titleclassemnt = ["Premier", "Deuxième", "Troisième"];
+  // on affiche le classement des 3 premiers joueurs
+  for (let i = 0; i < 3; i++) {
+    const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
+    const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
+    const joueur = classement[i];
+    const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
+    classementContent.innerHTML += `<p>${titleclassemnt[i]}: ${joueur.joueurId} (${joueur.balisesTrouvees} balises trouvées, ${tempsTotalText})</p>`;
+    joueurNameHtml.innerHTML = joueur.joueurId;
+    // joueur possede l'attribut couleur qui contient l'hexa de la couleur
+    console.log(joueur.couleur);
+    joueurColorHtml.style.backgroundColor = joueur.couleur;
+  }
+  return classement;
+}
 
 
 // ================================== A MODIFIER ==================================
-$(document).ready(function() {
-  window.addEventListener('load', function() {
-    lirePortSerie();
+// function creerPions(){
+// event listener on load page
+// window.addEventListener('load', function() {
+//   var monElement = document.getElementById('0');
+//   console.log(monElement);
+
+// });
+// }
+
+$(document).ready(function () {
+  window.addEventListener('load', function () {
     // Récupérez l'élément <td> avec l'id "0"
     var tdElement = document.getElementById('0');
 
@@ -332,12 +341,12 @@ $(document).ready(function() {
     divElement.style.display = "flex";
 
     // Récupérez les valeurs du localStorage
-    var listNodeWithColor = JSON.parse(localStorage.getItem('listNodeWithColor')) || [];
-    console.log(listNodeWithColor);
+    var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor')) || [];
+    console.log(cacheCacheData);
     // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
-    for (var i = 0; i < listNodeWithColor.length; i++) {
+    for (var i = 0; i < cacheCacheData.length; i++) {
       var nouvelleDiv = document.createElement('div');
-      nouvelleDiv.id = listNodeWithColor[i].node;  // Utilisez la valeur du localStorage pour l'ID
+      nouvelleDiv.id = cacheCacheData[i].node;  // Utilisez la valeur du localStorage pour l'ID
       tdElement.appendChild(divElement);
       divElement.appendChild(nouvelleDiv);
 
@@ -353,19 +362,11 @@ $(document).ready(function() {
   });
 });
 
-
-
-
-
-
 ////////////////////////////////
 ////////////////////////////////
 //Fonctionnalités pour l'index//
 ////////////////////////////////
 ////////////////////////////////
-
-let rotationJoueurs = 0;
-let joueursCaches = true;
 
 function afficherJoueurs() {
   rotationJoueurs += 180;
@@ -379,9 +380,6 @@ function afficherJoueurs() {
     document.getElementById('listJoueurs').style.display = "block";
   }
 }
-
-let rotationCheckpoints = 0;
-let CheckpointsCaches = true;
 
 function afficherCheckpoints() {
   rotationCheckpoints += 180;
@@ -397,10 +395,8 @@ function afficherCheckpoints() {
 }
 
 function getListJoueurs() {
-
-  text = "";
-
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  text = "";
 
   for (const joueurId in cacheCacheData) {
     const joueurData = cacheCacheData[joueurId];
@@ -408,32 +404,23 @@ function getListJoueurs() {
     console.log("test");
 
   }
-
   return text;
 }
 
+function openModal() {
+  document.getElementById("myModal").style.display = "flex";
+}
 
-
-    function openModal() {
-      document.getElementById("myModal").style.display = "flex";
-    }
-    function closeModal() {
-      document.getElementById("myModal").style.display = "none";
-    }
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
 
 function getListCheckpoints() {
-
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
   if (getNbJoueurs() === 0) {
     return "";
   }
   text = "";
-
-    function rafraichir(){
-        document.getElementById('nbJoueurs').innerText = getNbJoueurs();
-        document.getElementById('listJoueurs').innerText = getListJoueurs();
-    }
-
-  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
   for (const joueurId in cacheCacheData) {
     const joueurData = cacheCacheData[joueurId];
@@ -442,51 +429,24 @@ function getListCheckpoints() {
     }
     return text;
   }
-
 }
 
 function getNbJoueurs() {
-
   return Object.keys(JSON.parse(localStorage.getItem('listNodeWithColor'))).length;
-
 }
 
 function getNbCheckpoints() {
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
   if (getNbJoueurs() === 0) {
     return 0;
   }
-
-  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
   for (const joueurId in cacheCacheData) {
     const joueurData = cacheCacheData[joueurId];
     return joueurData.targets.length;
   }
 
-}
-
-
-//   $(document).ready(function() {
-//   $('#genererPDF').on('click', function() {
-//     // Créez une instance de jsPDF
-//     var doc = new jsPDF();
-//     console.log("on cree le pdf");
-//     // Ajoutez du contenu au PDF
-//     doc.text('Compte rendu', 10, 10);
-
-//     // Ajoutez le reste du contenu ici
-
-//     // Sauvegardez le fichier PDF
-//     doc.save('compte_rendu.pdf');
-//   });
-// });
-
-function openModal() {
-  document.getElementById("myModal").style.display = "flex";
-}
-function closeModal() {
-  document.getElementById("myModal").style.display = "none";
 }
 
 function rafraichir() {
@@ -505,27 +465,3 @@ function rafraichir() {
   document.getElementById('nbCheckpoints').innerText = getNbCheckpoints();
   document.getElementById('listCheckpoints').innerHTML = getListCheckpoints();
 }
-
-
-///////////////////////////////////
-///////////////////////////////////
-//Fonctionnalités pour la console//
-///////////////////////////////////
-///////////////////////////////////
-
-window.addEventListener('load', function () {
-  if (window.location.href.includes('consoleJson.php')) {
-    // Récupérer les données depuis le stockage local
-    console.log(listNodeWithColor);
-  } else {
-    console.error('Aucune donnée disponible.');
-  }
-});
-
-
-$(document).ready(function () {
-  $(".donnee").on("click", function () {
-
-    lirePortSerie();
-  });
-});
