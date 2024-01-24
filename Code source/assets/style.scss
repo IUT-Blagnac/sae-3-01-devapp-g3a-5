@@ -217,3 +217,24 @@ button#genererJson{
     top: 10px;
     right: 15px;
 }
+
+.square {
+    width: 10px; 
+    height: 10px;
+    background-color: #e02c2c;
+ }
+
+ .circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #840d72;
+ }
+
+ .triangle {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8.66px solid #2d23c6; 
+}  

@@ -4,8 +4,8 @@
     <meta charset="utf-8"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
-	<script src="assets/js/locura4iot.js" defer> </script>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="assets/js/locura4iot.js" defer> </script>
     <link rel="stylesheet" href="./assets/style.scss" />
 
     <title>Chasse au trésor : interface utilisateur</title>
