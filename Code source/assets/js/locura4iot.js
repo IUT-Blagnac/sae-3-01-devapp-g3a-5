@@ -50,7 +50,6 @@ async function lirePortSerie() {
           if (!nodeExistante) {
             // Ajoute un attribut "couleur" avec une couleur générée
             jsonData.couleur = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-            //admin : createTableau(jsonData);
             listNodeWithColor[jsonData.node] = jsonData;
             localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
             if (partieCommencee) {
@@ -134,8 +133,8 @@ window.addEventListener('load', function () {
     partieCommencee = true;
     const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
-    for (var joueur of cacheCacheData) {
-      createTableau(joueur);
+    for (const joueur in cacheCacheData) {
+      createTableau(cacheCacheData[joueur]);
     }
   }
 });
@@ -394,18 +393,27 @@ function afficherCheckpoints() {
   }
 }
 
-function getListJoueurs() {
-  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-  text = "";
+function getListText(mot, list){
+  let text = "";
 
-  for (const joueurId in cacheCacheData) {
-    const joueurData = cacheCacheData[joueurId];
-    text += "Joueur " + joueurData.node + "<br>";
-    console.log("test");
-
+  for(let i in list){
+    text += mot + " " + list[i] + "<br>";
   }
+
   return text;
 }
+
+function getListJoueurs() {
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  let listJoueurs = [];
+
+  for (const joueurId in cacheCacheData) {
+    listJoueurs.push(cacheCacheData[joueurId].node);
+  }
+
+  return listJoueurs;
+}
+
 
 function openModal() {
   document.getElementById("myModal").style.display = "flex";
@@ -418,21 +426,28 @@ function closeModal() {
 function getListCheckpoints() {
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
   if (getNbJoueurs() === 0) {
-    return "";
+    return [];
   }
-  text = "";
+  let listCheckpoints = [];
 
   for (const joueurId in cacheCacheData) {
     const joueurData = cacheCacheData[joueurId];
-    for (const target in joueurData.targets) {
-      text += "Checkpoint " + joueurData.targets[target] + "<br>";
+    for (const target in cacheCacheData[joueurId].targets) {
+      listCheckpoints.push(joueurData.targets[target]);
     }
-    return text;
+    return listCheckpoints;
   }
 }
 
 function getNbJoueurs() {
-  return Object.keys(JSON.parse(localStorage.getItem('listNodeWithColor'))).length;
+
+  const listNodeWithColor = JSON.parse(localStorage.getItem('listNodeWithColor'));
+
+  if (!listNodeWithColor) {
+    return 0;
+  }
+
+  return Object.keys(listNodeWithColor).length;
 }
 
 function getNbCheckpoints() {
@@ -461,7 +476,7 @@ function rafraichir() {
     document.getElementById('commencerPartie').style.display = "block";
   }
   document.getElementById('nbJoueurs').innerText = getNbJoueurs();
-  document.getElementById('listJoueurs').innerHTML = getListJoueurs();
+  document.getElementById('listJoueurs').innerHTML = getListText("Joueur", getListJoueurs());
   document.getElementById('nbCheckpoints').innerText = getNbCheckpoints();
-  document.getElementById('listCheckpoints').innerHTML = getListCheckpoints();
+  document.getElementById('listCheckpoints').innerHTML = getListText("Checkpoint", getListCheckpoints());
 }
