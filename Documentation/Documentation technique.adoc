@@ -28,13 +28,19 @@ image::img/doc_tech_usecase_usergen.png[]
 
 ==== Javascript
 
+image::img/js.png[width=90, height=50]
+
 Principalement utilisé pour rendre les pages web interactives, Javascript permet d'ajouter des fonctionnalités dynamiques, de manipuler le contenu de la page et de réagir aux événements utilisateur. Il s'agit d'un système front parfait pour notre projet puisque nous avons besoin de manipuler des données en temps réel, notamment en déplaçant les pions sur le plateau.
 
 ==== PHP
 
+image::img/php.png[width=100, height=50]
+
 Principalement utilisé pour le développement web, PHP génère du contenu dynamique. Il est souvent intégré dans le code HTML et s'exécute sur le serveur avant que la page ne soit envoyée au navigateur. Généralement, cela permet d'ajouter de la sécurité au projet, mais en l'occurence, le serveur est également le client. Il n'y a donc pas d'aspect de sécurité à prendre en compte. Nous utilisons tout de même PHP pour sa génération dynamique de contenu, contrairement à HTML qui donne du contenu entièrement statique.
 
 ==== CSS/SCSS
+
+image::img/css.png[width=35, height=50]
 
 Utilisé pour définir la présentation visuelle des pages web PHP, le CSS permet de spécifier la mise en forme, les couleurs, les polices, les marges, etc. CSS sépare la structure du contenu HTML de sa présentation. Dans notre projet, il est utilisé principalement pour modifier l'apparance des tableaux, et l'arranger à notre convenance.
 
