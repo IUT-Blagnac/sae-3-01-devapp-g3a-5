@@ -208,6 +208,36 @@ function gererDeconnection(id){
 }
 
 
+function downloadJSON() {
+  // Récupérez le contenu du localStorage
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+
+  // Convertissez l'objet en chaîne JSON
+  const jsonData = JSON.stringify(cacheCacheData, null, 2);
+
+  // Créez un objet Blob avec le contenu JSON
+  const blob = new Blob([jsonData], { type: 'application/json' });
+
+  // Créez un objet URL pour le Blob
+  const url = URL.createObjectURL(blob);
+
+  // Créez un élément <a> pour le téléchargement
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'cacheCacheData.json';
+
+  // Ajoutez l'élément <a> à la page et déclenchez le téléchargement
+  document.body.appendChild(a);
+  a.click();
+
+  // Supprimez l'élément <a> de la page
+  document.body.removeChild(a);
+
+  // Révoquez l'URL de l'objet Blob
+  URL.revokeObjectURL(url);
+}
+
+
 $(document).ready(function() {
   $("#consoleJson").on("click", function() {
     window.location.href = "consoleJson.php";

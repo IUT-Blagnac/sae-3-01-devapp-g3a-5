@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
-	<script src="assets/js/locura4iot.js"> </script>
+	<script src="assets/js/locura4iot.js" defer> </script>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="./assets/style.scss" />
 
@@ -20,14 +20,17 @@
 			<!-- vraiment utile cette table? -->
 			<table>
 				<tr>
+					<td class="label">Joueur en tete</td>
 					<td id="joueur1-color"></td>
 					<td id="joueur1-name"></td>	
 				</tr>
 				<tr>
+					<td class="label">2eme joueur</td>
 					<td id="joueur2-color"></td>
 					<td id="joueur2-name"></td>	
 				</tr>
 				<tr>
+					<td class="label">3eme joueur</td>
 					<td id="joueur3-color"></td>
 					<td id="joueur3-name"></td>	
 				</tr>
@@ -82,9 +85,10 @@
 				console.log(joueur.couleur);
   				joueurColorHtml.style.backgroundColor = joueur.couleur;
 				
+				
 			}
 		
-			window.onload=openModal();
+			openModal();
 			$(document).ready(function() {
 				$('#genererPDF').on('click', function() {
 					// Utilisez pdfmake pour générer le PDF
@@ -127,34 +131,6 @@
 					});
 			});
 
-			function downloadJSON() {
-				// Récupérez le contenu du localStorage
-				const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-
-				// Convertissez l'objet en chaîne JSON
-				const jsonData = JSON.stringify(cacheCacheData, null, 2);
-
-				// Créez un objet Blob avec le contenu JSON
-				const blob = new Blob([jsonData], { type: 'application/json' });
-
-				// Créez un objet URL pour le Blob
-				const url = URL.createObjectURL(blob);
-
-				// Créez un élément <a> pour le téléchargement
-				const a = document.createElement('a');
-				a.href = url;
-				a.download = 'cacheCacheData.json';
-
-				// Ajoutez l'élément <a> à la page et déclenchez le téléchargement
-				document.body.appendChild(a);
-				a.click();
-
-				// Supprimez l'élément <a> de la page
-				document.body.removeChild(a);
-
-				// Révoquez l'URL de l'objet Blob
-				URL.revokeObjectURL(url);
-			}
 
 
 		</script>
