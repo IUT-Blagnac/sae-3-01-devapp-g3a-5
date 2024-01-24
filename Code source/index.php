@@ -26,8 +26,8 @@
 		</div>
 
 
-		<button class="mainbutton" style="display: none;" id="commencerPartie" onclick="window.open('IHM_admin.php')">Commencer la partie !</button>
 		<button class="mainbutton" onclick="rafraichir()" id="rafraichir">Lancer lecture des données</button>
+		<button class="mainbutton" style="display: none;" id="commencerPartie" onclick="window.open('IHM_admin.php');">Commencer la partie !</button>
 	
 </body>
 </html>

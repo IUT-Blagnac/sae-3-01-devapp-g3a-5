@@ -4,8 +4,9 @@ body{
     padding: 0; 
     background-image: url("./assets/images/background.jpg");
     background-size: cover;
-    background-position: center; 
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 
 
     font-family: muli,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
@@ -124,7 +125,7 @@ button:hover {
     font-weight: 700;
 }
 
-.tabEquipes {
+#tabEquipes {
     margin-top: 70px;
     color: #242729;
 }

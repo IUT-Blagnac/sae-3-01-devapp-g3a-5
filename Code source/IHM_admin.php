@@ -39,7 +39,7 @@
 
 
 		<!-- Tableau des équipes -->
-		<div class="tabEquipes">
+		<div id="tabEquipes">
 			<p> aaaa </p>
 
 			<!-- TABLEAUX EN DUR
@@ -123,6 +123,17 @@
 			-->
 			
 		</div>
+
+		<script>
+ 			 document.addEventListener('DOMContentLoaded', function () {
+    
+			console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      
+			initialiserPartie();
+		
+			});
+		</script>
+
 </body>
 </html>
 
