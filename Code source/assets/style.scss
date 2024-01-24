@@ -96,13 +96,15 @@ td.rounded-down{
     border-bottom-left-radius: 50%;
 }
 
-td.joueur{
+td[id^="joueur"][id$="-color"]{
     border-radius: 100%;
     height: 20px;
     width: 20px;
-    background-color: #1DC2AF;
+    margin-top: 10px;
     border: 0;
 }
+
+
 
 td.position-right{
     text-align: right;
@@ -190,10 +192,20 @@ button#genererPDF{
     margin-bottom: 20px;
 
 }
-// hover
-button#genererPDF:hover{
-    background-color: #597f7b;
+button#genererJson{
+    background-color: #b89180;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
 }
+
+
+
 
 
 /* Styles pour le bouton de fermeture de la fenêtre modale */

@@ -10,12 +10,10 @@
 <body>
 
 	<header>
-
-		
 		<h1>LocURa4IoT - Interface Administrateur</h1>
 
 		<button class="littlebutton" onclick="afficherPopup('contenu', false)"> MESSAGE </button>
-		<button class="littlebutton" > FIN </button>
+		<button class="littlebutton" onclick="downloadJSON()"> Json </button>
 		<button class="littlebutton"  onclick="togglepause()"> PAUSE </button>
 		<button class="littlebutton"  onclick="window.open('IHM_user.php', '_blank', 'noopener noreferrer')">IHM User</button>
 		<button class="littlebutton" id="consoleJson"> Console </button>
@@ -35,22 +33,16 @@
 
 		<!-- Pour les notifications -->
 		<div class="popup" id="popup">
-				<div class="popup-content" id="popupContent">
-				</div>
+			<div class="popup-content" id="popupContent">
 			</div>
+		</div>
 
 
 		<!-- Tableau des équipes -->
-		<div class="tabEquipes">
+		<div id="tabEquipes">
 			<p> aaaa </p>
-			<?php
 
-				
-			
-			?>
-
-			
-		
+			<!-- TABLEAUX EN DUR
 			<table id="0XFD43">
 				<tr>
 					<b>
@@ -77,7 +69,6 @@
 				</tr>
 			</table>
 
-			<!-- TABLEAUX EN DUR 
 			<table  >
 				<tr>
 					<b>
@@ -129,11 +120,20 @@
 					<td> --:-- </td>
 				</tr>
 			</table>
-		
 			-->
 			
-
 		</div>
+
+		<script>
+ 			 document.addEventListener('DOMContentLoaded', function () {
+    
+			console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      
+			initialiserPartie();
+		
+			});
+		</script>
+
 </body>
 </html>
 
