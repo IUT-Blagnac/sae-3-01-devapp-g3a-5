@@ -15,7 +15,7 @@
 		<h1>LocURa4IoT - Interface Administrateur</h1>
 
 		<button class="littlebutton" onclick="afficherPopup('contenu', false)"> MESSAGE </button>
-		<button class="littlebutton" > FIN </button>
+		<button class="littlebutton" onclick="togglepause()> FIN </button>
 		<button class="littlebutton"  onclick="togglepause()"> PAUSE </button>
 		<button class="littlebutton"  onclick="window.open('IHM_user.php', '_blank', 'noopener noreferrer')">IHM User</button>
 		<button class="littlebutton" id="consoleJson"> Console </button>

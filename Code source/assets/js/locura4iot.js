@@ -301,20 +301,7 @@ var joueursCaches = true;
     }
     
 
-  //   $(document).ready(function() {
-  //   $('#genererPDF').on('click', function() {
-  //     // Créez une instance de jsPDF
-  //     var doc = new jsPDF();
-  //     console.log("on cree le pdf");
-  //     // Ajoutez du contenu au PDF
-  //     doc.text('Compte rendu', 10, 10);
-  
-  //     // Ajoutez le reste du contenu ici
-  
-  //     // Sauvegardez le fichier PDF
-  //     doc.save('compte_rendu.pdf');
-  //   });
-  // });
+
 
     function openModal() {
       document.getElementById("myModal").style.display = "flex";
@@ -349,6 +336,7 @@ window.addEventListener('load', function() {
 // a supprimer après
 $(document).ready(function() {
   $(".donnee").on("click", function() {
+    console.log("click");
     lirePortSerie();
   });
 });
