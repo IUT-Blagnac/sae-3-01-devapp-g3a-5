@@ -125,8 +125,6 @@ Tuteurices de l'équipe::
 
 :tst: image:{badge}Tests-pink.svg[link="{baseURL}/blob/{branch}/Documentation/Cahier%20de%20tests.adoc#
 
-== Gestion de projet & Qualité
-
 :release: v1.0.0
 
 - Lien de la release courante (Sprint {sp}) : image:{badge}Version-{release}-purple.svg[link="https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/releases/tag/{release} "]
@@ -139,6 +137,8 @@ Tuteurices de l'équipe::
 
 Bilan du Sprint :
 La plupart des tâches ont été réalisées. Les tâches de dev de Loélia sont sprint2/sprint3, donc c'est OK. Discussions avec Quentin Vey, on lui a montré le proto. Quentin nous a donné plusieurs nouvelles tâches pour le sprint 3.
+
+== Gestion de projet & Qualité
 
 == Evaluation hebdomadaire
 
