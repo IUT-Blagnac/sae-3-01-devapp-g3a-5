@@ -36,6 +36,7 @@ async function lirePortSerie() {
           }
           
           partialData += value; // Concatène les fragments de données
+          console.log(partialData);
           const lines = partialData.split('\n'); // Sépare les données en lignes
   
           // Traite chaque ligne (sauf la dernière, potentiellement incomplète)
@@ -52,6 +53,14 @@ async function lirePortSerie() {
                 //admin : createTableau(jsonData);
                 listNodeWithColor[jsonData.node] = jsonData;
                 localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+              }
+              else {
+                // si les valeurs dans times sont différentes, on met à jour
+                for (let j = 0; j < jsonData.times.length; j++) {
+                  if (jsonData.times[j] !== listNodeWithColor[jsonData.node].times[j]) {
+                    listNodeWithColor[jsonData.node].times[j] = jsonData.times[j];
+                  }
+                }
               }
               console.log(listNodeWithColor);
             } catch (jsonError) {
@@ -221,8 +230,49 @@ $(document).ready(function() {
 ///////////////////////////////
 ///////////////////////////////
 
+// function creerPions(){
+  // event listener on load page
+  // window.addEventListener('load', function() {
+  //   var monElement = document.getElementById('0');
+  //   console.log(monElement);
 
-//TODO
+  // });
+// }
+
+
+// ================================== A MODIFIER ==================================
+$(document).ready(function() {
+  window.addEventListener('load', function() {
+    lirePortSerie();
+    // Récupérez l'élément <td> avec l'id "0"
+    var tdElement = document.getElementById('0');
+
+    var divElement = document.createElement('div');
+    // Créez un nouvel élément <div>
+    divElement.style.display = "flex";
+
+    // Récupérez les valeurs du localStorage
+    var listNodeWithColor = JSON.parse(localStorage.getItem('listNodeWithColor')) || [];
+    console.log(listNodeWithColor);
+    // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
+    for (var i = 0; i < listNodeWithColor.length; i++) {
+      var nouvelleDiv = document.createElement('div');
+      nouvelleDiv.id = listNodeWithColor[i].node;  // Utilisez la valeur du localStorage pour l'ID
+      tdElement.appendChild(divElement);
+      divElement.appendChild(nouvelleDiv);
+
+      // Ajoutez une classe à chaque nouvelle div en fonction de la logique existante
+      if (i % 3 === 0) {
+        nouvelleDiv.classList.add('square');
+      } else if (i % 3 === 1) {
+        nouvelleDiv.classList.add('circle');
+      } else {
+        nouvelleDiv.classList.add('triangle');
+      }
+    }
+  });
+});
+
 
 
 
@@ -329,27 +379,3 @@ var joueursCaches = true;
         document.getElementById('nbJoueurs').innerText = getNbJoueurs();
         document.getElementById('listJoueurs').innerText = getListJoueurs();
     }
-
-
-///////////////////////////////////
-///////////////////////////////////
-//Fonctionnalités pour la console//
-///////////////////////////////////
-///////////////////////////////////
-
-window.addEventListener('load', function() {
-  if (window.location.href.includes('consoleJson.php')){
-    // Récupérer les données depuis le stockage local
-      console.log(listNodeWithColor);
-    } else {
-      console.error('Aucune donnée disponible.');
-    }
-  });
-
-// a supprimer après
-$(document).ready(function() {
-  $(".donnee").on("click", function() {
-    lirePortSerie();
-  });
-});
- 
