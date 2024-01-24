@@ -99,15 +99,42 @@ Tuteurices de l'équipe::
 
 > Note de Vincent : Non je ne fais pas rien, je m'occupe simplement de la partie de gestion de projet 😅 Je vois RB demain (Lundi midi) pour en parler avec lui.
 
+=== Sprint 3
+
+:sp: 3
+
+:vt: Vincent
+:la: Loélia
+:ts: Thomas
+:lo: Loïs
+
+:branch: master
+
+:is_c_o: image:{badge}Code-WIP-orange.svg[link="{baseURL}/issues/
+:is_c_c: image:{badge}Code-Done-purple.svg[link="{baseURL}/issues/
+:is_d_o: image:{badge}Doc-WIP-orange.svg[link="{baseURL}/issues/
+:is_d_c: image:{badge}Doc-Done-purple.svg[link="{baseURL}/issues/
+:is_t_o: image:{badge}Test-WIP-orange.svg[link="{baseURL}/issues/
+:is_t_c: image:{badge}Test-Done-purple.svg[link="{baseURL}/issues/
+
+
+:us_: image:{badge}UserStory-blue.svg[link="{baseURL}/issues/
+
+:doc_t: image:{badge}Doc-Tech-white.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20technique.adoc#
+:doc_u: image:{badge}Doc-Util-white.svg[link="{baseURL}/blob/{branch}/Documentation/Documentation%20utilisateur.adoc#
+
+:tst: image:{badge}Tests-pink.svg[link="{baseURL}/blob/{branch}/Documentation/Cahier%20de%20tests.adoc#
+
 == Gestion de projet & Qualité
 
-:release: v0.2.0
+:release: v1.0.0
 
 - Lien de la release courante (Sprint {sp}) : image:{badge}Version-{release}-purple.svg[link="https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/releases/tag/{release} "]
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20technique.adoc[Lien vers la doc technique]
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Documentation%20utilisateur.adoc[Lien vers la doc utilisateur]
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/blob/master/Documentation/Cahier%20de%20tests.adoc[Lien vers le cahier de recettes]
-- link:https://github.com/orgs/IUT-Blagnac/projects/172[Lien vers le projet du Sprint {sp}]
+- link:https://github.com/orgs/IUT-Blagnac/projects/175[Backlog du Sprint {sp}]
+- link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues?q=is%3Aopen+is%3Aissue+label%3A%22user+story%22[Backlog Produit]
 - Les UserStories se trouvent dans *Répartition des tâches et état d'avancement*
 
 Bilan du Sprint :
