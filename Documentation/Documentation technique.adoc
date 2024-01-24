@@ -14,15 +14,29 @@ toc::[]
 
 == Présentation de l'application
 
-=== 1. Contexte
+=== Contexte
 
 LocURa4IoT a développé un jeu de chasse au trésor : Des joueurs doivent trouver des checkpoints à l'aide d'un noeud, le tout se basant sur la technologie des flux mqtt. Le jeu est actuellement fonctionnel mais manque d'une interface pour faciliter son déroulement. C'est ainsi que nous intervenons :  Nous sommes une équipe de 4 développeurs en alternance chargé de créer une interface destinée aux administrateur, pour visualiser son déroulement et intervenir si besoin, et une interface utilisateur qui sera diffusée à tous les joueurs pour qu'ils aient une idée de l'avancement de la partie.
 
-=== 2. Use cases généraux
+=== Use cases généraux
 
 image::img/doc_tech_usecase_admingen.png[]
 
 image::img/doc_tech_usecase_usergen.png[]
+
+=== Technologies utilisées
+
+==== Javascript
+
+Principalement utilisé pour rendre les pages web interactives, Javascript permet d'ajouter des fonctionnalités dynamiques, de manipuler le contenu de la page et de réagir aux événements utilisateur. Il s'agit d'un système front parfait pour notre projet puisque nous avons besoin de manipuler des données en temps réel, notamment en déplaçant les pions sur le plateau.
+
+==== PHP
+
+Principalement utilisé pour le développement web, PHP génère du contenu dynamique. Il est souvent intégré dans le code HTML et s'exécute sur le serveur avant que la page ne soit envoyée au navigateur. Généralement, cela permet d'ajouter de la sécurité au projet, mais en l'occurence, le serveur est également le client. Il n'y a donc pas d'aspect de sécurité à prendre en compte. Nous utilisons tout de même PHP pour sa génération dynamique de contenu, contrairement à HTML qui donne du contenu entièrement statique.
+
+==== CSS/SCSS
+
+Utilisé pour définir la présentation visuelle des pages web PHP, le CSS permet de spécifier la mise en forme, les couleurs, les polices, les marges, etc. CSS sépare la structure du contenu HTML de sa présentation. Dans notre projet, il est utilisé principalement pour modifier l'apparance des tableaux, et l'arranger à notre convenance.
 
 == Architecture Système
 
