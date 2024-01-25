@@ -4,7 +4,7 @@
 	<meta charset="utf-8"/>
 	<title>Chasse au trésor : interface administrateur</title>
 	<link rel="stylesheet" href="./assets/admin.css" />
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="assets/libs/jquery-3.7.1.min.js"></script>
 	<script src="assets/js/locura4iot.js" defer></script>
 </head>
 <body>
