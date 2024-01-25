@@ -29,9 +29,16 @@ Un chronomètre permet de mesurer le temps que chaque équipe mets pour trouver 
 6. Une fois que toutes les équipes ont trouvées tout les checkpoints, les équipes retournent à la balise de départ pour la déclaration des résultats.
 7. L'équipe avec le temps le plus court remporte la partie.
 
-== III. Pre-Requis :
+== III. Installation du jeu
+
+=== 1. Pré-requis
 [.text-justify]
-Pour utiliser le jeu, vous devez posséder un ordinateur avec un navigateur web. Vous devez également posséder les boitiers de recherche de balises ainsi que les balises.  Il est aussi nécessaire d'avoir le pont qui permet de lire les données des balises et de les envoyer sur le site web.
+Pour utiliser le jeu, vous devez posséder un ordinateur avec un navigateur web et l'application "WampServer". Vous devez également posséder les boitiers de recherche de balises ainsi que les balises. Il est aussi nécessaire d'avoir le pont qui permet de lire les données des balises et de les envoyer sur le site web.
+
+=== 2. Installation 
+==== Installation de Wamp
+
+==== Installation de l'application
 
 == IV. Utilisation de l'application
 [.text-justify]
