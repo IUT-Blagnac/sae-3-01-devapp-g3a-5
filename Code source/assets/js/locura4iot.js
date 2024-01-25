@@ -278,7 +278,7 @@ function downloadJSON() {
 ///////////////////////////////
 ///////////////////////////////
 
-function creerClassementPopUp() {
+function creerClassement() {
   // Récupérer l'objet depuis le localStorage
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
@@ -286,10 +286,11 @@ function creerClassementPopUp() {
   const classement = [];
   for (const joueurId in cacheCacheData) {
     const joueurData = cacheCacheData[joueurId];
-    const balisesTrouvees = joueurData.times.filter(temps => temps === 0).length;
+    const balisesTrouvees = joueurData.times.filter(temps => temps != 0).length;
+    const targets = joueurData.targets;
     const tempsTotal = joueurData.times.reduce((total, temps) => total + temps, 0);
     const couleur = joueurData.couleur;
-    classement.push({ joueurId, balisesTrouvees, tempsTotal, couleur });
+    classement.push({ joueurId, balisesTrouvees, targets, tempsTotal, couleur });
   }
 
   // Trier les joueurs en fonction du nombre de balises trouvées et du temps total
@@ -302,7 +303,27 @@ function creerClassementPopUp() {
   });
 
   // Afficher le classement
-  const classementContent = document.getElementById('classementContent');
+  
+  
+  // on affiche le classement des 3 premiers joueurs
+  for (let i = 0; i < 3; i++) {
+    const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
+    const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
+    const joueur = classement[i];
+    const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
+    
+    joueurNameHtml.innerHTML = joueur.joueurId;
+    // joueur possede l'attribut couleur qui contient l'hexa de la couleur
+    console.log(joueur.couleur);
+    joueurColorHtml.style.backgroundColor = joueur.couleur;
+  }
+  return classement;
+}
+
+function creerClassementPopUp(classement) {
+
+  // Afficher le classement
+  const classementContent = document.getElementById('classementContent-pop-up');
   classementContent.innerHTML += '<h2>Classement Cache-Cache</h2>';
   titleclassemnt = ["Premier", "Deuxième", "Troisième"];
   // on affiche le classement des 3 premiers joueurs
@@ -317,7 +338,20 @@ function creerClassementPopUp() {
     console.log(joueur.couleur);
     joueurColorHtml.style.backgroundColor = joueur.couleur;
   }
-  return classement;
+}
+
+// la taille du plateau est un entier qui correspond au nombre de target par joueur
+function getTaillePlateau() {
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  const cachecacheTable = [];
+  for (const joueurId in cacheCacheData) {
+    const joueurData = cacheCacheData[joueurId];
+  
+    const targets = joueurData.targets;
+   
+    cachecacheTable.push({ targets });
+  }
+  return cachecacheTable[0].targets.length;
 }
 
 
@@ -337,6 +371,7 @@ $(document).ready(function () {
       tabCouleurs.push(couleur);
     }
     console.log(cacheCacheData);
+
     // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
     for (var i = 0; i < nbJoueurs; i++) {
       var nouvelleDiv = document.createElement('div');
@@ -412,6 +447,7 @@ function getListJoueurs() {
 }
 
 function openModal() {
+  creerClassementPopUp(creerClassement());
   document.getElementById("myModal").style.display = "flex";
 }
 

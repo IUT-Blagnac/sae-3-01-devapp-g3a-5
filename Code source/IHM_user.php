@@ -1,75 +1,5 @@
-<?php
-$cpt = 0;
-$liste_size = 25;
-static $color = 0;
-function position($i, $j)
-{
-	if ($i % 2 == 0) {
-		return (5 * $i) + $j;
-	} else {
-		return (5 * $i + 4) - $j;
-	}
-};
-
-//fonction qui va de 1 a 5, une fois a 5 on va de 5 a 1
-function fonction_color()
-{
-	global $color;
-	static $increment = true;
-	if ($increment) {
-		$color++;
-		if ($color >= 5) {
-			$increment = false;
-		}
-	} else {
-		$color--;
-		if ($color <= 1) {
-			$increment = true;
-		}
-	}
-	return $color;
-}
-
-function attributeCLass($i, $j, $liste_size)
-{
-
-	if ($i % 2 == 0) {
-		if ($j == 0 && $i == 0) {
-			return "rounded-left";
-		} else if ($j == 0 && position($i, $j) == $liste_size - 1) {
-			return "rounded-down";
-		} else if ($j == 0 && $i != 0) {
-			return "corner-bottom-left";
-		} else if ($j == 4 && position($i, $j) != $liste_size - 1) {
-			return "corner-top-right";
-		} else if ($i % 2 == 0 && position($i, $j) == $liste_size - 1) {
-			return "rounded-right";
-		} else {
-			return "";
-		}
-	} else {
-		if ($j == 4 && position($i, $j) == $liste_size - 1) {
-			return "rounded-down";
-		} else if ($j == 0 && position($i, $j) < $liste_size - 1) {
-			return "corner-top-left";
-		} else if ($j == 4 && position($i, $j) != $liste_size - 1) {
-			return "corner-bottom-right";
-		} else if ($i % 2 != 0 && position($i, $j) == $liste_size - 1) {
-			return "rounded-left";
-		} else if ($i % 2 != 0 && position($i, $j) > $liste_size - 1) {
-			return "hidden";
-		} else {
-			return "";
-		}
-	}
-};
-
-
-?>
-
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 	<meta charset="utf-8" />
@@ -82,152 +12,155 @@ function attributeCLass($i, $j, $liste_size)
 </head>
 
 <body>
-	<div class="nav-bar">
-		<h1> Bienvenue sur la carte de la course LocURa4IoT!</h1>
-	</div>
+    <div class="nav-bar">
+        <h1> Bienvenue sur la carte de la course LocURa4IoT!</h1>
+    </div>
 
-	<!-- Pour les notifications -->
-	<div class="popup" id="popup">
-		<div class="popup-content" id="popupContent">
-		</div>
-	</div>
+    <!-- For notifications -->
+    <div class="popup" id="popup">
+        <div class="popup-content" id="popupContent">
+        </div>
+    </div>
 
-	<div class="classMere">
-		<div class="centered-div">
-			<!-- vraiment utile cette table? -->
-			<table>
-				<tr>
-					<td class="label">Joueur en tete</td>
-					<td id="joueur1-color"></td>
-					<td id="joueur1-name"></td>
-				</tr>
-				<tr>
-					<td class="label">2eme joueur</td>
-					<td id="joueur2-color"></td>
-					<td id="joueur2-name"></td>
-				</tr>
-				<tr>
-					<td class="label">3eme joueur</td>
-					<td id="joueur3-color"></td>
-					<td id="joueur3-name"></td>
-				</tr>
-			</table>
-		</div>
-		<div class="modal-background" id="myModal">
-			<div class="modal">
-				<span class="close-button" onclick="closeModal()">&times;</span>
-				<div id="classementContent"></div>
-				<button id="genererPDF">Générer PDF</button>
-				<button id="genererJson" onclick="downloadJSON()">Générer JSON</button>
-			</div>
-		</div>
-		<script>
-			classement = creerClassementPopUp();
-			openModal();
-			$(document).ready(function() {
-				$('#genererPDF').on('click', function() {
-						// Utilisez pdfmake pour générer le PDF
-						console.log('Générer PDF');
-						var content = [{
-								text: 'Date: ' + new Date().toLocaleDateString()
-							},
-							{
-								text: 'Heure: ' + new Date().toLocaleTimeString()
-							},
-							{
-								text: '\n'
-							},
-							{
-								text: 'Compte rendu',
-								fontSize: 16,
-								bold: true,
-								alignment: 'center'
-							},
-							// saut de ligne
-							{
-								text: '\n'
-							},
-							{
-								text: '\n'
-							},
-							{
-								text: '\n'
-							},
-							{
-								text: '\n'
-							},
-							{
-								text: '\n'
-							},
-							{
-								text: '\n'
-							},
-							// tableau
-							{
-								text: 'Score de la course:',
-								fontSize: 14,
-								margin: [0, 10, 0, 5]
-							},
-							{
-								style: 'tableExample',
-								table: {
-									widths: ['*', '*', '*', '*'],
-									body: [
-										['Position', 'Joueur', 'Temps', 'Balises trouvées'],
-										...classement.map((joueur, index) => {
-											// je veux que les milisecondes depassent pas 2 chiffres apres la virgule
-											const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${(joueur.tempsTotal).toFixed(2)} secondes`;
-											return [index + 1, joueur.joueurId, tempsTotalText, joueur.balisesTrouvees];
-										})
-									]
-								}
-							}
-							// ecrire en bas de la page
-						];
-						pdfMake.createPdf({
-							content
-						}).download('compte_rendu.pdf');
-					}
-				)});
+    <div class="classMere">
+        <div class="centered-div">
+            <table>
+                <tr>
+                    <td class="label">Joueur en tête</td>
+                    <td id="joueur1-color"></td>
+                    <td id="joueur1-name"></td>
+                </tr>
+                <tr>
+                    <td class="label">2eme joueur</td>
+                    <td id="joueur2-color"></td>
+                    <td id="joueur2-name"></td>
+                </tr>
+                <tr>
+                    <td class="label">3eme joueur</td>
+                    <td id="joueur3-color"></td>
+                    <td id="joueur3-name"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="modal-background" id="myModal">
+            <div class="modal">
+                <span class="close-button" onclick="closeModal()">&times;</span>
+                <div id="classementContent-pop-up"></div>
+                <button id="genererPDF">Générer PDF</button>
+                <button id="genererJson" onclick="downloadJSON()">Générer JSON</button>
+            </div>
+        </div>
+        <script>
+            // Add your JavaScript code here for the client-side logic
+            // Remember to include the necessary logic from your locura4iot.js file
+            // ...
+
+            $(document).ready(function () {
+                $('#genererPDF').on('click', function () {
+                    // Use pdfmake to generate the PDF
+                    console.log('Générer PDF');
+                    // ... (rest of the PDF generation logic)
+                });
+            });
+        </script>
+        <div class="centered-div">
+            <table id="gameTable">
+                <!-- JavaScript will generate the table content here -->
+            </table>
+        </div>
+
+        <script>
+            // JavaScript code to generate the game table dynamically
+            var liste_size = getTaillePlateau();
+			setInterval(() => {
+				creerClassement();
+			}, 1500);
+			openModal();// a changer par un if qui verifie si un joueur a gagner
+
+            var rep_max = Math.ceil(liste_size / 5);
+            var color = 0;
+            var increment = true;
+
+            function position(i, j) {
+                if (i % 2 === 0) {
+                    return 5 * i + j;
+                } else {
+                    return 5 * i + 4 - j;
+                }
+            }
+			// faire une classe qui active la fonction openModal au moment ou un joueur gagne c'est a dire quand il arrive a la fin du plateau
 			
-		</script>
-		<div class="centered-div">
-			<table>
-				<?php
-				$rep_max = $liste_size / 5;
-				$rep_max = ceil($rep_max);
-				for ($i = 0; $i < $rep_max; $i++) {
 
-					echo "<tr id=' $i'>";
-					for ($j = 0; $j < $liste_size; $j++) {
+            function fonctionColor() {
+                if (increment) {
+                    color++;
+                    if (color >= 5) {
+                        increment = false;
+                    }
+                } else {
+                    color--;
+                    if (color <= 1) {
+                        increment = true;
+                    }
+                }
+                return color;
+            }
 
-						if ($i % 2 == 0) {
-							if ($j < 5) {
-								if ($cpt < $liste_size) {
-									$corner_class = attributeCLass($i, $j, $liste_size);
-									$color = fonction_color($color);
-									// var_dump($cpt,$liste_size,"j=".$j);	
-
-									echo "<td id=" . position($i, $j) . " class='" . $corner_class . " color-" . $color . "'></td>";
-									$cpt++;
-								}
-							}
-						} else {
-							if ($j < 5) {
-								$corner_class = attributeCLass($i, $j, $liste_size);
-								if ($cpt < $liste_size) {
-									$color = fonction_color($color);
-									$cpt++;
-								}
-								echo "<td id=" . position($i, $j) . " class='" . $corner_class . " color-" . $color . "'></td>";
-							}
-						}
+            function attributeClass(i, j) {
+				if (i % 2 === 0) {
+					if (j === 0 && i === 0) {
+						return "rounded-left";
+					} else if (j === 0 && position(i, j) === liste_size - 1) {
+						return "rounded-down";
+					} else if (j === 0 && i !== 0) {
+						return "corner-bottom-left";
+					} else if (j === 4 && position(i, j) !== liste_size - 1) {
+						return "corner-top-right";
+					} else if (i % 2 === 0 && position(i, j) === liste_size - 1) {
+						return "rounded-right";
+					} else {
+						return "";
 					}
-					echo "</tr>";
+				} else {
+					if (j === 4 && position(i, j) === liste_size - 1) {
+						return "rounded-down";
+					} else if (j === 0 && position(i, j) < liste_size - 1) {
+						return "corner-top-left";
+					} else if (j === 4 && position(i, j) !== liste_size - 1) {
+						return "corner-bottom-right";
+					} else if (i % 2 !== 0 && position(i, j) === liste_size - 1) {
+						return "rounded-left";
+					} else if (i % 2 !== 0 && position(i, j) > liste_size - 1) {
+						return "hidden";
+					} else {
+						return "";
+					}
 				}
-				?>
-			</table>
-		</div>
-	</div>
+			}
+
+            var table = document.getElementById("gameTable");
+
+            for (var i = 0; i < rep_max; i++) {
+                var row = table.insertRow(i);
+                for (var j = 0; j < liste_size; j++) {
+                    if (i % 2 === 0 && j < 5) {
+                        var cornerClass = attributeClass(i, j);
+                        color = fonctionColor();
+                        var cell = row.insertCell(j);
+                        cell.id = position(i, j);
+                        cell.className = cornerClass + " color-" + color;
+                    } else if (i % 2 !== 0 && j < 5) {
+                        var cornerClass = attributeClass(i, j);
+                        color = fonctionColor();
+                        var cell = row.insertCell(j);
+                        cell.id = position(i, j);
+                        cell.className = cornerClass + " color-" + color;
+                    }
+                }
+            }
+			
+        </script>
+    </div>
 </body>
+
 </html>
