@@ -355,46 +355,51 @@ function getTaillePlateau() {
 }
 
 
-// ================================== A MODIFIER ==================================
-// function creerPions(){
-// event listener on load page
-// window.addEventListener('load', function() {
-//   var monElement = document.getElementById('0');
-//   console.log(monElement);
-
-// });
-// }
-
 $(document).ready(function () {
-  window.addEventListener('load', function () {
+  $(".classMere").on("click", function () {
     // Récupérez l'élément <td> avec l'id "0"
     var tdElement = document.getElementById('0');
-
     var divElement = document.createElement('div');
     // Créez un nouvel élément <div>
     divElement.style.display = "flex";
-
     // Récupérez les valeurs du localStorage
-    var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor')) || [];
-    // console.log(cacheCacheData);
+    var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+    nbJoueurs = getNbJoueurs();
+    const tabCouleurs = [];
+    for (const joueur in cacheCacheData) {
+      const couleur = cacheCacheData[joueur].couleur;
+      tabCouleurs.push(couleur);
+    }
+    console.log(cacheCacheData);
+
     // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
-    for (var i = 0; i < cacheCacheData.length; i++) {
+    for (var i = 0; i < nbJoueurs; i++) {
       var nouvelleDiv = document.createElement('div');
-      nouvelleDiv.id = cacheCacheData[i].node;  // Utilisez la valeur du localStorage pour l'ID
+      nouvelleDiv.id = cacheCacheData[i];  // Utilisez la valeur du localStorage pour l'ID
       tdElement.appendChild(divElement);
       divElement.appendChild(nouvelleDiv);
-
       // Ajoutez une classe à chaque nouvelle div en fonction de la logique existante
       if (i % 3 === 0) {
         nouvelleDiv.classList.add('square');
+        nouvelleDiv.style.backgroundColor = tabCouleurs[i];
       } else if (i % 3 === 1) {
         nouvelleDiv.classList.add('circle');
+        nouvelleDiv.style.backgroundColor = tabCouleurs[i];
       } else {
         nouvelleDiv.classList.add('triangle');
+        nouvelleDiv.style.borderBottomColor = tabCouleurs[i];
       }
     }
   });
 });
+
+
+
+
+
+
+
+
 
 ////////////////////////////////
 ////////////////////////////////

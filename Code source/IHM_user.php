@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="assets/js/locura4iot.js"></script>
-    <link rel="stylesheet" href="./assets/user.css" />
-    <title>Chasse au trésor : interface utilisateur</title>
+	<meta charset="utf-8" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+	<script src="assets/libs/jquery-3.7.1.min.js"></script>
+	<script src="assets/js/locura4iot.js"> </script>
+	<link rel="stylesheet" href="./assets/user.css" />
+	<title>Chasse au trésor : interface utilisateur</title>
 </head>
 
 <body>
@@ -76,10 +76,6 @@
 				creerClassement();
 			}, 1500);
 			openModal();// a changer par un if qui verifie si un joueur a gagner
-			
-
-			
-
 
             var rep_max = Math.ceil(liste_size / 5);
             var color = 0;
