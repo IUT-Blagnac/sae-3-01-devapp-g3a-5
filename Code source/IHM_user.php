@@ -65,17 +65,18 @@
         </script>
         <div class="centered-div">
             <table id="gameTable">
-                <!-- JavaScript will generate the table content here -->
+                <!-- JavaScript -->
             </table>
         </div>
 
         <script>
             // JavaScript code to generate the game table dynamically
-            var liste_size = getTaillePlateau();
+            var liste_size = getTaillePlateau() + 1;
 			setInterval(() => {
 				creerClassement();
+				
 			}, 1500);
-			openModal();// a changer par un if qui verifie si un joueur a gagner
+			// openModal();// a changer par un if qui verifie si un joueur a gagner
 
             var rep_max = Math.ceil(liste_size / 5);
             var color = 0;
@@ -149,15 +150,49 @@
                         var cell = row.insertCell(j);
                         cell.id = position(i, j);
                         cell.className = cornerClass + " color-" + color;
+						// si c'est la derniere case du plateau on met un id pour pouvoir la retrouver facilement
+						// if (position(i, j) === liste_size - 1) {
+						// 	cell.className += " lastCase";
+						// }
+						// si c'est la premiere case du plateau on met un id pour pouvoir la retrouver facilement
+						// if (position(i, j) === 0) {
+						// 	cell.className += " firstCase";
+						// }
+						
                     } else if (i % 2 !== 0 && j < 5) {
                         var cornerClass = attributeClass(i, j);
                         color = fonctionColor();
                         var cell = row.insertCell(j);
                         cell.id = position(i, j);
                         cell.className = cornerClass + " color-" + color;
+						// if (position(i, j) === liste_size - 1) {
+						// 	cell.className += " lastCase";
+						// }
+						// if (position(i, j) === 0) {
+						// 	cell.className += " firstCase";
+						// }
                     }
                 }
             }
+			// var lastCase = document.querySelector(".lastCase");
+			// // mettre une image dans la derniere case
+			// var img = document.createElement("img");
+			// img.style.width = "40px";
+			// img.style.height = "40px";
+			// img.src = "./assets/images/ligne-darrivee.png";
+			
+			// lastCase.appendChild(img);
+			// // // mettre une image dans la premiere case
+			// var firstCase = document.querySelector("firstCase");
+			// var img = document.createElement("img");
+			// img.style.width = "40px";
+			// img.style.height = "40px";
+			// img.src = "./assets/images/depart.png";
+			// // je veux mettre pas que l'image mais aussi d'autre chose dans la premiere case
+			// firstCase.appendChild(img);
+
+
+
 			
         </script>
     </div>
