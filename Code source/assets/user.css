@@ -232,3 +232,46 @@ button#genererJson{
     border-right: 5px solid transparent;
     border-bottom: 8.66px solid #2d23c6; 
 }  
+
+
+
+
+/* POP UP */
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+
+@keyframes deplacementInformation {
+    0% {
+        opacity: 0;
+        transform: translateX(-600px);
+    }
+    20%{
+        opacity: 0.8;
+    }
+    40%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+    60%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(600px);
+    }
+}

@@ -11,6 +11,8 @@ let joueursCaches = true;
 let rotationCheckpoints = 0;
 let CheckpointsCaches = true;
 const listNodeWithColor = {};
+
+var tableauxList = [];
 // Le listNodeWithColor est de la forme
 // [0:{node: "0xFD24", targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}]
 // Nous voulons le passer à la forme
@@ -46,22 +48,26 @@ async function lirePortSerie() {
         try {
           const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
           const nodeExistante = jsonData.node in listNodeWithColor ? true : false;
-          //SI C'EST UNE NOUVELLE EQUIPE
+          if(jsonData.lastUpdate < 0){
+            gererReconnection(jsonData.node);
+          }
+          jsonData.lastUpdate = Date.now();
+          console.log("AAAAAAAA");
           if (!nodeExistante) {
             // Ajoute un attribut "couleur" avec une couleur générée
             jsonData.couleur = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+            
             listNodeWithColor[jsonData.node] = jsonData;
             localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+            console.log("avaant");
             if (partieCommencee) {
               createTableau(jsonData);
             }
-          }
-          else {
-            // si les valeurs dans times sont différentes, on met à jour
-            for (let j = 0; j < jsonData.times.length; j++) {
-              if (jsonData.times[j] !== listNodeWithColor[jsonData.node].times[j]) {
-                listNodeWithColor[jsonData.node].times[j] = jsonData.times[j];
-              }
+          } else {
+            if (jsonData.times != listNodeWithColor[jsonData.node].times) {
+              localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+              modifierTableau(jsonData);
+              //Modifier pion
             }
           }
           console.log(listNodeWithColor);
@@ -94,24 +100,42 @@ async function lirePortSerie() {
 ////////////////////////////////
 ////////////////////////////////
 
+function updatePopup(jsonData){
+  if(jsonData.times.filter(temps => temps === 0).length == Math.round(getNbCheckpoints/2)){
+    afficherPopup("L'équipe " + jsonData.node + " a trouvé la moitié des trésors !");
+  }
+  else if(jsonData.times.filter(temps => temps === 0).length == getNbCheckpoints){
+    afficherPopup("L'équipe " + jsonData.node + " a fini le jeu !");
+  }
+}
+
 function afficherPopup(contenu, auto) {
-  var popup = document.getElementById("popup");
-  var popupContent = document.getElementById("popupContent");
 
   if (!auto) {
     contenu = prompt("Veuillez saisir votre message :")
   }
 
-  if (contenu.length > 0) {
-    popupContent.innerHTML = contenu;
-    popup.style.display = "block";
-    popup.style.animation = "deplacementInformation 5s";
+  localStorage.setItem("popupContent", contenu);
+}
+
+window.addEventListener("storage", function (event) {
+  if (event.key === "popupContent") {
+    var popup = document.getElementById("popup");
+    var popupContent = document.getElementById("popupContent");
+
+    // Affichez la popup avec le contenu du localStorage
+    if(localStorage.getItem("popupContent") != ""){
+      popupContent.innerHTML = localStorage.getItem("popupContent");
+      popup.style.display = "block";
+      popup.style.animation = "deplacementInformation 5s";
+    }
+    
 
     setTimeout(function () {
       popup.style.display = "none";
     }, 5000);
   }
-}
+});
 
 function togglepause() {
 
@@ -136,10 +160,16 @@ window.addEventListener('load', function () {
     for (const joueur in cacheCacheData) {
       createTableau(cacheCacheData[joueur]);
     }
+
+    // while(true){
+    //   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+    //   for(let joueurId in cacheCacheData)
+    // }
   }
 });
 
 function createTableau(jsonData) {
+  console.log("refresh called");
   const obj1 = JSON.parse(JSON.stringify(
     jsonData
   ));
@@ -154,6 +184,9 @@ function createTableau(jsonData) {
 
   var cellNoeud = document.createElement("td");
   cellNoeud.classList.add("equipe");
+  if(isCouleurClaire(obj1.couleur)){
+    cellNoeud.style.color = "#242729";
+  }
   cellNoeud.style.setProperty("background-color", obj1.couleur);
   cellNoeud.rowSpan = $nbIndex + 1;
   cellNoeud.textContent = "Noeud " + obj1.node;
@@ -204,11 +237,25 @@ function createTableau(jsonData) {
     tbl.appendChild(rowCheckpoint);
   }
 
+  // //Afficher tableau
+  // var tabEquipesDiv = document.getElementById("tabEquipes");
+  // tabEquipesDiv.appendChild(tbl);^
+
   //Afficher tableau
   var tabEquipesDiv = document.getElementById("tabEquipes");
-  console.log(tabEquipesDiv);
-  console.log(tbl);
-  tabEquipesDiv.appendChild(tbl);
+
+  // Ajouter le nouveau tableau à la liste
+  tableauxList.push(tbl);
+
+  // Effacer le contenu actuel de tabEquipesDiv
+  tabEquipesDiv.innerHTML = '';
+
+  // Ajouter tous les tableaux de la liste à tabEquipesDiv
+  tableauxList.forEach(function(tableau) {
+    tabEquipesDiv.appendChild(tableau);
+  });
+
+  document.getElementById("testTabAAA").innerHTML = getNbJoueurs();
 }
 
 function modifierTableau(jsonData) {
@@ -229,6 +276,31 @@ function modifierTableau(jsonData) {
   }
 }
 
+function isCouleurClaire(couleur) {
+  let r = parseInt(couleur.slice(1, 3), 16);
+  let g = parseInt(couleur.slice(3, 5), 16);
+  let b = parseInt(couleur.slice(5, 7), 16);
+
+  let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+  return brightness > 128;
+}
+
+async function verifierDeconnection(){
+
+  while (lectureDonneesEnCours) {
+    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+    for (const joueurId in cacheCacheData) {
+      const joueurData = cacheCacheData[joueurId];
+      if (joueurData.lastUpdate > 0 && (joueurData.lastUpdate - Date.now()) / 1000 > 5) {
+        gererDeconnection(joueurData.node);
+        joueurData.lastUpdate = -1;
+      }
+    }
+  }
+
+}
+
 /**
 * Change l'apprence du noeud hors-connexion et informe les joueurs.
 * 
@@ -238,7 +310,22 @@ function gererDeconnection(id) {
   $popup = "L'équipe " + id + " est déconnectée !";
   afficherPopup(popup, true)
 
+  
   document.getElementById(id).classList.add("deconnecte");
+
+  //Modifier pion sur interface user ?
+}
+
+/**
+* Change l'apprence du noeud hors-connexion et informe les joueurs.
+* 
+* @param {*} id du noeud déconnectée
+*/
+function gererReconnection(id) {
+  $popup = "L'équipe " + id + " s'est reconnectée !";
+  afficherPopup(popup, true)
+
+  document.getElementById(id).classList.remove("deconnecte");
 
   //Modifier pion sur interface user ?
 }
