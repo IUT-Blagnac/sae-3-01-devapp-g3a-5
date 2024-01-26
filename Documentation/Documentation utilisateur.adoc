@@ -119,7 +119,7 @@ image::img/viewteamdata.png[Données d'une équipe]
 > AKA - index.php
 Il s'agit de l'interface utilisée pour s'assurer que le jeu est prêt à être lancé. Il contient principalement des informations à lire. Elle est responsable de la lecture du port série, de la conversion des données et du stockage local des données des sniffeurs. Cela permet ensuite aux différentes pages du site (user et admin) de connaître l'état d'avancement des joueurs.
 
-> **/!\** - Durant l'intégralité de la partie, la page index.php doit impérativement __rester ouverte__, même après le lancement du jeu dans la page admin. En effet, fermer la page interromprait la connexion entre les joueurs.
+> **/!\** - Durant l'intégralité de la partie, la page index.php doit impérativement *rester ouverte*, même après le lancement du jeu dans la page admin. En effet, fermer la page interromprait la connexion entre les joueurs.
 
 ==== Accès Interface Admin
 
