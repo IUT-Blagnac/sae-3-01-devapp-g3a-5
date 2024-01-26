@@ -99,6 +99,9 @@ Tuteurices de l'équipe::
 
 > Note de Vincent : Non je ne fais pas rien, je m'occupe simplement de la partie de gestion de projet 😅 Je vois RB demain (Lundi midi) pour en parler avec lui.
 
+Bilan du Sprint :
+La plupart des tâches ont été réalisées. Les tâches de dev de Loélia sont sprint2/sprint3, donc c'est OK. Discussions avec Quentin Vey, on lui a montré le proto. Quentin nous a donné plusieurs nouvelles tâches pour le sprint 3.
+
 === Sprint 3
 
 :sp: 3
@@ -135,8 +138,6 @@ Tuteurices de l'équipe::
 - link:https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues?q=is%3Aopen+is%3Aissue+label%3A%22user+story%22[Backlog Produit]
 - Les UserStories se trouvent dans *Répartition des tâches et état d'avancement*
 
-Bilan du Sprint :
-La plupart des tâches ont été réalisées. Les tâches de dev de Loélia sont sprint2/sprint3, donc c'est OK. Discussions avec Quentin Vey, on lui a montré le proto. Quentin nous a donné plusieurs nouvelles tâches pour le sprint 3.
 
 == Gestion de projet & Qualité
 
