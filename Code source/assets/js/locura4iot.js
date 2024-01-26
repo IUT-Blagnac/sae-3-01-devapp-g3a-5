@@ -314,7 +314,7 @@ function creerClassement() {
     
     joueurNameHtml.innerHTML = joueur.joueurId;
     // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-    console.log(joueur.couleur);
+    // console.log(joueur.couleur);
     joueurColorHtml.style.backgroundColor = joueur.couleur;
   }
   return classement;
@@ -335,7 +335,7 @@ function creerClassementPopUp(classement) {
     classementContent.innerHTML += `<p>${titleclassemnt[i]}: ${joueur.joueurId} (${joueur.balisesTrouvees} balises trouvées, ${tempsTotalText})</p>`;
     joueurNameHtml.innerHTML = joueur.joueurId;
     // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-    console.log(joueur.couleur);
+    // console.log(joueur.couleur);
     joueurColorHtml.style.backgroundColor = joueur.couleur;
   }
 }
@@ -357,47 +357,76 @@ function getTaillePlateau() {
 
 $(document).ready(function () {
   $(".classMere").on("click", function () {
-    // Récupérez l'élément <td> avec l'id "0"
-    var tdElement = document.getElementById('0');
-    var divElement = document.createElement('div');
-    // Créez un nouvel élément <div>
-    divElement.style.display = "flex";
-    // Récupérez les valeurs du localStorage
+    nbTargets = getTaillePlateau();
     var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+    var ListJoueurs = Object.keys(cacheCacheData);
+    var tabCouleurs = [];
     nbJoueurs = getNbJoueurs();
-    const tabCouleurs = [];
-    for (const joueur in cacheCacheData) {
-      const couleur = cacheCacheData[joueur].couleur;
-      tabCouleurs.push(couleur);
-    }
-    console.log(cacheCacheData);
-
-    // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
-    for (var i = 0; i < nbJoueurs; i++) {
-      var nouvelleDiv = document.createElement('div');
-      nouvelleDiv.id = cacheCacheData[i];  // Utilisez la valeur du localStorage pour l'ID
-      tdElement.appendChild(divElement);
-      divElement.appendChild(nouvelleDiv);
-      // Ajoutez une classe à chaque nouvelle div en fonction de la logique existante
-      if (i % 3 === 0) {
-        nouvelleDiv.classList.add('square');
-        nouvelleDiv.style.backgroundColor = tabCouleurs[i];
-      } else if (i % 3 === 1) {
-        nouvelleDiv.classList.add('circle');
-        nouvelleDiv.style.backgroundColor = tabCouleurs[i];
-      } else {
-        nouvelleDiv.classList.add('triangle');
-        nouvelleDiv.style.borderBottomColor = tabCouleurs[i];
+    for (var j = 0; j < nbTargets; j++) {
+      var tdElement = document.getElementById(j);
+      for (const joueur in cacheCacheData) {
+        const couleur = cacheCacheData[joueur].couleur;
+        tabCouleurs.push(couleur);
+      }
+  
+      // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
+      for (var i = 0; i < nbJoueurs; i++) {
+        var nouvelleDiv = document.createElement('div');
+        nouvelleDiv.id = ListJoueurs[i];  // Utilisez la valeur du localStorage pour l'ID
+        tdElement.appendChild(nouvelleDiv);
+        // Ajoutez une classe à chaque nouvelle div en fonction de la logique existante
+        if (i % 3 === 0) {
+          nouvelleDiv.classList.add('square');
+          nouvelleDiv.style.backgroundColor = tabCouleurs[i];
+          nouvelleDiv.style.display = "none";
+        } else if (i % 3 === 1) {
+          nouvelleDiv.classList.add('circle');
+          nouvelleDiv.style.backgroundColor = tabCouleurs[i];
+          nouvelleDiv.style.display = "none";
+        } else {
+          nouvelleDiv.classList.add('triangle');
+          nouvelleDiv.style.borderBottomColor = tabCouleurs[i];
+          nouvelleDiv.style.display = "none";
+        }    
       }
     }
   });
 });
 
+function afficherPions() {
+  var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  const ListJoueurs = Object.keys(cacheCacheData);
+  const nbTargets = getTaillePlateau();
+  for (node in ListJoueurs) {
+    for (var i = 0; i < nbTargets; i++) {
+      var pionAfficher = document.getElementById(i).children[node];
+      pionAfficher.style.display = "none";
+    }
+  }
+ 
+  for (var node in ListJoueurs) {
+    positionPion = getCapteursTrouvés(ListJoueurs[node]);
+    var pionAfficher = document.getElementById(positionPion - 1).children[node];
+    pionAfficher.style.display = "flex";
+    
+  }
+}
 
 
 
-
-
+function getCapteursTrouvés(node) {
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  const joueurData = cacheCacheData[node];
+  const targets = joueurData.targets;
+  const times = joueurData.times;
+  const capteursTrouvés = [];
+  for (let i = 0; i < times.length; i++) {
+    if (times[i] > 0) {
+      capteursTrouvés.push(targets[i]);
+    }
+  }
+  return capteursTrouvés.length;
+}
 
 
 
