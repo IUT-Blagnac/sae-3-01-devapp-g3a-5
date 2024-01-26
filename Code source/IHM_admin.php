@@ -24,7 +24,6 @@
     		<img src="assets/images/pause_icon.png" onclick="togglepause()">
 		</div>
 
-		<div id="tableContainer"><p id="testTabAAA"> aaa </p></div>
 
 		<!-- Tableau des équipes -->
 		<div id="tabEquipes">

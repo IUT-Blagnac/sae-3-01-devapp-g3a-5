@@ -5,18 +5,18 @@
 /////////////////////////////////////
 
 let lectureDonneesEnCours = false;
-let partieCommencee = false;
 let rotationJoueurs = 0;
 let joueursCaches = true;
 let rotationCheckpoints = 0;
 let CheckpointsCaches = true;
-const listNodeWithColor = {};
+var listNodeWithColor = {};
 
-var tableauxList = [];
 // Le listNodeWithColor est de la forme
 // [0:{node: "0xFD24", targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}]
 // Nous voulons le passer à la forme
 // {"0xFD24": {targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}}
+
+
 
 /////////////////////////
 /////////////////////////
@@ -47,42 +47,22 @@ async function lirePortSerie() {
       for (let i = 0; i < lines.length - 1; i++) {
         try {
           const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
-          const nodeExistante = jsonData.node in listNodeWithColor ? true : false;
-          if(jsonData.lastUpdate < 0){
-            gererReconnection(jsonData.node);
-          }
-          jsonData.lastUpdate = Date.now();
-          console.log("AAAAAAAA");
+          const nodeExistante = jsonData && jsonData.node && (jsonData.node in listNodeWithColor);
+
+
           if (!nodeExistante) {
             // Ajoute un attribut "couleur" avec une couleur générée
             jsonData.couleur = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
-            
-            listNodeWithColor[jsonData.node] = jsonData;
-            localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-            console.log("avaant");
-            if (partieCommencee) {
-              createTableau(jsonData);
-            }
-          } else {
-            if (jsonData.times != listNodeWithColor[jsonData.node].times) {
-              localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-              modifierTableau(jsonData);
-              //Modifier pion
-            }
           }
-          console.log(listNodeWithColor);
+
+          jsonData.lastUpdate = Date.now();
+          listNodeWithColor[jsonData.node] = jsonData;
+
+          localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+          
         } catch (jsonError) {
           console.error('Erreur lors de l\'analyse JSON :', jsonError);
         }
-        // else{
-        //   if(jsonData != listNodeWithColor.contai(jsonData.node)){
-        //     listNodeWithColor.set(jsonData.node, jsonData);
-        //     localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-        //     if(partieCommencee){
-        //       modifierTableau(jsonData);
-        //     }
-        //   }
-        // }
         partialData = lines[lines.length - 1]; // Garde le dernier fragment potentiellement incomplet
       }
     }
@@ -94,18 +74,100 @@ async function lirePortSerie() {
   }
 };
 
+
+
 ////////////////////////////////
 ////////////////////////////////
 //Fonctionnalités pour l'admin//
 ////////////////////////////////
 ////////////////////////////////
 
-function updatePopup(jsonData){
-  if(jsonData.times.filter(temps => temps === 0).length == Math.round(getNbCheckpoints/2)){
-    afficherPopup("L'équipe " + jsonData.node + " a trouvé la moitié des trésors !");
+////////////////////////////////////////////////////
+//Fonctions en continu (bon fonctionnement du jeu)//
+////////////////////////////////////////////////////
+
+/** Initialisation interface
+ * Dès le chargement du l'interface administrateur, on construit les tableaux de toutes les équipes qui ont eu le temps de se connecter. 
+ */
+window.addEventListener('load', function () {
+  if (window.location.href.includes("IHM_admin.php")) {
+    let cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+
+    for (const joueur in cacheCacheData) {
+      createTableau(cacheCacheData[joueur]);
+    }
   }
-  else if(jsonData.times.filter(temps => temps === 0).length == getNbCheckpoints){
-    afficherPopup("L'équipe " + jsonData.node + " a fini le jeu !");
+});
+
+/** 
+ * Met à jour le jeu dès qu'un changement est détecté dans les équipes contenues dans le local storage
+ */
+window.addEventListener("storage", function (event) {
+  if (event.key === "listNodeWithColor") {
+    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+
+    //activatedModal();
+
+    for (let joueurId in cacheCacheData) {
+      var joueur = cacheCacheData[joueurId]
+
+      //C'est une nouvelle équipe
+      if (!(joueur.node in listNodeWithColor)) {
+        console.log("Nouvelle équipe : " + joueur.node)
+        createTableau(joueur);
+        joueur.lastUpdate = Date.now();
+      }
+
+      //C'est une maj
+      else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times)) {
+
+        console.log(joueur.node + " : " + joueur.times.filter(temps => temps > 0).length + "/" + getNbCheckpoints())
+        joueur.lastUpdate = Date.now();
+        modifierTableau(joueur);
+        updatePopup(joueur, joueur.times.filter(temps => temps > 0).length);
+      }
+      else if (joueur.lastUpdate < 0) {
+          gererReconnection(joueur.node);
+      }
+      
+    }
+
+    listNodeWithColor = cacheCacheData;
+  }
+});
+
+async function verifierDeconnection() {
+  setInterval(() => {
+    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+    const currentTime = Date.now();
+
+    for (const joueurId in cacheCacheData) {
+      const joueurData = cacheCacheData[joueurId];
+
+      if (joueurData.lastUpdate > 0 && (currentTime - joueurData.lastUpdate) / 1000 > 5) {
+        gererDeconnection(joueurData.node);
+        joueurData.lastUpdate = -1;
+      }
+    }
+  }, 1000);
+}
+
+////////////////////
+//Pour les pop-ups//
+////////////////////
+
+function updatePopup(jsonData, nbBalises){
+
+  jsonData = JSON.parse(JSON.stringify(jsonData));
+  let contenu = "";
+
+  if(nbBalises == Math.round(getNbCheckpoints()/2)){
+    contenu = "L'équipe " + jsonData.node + " a trouvé la moitié des trésors !";
+    afficherPopup(contenu, true);
+  }
+  else if(nbBalises == getNbCheckpoints()){
+    contenu = "L'équipe " + jsonData.node + " a fini le jeu !";
+    afficherPopup(contenu, true);
   }
 }
 
@@ -130,46 +192,17 @@ window.addEventListener("storage", function (event) {
       popup.style.animation = "deplacementInformation 5s";
     }
     
-
     setTimeout(function () {
       popup.style.display = "none";
     }, 5000);
   }
 });
 
-function togglepause() {
-
-  var pause = document.getElementById("pause_icon");
-  var dark = document.getElementById("dark");
-
-  if (pause.style.display == "none") {
-    pause.style.display = "block";
-    dark.style.display = "block";
-  }
-  else {
-    pause.style.display = "none";
-    dark.style.display = "none";
-  }
-}
-
-window.addEventListener('load', function () {
-  if (window.location.href.includes("IHM_admin.php")) {
-    partieCommencee = true;
-    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-
-    for (const joueur in cacheCacheData) {
-      createTableau(cacheCacheData[joueur]);
-    }
-
-    // while(true){
-    //   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-    //   for(let joueurId in cacheCacheData)
-    // }
-  }
-});
+/////////////////////////////////
+//Gérer les tableaux des noeuds//
+/////////////////////////////////
 
 function createTableau(jsonData) {
-  console.log("refresh called");
   const obj1 = JSON.parse(JSON.stringify(
     jsonData
   ));
@@ -216,13 +249,13 @@ function createTableau(jsonData) {
 
     //ID CHECKPOINT 
     var cellCheckpoint = document.createElement("td");
-    cellCheckpoint.id = obj1.targets[i];
+    cellCheckpoint.id = obj1.node + obj1.targets[i];
     cellCheckpoint.textContent = obj1.targets[i];
     rowCheckpoint.appendChild(cellCheckpoint);
 
     //ICON TROUVE
     var cellTrouve = document.createElement("td");
-    cellTrouve.id = obj1.targets[i] + ".icon";
+    cellTrouve.id = obj1.node + obj1.targets[i] + ".icon";
     if (obj1.times[i] > 0) {
       cellTrouve.innerHTML = '<img class="icon" src="assets/images/check.png"></img>';
     }
@@ -230,75 +263,35 @@ function createTableau(jsonData) {
 
     //TEMPS
     var cellTemps = document.createElement("td");
-    cellTemps.id = obj1.targets[i] + ".time";
+    cellTemps.id = obj1.node + obj1.targets[i] + ".time";
     cellTemps.textContent = (obj1.times[i] > 0) ? obj1.times[i] : "--:--";
     rowCheckpoint.appendChild(cellTemps);
 
     tbl.appendChild(rowCheckpoint);
   }
 
-  // //Afficher tableau
-  // var tabEquipesDiv = document.getElementById("tabEquipes");
-  // tabEquipesDiv.appendChild(tbl);^
-
   //Afficher tableau
   var tabEquipesDiv = document.getElementById("tabEquipes");
+  tabEquipesDiv.appendChild(tbl);
 
-  // Ajouter le nouveau tableau à la liste
-  tableauxList.push(tbl);
-
-  // Effacer le contenu actuel de tabEquipesDiv
-  tabEquipesDiv.innerHTML = '';
-
-  // Ajouter tous les tableaux de la liste à tabEquipesDiv
-  tableauxList.forEach(function(tableau) {
-    tabEquipesDiv.appendChild(tableau);
-  });
-
-  document.getElementById("testTabAAA").innerHTML = getNbJoueurs();
 }
 
 function modifierTableau(jsonData) {
+  const obj1 = JSON.parse(JSON.stringify(jsonData));
 
-  const obj1 = JSON.parse(JSON.stringify(
-    jsonData
-  ));
+  $nbIndex = getNbCheckpoints();
 
-  //Récupérer tableau
-  table = document.getElementById(obj1.node);
-
-  //Modifier les lignes ou le joueur a trouvé un checkpoint
   for (var i = 0; i < $nbIndex; i++) {
-    if (obj1.times[i] > 0 && table.getElementById(obj1.targets[i] + ".time") > 0) {
-      table.getElementById(obj1.targets[i] + ".time") = obj1.times[i];
-      table.getElementById(obj1.targets[i] + ".icon").innerHTML = '<img class="icon" src="assets/images/check.png"></img>';
-    }
-  }
-}
+    var cellTemps = document.getElementById(obj1.node + obj1.targets[i] + ".time");
+    var cellIcon = document.getElementById(obj1.node + obj1.targets[i] + ".icon");
 
-function isCouleurClaire(couleur) {
-  let r = parseInt(couleur.slice(1, 3), 16);
-  let g = parseInt(couleur.slice(3, 5), 16);
-  let b = parseInt(couleur.slice(5, 7), 16);
-
-  let brightness = (r * 299 + g * 587 + b * 114) / 1000;
-
-  return brightness > 128;
-}
-
-async function verifierDeconnection(){
-
-  while (lectureDonneesEnCours) {
-    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-    for (const joueurId in cacheCacheData) {
-      const joueurData = cacheCacheData[joueurId];
-      if (joueurData.lastUpdate > 0 && (joueurData.lastUpdate - Date.now()) / 1000 > 5) {
-        gererDeconnection(joueurData.node);
-        joueurData.lastUpdate = -1;
+    if (cellTemps && cellIcon) {
+      cellTemps.textContent = (obj1.times[i] > 0) ? obj1.times[i] : "--:--";
+      if (obj1.times[i] > 0) {
+        cellIcon.innerHTML = '<img class="icon" src="assets/images/check.png"></img>';
       }
     }
   }
-
 }
 
 /**
@@ -308,6 +301,7 @@ async function verifierDeconnection(){
 */
 function gererDeconnection(id) {
   $popup = "L'équipe " + id + " est déconnectée !";
+  console.log($popup);
   afficherPopup(popup, true)
 
   
@@ -323,6 +317,7 @@ function gererDeconnection(id) {
 */
 function gererReconnection(id) {
   $popup = "L'équipe " + id + " s'est reconnectée !";
+  console.log($popup);
   afficherPopup(popup, true)
 
   document.getElementById(id).classList.remove("deconnecte");
@@ -358,11 +353,30 @@ function downloadJSON() {
   URL.revokeObjectURL(url);
 }
 
-///////////////////////////////
-///////////////////////////////
-//Fonctionnalités pour l'user//
-///////////////////////////////
-///////////////////////////////
+//////////
+//Autres//
+//////////
+
+function togglepause() {
+
+  var pause = document.getElementById("pause_icon");
+  var dark = document.getElementById("dark");
+
+  if (pause.style.display == "none") {
+    pause.style.display = "block";
+    dark.style.display = "block";
+  }
+  else {
+    pause.style.display = "none";
+    dark.style.display = "none";
+  }
+}
+
+////////////////////////////////
+////////////////////////////////
+//FONCTIONNALITEES POUR L'USER//
+////////////////////////////////
+////////////////////////////////
 
 function creerClassementPopUp() {
   // Récupérer l'objet depuis le localStorage
@@ -480,6 +494,37 @@ function afficherCheckpoints() {
   }
 }
 
+function rafraichir() {
+
+  if (!lectureDonneesEnCours) {
+    lirePortSerie();
+    lectureDonneesEnCours = true;
+    document.getElementById("rafraichir").innerText = "Rafraîchir";
+
+  }
+  if (getNbJoueurs() > 0) {
+    document.getElementById('commencerPartie').style.display = "block";
+  }
+  document.getElementById('nbJoueurs').innerText = getNbJoueurs();
+  document.getElementById('listJoueurs').innerHTML = getListText("Joueur", getListJoueurs());
+  document.getElementById('nbCheckpoints').innerText = getNbCheckpoints();
+  document.getElementById('listCheckpoints').innerHTML = getListText("Checkpoint", getListCheckpoints());
+}
+
+function openModal() {
+  document.getElementById("myModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+///////////
+///////////
+// UTILS //
+///////////
+///////////
+
 function getListText(mot, list){
   let text = "";
 
@@ -499,15 +544,6 @@ function getListJoueurs() {
   }
 
   return listJoueurs;
-}
-
-
-function openModal() {
-  document.getElementById("myModal").style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById("myModal").style.display = "none";
 }
 
 function getListCheckpoints() {
@@ -551,19 +587,33 @@ function getNbCheckpoints() {
 
 }
 
-function rafraichir() {
-
-  if (!lectureDonneesEnCours) {
-    lirePortSerie();
-    lectureDonneesEnCours = true;
-    document.getElementById("rafraichir").innerText = "Rafraîchir";
-
+function arraysEqual(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+      return false;
   }
-  if (getNbJoueurs() > 0) {
-    document.getElementById('commencerPartie').style.display = "block";
+
+  for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+          return false;
+      }
   }
-  document.getElementById('nbJoueurs').innerText = getNbJoueurs();
-  document.getElementById('listJoueurs').innerHTML = getListText("Joueur", getListJoueurs());
-  document.getElementById('nbCheckpoints').innerText = getNbCheckpoints();
-  document.getElementById('listCheckpoints').innerHTML = getListText("Checkpoint", getListCheckpoints());
+
+  return true;
+}
+
+function isCouleurClaire(couleur) {
+  console.log(couleur);
+  if (couleur && typeof couleur === 'string') {
+    let r = parseInt(couleur.slice(1, 3), 16);
+    let g = parseInt(couleur.slice(3, 5), 16);
+    let b = parseInt(couleur.slice(5, 7), 16);
+
+    let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+    return brightness > 128;
+  } else {
+    // Gérer le cas où couleur n'est pas défini ou n'est pas une chaîne de caractères
+    console.error("La couleur n'est pas définie ou n'est pas une chaîne de caractères");
+    return false; // ou une autre valeur par défaut
+  }
 }
