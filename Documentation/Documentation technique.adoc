@@ -46,18 +46,25 @@ Utilisé pour définir la présentation visuelle des pages web PHP, le CSS perme
 
 == Architecture Système
 
+image::img/architecture.png[Archiii]
+
 === Dossier du Code Source (`CodeSource`)
 
 Ce dossier contient l'ensemble du code source de l'app.
 
 === Fichiers PHP
 
+==== `index.php`
+
+Il s'agit de la page d'accueil du projet. C'est elle qui demande, à travers le fichier JS
+
 ==== `IHM_admin.php`
 
 Fichier PHP responsable de l'interface utilisateur administrateur.
-Gère l'affichage des informations administratives et des statistiques du jeu. 
+Gère l'affichage des informations administratives et des statistiques du jeu.
+Il permet d'accéder à l'IHM utilisateur.
 
-==== `IHM_User.php`
+==== `IHM_user.php`
 
 Fichier PHP responsable de l'interface utilisateur pour les joueurs.
 Gère l'affichage de l'interface de jeu, de la progression globale des joueurs, etc.
@@ -71,10 +78,9 @@ Gère l'affichage des sniffeurs et checkpoints connectés, bouton pour démarrer
 
 Ce dossier contient des ressources utilisées par l'application.
 
-==== `style.scss`
+==== `admin.css` & `user.css`
 
-Fichier SCSS contenant les styles de votre application.
-Doit être compilé en CSS pour être utilisé dans les pages PHP.
+Fichiers CSS contenant les styles de l'application.
 
 === Dossier `images`
 
@@ -84,19 +90,13 @@ Contient les images utilisées dans l'IHM, telles que des icônes, des logos, et
 
 Ce dossier contient les fichiers JavaScript nécessaires pour l'IHM.
 
-==== `admin.js`
+==== `locura4iot.js`
 
-Fichier JavaScript spécifique à l'IHM administrateur.
-Gère les fonctionnalités administratives et les interactions avec l'IHM_admin.php.
-
-==== `user.js`
-
-Fichier JavaScript spécifique à l'IHM utilisateur.
-Gère les fonctionnalités du jeu et les interactions avec l'IHM_User.php.
+Contient toutes les fonctions Javascript du projet.
 
 ==== Communication avec les Données du Jeu via Web Serial
 
-Les fichiers JavaScript (`admin.js` et `user.js`) utilisent la Web Serial API pour établir une communication avec le matériel du jeu.
+Le fichier JavaScript (`locura4iot.js`) utilise la Web Serial API pour établir une communication avec le matériel du jeu.
 
 == Adaptabilité du plateau de jeu
 Le plateau de jeu depends du nombre de balises cachées, il fonctionne avec un tableau html adapté en php. Le seul soucis rencontré a été la génération du tableau car elle se fait de gauche a droite,
