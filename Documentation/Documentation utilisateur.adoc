@@ -6,7 +6,22 @@ Créé par : Pacqueteau Loïs, Duppi Thomas, Demany Loelia, Barette Vincent
 
 == I. Introduction
 [.text-justify]
-Cette documentation a pour but de vous aider à comprendre le fonctionnement du site de jeu.
+Cette documentation a pour but de vous aider à comprendre comment se servir du site de jeu.
+
+=== Contexte
+[.text-justify]
+Quentin Vey, ingénieur et chercheur à l'IUT de Blagnac, a développé un jeu de chasse au trésor, en IoT. Les nodes, aussi connus sous le nom de *sniffeurs*, sont des objets connectés dont la LED s'intensifie plus ou moins en fonction de son niveau de proximité avec l'un des Checkpoints (autre objet connecté), que les joueurs doivent trouver. Tout cela fonctionne bien, et nous n'allons pas y toucher.
+
+Seulement, ce jeu n'a pas d'interface graphique. La seule communication qui existe pour la chasse au trésor, c'est les LED qui s'allument en vert lorsque l'on trouve un nouveau checkpoint.
+
+=== Analyse de l'existant
+Il existe le jeu de Quentin, détaillé ci-dessus, ainsi qu'un 3ème objet connecté : un récepteur de données qui se branche en USB à l'ordinateur, et qui lui envoie les informations des sniffeurs (quels checkpoints ils ont trouvé, notamment).
+
+=== Le Projet
+Créer une IHM pour le jeu, comprennant :
+- une page d'accueil où l'on peut prendre le temps de s'assurer que tous les objects IoT sont connectés avec la machine ;
+- une interface administrateur où l'on peut voir les temps des différents utilisateurs ;
+- une interface utilisateur disposant d'un plateau de jeu, qui est une représentation plus divertisante de l'avancement des joueurs. Cette interface a pour objectif d'être projetée.
 
 == II. Règle du Jeu
 [.text-justify]
