@@ -351,7 +351,7 @@ function creerClassementPopUp(classement) {
     classementContent.innerHTML += `<p>${titleclassemnt[i]}: ${joueur.joueurId} (${joueur.balisesTrouvees} balises trouvées, ${tempsTotalText})</p>`;
     joueurNameHtml.innerHTML = joueur.joueurId;
     // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-    console.log(joueur.couleur);
+    // console.log(joueur.couleur);
     joueurColorHtml.style.backgroundColor = joueur.couleur;
   }
 }
@@ -373,48 +373,67 @@ function getTaillePlateau() {
 
 $(document).ready(function () {
   $(".classMere").on("click", function () {
-    // Récupérez l'élément <td> avec l'id "0"
-    var tdElement = document.getElementById('0');
-    var divElement = document.createElement('div');
-    // Créez un nouvel élément <div>
-    divElement.style.display = "flex";
-    // Récupérez les valeurs du localStorage
+    nbTargets = getTaillePlateau();
     var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+    var ListJoueurs = Object.keys(cacheCacheData);
+    var tabCouleurs = [];
     nbJoueurs = getNbJoueurs();
-    const tabCouleurs = [];
-    for (const joueur in cacheCacheData) {
-      const couleur = cacheCacheData[joueur].couleur;
-      tabCouleurs.push(couleur);
-    }
-    console.log(cacheCacheData);
-
-    // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
-    for (var i = 0; i < nbJoueurs; i++) {
-      var nouvelleDiv = document.createElement('div');
-      nouvelleDiv.id = cacheCacheData[i];  // Utilisez la valeur du localStorage pour l'ID
-      tdElement.appendChild(divElement);
-      divElement.appendChild(nouvelleDiv);
-      // Ajoutez une classe à chaque nouvelle div en fonction de la logique existante
-      if (i % 3 === 0) {
-        nouvelleDiv.classList.add('square');
-        nouvelleDiv.style.backgroundColor = tabCouleurs[i];
-      } else if (i % 3 === 1) {
-        nouvelleDiv.classList.add('circle');
-        nouvelleDiv.style.backgroundColor = tabCouleurs[i];
-      } else {
-        nouvelleDiv.classList.add('triangle');
-        nouvelleDiv.style.borderBottomColor = tabCouleurs[i];
+    for (var j = 0; j < nbTargets; j++) {
+      var tdElement = document.getElementById(j);
+      for (const joueur in cacheCacheData) {
+        const couleur = cacheCacheData[joueur].couleur;
+        tabCouleurs.push(couleur);
+      }
+  
+      // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
+      for (var i = 0; i < nbJoueurs; i++) {
+        var nouvelleDiv = document.createElement('div');
+        nouvelleDiv.id = ListJoueurs[i];  // Utilisez la valeur du localStorage pour l'ID
+        tdElement.appendChild(nouvelleDiv);
+        // Ajoutez une classe à chaque nouvelle div en fonction de la logique existante
+        if (i % 3 === 0) {
+          nouvelleDiv.classList.add('square');
+          nouvelleDiv.style.backgroundColor = tabCouleurs[i];
+          nouvelleDiv.style.display = "none";
+        } else if (i % 3 === 1) {
+          nouvelleDiv.classList.add('circle');
+          nouvelleDiv.style.backgroundColor = tabCouleurs[i];
+          nouvelleDiv.style.display = "none";
+        } else {
+          nouvelleDiv.classList.add('triangle');
+          nouvelleDiv.style.borderBottomColor = tabCouleurs[i];
+          nouvelleDiv.style.display = "none";
+        }    
       }
     }
   });
 });
+
+
+function afficherPions() {
+  var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  const ListJoueurs = Object.keys(cacheCacheData);
+  const nbTargets = getTaillePlateau();
+  for (node in ListJoueurs) {
+    for (var i = 0; i < nbTargets; i++) {
+      var pionAfficher = document.getElementById(i).children[node];
+      pionAfficher.style.display = "none";
+    }
+  }
+ 
+  for (var node in ListJoueurs) {
+    positionPion = getCapteursTrouvés(ListJoueurs[node]);
+    var pionAfficher = document.getElementById(positionPion - 1).children[node];
+    pionAfficher.style.display = "flex";
+    
+  }
+}
 
 // faire une fonction qui active la fonction openModal() quand tout les elements d'une liste target sont trouvés (times != 0)
 // on parcours toute la liste des joueurs si un joueur a un temps = 0 on passe au joueur suivant si on arrive à la fin de la liste et que toute les joueurs ont au mois un temps = 0 on return false
 function estFinDuJeu() {
   // Récupérer les données du localStorage
   const jeuData = getJeuDataFromLocalStorage();
-
   // Vérifier si tous les temps pour au moins un nœud sont différents de zéro
   for (const nodeId in jeuData) {
     const node = jeuData[nodeId];
@@ -430,22 +449,26 @@ function estFinDuJeu() {
   return false;
 }
 
-// Utilisation de la fonction pour vérifier la fin du jeu
-// if (estFinDuJeu()) {
-//   // Mettez ici le code à exécuter lorsque le jeu est terminé
-//   console.log("Le jeu est terminé !");
-// } else {
-//   console.log("Le jeu n'est pas encore terminé.");
-// }
+
+function getCapteursTrouvés(node) {
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  const joueurData = cacheCacheData[node];
+  const targets = joueurData.targets;
+  const times = joueurData.times;
+  const capteursTrouvés = [];
+  for (let i = 0; i < times.length; i++) {
+    if (times[i] > 0) {
+      capteursTrouvés.push(targets[i]);
+    }
+  }
+  return capteursTrouvés.length;
+}
 
 function activatedModal(){
   if (estFinDuJeu()) {
     openModal();
   }
 }
-
-
-
 
 
 ////////////////////////////////
