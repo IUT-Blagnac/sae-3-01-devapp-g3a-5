@@ -278,6 +278,11 @@ function downloadJSON() {
 ///////////////////////////////
 ///////////////////////////////
 
+function getJeuDataFromLocalStorage() {
+  const jeuDataString = localStorage.getItem('listNodeWithColor');
+  return JSON.parse(jeuDataString);
+}
+
 function creerClassement() {
   // Récupérer l'objet depuis le localStorage
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
@@ -305,7 +310,7 @@ function creerClassement() {
   // Afficher le classement
   
   
-  // on affiche le classement des 3 premiers joueurs
+  // on affiche le classement de TOUT joueurs classement.length
   for (let i = 0; i < 3; i++) {
     const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
     const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
@@ -314,7 +319,18 @@ function creerClassement() {
     
     joueurNameHtml.innerHTML = joueur.joueurId;
     // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-    console.log(joueur.couleur);
+    // console.log(joueur.couleur);
+    // if (i % 3 === 0) {
+    //   joueurColorHtml.classList.add('square');
+      
+    // } else if (i % 3 === 1) {
+    //   joueurColorHtml.classList.add('circle');
+      
+    // } else {
+    //   joueurColorHtml.classList.add('triangle');
+      
+    // }
+  
     joueurColorHtml.style.backgroundColor = joueur.couleur;
   }
   return classement;
@@ -393,9 +409,40 @@ $(document).ready(function () {
   });
 });
 
+// faire une fonction qui active la fonction openModal() quand tout les elements d'une liste target sont trouvés (times != 0)
+// on parcours toute la liste des joueurs si un joueur a un temps = 0 on passe au joueur suivant si on arrive à la fin de la liste et que toute les joueurs ont au mois un temps = 0 on return false
+function estFinDuJeu() {
+  // Récupérer les données du localStorage
+  const jeuData = getJeuDataFromLocalStorage();
 
+  // Vérifier si tous les temps pour au moins un nœud sont différents de zéro
+  for (const nodeId in jeuData) {
+    const node = jeuData[nodeId];
+    const tempsNonZero = node.times.every(time => time !== 0);
 
+    // Si tous les temps pour un nœud sont différents de zéro, le jeu est terminé
+    if (tempsNonZero) {
+      return true;
+    }
+  }
 
+  // Si aucun nœud n'a tous les temps différents de zéro, le jeu n'est pas terminé
+  return false;
+}
+
+// Utilisation de la fonction pour vérifier la fin du jeu
+// if (estFinDuJeu()) {
+//   // Mettez ici le code à exécuter lorsque le jeu est terminé
+//   console.log("Le jeu est terminé !");
+// } else {
+//   console.log("Le jeu n'est pas encore terminé.");
+// }
+
+function activatedModal(){
+  if (estFinDuJeu()) {
+    openModal();
+  }
+}
 
 
 
