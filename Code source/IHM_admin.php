@@ -24,8 +24,64 @@
     		<img src="assets/images/pause_icon.png" onclick="togglepause()">
 		</div>
 
+
 		<!-- Tableau des équipes -->
-		<div id="tabEquipes"></div>
+		<div id="tabEquipes">
+		<!--
+		<table>
+				<tr>
+					<b>
+					<td  class="equipe"  rowspan ="4" style="width:15%"> <center> Equipe B </center> </td>
+					<td class = "label" > Id Capteur </td>
+					<td class = "label" > Trouvé ? </td>
+					<td class = "label" > Tps </td>
+					</b>
+				</tr>
+				<tr>
+					<td> 123 </td>
+					<td> <img class= "icon" src="assets/images/check.png"> </td>
+					<td> 00:32 </td>
+				</tr>
+				<tr>
+					<td> 456 </td>
+					<td>   </td>
+					<td> --:-- </td>
+				</tr>
+				<tr>
+					<td> 789 </td>
+					<td>  </td>
+					<td> --:-- </td>
+				</tr>
+			</table>
+			<table class="deconnecte">
+				<tr>
+					<b>
+					<td  class="equipe"  rowspan ="4" style="width:15%"> <center> Equipe C </center> </td>
+					<td class = "label" > Id Capteur </td>
+					<td class = "label" > Trouvé ? </td>
+					<td class = "label" > Tps </td>
+					</b>
+				</tr>
+				<tr>
+					<td> 123 </td>
+					<td> <img class= "icon" src="assets/images/check.png"> </td>
+					<td> 00:32 </td>
+				</tr>
+				<tr>
+					<td> 456 </td>
+					<td>   </td>
+					<td> --:-- </td>
+				</tr>
+				<tr>
+					<td> 789 </td>
+					<td>  </td>
+					<td> --:-- </td>
+				</tr>
+			</table>
+
+
+		
+		--></div>
 </body>
 </html>
 
