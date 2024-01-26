@@ -56,7 +56,7 @@ Pour utiliser le jeu, vous devez posséder un ordinateur avec un navigateur web 
 
 ==== Installation de l'application
 
-== IV. Utilisation de l'application
+== IV. Lancement de l'application
 [.text-justify]
 
 === Lancement du Site web
@@ -66,13 +66,12 @@ Rendez vous sur le site web à l'adresse suivante :
 === Navigation sur le Site
 Fonctionnalité en cours de développement.
 
-=== Interactions sur le Jeu
+== V. Utilisation de l'application
+[.text-justify]
 
-La majeure partie des interactions avec le jeu se réalisnet à travers l'interface administrateur.
+=== Interface Administrateur
 
-==== Interface Administrateur
-
-===== Rafraîchir Equipes
+==== Rafraîchir Equipes
 
 Il est possible de rafraîchir les équipes de plusieurs manières, en fonction du souhait du client. Le rafraîchissement peut-être automatique, ou manuel (via un bouton).
 
@@ -90,7 +89,7 @@ image::img/afterrefresh.png[]
 
 // On voit l'équipe A et B par exemple
 
-===== Afficher Message
+==== Afficher Message
 
 Vous trouverez un bouton "message". Si vous cliquez dessus, une pop-up vous demandera le contenu de votre message. Confirmez, et il sera affiché sur l'écran des utilisateurs.
 Cette fonction est utile pour informer les joueurs que la partie se termine bientôt ou alerter une équipe qu'elle s'est trop éloignée par exemple.
@@ -99,7 +98,7 @@ image::img/messagebutton.png[Bouton Message]
 
 image::img/messagedisplay.png[Affichage du message]
 
-===== Menu Pause
+==== Menu Pause
 
 Il est possible de mettre le jeu en pause grâce au bouton associé. Cela permet d'indiquer aux joueurs, sur l'interface utilisateur, qu'ils doivent arrêter leurs recherches, et de synchroniser le temps passé en pause correctement dans les leaderboards.
 
@@ -109,38 +108,40 @@ image::img/nopausemode.png[Sans mode pause]
 
 image::img/pausemode.png[Affichage du mode pause]
 
-===== Voir Données Equipes
+==== Voir Données Equipes
 
 La liste des équipes étant disponibles depuis l'interface administrateur, il est possible facilement de s'intéresser à leur détails de progression. On peut notamment observer quels checkpoints ont été trouvés, et en combien de temps.
 
 image::img/viewteamdata.png[Données d'une équipe]
 
-==== Interface de lancement du jeu
+=== Interface de lancement du jeu
 
 > AKA - index.php
-Il s'agit de l'interface utilisée pour s'assurer que le jeu est prêt à être lancé. Il contient principalement des informations en lecture.
+Il s'agit de l'interface utilisée pour s'assurer que le jeu est prêt à être lancé. Il contient principalement des informations à lire. Elle est responsable de la lecture du port série, de la conversion des données et du stockage local des données des sniffeurs. Cela permet ensuite aux différentes pages du site (user et admin) de connaître l'état d'avancement des joueurs.
 
-===== Accès Interface Admin
+> **/!\** - Durant l'intégralité de la partie, la page index.php doit impérativement __rester ouverte__, même après le lancement du jeu dans la page admin. En effet, fermer la page interromprait la connexion entre les joueurs.
+
+==== Accès Interface Admin
 
 On peut accéder à l'interface d'administrateur du jeu depuis la page d'index. Il suffit de cliquer sur un bouton.
 
 image::img/accessadmin.png[Bouton d'accès à l'interface admin]
 
-===== Voir Checkpoints Connectés
+==== Voir Checkpoints Connectés
 
 Il s'agit d'une fonctionnalité de lecture pour s'assurer que le jeu est prêt. En effet, elle permet de voir quels checkpoints sont connectés, avant de démarrer le jeu.
 
 image::img/viewcheckpoints.png[Exemple de liste de checkpoints]
 
-===== Voir Sniffeurs Connectés
+==== Voir Sniffeurs Connectés
 
 Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index/
 
 image::img/afterrefresh.png[Exemple de liste de sniffeurs connectés]
 
-==== Interface Utilisateur/Spectateur
+=== Interface Utilisateur/Spectateur
 
-===== Plateau Adaptation Taille
+==== Plateau Adaptation Taille
 
 La taille du plateau s'adapte automatiquement au nombre de checkpoints. En effet, lorsque l'on se trouve sur la page d'accueil (index), et qu'on souhaite accéder au plateau du jeu, le Javascript de la page d'accueil fournit au PHP de l'interface utilisateur le nombre de cases. Le plateau est en réalité un tableau PHP, dont l'apparance est modifiée avec du SCSS. Lorsque la page se charge, le PHP crée le tableau et lui attribue non seulement le bon nombre de case, mais aussi dans le bon ordre.
 
@@ -148,17 +149,17 @@ image::img/plateau6.png[Plateau de taille 6]
 
 image::img/plateau11.png[Plateau de taille 11]
 
-===== Couleur Plateau
+==== Couleur Plateau
 
 En harmonie avec la taille du plateau, la couleur du plateau est très importante. Elle permet d'améliorer la visibilité et la compréhension du jeu, et surtout l'accessibilité. La couleur du plateau est une échelle de bleu, conformément à la charte graphique du client. Les cases partent d'un bleu clair, à un bleu foncé, pour revenir au clair. Cela fait une boucle.
 
 image::img/plateau6.png[Plateau de taille 6]
 
-==== Divers
+=== Divers
 
 Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
 
-===== Equipe Connexion
+==== Equipe Connexion
 
 Lorsqu'un sniffeur se connecte, il peut être vu depuis :
 
@@ -170,5 +171,5 @@ image::img/viewteamdata.png[Interface administrateur]
 image::img/indexteamconnection.png[Interface utilisateur]
 image::img/afterrefresh.png[Index]
 
-=== Personnalisation des Paramètres
+== Personnalisation des Paramètres
 Fonctionnalité en cours de développement.
