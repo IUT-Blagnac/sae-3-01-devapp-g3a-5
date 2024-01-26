@@ -19,9 +19,10 @@ Il existe le jeu de Quentin, détaillé ci-dessus, ainsi qu'un 3ème objet conne
 
 === Le Projet
 Créer une IHM pour le jeu, comprennant :
-- une page d'accueil où l'on peut prendre le temps de s'assurer que tous les objects IoT sont connectés avec la machine ;
-- une interface administrateur où l'on peut voir les temps des différents utilisateurs ;
-- une interface utilisateur disposant d'un plateau de jeu, qui est une représentation plus divertisante de l'avancement des joueurs. Cette interface a pour objectif d'être projetée.
+
+* une page d'accueil où l'on peut prendre le temps de s'assurer que tous les objects IoT sont connectés avec la machine ;
+* une interface administrateur où l'on peut voir les temps des différents utilisateurs ;
+* une interface utilisateur disposant d'un plateau de jeu, qui est une représentation plus divertisante de l'avancement des joueurs. Cette interface a pour objectif d'être projetée.
 
 == II. Règle du Jeu
 [.text-justify]
@@ -160,9 +161,10 @@ Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
 ===== Equipe Connexion
 
 Lorsqu'un sniffeur se connecte, il peut être vu depuis :
- - l'interface admin (comme une équipe) ;
- - l'interface utilisateur (comme un pion) ;
- - la page d'index (dans la liste).
+
+* l'interface admin (comme une équipe) ;
+* l'interface utilisateur (comme un pion) ;
+* la page d'index (dans la liste).
 
 image::img/viewteamdata.png[Interface administrateur]
 image::img/indexteamconnection.png[Interface utilisateur]
