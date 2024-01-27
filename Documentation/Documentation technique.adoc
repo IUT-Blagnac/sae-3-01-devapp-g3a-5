@@ -18,15 +18,9 @@ toc::[]
 
 LocURa4IoT a développé un jeu de chasse au trésor : Des joueurs doivent trouver des checkpoints à l'aide d'un noeud, le tout se basant sur la technologie des flux mqtt. Le jeu est actuellement fonctionnel mais manque d'une interface pour faciliter son déroulement. C'est ainsi que nous intervenons :  Nous sommes une équipe de 4 développeurs en alternance chargé de créer une interface destinée aux administrateur, pour visualiser son déroulement et intervenir si besoin, et une interface utilisateur qui sera diffusée à tous les joueurs pour qu'ils aient une idée de l'avancement de la partie.
 
-=== Use cases généraux
+=== Use case général
 
-Pour l'ihm admin:
-
-image::img/doc_tech_usecase_admingen.PNG[]
-
-pour l'ihm user:
-
-image::img/doc_tech_usecase_playergen.PNG[]
+image::img/usecase.png[]
 
 === Langages / Technologies utilisées
 
