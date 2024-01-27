@@ -20,7 +20,7 @@ LocURa4IoT a développé un jeu de chasse au trésor : Des joueurs doivent trouv
 
 === 1. Cas d'utilisation général
 
-image::img/usecase.png[width=370, height=500]
+image::img/usecase.png[]
 
 === 2. Déploiement du projet 
 (explier comment deploiyer le porjet avec wamp et google chrome)
