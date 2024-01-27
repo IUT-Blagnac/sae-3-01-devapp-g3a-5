@@ -20,7 +20,12 @@ image::img/usecase.png[]
 == Déploiement du projet 
 
 === Prérequis
-(expliquer comment deployer le projet en utilisant wamp et google chrome)
+Il faut télécharger Wamp pour déployer le projet sur sa propre machine, et l'héberger localement.
+
+=== Lancement
+On peut télécharger une release du projet et la sauvegarder dans son dossier Wamp. On lance le serveur et on peut y accéder en tapant `localhost` dans sa barre de recherche Google Chrome.
+
+> /!\ Le projet doit être utilisé avec Google Chrome pour être compatible.
 
 == Lancement
 
