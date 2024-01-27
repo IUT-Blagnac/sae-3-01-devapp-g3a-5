@@ -38,7 +38,7 @@ toc::[]
 
 ===  Contexte
 
-LocURa4IoT a développé un jeu de chasse au trésor : Des joueurs doivent trouver des checkpoints à l'aide d'un noeud, le tout se basant sur la technologie des flux mqtt. Le jeu est actuellement fonctionnel mais manque d'une interface pour faciliter son déroulement. C'est ainsi que nous intervenons :  Nous sommes une équipe de 4 développeurs en alternance chargé de créer une interface destinée aux administrateur, pour visualiser son déroulement et intervenir si besoin, et une interface utilisateur qui sera diffusée à tous les joueurs pour qu'ils aient une idée de l'avancement de la partie.
+Le laboratoire de recherche *LocURa4IoT* a développé un jeu de chasse au trésor : Des joueurs doivent trouver des checkpoints à l'aide d'un noeud, le tout se basant sur la technologie des flux mqtt. Le jeu est actuellement fonctionnel mais manque d'une interface pour faciliter son déroulement. C'est ainsi que nous intervenons :  Nous sommes une équipe de 4 développeurs en alternance chargé de créer une interface destinée aux administrateur, pour visualiser son déroulement et intervenir si besoin, et une interface utilisateur qui sera diffusée à tous les joueurs pour qu'ils aient une idée de l'avancement de la partie.
 
 ===  Notre équipe
 
