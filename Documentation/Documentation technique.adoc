@@ -20,7 +20,7 @@ LocURa4IoT a développé un jeu de chasse au trésor : Des joueurs doivent trouv
 
 === Use case général
 
-image::img/usecase.png[]
+image::img/usecase.png[width=370, height=500]
 
 === Langages / Technologies utilisées
 
@@ -44,7 +44,7 @@ Utilisé pour définir la présentation visuelle des pages web PHP, le CSS perme
 
 == Architecture Système
 
-image::img/architecture.png[Archiii]
+image::img/architecture.png[width=500, height=375]
 
 === Dossier du Code Source (`CodeSource`)
 
