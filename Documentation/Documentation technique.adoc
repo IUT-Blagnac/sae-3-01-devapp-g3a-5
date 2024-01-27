@@ -3,6 +3,7 @@
 :toc: macro
 :toclevels: 3
 :toc-title: 
+:numbered:
 
 Réalisé par *Thomas Duppi, Loïs Pacqueteau, Vincent Barette, Loélia Demany*
 
@@ -12,20 +13,16 @@ Documentation technique pour le projet de chasse au trésor LocuraIoT
 
 toc::[]
 
-== Présentation de l'application
-
-=== Contexte
-
-LocURa4IoT a développé un jeu de chasse au trésor : Des joueurs doivent trouver des checkpoints à l'aide d'un noeud, le tout se basant sur la technologie des flux mqtt. Le jeu est actuellement fonctionnel mais manque d'une interface pour faciliter son déroulement. C'est ainsi que nous intervenons :  Nous sommes une équipe de 4 développeurs en alternance chargé de créer une interface destinée aux administrateur, pour visualiser son déroulement et intervenir si besoin, et une interface utilisateur qui sera diffusée à tous les joueurs pour qu'ils aient une idée de l'avancement de la partie.
-
-=== 1. Cas d'utilisation général
+== Cas d'utilisation général
 
 image::img/usecase.png[]
 
-=== 2. Déploiement du projet 
-(explier comment deploiyer le porjet avec wamp et google chrome)
+== Déploiement du projet 
 
+=== Prérequis
+(expliquer comment deployer le projet en utilisant wamp et google chrome)
 
+== Lancement
 
 == Architecture Système
 
