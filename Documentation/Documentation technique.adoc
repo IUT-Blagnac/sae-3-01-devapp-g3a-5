@@ -32,7 +32,7 @@ image::img/architecture.png[width=500, height=375]
 
 Ce dossier contient l'ensemble du code source de l'app.
 
-=== Fichiers PHP
+=== Backend
 
 ==== `index.php`
 
@@ -54,7 +54,7 @@ Gère l'affichage de l'interface de jeu, de la progression globale des joueurs, 
 Fichier PHP responsable du lancement du jeu.
 Gère l'affichage des sniffeurs et checkpoints connectés, bouton pour démarrer le jeu.
 
-=== Dossier `assets`
+=== Frontend
 
 Ce dossier contient des ressources utilisées par l'application.
 
@@ -62,19 +62,19 @@ Ce dossier contient des ressources utilisées par l'application.
 
 Fichiers CSS contenant les styles de l'application.
 
-=== Dossier `images`
+==== Dossier `images`
 
 Contient les images utilisées dans l'IHM, telles que des icônes, des logos, etc.
 
-=== Dossier `js`
+==== Dossier `js`
 
 Ce dossier contient les fichiers JavaScript nécessaires pour l'IHM.
 
-==== `locura4iot.js`
+===== `locura4iot.js`
 
 Contient toutes les fonctions Javascript du projet.
 
-==== Communication avec les Données du Jeu via Web Serial
+===== Communication avec les Données du Jeu via Web Serial
 
 Le fichier JavaScript (`locura4iot.js`) utilise la Web Serial API pour établir une communication avec le matériel du jeu.
 
