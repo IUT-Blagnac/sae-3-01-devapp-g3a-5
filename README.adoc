@@ -1,4 +1,4 @@
-= SAÉ 3.01 2023-2024
+= SAÉ 3.01 2023-2024 Groupe 3A-5
 :icons: font
 :models: models
 :experimental:
@@ -33,25 +33,32 @@ endif::[]
 
 toc::[]
 
-== Equipe
+
+==  Introduction 
+
+===  Contexte
+
+LocURa4IoT a développé un jeu de chasse au trésor : Des joueurs doivent trouver des checkpoints à l'aide d'un noeud, le tout se basant sur la technologie des flux mqtt. Le jeu est actuellement fonctionnel mais manque d'une interface pour faciliter son déroulement. C'est ainsi que nous intervenons :  Nous sommes une équipe de 4 développeurs en alternance chargé de créer une interface destinée aux administrateur, pour visualiser son déroulement et intervenir si besoin, et une interface utilisateur qui sera diffusée à tous les joueurs pour qu'ils aient une idée de l'avancement de la partie.
+
+===  Notre équipe
 
 Projet est réalisé par::
 
-- https://github.com/thomasduppi[Thomas Duppy]
-- https://github.com/loisPacqueteau[Loïs Pacqueteau]
-- https://github.com/vincentEnRoueLibre[Vincent Barette]
-- https://github.com/L-Demany[Loélia Demany]
+- https://github.com/thomasduppi[Thomas Duppy] - Développeur
+- https://github.com/loisPacqueteau[Loïs Pacqueteau] - Chef de projet/ Développeur
+- https://github.com/vincentEnRoueLibre[Vincent Barette] - Secretaire
+- https://github.com/L-Demany[Loélia Demany] - Développeur
 
+===  Tuteurs de l'équipe:
 
-Tuteurices de l'équipe::
-- RB
-- EP
-- Quentin Vey
-- Adrien Van
+- link:https://github.com/rboulle[Rémi Boulle]
+- link:https://github.com/ependaries[Esther Pendaries]
+- Quentin Vey - Client
+- Adrien Van - Client
 
-=== Langages / Technologies utilisées
+===  Langages / Technologies utilisées
 
-==== Javascript
+====  Javascript
 
 image::Documentation/img/js.png[width=90, height=50]
 
@@ -59,7 +66,7 @@ Principalement utilisé pour rendre les pages web interactives, Javascript perme
 
 ---
 
-==== PHP
+====  PHP
 
 image::Documentation/img/php.png[width=100, height=50]
 
