@@ -85,6 +85,8 @@ Utilisé pour définir la présentation visuelle des pages web PHP, le CSS perme
 
 === Sprint 1
 
+:sp: 1
+
 === Sprint 2
 
 :sp: 2
@@ -129,7 +131,7 @@ Utilisé pour définir la présentation visuelle des pages web PHP, le CSS perme
 
 |=======================
 
-> Note de Vincent : Non je ne fais pas rien, je m'occupe simplement de la partie de gestion de projet 😅 Je vois RB demain (Lundi midi) pour en parler avec lui.
+
 
 Bilan du Sprint :
 La plupart des tâches ont été réalisées. Les tâches de dev de Loélia sont sprint2/sprint3, donc c'est OK. Discussions avec Quentin Vey, on lui a montré le proto. Quentin nous a donné plusieurs nouvelles tâches pour le sprint 3.
@@ -171,7 +173,6 @@ La plupart des tâches ont été réalisées. Les tâches de dev de Loélia sont
 - Les UserStories se trouvent dans *Répartition des tâches et état d'avancement*
 
 
-== Gestion de projet & Qualité
 
 == Evaluation hebdomadaire
 
