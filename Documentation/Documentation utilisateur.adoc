@@ -2,45 +2,38 @@
 :toc:
 :toc-title: Sommaire
 
-Créé par : Pacqueteau Loïs, Duppi Thomas, Demany Loelia, Barette Vincent
+Créé par : Pacqueteau Loïs, Duppi Thomas, Demany Loélia, Barette Vincent
 
 == I. Introduction
 [.text-justify]
-Cette documentation a pour but de vous aider à comprendre comment se servir du site de jeu.
+Cette documentation a pour but de vous aider à comprendre le fonctionnement de l'interface de jeu.
 
-=== Contexte
+== II. Règles du Jeu
 [.text-justify]
-Quentin Vey, ingénieur et chercheur à l'IUT de Blagnac, a développé un jeu de chasse au trésor, en IoT. Les nodes, aussi connus sous le nom de *sniffeurs*, sont des objets connectés dont la LED s'intensifie plus ou moins en fonction de son niveau de proximité avec l'un des Checkpoints (autre objet connecté), que les joueurs doivent trouver. Tout cela fonctionne bien, et nous n'allons pas y toucher.
 
-Seulement, ce jeu n'a pas d'interface graphique. La seule communication qui existe pour la chasse au trésor, c'est les LED qui s'allument en vert lorsque l'on trouve un nouveau checkpoint.
+=== 0. Fonctionnement des boitiers
+A intervalle réguliers, les boitiers envoient des JSON contenant :
 
-=== Analyse de l'existant
-Il existe le jeu de Quentin, détaillé ci-dessus, ainsi qu'un 3ème objet connecté : un récepteur de données qui se branche en USB à l'ordinateur, et qui lui envoie les informations des sniffeurs (quels checkpoints ils ont trouvé, notamment).
-
-=== Le Projet
-Créer une IHM pour le jeu, comprennant :
-
-* une page d'accueil où l'on peut prendre le temps de s'assurer que tous les objects IoT sont connectés avec la machine ;
-* une interface administrateur où l'on peut voir les temps des différents utilisateurs ;
-* une interface utilisateur disposant d'un plateau de jeu, qui est une représentation plus divertisante de l'avancement des joueurs. Cette interface a pour objectif d'être projetée.
-
-== II. Règle du Jeu
-[.text-justify]
+* L'id du noeud (de la forme '0x????')
+* Les id des checkpoints, dans l'ordre dans lequel l'équipe doit les trouver
+** A noter que les équipes doivent trouver les même checkpoints, dans un ordre différent, excepté pour le checkpoint final qui est le même pour toutes les équipes.
+* Le temps mit pour trouver chaque checkpoint, depuis le début de la partie 
+** Par exemple, si une équipe trouve un checkpoint au bout de 10 seconde de jeu, et un autre 15 secondes plus tard, le second checkpoint sera considéré comment ayant été trouvé au bout de 25 secondes.
 
 === 1. Localisation des Objets
 Les équipes s'affrontent pour retrouver des objets connectés disséminés sur la plateforme. Les informations de localisation des objets sont fournies par la plateforme LocURa4IoT.
 
 === 2. Règles de Recherche
-Chaque équipe possède doit trouver tous les checkpoints dans un ordre définit aléatoirement. Chaque équipe doit trouver les checkpoints dans l'ordre qui lui est attribué. Les boities de recherches changent de couleurs et clignotent de plus en plus vite lorsque l'équipe se rapproche de la balise.
+Chaque équipe possède doit trouver tous les checkpoints dans un ordre défini aléatoirement. (A noter qu'il est également possible de jouer à ce jeu en solitaire.) Chaque équipe doit trouver les checkpoints dans l'ordre qui lui est attribué. Les boitiers de recherche changent de couleur et clignotent de plus en plus vite lorsque l'équipe se rapproche de la balise.
 
 === 3. Conditions de Victoire
 Un chronomètre permet de mesurer le temps que chaque équipe mets pour trouver toutes les balises. L'équipe qui trouve toutes les balises en le moins de temps possible remporte la partie.
 
 === 4. Déroulement du Jeu
 1. Les équipes se rassemblent à la balise de départ.
-2. Chaque équipe reçoit un boitié qui détecte les balises.
-3. Les équipes partent ensuite à la recherche des objets dans la zone désignée.
-4. Les équipes doivent signaler chaque objet trouvé à la plateforme LocURa4IoT pour validation.
+2. Chaque équipe reçoit un boitier qui détecte les balises.
+3. Les équipes partent ensuite à la recherche des objets dans la zone où ils ont été cachés.
+4. Si un boitier se trouve à moins de 30cm de distance pendant 5 secondes, il est considéré trouvé.
 5. La plateforme met à jour régulièrement les informations de localisation pour maintenir le défi.
 6. Une fois que toutes les équipes ont trouvées tout les checkpoints, les équipes retournent à la balise de départ pour la déclaration des résultats.
 7. L'équipe avec le temps le plus court remporte la partie.
@@ -53,27 +46,46 @@ Pour utiliser le jeu, vous devez posséder un ordinateur avec un navigateur web 
 
 === 2. Installation 
 ==== Installation de Wamp
+[[installation]]
+Téléchargez Wamp à l'adresse suivante : https://www.wampserver.com/
+
+image::img/installwamp.PNG[]
+
+Vous devriez obtenir un fichier comme cela :
+image::img/wampsetup.PNG[]
+Lancez-le et suivez les instructions pour installer Wamp.
 
 ==== Installation de l'application
 
-== IV. Lancement de l'application
+TODO
+
+== IV. Utilisation de l'application
 [.text-justify]
 
 === Lancement du Site web
-Fonctionnalité en cours de développement.
-Rendez vous sur le site web à l'adresse suivante :
+Ouvrez <<installation, l'application>>. 
+Vous arriverez sur la page index. Cliquez sur "Lancer lecture des données" et sélectionnez le port utilisé pour la carte programmable lectrice de données.
 
 === Navigation sur le Site
-Fonctionnalité en cours de développement.
+Pour accéder à l'interface administrateur, cliquez sur le bouton "Commencer la partie" présent sur la page index.
 
-== V. Utilisation de l'application
-[.text-justify]
+image::img/commencerpartie.PNG[]
 
-=== Interface Administrateur
+/!\ Ne pas fermer la page index ! C'est elle qui se charge de la lecture des données.
 
-==== Rafraîchir Equipes
+Depuis la page administrateur, vous pouvez accéder à l'interface utilisateur en cliquant sur le bouton "IHM User"
 
-Il est possible de rafraîchir les équipes de plusieurs manières, en fonction du souhait du client. Le rafraîchissement peut-être automatique, ou manuel (via un bouton).
+image::img/btnihmuser.PNG[]
+
+=== Interactions sur le Jeu
+
+La majeure partie des interactions avec le jeu se réalisent à travers l'interface administrateur.
+
+==== Index
+
+===== Rafraîchissement
+
+Avant de commencer la partie, l'administrateur peut s'assurer que tous les joueurs et tous les trésors sont captés avec succès.
 
 image::img/refreshbutton.png[Bouton de rafraîchissement]
 
@@ -89,18 +101,38 @@ image::img/afterrefresh.png[]
 
 // On voit l'équipe A et B par exemple
 
-==== Afficher Message
+===== Accès Interface Admin
+
+On peut accéder à l'interface d'administrateur du jeu depuis la page d'index. Ce bouton apparaît lorsqu'on détecte au moins 1 joueur.
+
+image::img/accessadmin.png[Bouton d'accès à l'interface admin]
+
+===== Voir Checkpoints Connectés
+
+Il s'agit d'une fonctionnalité de lecture pour s'assurer que le jeu est prêt. En effet, elle permet de voir quels checkpoints sont connectés, avant de démarrer le jeu.
+
+image::img/viewcheckpoints.png[Exemple de liste de checkpoints]
+
+===== Voir Sniffeurs Connectés
+
+Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index/
+
+image::img/afterrefresh.png[Exemple de liste de sniffeurs connectés]
+
+==== Interface administrateur
+
+===== Afficher Message
 
 Vous trouverez un bouton "message". Si vous cliquez dessus, une pop-up vous demandera le contenu de votre message. Confirmez, et il sera affiché sur l'écran des utilisateurs.
 Cette fonction est utile pour informer les joueurs que la partie se termine bientôt ou alerter une équipe qu'elle s'est trop éloignée par exemple.
 
-image::img/messagebutton.png[Bouton Message]
+image::img/btnmessage.png[Bouton Message]
 
 image::img/messagedisplay.png[Affichage du message]
 
-==== Menu Pause
+===== Menu Pause
 
-Il est possible de mettre le jeu en pause grâce au bouton associé. Cela permet d'indiquer aux joueurs, sur l'interface utilisateur, qu'ils doivent arrêter leurs recherches, et de synchroniser le temps passé en pause correctement dans les leaderboards.
+Il est possible de mettre le jeu en pause grâce au bouton associé. Cela permet d'indiquer aux joueurs, sur l'interface utilisateur, qu'ils doivent arrêter leurs recherches. Le bouton pause n'a pas de réelle fonctionnalité, il est purement esthétique, il faut compter sur la bonne foi des joueurs de ne pas continuer à jouer lorsque le jeu est en pause
 
 image::img/pausebutton.png[Bouton Pause]
 
@@ -108,40 +140,15 @@ image::img/nopausemode.png[Sans mode pause]
 
 image::img/pausemode.png[Affichage du mode pause]
 
-==== Voir Données Equipes
+===== Voir Données Equipes
 
 La liste des équipes étant disponibles depuis l'interface administrateur, il est possible facilement de s'intéresser à leur détails de progression. On peut notamment observer quels checkpoints ont été trouvés, et en combien de temps.
 
 image::img/viewteamdata.png[Données d'une équipe]
 
-=== Interface de lancement du jeu
+==== Interface Utilisateur/Spectateur
 
-> AKA - index.php
-Il s'agit de l'interface utilisée pour s'assurer que le jeu est prêt à être lancé. Il contient principalement des informations à lire. Elle est responsable de la lecture du port série, de la conversion des données et du stockage local des données des sniffeurs. Cela permet ensuite aux différentes pages du site (user et admin) de connaître l'état d'avancement des joueurs.
-
-> **/!\** - Durant l'intégralité de la partie, la page index.php doit impérativement *rester ouverte*, même après le lancement du jeu dans la page admin. En effet, fermer la page interromprait la connexion entre les joueurs.
-
-==== Accès Interface Admin
-
-On peut accéder à l'interface d'administrateur du jeu depuis la page d'index. Il suffit de cliquer sur un bouton.
-
-image::img/accessadmin.png[Bouton d'accès à l'interface admin]
-
-==== Voir Checkpoints Connectés
-
-Il s'agit d'une fonctionnalité de lecture pour s'assurer que le jeu est prêt. En effet, elle permet de voir quels checkpoints sont connectés, avant de démarrer le jeu.
-
-image::img/viewcheckpoints.png[Exemple de liste de checkpoints]
-
-==== Voir Sniffeurs Connectés
-
-Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index/
-
-image::img/afterrefresh.png[Exemple de liste de sniffeurs connectés]
-
-=== Interface Utilisateur/Spectateur
-
-==== Plateau Adaptation Taille
+===== Plateau Adaptation Taille
 
 La taille du plateau s'adapte automatiquement au nombre de checkpoints. En effet, lorsque l'on se trouve sur la page d'accueil (index), et qu'on souhaite accéder au plateau du jeu, le Javascript de la page d'accueil fournit au PHP de l'interface utilisateur le nombre de cases. Le plateau est en réalité un tableau PHP, dont l'apparance est modifiée avec du SCSS. Lorsque la page se charge, le PHP crée le tableau et lui attribue non seulement le bon nombre de case, mais aussi dans le bon ordre.
 
@@ -149,17 +156,22 @@ image::img/plateau6.png[Plateau de taille 6]
 
 image::img/plateau11.png[Plateau de taille 11]
 
-==== Couleur Plateau
+===== Couleur Plateau
 
 En harmonie avec la taille du plateau, la couleur du plateau est très importante. Elle permet d'améliorer la visibilité et la compréhension du jeu, et surtout l'accessibilité. La couleur du plateau est une échelle de bleu, conformément à la charte graphique du client. Les cases partent d'un bleu clair, à un bleu foncé, pour revenir au clair. Cela fait une boucle.
 
 image::img/plateau6.png[Plateau de taille 6]
 
-=== Divers
+==== Divers
 
 Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
 
-==== Equipe Connexion
+===== Lecture des données
+
+Lorsque vous arrivez sur le jeu, vous devez sélectionner le port connecté à la carte lisant des données. Une fois cela fait, le bouton disparaît et est remplacé par un bouton rafraîchir. Si vous avez sélectionné le mauvais port/aucun port, relancez la page.
+C'est la page index qui se charge de la lecture des données, par conséquence, *elle ne doit pas être fermée.*
+
+===== Equipe Connexion
 
 Lorsqu'un sniffeur se connecte, il peut être vu depuis :
 
@@ -171,5 +183,12 @@ image::img/viewteamdata.png[Interface administrateur]
 image::img/indexteamconnection.png[Interface utilisateur]
 image::img/afterrefresh.png[Index]
 
-== Personnalisation des Paramètres
-Fonctionnalité en cours de développement.
+
+===== Déconnexion d'une équipe
+
+Lorsqu'une équipe se déconnecte (Joueur hors de portée, noeud déchargé...) les participants au jeu en sont informés : un message est lancé automatiquement sur l'interface utilisateur et le tableau correspondant à l'équipe dans l'interface utilisateur est mit en transparence.
+
+
+image::img/tabdeco.png[Tableau déconnecté]
+
+Si l'équipe se reconnecte, l'apparence de l'équipe revient à la normale et un message est lancé sur l'interface user pour prévenir les joueurs.
