@@ -499,44 +499,70 @@ function getTaillePlateau() {
 }
 
 
-$(document).ready(function () {
-  $(".classMere").on("click", function () {
+function créerPions() {
     nbTargets = getTaillePlateau();
     var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
     var ListJoueurs = Object.keys(cacheCacheData);
     var tabCouleurs = [];
+    for (const joueur in cacheCacheData) {
+      const couleur = cacheCacheData[joueur].couleur;
+      tabCouleurs.push(couleur);
+    }
     nbJoueurs = getNbJoueurs();
-    for (var j = 0; j < nbTargets; j++) {
-      var tdElement = document.getElementById(j);
-      for (const joueur in cacheCacheData) {
-        const couleur = cacheCacheData[joueur].couleur;
-        tabCouleurs.push(couleur);
-      }
-  
-      // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
-      for (var i = 0; i < nbJoueurs; i++) {
-        var nouvelleDiv = document.createElement('div');
-        nouvelleDiv.id = ListJoueurs[i];  // Utilisez la valeur du localStorage pour l'ID
-        tdElement.appendChild(nouvelleDiv);
-        // Ajoutez une classe à chaque nouvelle div en fonction de la logique existante
-        if (i % 3 === 0) {
-          nouvelleDiv.classList.add('square');
-          nouvelleDiv.style.backgroundColor = tabCouleurs[i];
-          nouvelleDiv.style.display = "none";
-        } else if (i % 3 === 1) {
-          nouvelleDiv.classList.add('circle');
-          nouvelleDiv.style.backgroundColor = tabCouleurs[i];
-          nouvelleDiv.style.display = "none";
-        } else {
-          nouvelleDiv.classList.add('triangle');
-          nouvelleDiv.style.borderBottomColor = tabCouleurs[i];
-          nouvelleDiv.style.display = "none";
-        }    
+    // Récupérer le tableau
+    var table = document.getElementById("gameTable");
+    // recupérer tous les tr du tableau
+    var tr = table.getElementsByTagName("tr");
+    // pour chaque tr on récupère les td
+    for (var i = 0; i < tr.length; i++) {
+      var td = tr[i].getElementsByTagName("td");
+      // pour chaque td on créer autant de div que de joueurs
+      for (var j = 0; j < td.length; j++) {
+        //pour chaque joueur on créer une div
+        for (var k = 0; k < nbJoueurs; k++) {
+          var nouvelleDiv = document.createElement('div');
+          nouvelleDiv.id = ListJoueurs[k];  // la node du localStorage est utilisé pour l'ID
+          td[j].appendChild(nouvelleDiv);
+          // Ajoute une classe à chaque nouvelle div
+          if (k % 3 === 0) {
+            nouvelleDiv.classList.add('square');
+            nouvelleDiv.style.backgroundColor = tabCouleurs[k];
+            nouvelleDiv.style.display = "none";
+          } else if (k % 3 === 1) {
+            nouvelleDiv.classList.add('circle');
+            nouvelleDiv.style.backgroundColor = tabCouleurs[k];
+            nouvelleDiv.style.display = "none";
+          } else {
+            nouvelleDiv.classList.add('triangle');
+            nouvelleDiv.style.borderBottomColor = tabCouleurs[k];
+            nouvelleDiv.style.display = "none";
+          }
+        }
       }
     }
-  });
-});
+  };
 
+function afficherPions() {
+  var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  const ListJoueurs = Object.keys(cacheCacheData);
+
+  for (node in ListJoueurs) {
+    for (var i = 0; i < nbTargets; i++) {
+      var pionAfficher = document.getElementById(i).children[node];
+      pionAfficher.style.display = "none";
+    }
+  }
+
+  for (var i = 0; i < ListJoueurs.length; i++) {
+    const positionPion = getCapteursTrouvés(ListJoueurs[i]);
+    var numeroLigne = Math.floor(positionPion / 5);
+    var ligne = document.getElementsByTagName('tr')["row-" + numeroLigne]
+    var cellules = ligne.getElementsByTagName('td');
+    var cellule = Array.from(cellules).find(cellule => parseInt(cellule.id) === positionPion);
+    var pion = cellule.getElementsByTagName('div')[i];
+    pion.style.display = "block";
+  }
+}
 
 $(document).ready(function () {
   $('#genererPDF').on('click', function () {
@@ -583,38 +609,11 @@ $(document).ready(function () {
     // { image: '../assets/images/Logo_IUT_Blagnac.png', width: 100, height: 100, alignment: 'center' },
     { text: 'Cache-Cache LocURa4IoT sae-3-01devapp-g3a-5', fontSize: 12, alignment: 'center' },
     { text: '© 2024', fontSize: 12, alignment: 'center' }
-    
-
-
-
     ];
 
     pdfMake.createPdf({ content }).download('compte_rendu_LocURa4IoT.pdf');
   });
 });
-
-function afficherPions() {
-  var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-  const ListJoueurs = Object.keys(cacheCacheData);
-  const nbTargets = getTaillePlateau();
-  // for (node in ListJoueurs) {
-  //   for (var i = 0; i < nbTargets; i++) {
-  //     var pionAfficher = document.getElementById(i).children[node];
-  //     pionAfficher.style.display = "none";
-  //     console.log(pionAfficher);
-  //   }
-  // }
- 
-  for (var node in ListJoueurs) {
-    positionPion = getCapteursTrouvés(ListJoueurs[node]);
-    console.log(positionPion);
-    var pionAfficher = document.getElementById(parseInt(positionPion-1)).children[node];
-    // console.log(pionAfficher);
-    pionAfficher.style.display = "flex";
-    
-    
-  }
-}
 
 // faire une fonction qui active la fonction openModal() quand tout les elements d'une liste target sont trouvés (times != 0)
 // on parcours toute la liste des joueurs si un joueur a un temps = 0 on passe au joueur suivant si on arrive à la fin de la liste et que toute les joueurs ont au mois un temps = 0 on return false
