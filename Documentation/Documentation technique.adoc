@@ -44,7 +44,6 @@ l'application est maintenant déployée sur votre machine.
 
 > /!\ Le projet doit être utilisé avec Google Chrome pour être compatible.
 
-== Lancement
 
 == Architecture Système
 
