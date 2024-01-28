@@ -47,6 +47,7 @@ async function lirePortSerie() {
       for (let i = 0; i < lines.length - 1; i++) {
         try {
           const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
+
           const nodeExistante = jsonData.node in listNodeWithColor ? true : false;
           //SI C'EST UNE NOUVELLE EQUIPE
           if (!nodeExistante) {
@@ -55,9 +56,6 @@ async function lirePortSerie() {
             //admin : createTableau(jsonData);
             listNodeWithColor[jsonData.node] = jsonData;
             localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-            if (partieCommencee) {
-              createTableau(jsonData);
-            }
           }
           else {
             // si les valeurs dans times sont différentes, on met à jour
@@ -71,15 +69,6 @@ async function lirePortSerie() {
         } catch (jsonError) {
           console.error('Erreur lors de l\'analyse JSON :', jsonError);
         }
-        // else{
-        //   if(jsonData != listNodeWithColor.contai(jsonData.node)){
-        //     listNodeWithColor.set(jsonData.node, jsonData);
-        //     localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-        //     if(partieCommencee){
-        //       modifierTableau(jsonData);
-        //     }
-        //   }
-        // }
         partialData = lines[lines.length - 1]; // Garde le dernier fragment potentiellement incomplet
       }
     }
@@ -109,7 +98,7 @@ async function lirePortSerie() {
 window.addEventListener('load', function () {
   if (window.location.href.includes("IHM_admin.php")) {
     let cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-
+    verifierDeconnection();
     for (const joueur in cacheCacheData) {
       createTableau(cacheCacheData[joueur]);
     }
@@ -131,12 +120,16 @@ if (window.location.href.includes("IHM_admin.php")) {
       for (let joueurId in cacheCacheData) {
         var joueur = cacheCacheData[joueurId]
 
-        //C'est une nouvelle équipe
-        if (!(joueur.node in listNodeWithColor)) {
-          console.log("Nouvelle équipe : " + joueur.node)
-          createTableau(joueur);
-          joueur.lastUpdate = Date.now();
-        }
+      if(isEquipeDeconnectee(joueur.node)){
+        gererReconnection(joueur.node);
+      }
+
+      //C'est une nouvelle équipe
+      if (!(joueur.node in listNodeWithColor)) {
+        console.log("Nouvelle équipe : " + joueur.node)
+        createTableau(joueur);
+        joueur.lastUpdate = Date.now();
+      }
 
         //C'est une maj
         else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times) ) {
@@ -222,7 +215,6 @@ window.addEventListener("storage", function (event) {
 //Gérer les tableaux des noeuds//
 /////////////////////////////////
 function createTableau(jsonData) {
-
   //Anomalie, un noeud n'a pas de couleur, on en génère une et on modifie le localStorage
   if(!jsonData.couleur){
     jsonData.couleur = genererCouleur();
@@ -246,8 +238,8 @@ function createTableau(jsonData) {
 
     var cellNoeud = document.createElement("td");
     cellNoeud.classList.add("equipe");
-
-if (isCouleurClaire(obj1.couleur)) {
+    
+    if (isCouleurClaire(obj1.couleur)) {
       cellNoeud.style.color = "#242729";
     }
     cellNoeud.style.setProperty("background-color", obj1.couleur);
@@ -260,7 +252,7 @@ if (isCouleurClaire(obj1.couleur)) {
     cellCheckpoint.textContent = "Id Checkpoint";
     rowLabels.appendChild(cellCheckpoint);
 
-var cellTrouve = document.createElement("td");
+    var cellTrouve = document.createElement("td");
     cellTrouve.classList.add("label");
     cellTrouve.textContent = "Trouvé ?";
     rowLabels.appendChild(cellTrouve);
@@ -272,6 +264,7 @@ var cellTrouve = document.createElement("td");
 
     tbl.appendChild(rowLabels);
 
+    tbl.appendChild(rowLabels);
 
     //Contenu checkpoints
     for (var i = 0; i < $nbIndex; i++) {
@@ -308,7 +301,7 @@ var cellTrouve = document.createElement("td");
     if (!arraysEqual(obj1.times, listNodeWithColor[obj1.node].times)){
       modifierTableau(jsonData)
     }
-
+    
   }
 }
 
@@ -330,14 +323,35 @@ function modifierTableau(jsonData) {
   }
 }
 
+
+////////////////////////////////////
+//Gérer les connections des noeuds//
+////////////////////////////////////
+
+async function verifierDeconnection() {
+  setInterval(() => {
+    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+    const currentTime = Date.now();
+
+    for (const joueurId in cacheCacheData) {
+      const joueurData = cacheCacheData[joueurId];
+
+      if (!isEquipeDeconnectee(joueurData.node) && (currentTime - joueurData.lastUpdate) / 1000 > 7) {
+        gererDeconnection(joueurData.node);
+      }
+    }
+  }, 1000);
+}
+
+
 /**
 * Change l'apprence du noeud hors-connexion et informe les joueurs.
 * 
 * @param {*} id du noeud déconnectée
 */
 function gererDeconnection(id) {
-  $popup = "L'équipe " + id + " est déconnectée !";
-  console.log($popup);
+  let popup = "L'équipe " + id + " est déconnectée !";
+  console.log(popup);
   afficherPopup(popup, true)
 
   
@@ -352,13 +366,17 @@ function gererDeconnection(id) {
 * @param {*} id du noeud déconnectée
 */
 function gererReconnection(id) {
-  $popup = "L'équipe " + id + " s'est reconnectée !";
-  console.log($popup);
+  let popup = "L'équipe " + id + " s'est reconnectée !";
+  console.log(popup);
   afficherPopup(popup, true)
 
   document.getElementById(id).classList.remove("deconnecte");
 
   //Modifier pion sur interface user ?
+}
+
+function isEquipeDeconnectee(id){
+  return document.getElementById(id).classList.contains("deconnecte")
 }
 
 function downloadJSON() {
@@ -405,12 +423,7 @@ function togglepause() {
 ////////////////////////////////
 ////////////////////////////////
 
-function getJeuDataFromLocalStorage() {
-  const jeuDataString = localStorage.getItem('listNodeWithColor');
-  return JSON.parse(jeuDataString);
-}
-
-function creerClassement() {
+function creerClassementPopUp() {
   // Récupérer l'objet depuis le localStorage
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
@@ -418,11 +431,10 @@ function creerClassement() {
   const classement = [];
   for (const joueurId in cacheCacheData) {
     const joueurData = cacheCacheData[joueurId];
-    const balisesTrouvees = joueurData.times.filter(temps => temps != 0).length;
-    const targets = joueurData.targets;
+    const balisesTrouvees = joueurData.times.filter(temps => temps === 0).length;
     const tempsTotal = joueurData.times.reduce((total, temps) => total + temps, 0);
     const couleur = joueurData.couleur;
-    classement.push({ joueurId, balisesTrouvees, targets, tempsTotal, couleur });
+    classement.push({ joueurId, balisesTrouvees, tempsTotal, couleur });
   }
 
   // Trier les joueurs en fonction du nombre de balises trouvées et du temps total
@@ -435,7 +447,6 @@ function creerClassement() {
   });
 
   // Afficher le classement
-  
   
   // on affiche le classement de TOUT joueurs classement.length
   for (let i = 0; i < 3 ; i++) {
@@ -479,25 +490,11 @@ function creerClassementPopUp(classement) {
     classementContent.innerHTML += `<p>${titleclassemnt[i]}: ${joueur.joueurId} (${joueur.balisesTrouvees} balises trouvées, ${tempsTotalText})</p>`;
     joueurNameHtml.innerHTML = joueur.joueurId;
     // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-    // console.log(joueur.couleur);
+    console.log(joueur.couleur);
     joueurColorHtml.style.backgroundColor = joueur.couleur;
   }
+  return classement;
 }
-
-// la taille du plateau est un entier qui correspond au nombre de target par joueur
-function getTaillePlateau() {
-  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-  const cachecacheTable = [];
-  for (const joueurId in cacheCacheData) {
-    const joueurData = cacheCacheData[joueurId];
-  
-    const targets = joueurData.targets;
-   
-    cachecacheTable.push({ targets });
-  }
-  return cachecacheTable[0].targets.length;
-}
-
 
 function créerPions() {
     nbTargets = getTaillePlateau();
@@ -707,7 +704,6 @@ function rafraichir() {
 }
 
 function openModal() {
-  creerClassementPopUp(creerClassement());
   document.getElementById("myModal").style.display = "flex";
 }
 
@@ -795,6 +791,10 @@ function arraysEqual(arr1, arr2) {
   }
 
   return true;
+}
+
+function genererCouleur(){
+  return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
 }
 
 function isCouleurClaire(couleur) {
