@@ -108,7 +108,7 @@ balises td correctement pour pouvoir donner le bon style a chaque td.
 
 Code de la generation du tableau:
 
-image:img/adaptationtable.png[width=320, height=320]
+image:img/adaptationtable.png[width=420, height=420]
 
 (on peut voir ici que la boucle for depends de la valeur liste-size)
 
