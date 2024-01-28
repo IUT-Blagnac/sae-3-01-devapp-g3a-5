@@ -133,8 +133,22 @@ image:img/fonction-color3.png[]
 
 image:img/genererpdf.png[]
 
+
 pour generer le pdf on utilise la librairie pdfmake qui permet de generer un pdf facilement en javascript. On a donc un "event listener" sur le bouton qui permet de generer le pdf a partir des données du jeu.
 
+Résultat:
+
+image:img/pdf.png[width=300, height=300]
+
+== Génération du JSON de la partie
+
+image:img/genererJSON.png[width=300, height=300]
+
+cette fonctionnalité disponible dans l'interface administrateur permet de generer un fichier json contenant les données de la partie en cours. Meme principe que pour le pdf, on a un "event listener" sur le bouton qui permet de generer le json a partir du local storage.
+
+Resultat:
+
+image:img/json.png[width=250, height=250]
 
 == Données Admin
 
