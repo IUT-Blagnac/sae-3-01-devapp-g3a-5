@@ -1,12 +1,13 @@
 .centered-div{
     display: inline-block;
-    width: 48%; /* Vous pouvez ajuster la largeur en fonction de vos besoins */
+    /* width: 500px; Vous pouvez ajuster la largeur en fonction de vos besoins */
     box-sizing: border-box;
     border: 0;
     margin: 1%; /* Espace entre les boîtes, ajustez selon vos préférences */
     display: flex;
-    justify-content: center;
-   padding-top: 5%;
+    padding-top: 30px;
+    justify-content: space-around;
+
 }
 
 body{
@@ -44,10 +45,23 @@ table{
     border-collapse: collapse;
 }
 
-td{
+/* sauf les td[id^="joueur"][id$="-color"]  */
+td:not([id^="joueur"][id$="-color"], .label, [id^="joueur"][id$="-name"] ){
     padding: 35px;
     border-bottom: 1px solid rgb(183, 255, 247);
+    height: 100px;
+    width: 100px;
 }
+
+td[id^="joueur"][id$="-color"]{
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    margin-top: 10px;
+    border: 0;
+}
+
+
 
 td.corner-top-right{
     border-color: 0;
@@ -89,16 +103,8 @@ td.rounded-down{
     border-bottom-right-radius: 50%;
     border: 0;
     border-bottom-left-radius: 50%;
+   
 }
-
-td[id^="joueur"][id$="-color"]{
-    border-radius: 100%;
-    height: 20px;
-    width: 20px;
-    margin-top: 10px;
-    border: 0;
-}
-
 
 
 td.position-right{
@@ -126,15 +132,16 @@ td.color-5{
 td.joueur-name{
     border: 0;
 }
+.lastcase{
+    background-image: url("./images/ligne-darrivee.png");
+    background-size: contain;
+}
+
 
 .classMere {
     display: flex;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: space-around;
-    align-items: flex-start;
+    flex-direction: column;
 }
-
 .modal-background {
     display: none;
     position: fixed;
