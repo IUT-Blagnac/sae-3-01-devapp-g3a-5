@@ -47,22 +47,39 @@ async function lirePortSerie() {
       for (let i = 0; i < lines.length - 1; i++) {
         try {
           const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
-          const nodeExistante = jsonData && jsonData.node && (jsonData.node in listNodeWithColor);
-
-
+          const nodeExistante = jsonData.node in listNodeWithColor ? true : false;
+          //SI C'EST UNE NOUVELLE EQUIPE
           if (!nodeExistante) {
             // Ajoute un attribut "couleur" avec une couleur générée
-            jsonData.couleur = '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+            jsonData.couleur = '#' + ('000000' + (Math.random() * 0xFFFFFF << 0).toString(16)).slice(-6);
+            //admin : createTableau(jsonData);
+            listNodeWithColor[jsonData.node] = jsonData;
+            localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+            if (partieCommencee) {
+              createTableau(jsonData);
+            }
           }
-
-          jsonData.lastUpdate = Date.now();
-          listNodeWithColor[jsonData.node] = jsonData;
-
-          localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-          
+          else {
+            // si les valeurs dans times sont différentes, on met à jour
+            for (let j = 0; j < jsonData.times.length; j++) {
+              if (jsonData.times[j] !== listNodeWithColor[jsonData.node].times[j]) {
+                listNodeWithColor[jsonData.node].times[j] = jsonData.times[j];
+              }
+            }
+          }
+          console.log(listNodeWithColor);
         } catch (jsonError) {
           console.error('Erreur lors de l\'analyse JSON :', jsonError);
         }
+        // else{
+        //   if(jsonData != listNodeWithColor.contai(jsonData.node)){
+        //     listNodeWithColor.set(jsonData.node, jsonData);
+        //     localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+        //     if(partieCommencee){
+        //       modifierTableau(jsonData);
+        //     }
+        //   }
+        // }
         partialData = lines[lines.length - 1]; // Garde le dernier fragment potentiellement incomplet
       }
     }
@@ -102,40 +119,43 @@ window.addEventListener('load', function () {
 /** 
  * Met à jour le jeu dès qu'un changement est détecté dans les équipes contenues dans le local storage
  */
-window.addEventListener("storage", function (event) {
-  if (event.key === "listNodeWithColor") {
-    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-
-    //activatedModal();
-
-    for (let joueurId in cacheCacheData) {
-      var joueur = cacheCacheData[joueurId]
-
-      //C'est une nouvelle équipe
-      if (!(joueur.node in listNodeWithColor)) {
-        console.log("Nouvelle équipe : " + joueur.node)
-        createTableau(joueur);
-        joueur.lastUpdate = Date.now();
-      }
-
-      //C'est une maj
-      else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times)) {
-
-        console.log(joueur.node + " : " + joueur.times.filter(temps => temps > 0).length + "/" + getNbCheckpoints())
-        joueur.lastUpdate = Date.now();
-        modifierTableau(joueur);
-        updatePopup(joueur, joueur.times.filter(temps => temps > 0).length);
-      }
-      else if (joueur.lastUpdate < 0) {
-          gererReconnection(joueur.node);
-      }
+if (window.location.href.includes("IHM_admin.php")) {
+    
+  window.addEventListener("storage", function (event) {
+    if (event.key === "listNodeWithColor") {
+      const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
       
+      // creerClassement();
+      // activatedModal();
+
+      for (let joueurId in cacheCacheData) {
+        var joueur = cacheCacheData[joueurId]
+
+        //C'est une nouvelle équipe
+        if (!(joueur.node in listNodeWithColor)) {
+          console.log("Nouvelle équipe : " + joueur.node)
+          createTableau(joueur);
+          joueur.lastUpdate = Date.now();
+        }
+
+        //C'est une maj
+        else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times) ) {
+
+          console.log(joueur.node + " : " + joueur.times.filter(temps => temps > 0).length + "/" + getNbCheckpoints())
+          joueur.lastUpdate = Date.now();
+          modifierTableau(joueur);
+          updatePopup(joueur, joueur.times.filter(temps => temps > 0).length);
+        }
+        else if (joueur.lastUpdate < 0) {
+            gererReconnection(joueur.node);
+        }
+        
+      }
+
+      listNodeWithColor = cacheCacheData;
     }
-
-    listNodeWithColor = cacheCacheData;
-  }
-});
-
+  });
+}
 async function verifierDeconnection() {
   setInterval(() => {
     const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
@@ -201,79 +221,95 @@ window.addEventListener("storage", function (event) {
 /////////////////////////////////
 //Gérer les tableaux des noeuds//
 /////////////////////////////////
-
 function createTableau(jsonData) {
+
+  //Anomalie, un noeud n'a pas de couleur, on en génère une et on modifie le localStorage
+  if(!jsonData.couleur){
+    jsonData.couleur = genererCouleur();
+    listNodeWithColor[jsonData.node] = jsonData;
+    localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
+  }
+
   const obj1 = JSON.parse(JSON.stringify(
     jsonData
   ));
 
-  $nbIndex = getNbCheckpoints();
+  //On vérifie que le tableau n'existe pas déjà, au cas où 
+  if (!document.getElementById(obj1.node)) {
+    $nbIndex = getNbCheckpoints();
 
-  var tbl = document.createElement("table");
-  tbl.id = obj1.node;
+    var tbl = document.createElement("table");
+    tbl.id = obj1.node;
 
-  //Ligne labels
-  var rowLabels = document.createElement("tr");
+    //Ligne labels
+    var rowLabels = document.createElement("tr");
 
-  var cellNoeud = document.createElement("td");
-  cellNoeud.classList.add("equipe");
-  if(isCouleurClaire(obj1.couleur)){
-    cellNoeud.style.color = "#242729";
-  }
-  cellNoeud.style.setProperty("background-color", obj1.couleur);
-  cellNoeud.rowSpan = $nbIndex + 1;
-  cellNoeud.textContent = "Noeud " + obj1.node;
-  rowLabels.appendChild(cellNoeud);
+    var cellNoeud = document.createElement("td");
+    cellNoeud.classList.add("equipe");
 
-  var cellCheckpoint = document.createElement("td");
-  cellCheckpoint.classList.add("label");
-  cellCheckpoint.textContent = "Id Checkpoint";
-  rowLabels.appendChild(cellCheckpoint);
-
-  var cellTrouve = document.createElement("td");
-  cellTrouve.classList.add("label");
-  cellTrouve.textContent = "Trouvé ?";
-  rowLabels.appendChild(cellTrouve);
-
-  var cellTemps = document.createElement("td");
-  cellTemps.classList.add("label");
-  cellTemps.textContent = "Temps (s)";
-  rowLabels.appendChild(cellTemps);
-
-  tbl.appendChild(rowLabels);
-
-
-  //Contenu checkpoints
-  for (var i = 0; i < $nbIndex; i++) {
-    var rowCheckpoint = document.createElement("tr");
-
-    //ID CHECKPOINT 
-    var cellCheckpoint = document.createElement("td");
-    cellCheckpoint.id = obj1.node + obj1.targets[i];
-    cellCheckpoint.textContent = obj1.targets[i];
-    rowCheckpoint.appendChild(cellCheckpoint);
-
-    //ICON TROUVE
-    var cellTrouve = document.createElement("td");
-    cellTrouve.id = obj1.node + obj1.targets[i] + ".icon";
-    if (obj1.times[i] > 0) {
-      cellTrouve.innerHTML = '<img class="icon" src="assets/images/check.png"></img>';
+if (isCouleurClaire(obj1.couleur)) {
+      cellNoeud.style.color = "#242729";
     }
-    rowCheckpoint.appendChild(cellTrouve);
+    cellNoeud.style.setProperty("background-color", obj1.couleur);
+    cellNoeud.rowSpan = $nbIndex + 1;
+    cellNoeud.textContent = "Noeud " + obj1.node;
+    rowLabels.appendChild(cellNoeud);
 
-    //TEMPS
+    var cellCheckpoint = document.createElement("td");
+    cellCheckpoint.classList.add("label");
+    cellCheckpoint.textContent = "Id Checkpoint";
+    rowLabels.appendChild(cellCheckpoint);
+
+var cellTrouve = document.createElement("td");
+    cellTrouve.classList.add("label");
+    cellTrouve.textContent = "Trouvé ?";
+    rowLabels.appendChild(cellTrouve);
+
     var cellTemps = document.createElement("td");
-    cellTemps.id = obj1.node + obj1.targets[i] + ".time";
-    cellTemps.textContent = (obj1.times[i] > 0) ? obj1.times[i] : "--:--";
-    rowCheckpoint.appendChild(cellTemps);
+    cellTemps.classList.add("label");
+    cellTemps.textContent = "Temps (s)";
+    rowLabels.appendChild(cellTemps);
 
-    tbl.appendChild(rowCheckpoint);
+    tbl.appendChild(rowLabels);
+
+
+    //Contenu checkpoints
+    for (var i = 0; i < $nbIndex; i++) {
+      var rowCheckpoint = document.createElement("tr");
+
+      //ID CHECKPOINT 
+      var cellCheckpoint = document.createElement("td");
+      cellCheckpoint.id = obj1.node + obj1.targets[i];
+      cellCheckpoint.textContent = obj1.targets[i];
+      rowCheckpoint.appendChild(cellCheckpoint);
+
+      //ICON TROUVE
+      var cellTrouve = document.createElement("td");
+      cellTrouve.id = obj1.node + obj1.targets[i] + ".icon";
+      if (obj1.times[i] > 0) {
+        cellTrouve.innerHTML = '<img class="icon" src="assets/images/check.png"></img>';
+      }
+      rowCheckpoint.appendChild(cellTrouve);
+
+      //TEMPS
+      var cellTemps = document.createElement("td");
+      cellTemps.id = obj1.node + obj1.targets[i] + ".time";
+      cellTemps.textContent = (obj1.times[i] > 0) ? obj1.times[i] : "--:--";
+      rowCheckpoint.appendChild(cellTemps);
+
+      tbl.appendChild(rowCheckpoint);
+    }
+
+    //Afficher tableau
+    var tabEquipesDiv = document.getElementById("tabEquipes");
+    tabEquipesDiv.appendChild(tbl);
   }
+  else {
+    if (!arraysEqual(obj1.times, listNodeWithColor[obj1.node].times)){
+      modifierTableau(jsonData)
+    }
 
-  //Afficher tableau
-  var tabEquipesDiv = document.getElementById("tabEquipes");
-  tabEquipesDiv.appendChild(tbl);
-
+  }
 }
 
 function modifierTableau(jsonData) {
@@ -330,28 +366,19 @@ function downloadJSON() {
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
   // Convertissez l'objet en chaîne JSON
   const jsonData = JSON.stringify(cacheCacheData, null, 2);
-
-  // Créez un objet Blob avec le contenu JSON
   const blob = new Blob([jsonData], { type: 'application/json' });
-
-  // Créez un objet URL pour le Blob
   const url = URL.createObjectURL(blob);
-
-  // Créez un élément <a> pour le téléchargement
   const a = document.createElement('a');
   a.href = url;
   a.download = 'cacheCacheData.json';
-
-  // Ajoutez l'élément <a> à la page et déclenchez le téléchargement
   document.body.appendChild(a);
   a.click();
-
-  // Supprimez l'élément <a> de la page
   document.body.removeChild(a);
-
-  // Révoquez l'URL de l'objet Blob
   URL.revokeObjectURL(url);
 }
+
+
+
 
 //////////
 //Autres//
@@ -411,7 +438,7 @@ function creerClassement() {
   
   
   // on affiche le classement de TOUT joueurs classement.length
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3 ; i++) {
     const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
     const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
     const joueur = classement[i];
@@ -432,6 +459,7 @@ function creerClassement() {
     // }
   
     joueurColorHtml.style.backgroundColor = joueur.couleur;
+  
   }
   return classement;
 }
@@ -510,21 +538,80 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function () {
+  $('#genererPDF').on('click', function () {
+    // appel de la fonction qui genere le classement pour etre sur que le classement est a jour
+    const classement = creerClassement();
+    console.log('Générer PDF');
+    
+
+    var content = [
+    { text: 'Date: ' + new Date().toLocaleDateString() },
+    { text: 'Heure: ' + new Date().toLocaleTimeString() },
+    { text: 'Par Loïs PACQUETEAU\n' },
+    { text: 'Compte rendu', fontSize: 16, bold: true, alignment: 'center' },
+    // saut de ligne
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    // tableau
+    { text: 'Score de la course:', fontSize: 14, margin: [0, 10, 0, 5] },
+    {
+    style: 'tableExample',
+    table: {
+      widths: ['*', '*', '*', '*'],
+      body: [
+        ['Position', 'Joueur', 'Temps', 'Balises trouvées'],
+        ...classement.map((joueur, index) => {
+          // ci dessous les milisecondes depassent pas 2 chiffres apres la virgule (d'ou le toFixed(2))
+          const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${(joueur.tempsTotal).toFixed(2)} secondes`;
+          return [index + 1, joueur.joueurId, tempsTotalText, joueur.balisesTrouvees];
+        })
+      ]
+    }
+    },
+    // bas de page
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    // ajouter le logo de l'iut 
+    // { image: '../assets/images/Logo_IUT_Blagnac.png', width: 100, height: 100, alignment: 'center' },
+    { text: 'Cache-Cache LocURa4IoT sae-3-01devapp-g3a-5', fontSize: 12, alignment: 'center' },
+    { text: '© 2024', fontSize: 12, alignment: 'center' }
+    
+
+
+
+    ];
+
+    pdfMake.createPdf({ content }).download('compte_rendu_LocURa4IoT.pdf');
+  });
+});
+
 function afficherPions() {
   var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
   const ListJoueurs = Object.keys(cacheCacheData);
   const nbTargets = getTaillePlateau();
-  for (node in ListJoueurs) {
-    for (var i = 0; i < nbTargets; i++) {
-      var pionAfficher = document.getElementById(i).children[node];
-      pionAfficher.style.display = "none";
-    }
-  }
+  // for (node in ListJoueurs) {
+  //   for (var i = 0; i < nbTargets; i++) {
+  //     var pionAfficher = document.getElementById(i).children[node];
+  //     pionAfficher.style.display = "none";
+  //     console.log(pionAfficher);
+  //   }
+  // }
  
   for (var node in ListJoueurs) {
     positionPion = getCapteursTrouvés(ListJoueurs[node]);
-    var pionAfficher = document.getElementById(positionPion - 1).children[node];
+    console.log(positionPion);
+    var pionAfficher = document.getElementById(parseInt(positionPion-1)).children[node];
+    // console.log(pionAfficher);
     pionAfficher.style.display = "flex";
+    
     
   }
 }
