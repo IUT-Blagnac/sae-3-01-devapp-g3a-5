@@ -66,11 +66,11 @@ Principalement utilisé pour rendre les pages web interactives, Javascript perme
 
 ---
 
-====  PHP
+====  HTML
 
-image::Documentation/img/php.png[width=100, height=50]
+image::Documentation/img/html.png[width=50, height=50]
 
-Principalement utilisé pour le développement web, PHP génère du contenu dynamique. Il est souvent intégré dans le code HTML et s'exécute sur le serveur avant que la page ne soit envoyée au navigateur. Généralement, cela permet d'ajouter de la sécurité au projet, mais en l'occurence, le serveur est également le client. Il n'y a donc pas d'aspect de sécurité à prendre en compte. Nous utilisons tout de même PHP pour sa génération dynamique de contenu, contrairement à HTML qui donne du contenu entièrement statique.
+HTML est un langage de balisage utilisé pour créer des pages web. Il permet de définir la structure et le contenu des pages web. Il s'agit d'un langage de base pour le développement web, et il est utilisé dans notre projet pour créer les pages web.
 
 ---
 
