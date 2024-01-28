@@ -3,6 +3,7 @@
 :toc: macro
 :toclevels: 3
 :toc-title: 
+:numbered:
 
 Réalisé par *Thomas Duppi, Loïs Pacqueteau, Vincent Barette, Loélia Demany*
 
@@ -12,69 +13,68 @@ Documentation technique pour le projet de chasse au trésor LocuraIoT
 
 toc::[]
 
-== Présentation de l'application
+== Cas d'utilisation général
 
-=== Contexte
+image::img/usecase.png[]
 
-LocURa4IoT a développé un jeu de chasse au trésor : Des joueurs doivent trouver des checkpoints à l'aide d'un noeud, le tout se basant sur la technologie des flux mqtt. Le jeu est actuellement fonctionnel mais manque d'une interface pour faciliter son déroulement. C'est ainsi que nous intervenons :  Nous sommes une équipe de 4 développeurs en alternance chargé de créer une interface destinée aux administrateur, pour visualiser son déroulement et intervenir si besoin, et une interface utilisateur qui sera diffusée à tous les joueurs pour qu'ils aient une idée de l'avancement de la partie.
+== Déploiement du projet 
 
-=== Use cases généraux
+=== Prérequis
+Pour lancer l'application, il faut télécharger Wamp pour déployer le projet sur sa propre machine, et l'héberger localement. N'importe quel autre serveur web peut être utilisé, mais Wamp est le plus simple à utiliser.
 
-image::img/doc_tech_usecase_admingen.png[]
+https://www.wampserver.com/en/download-wampserver-64bits/#download-wrapper[Lien de telechargemnt wamp]
 
-image::img/doc_tech_usecase_usergen.png[]
 
-=== Langages / Technologies utilisées
 
-==== Javascript
 
-image::img/js.png[width=90, height=50]
+=== Lancement
 
-Principalement utilisé pour rendre les pages web interactives, Javascript permet d'ajouter des fonctionnalités dynamiques, de manipuler le contenu de la page et de réagir aux événements utilisateur. Il s'agit d'un système front parfait pour notre projet puisque nous avons besoin de manipuler des données en temps réel, notamment en déplaçant les pions sur le plateau.
+Une fois Wamp installé, il faut lancer l'application Wamp puis lancer le serveur en cliquant sur l'icône Wamp dans la barre des tâches, puis en cliquant sur "Start All Services".
 
-==== PHP
+image::img/wamp.png[]
 
-image::img/php.png[width=100, height=50]
+Ensuite, il faut se rendre dans le dossier www de Wamp, et y cloner le depot GitHub. Le dossier www se trouve dans le dossier d'installation de Wamp, par défaut `C:\wamp64\www`.
 
-Principalement utilisé pour le développement web, PHP génère du contenu dynamique. Il est souvent intégré dans le code HTML et s'exécute sur le serveur avant que la page ne soit envoyée au navigateur. Généralement, cela permet d'ajouter de la sécurité au projet, mais en l'occurence, le serveur est également le client. Il n'y a donc pas d'aspect de sécurité à prendre en compte. Nous utilisons tout de même PHP pour sa génération dynamique de contenu, contrairement à HTML qui donne du contenu entièrement statique.
+Une fois le depot cloné dans le dossier www, il faut se rendre sur la page `localhost/sae-3-01-devapp-g3a-5/Code%20source/` dans son navigateur Google Chrome.
 
-==== CSS/SCSS
+l'application est maintenant déployée sur votre machine.
 
-image::img/css.png[width=35, height=50]
+> /!\ Le projet doit être utilisé avec Google Chrome pour être compatible.
 
-Utilisé pour définir la présentation visuelle des pages web PHP, le CSS permet de spécifier la mise en forme, les couleurs, les polices, les marges, etc. CSS sépare la structure du contenu HTML de sa présentation. Dans notre projet, il est utilisé principalement pour modifier l'apparance des tableaux, et l'arranger à notre convenance.
 
 == Architecture Système
 
-image::img/architecture.png[Archiii]
+image::img/architecture.png[width=500, height=375]
 
 === Dossier du Code Source (`CodeSource`)
 
 Ce dossier contient l'ensemble du code source de l'app.
 
-=== Fichiers PHP
+=== FICHIER HTML
 
-==== `index.php`
+La gestion des données est réalisée en PHP. Les données sont stockées dans des fichiers JSON, eux memes stockés dans le local storage du navigateur.
 
-Il s'agit de la page d'accueil du projet. C'est elle qui demande, à travers le fichier JS
+==== `index.html`
 
-==== `IHM_admin.php`
+Il s'agit de la page d'accueil du projet. C'est elle qui demande l'accès au port série, et qui gère la communication avec le matériel du jeu.
+
+==== `IHM_admin.html`
 
 Fichier PHP responsable de l'interface utilisateur administrateur.
 Gère l'affichage des informations administratives et des statistiques du jeu.
 Il permet d'accéder à l'IHM utilisateur.
 
-==== `IHM_user.php`
+==== `IHM_user.html`
 
 Fichier PHP responsable de l'interface utilisateur pour les joueurs.
 Gère l'affichage de l'interface de jeu, de la progression globale des joueurs, etc.
 
-==== `index.php`
+==== `index.html`
 
 Fichier PHP responsable du lancement du jeu.
 Gère l'affichage des sniffeurs et checkpoints connectés, bouton pour démarrer le jeu.
 
-=== Dossier `assets`
+=== `Assets`
 
 Ce dossier contient des ressources utilisées par l'application.
 
@@ -82,15 +82,15 @@ Ce dossier contient des ressources utilisées par l'application.
 
 Fichiers CSS contenant les styles de l'application.
 
-=== Dossier `images`
+==== Dossier `images`
 
 Contient les images utilisées dans l'IHM, telles que des icônes, des logos, etc.
 
-=== Dossier `js`
+==== Dossier `js`
 
 Ce dossier contient les fichiers JavaScript nécessaires pour l'IHM.
 
-==== `locura4iot.js`
+===== `locura4iot.js`
 
 Contient toutes les fonctions Javascript du projet.
 
@@ -105,7 +105,7 @@ balises td correctement pour pouvoir donner le bon style a chaque td.
 
 Code de la generation du tableau:
 
-image:img/adaptationtable.png[]
+image:img/adaptationtable.png[width=420, height=420]
 
 (on peut voir ici que la boucle for depends de la valeur liste-size)
 
@@ -126,15 +126,38 @@ le css:
 
 image:img/fonction-color3.png[]
 
+== Génération du PDF de fin de partie
+
+image:img/genererpdf.png[]
+
+
+pour generer le pdf on utilise la librairie pdfmake qui permet de generer un pdf facilement en javascript. On a donc un "event listener" sur le bouton qui permet de generer le pdf a partir des données du jeu.
+
+Résultat:
+
+image:img/pdf.png[width=300, height=300]
+
+== Génération du JSON de la partie
+
+image:img/genererJSON.png[width=300, height=300]
+
+cette fonctionnalité disponible dans l'interface administrateur permet de generer un fichier json contenant les données de la partie en cours. Meme principe que pour le pdf, on a un "event listener" sur le bouton qui permet de generer le json a partir du local storage.
+
+Resultat:
+
+image:img/json.png[width=250, height=250]
 
 == Données Admin
+
+Dans le local storage sont sauvegardées les données des équipes (utilisables par les admins) et écrites par la page index (cf. Accès Port Série) ci-dessous.
+
 === Couleur aléatoire des joueurs
 Compare la node qui vient d'être récupéré avec un tableau contenant les nodes ayant déjà une couleur. Si la node est déjà existante il ne se passe rien. Sinon une couleur est générer de manière aléatoire. Ensuite cette couleur est ajouter au json de la node et la node est ajouté au tableau des nodes avec couleurs. 
 
 image:img/génération-couleur.png[]
 
 == Accès Port Série
-=== Protocole de communication
+=== Protocole de communication des données
 La Web Serial API permet aux navigateurs web d'établir une communication série avec des périphériques matériels connectés via USB, tels que des microcontrôleurs Arduino.
 L'utilisateur autorise l'accès à la Web Serial API, puis la page web peut ouvrir un port série, le configurer, établir une connexion, transmettre et recevoir des données. 
 Elle offre des méthodes pour envoyer et recevoir des données, ainsi que des événements pour la gestion asynchrone de la communication série. Une fois la communication terminée,

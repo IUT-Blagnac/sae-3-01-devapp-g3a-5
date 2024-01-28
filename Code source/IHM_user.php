@@ -51,17 +51,8 @@
             </div>
         </div>
         <script>
-            // Add your JavaScript code here for the client-side logic
-            // Remember to include the necessary logic from your locura4iot.js file
-            // ...
-
-            $(document).ready(function () {
-                $('#genererPDF').on('click', function () {
-                    // Use pdfmake to generate the PDF
-                    console.log('Générer PDF');
-                    // ... (rest of the PDF generation logic)
-                });
-            });
+            
+            
         </script>
         <div class="centered-div">
             <table id="gameTable">
@@ -71,12 +62,13 @@
 
         <script>
             // JavaScript code to generate the game table dynamically
-            var liste_size = getTaillePlateau() + 1;
+            var liste_size = getTaillePlateau()+1;
 			setInterval(() => {
-				creerClassement();
+				// creerClassement();
+				// afficherPions();
 				
-			}, 1500);
-			// openModal();// a changer par un if qui verifie si un joueur a gagner
+			}, 1000);
+			openModal();// a changer par un if qui verifie si un joueur a gagner
 
             var rep_max = Math.ceil(liste_size / 5);
             var color = 0;
@@ -140,37 +132,45 @@
 			}
 
             var table = document.getElementById("gameTable");
-
+			
+            cpt = 0;
             for (var i = 0; i < rep_max; i++) {
                 var row = table.insertRow(i);
+                row.id = "row-" + i;
                 for (var j = 0; j < liste_size; j++) {
                     if (i % 2 === 0 && j < 5) {
-                        var cornerClass = attributeClass(i, j);
-                        color = fonctionColor();
-                        var cell = row.insertCell(j);
-                        cell.id = position(i, j);
-                        cell.className = cornerClass + " color-" + color;
-						// si c'est la derniere case du plateau on met un id pour pouvoir la retrouver facilement
-						// if (position(i, j) === liste_size - 1) {
-						// 	cell.className += " lastCase";
-						// }
-						// si c'est la premiere case du plateau on met un id pour pouvoir la retrouver facilement
-						// if (position(i, j) === 0) {
-						// 	cell.className += " firstCase";
-						// }
+                        if(cpt < liste_size){
+                            var cornerClass = attributeClass(i, j);
+                            color = fonctionColor();
+                            var cell = row.insertCell(j);
+                            cell.id = position(i, j);
+                            cell.className = cornerClass + " color-" + color;
+                            
+                            if (position(i, j) === liste_size - 1) {
+                                cell.className += " lastCase";
+                            }
+                            
+                            if (position(i, j) === 0) {
+                                cell.className += " firstCase";
+                            }
+                            cpt++;
+                        }
 						
                     } else if (i % 2 !== 0 && j < 5) {
                         var cornerClass = attributeClass(i, j);
-                        color = fonctionColor();
+                        if(cpt < liste_size){
+                            color = fonctionColor();
+                            cpt++;
+                        }
                         var cell = row.insertCell(j);
                         cell.id = position(i, j);
                         cell.className = cornerClass + " color-" + color;
-						// if (position(i, j) === liste_size - 1) {
-						// 	cell.className += " lastCase";
-						// }
-						// if (position(i, j) === 0) {
-						// 	cell.className += " firstCase";
-						// }
+						if (position(i, j) === liste_size - 1) {
+							cell.className += " lastCase";
+						}
+						if (position(i, j) === 0) {
+							cell.className += " firstCase";
+						}
                     }
                 }
             }
@@ -183,14 +183,13 @@
 			
 			// lastCase.appendChild(img);
 			// // // mettre une image dans la premiere case
-			// var firstCase = document.querySelector("firstCase");
-			// var img = document.createElement("img");
-			// img.style.width = "40px";
-			// img.style.height = "40px";
-			// img.src = "./assets/images/depart.png";
-			// // je veux mettre pas que l'image mais aussi d'autre chose dans la premiere case
-			// firstCase.appendChild(img);
+			var firstCase = document.querySelector(".firstCase");
+			firstCase.style.backgroundImage = "url('./assets/images/depart.png')";
+            firstCase.style.backgroundSize = "cover";
 
+            var lastCase = document.querySelector(".lastCase");
+            lastCase.style.backgroundImage = "url('./assets/images/ligne-darrivee.png')";
+            lastCase.style.backgroundSize = "cover";
 
 
 			

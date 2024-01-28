@@ -42,22 +42,12 @@ Un chronomètre permet de mesurer le temps que chaque équipe mets pour trouver 
 
 === 1. Pré-requis
 [.text-justify]
-Pour utiliser le jeu, vous devez posséder un ordinateur avec un navigateur web et l'application "WampServer". Vous devez également posséder les boitiers de recherche de balises ainsi que les balises. Il est aussi nécessaire d'avoir le pont qui permet de lire les données des balises et de les envoyer sur le site web.
+Pour utiliser le jeu, vous devez posséder un ordinateur avec chrome et l'application "WampServer". Vous devez également posséder les boitiers de recherche de balises ainsi que les balises. Il est aussi nécessaire d'avoir le pont qui permet de lire les données des balises et de les envoyer sur le site web.
+
+> /!\ Le projet doit être utilisé avec Google Chrome pour être compatible.
 
 === 2. Installation 
-==== Installation de Wamp
-[[installation]]
-Téléchargez Wamp à l'adresse suivante : https://www.wampserver.com/
 
-image::img/installwamp.PNG[]
-
-Vous devriez obtenir un fichier comme cela :
-image::img/wampsetup.PNG[]
-Lancez-le et suivez les instructions pour installer Wamp.
-
-==== Installation de l'application
-
-TODO
 
 == IV. Utilisation de l'application
 [.text-justify]
@@ -68,6 +58,41 @@ Vous arriverez sur la page index. Cliquez sur "Lancer lecture des données" et s
 
 === Navigation sur le Site
 Pour accéder à l'interface administrateur, cliquez sur le bouton "Commencer la partie" présent sur la page index.
+
+
+Pour lancer l'application, il faut télécharger Wamp pour déployer le projet sur sa propre machine, et l'héberger localement. N'importe quel autre serveur web peut être utilisé, mais Wamp est le plus simple à utiliser.
+
+https://www.wampserver.com/en/download-wampserver-64bits/#download-wrapper[Lien de telechargement wamp]
+
+image::img/installwamp.PNG[]
+
+
+Vous devriez obtenir un fichier comme cela :
+image::img/wampsetup.PNG[]
+Lancez-le et suivez les instructions pour installer Wamp.
+
+
+=== Lancement
+
+Une fois Wamp installé, il faut lancer l'application Wamp puis lancer le serveur en cliquant sur l'icône Wamp dans la barre des tâches, puis en cliquant sur "Start All Services".
+
+image::img/wamp.png[]
+
+Ensuite, il faut se rendre dans le dossier www de Wamp, et y créer un dossier "LocuraIoT". C'est dans ce dossier que l'on va placer le code source du projet.
+
+Le fichier code source est disponible ici: 
+https://www.github.com/LoisPacqueteau/LocuraIoT[Code source]
+
+Une fois le code source placé dans le dossier LocuraIoT, il faut se rendre sur la page `localhost/Code%20source/` dans son navigateur Google Chrome.
+
+l'application est maintenant installé sur votre machine.
+
+
+
+
+=== Navigation sur le Site
+
+Une barre des taches sur l'IHM Administateur permet de naviguer entre les différentes pages du site.
 
 image::img/commencerpartie.PNG[]
 

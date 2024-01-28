@@ -1,4 +1,4 @@
-= SAÉ 3.01 2023-2024
+= SAÉ 3.01 2023-2024 Groupe 3A-5
 :icons: font
 :models: models
 :experimental:
@@ -33,25 +33,59 @@ endif::[]
 
 toc::[]
 
-== Equipe
+
+==  Introduction 
+
+===  Contexte
+
+Le laboratoire de recherche *LocURa4IoT* a développé un jeu de chasse au trésor : Des joueurs doivent trouver des checkpoints à l'aide d'un noeud, le tout se basant sur la technologie des flux mqtt. Le jeu est actuellement fonctionnel mais manque d'une interface pour faciliter son déroulement. C'est ainsi que nous intervenons :  Nous sommes une équipe de 4 développeurs en alternance chargé de créer une interface destinée aux administrateur, pour visualiser son déroulement et intervenir si besoin, et une interface utilisateur qui sera diffusée à tous les joueurs pour qu'ils aient une idée de l'avancement de la partie.
+
+===  Notre équipe
 
 Projet est réalisé par::
 
-- https://github.com/thomasduppi[Thomas Duppy]
-- https://github.com/loisPacqueteau[Loïs Pacqueteau]
-- https://github.com/vincentEnRoueLibre[Vincent Barette]
-- https://github.com/L-Demany[Loélia Demany]
+- https://github.com/thomasduppi[Thomas Duppy] - Développeur
+- https://github.com/loisPacqueteau[Loïs Pacqueteau] - Chef de projet/ Développeur
+- https://github.com/vincentEnRoueLibre[Vincent Barette] - Secretaire
+- https://github.com/L-Demany[Loélia Demany] - Développeur
+
+===  Tuteurs de l'équipe:
+
+- link:https://github.com/rboulle[Rémi Boulle]
+- link:https://github.com/ependaries[Esther Pendaries]
+- Quentin Vey - Client
+- Adrien Van - Client
+
+===  Langages / Technologies utilisées
+
+====  Javascript
+
+image::Documentation/img/js.png[width=90, height=50]
+
+Principalement utilisé pour rendre les pages web interactives, Javascript permet d'ajouter des fonctionnalités dynamiques, de manipuler le contenu de la page et de réagir aux événements utilisateur. Il s'agit d'un système front parfait pour notre projet puisque nous avons besoin de manipuler des données en temps réel, notamment en déplaçant les pions sur le plateau.
+
+---
+
+====  HTML
+
+image::Documentation/img/html.png[width=50, height=50]
+
+HTML est un langage de balisage utilisé pour créer des pages web. Il permet de définir la structure et le contenu des pages web. Il s'agit d'un langage de base pour le développement web, et il est utilisé dans notre projet pour créer les pages web.
+
+---
 
 
-Tuteurices de l'équipe::
-- RB
-- EP
-- Quentin Vey
-- Adrien Van
+==== CSS/SCSS
+
+image::Documentation/img/css.png[width=35, height=50]
+
+Utilisé pour définir la présentation visuelle des pages web PHP, le CSS permet de spécifier la mise en forme, les couleurs, les polices, les marges, etc. CSS sépare la structure du contenu HTML de sa présentation. Dans notre projet, il est utilisé principalement pour modifier l'apparance des tableaux, et l'arranger à notre convenance.
 
 == Répartition des tâches et état d'avancement
 
 === Sprint 1
+
+:sp: 1
 
 === Sprint 2
 
@@ -97,7 +131,7 @@ Tuteurices de l'équipe::
 
 |=======================
 
-> Note de Vincent : Non je ne fais pas rien, je m'occupe simplement de la partie de gestion de projet 😅 Je vois RB demain (Lundi midi) pour en parler avec lui.
+
 
 Bilan du Sprint :
 La plupart des tâches ont été réalisées. Les tâches de dev de Loélia sont sprint2/sprint3, donc c'est OK. Discussions avec Quentin Vey, on lui a montré le proto. Quentin nous a donné plusieurs nouvelles tâches pour le sprint 3.
@@ -139,7 +173,6 @@ La plupart des tâches ont été réalisées. Les tâches de dev de Loélia sont
 - Les UserStories se trouvent dans *Répartition des tâches et état d'avancement*
 
 
-== Gestion de projet & Qualité
 
 == Evaluation hebdomadaire
 

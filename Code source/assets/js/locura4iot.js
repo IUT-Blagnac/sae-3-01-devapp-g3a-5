@@ -47,18 +47,25 @@ async function lirePortSerie() {
       for (let i = 0; i < lines.length - 1; i++) {
         try {
           const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
-          const nodeExistante = jsonData.node in listNodeWithColor;
 
+          const nodeExistante = jsonData.node in listNodeWithColor ? true : false;
+          //SI C'EST UNE NOUVELLE EQUIPE
           if (!nodeExistante) {
             // Ajoute un attribut "couleur" avec une couleur générée
-            jsonData.couleur = genererCouleur();
+            jsonData.couleur = '#' + ('000000' + (Math.random() * 0xFFFFFF << 0).toString(16)).slice(-6);
+            //admin : createTableau(jsonData);
+            listNodeWithColor[jsonData.node] = jsonData;
+            localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
           }
-
-          jsonData.lastUpdate = Date.now();
-          listNodeWithColor[jsonData.node] = jsonData;
-
-          localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-          
+          else {
+            // si les valeurs dans times sont différentes, on met à jour
+            for (let j = 0; j < jsonData.times.length; j++) {
+              if (jsonData.times[j] !== listNodeWithColor[jsonData.node].times[j]) {
+                listNodeWithColor[jsonData.node].times[j] = jsonData.times[j];
+              }
+            }
+          }
+          console.log(listNodeWithColor);
         } catch (jsonError) {
           console.error('Erreur lors de l\'analyse JSON :', jsonError);
         }
@@ -101,14 +108,17 @@ window.addEventListener('load', function () {
 /** 
  * Met à jour le jeu dès qu'un changement est détecté dans les équipes contenues dans le local storage
  */
-window.addEventListener("storage", function (event) {
-  if (event.key === "listNodeWithColor") {
-    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+if (window.location.href.includes("IHM_admin.php")) {
+    
+  window.addEventListener("storage", function (event) {
+    if (event.key === "listNodeWithColor") {
+      const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+      
+      // creerClassement();
+      // activatedModal();
 
-    //activatedModal();
-
-    for (let joueurId in cacheCacheData) {
-      var joueur = cacheCacheData[joueurId]
+      for (let joueurId in cacheCacheData) {
+        var joueur = cacheCacheData[joueurId]
 
       if(isEquipeDeconnectee(joueur.node)){
         gererReconnection(joueur.node);
@@ -121,21 +131,39 @@ window.addEventListener("storage", function (event) {
         joueur.lastUpdate = Date.now();
       }
 
-      //C'est une maj
-      else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times)) {
+        //C'est une maj
+        else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times) ) {
 
-        console.log(joueur.node + " : " + joueur.times.filter(temps => temps > 0).length + "/" + getNbCheckpoints())
-        joueur.lastUpdate = Date.now();
-        modifierTableau(joueur);
-        updatePopup(joueur, joueur.times.filter(temps => temps > 0).length);
+          console.log(joueur.node + " : " + joueur.times.filter(temps => temps > 0).length + "/" + getNbCheckpoints())
+          joueur.lastUpdate = Date.now();
+          modifierTableau(joueur);
+          updatePopup(joueur, joueur.times.filter(temps => temps > 0).length);
+        }
+        else if (joueur.lastUpdate < 0) {
+            gererReconnection(joueur.node);
+        }
+        
       }
-      
-      
-    }
 
-    listNodeWithColor = cacheCacheData;
-  }
-});
+      listNodeWithColor = cacheCacheData;
+    }
+  });
+}
+async function verifierDeconnection() {
+  setInterval(() => {
+    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+    const currentTime = Date.now();
+
+    for (const joueurId in cacheCacheData) {
+      const joueurData = cacheCacheData[joueurId];
+
+      if (joueurData.lastUpdate > 0 && (currentTime - joueurData.lastUpdate) / 1000 > 5) {
+        gererDeconnection(joueurData.node);
+        joueurData.lastUpdate = -1;
+      }
+    }
+  }, 1000);
+}
 
 ////////////////////
 //Pour les pop-ups//
@@ -186,9 +214,7 @@ window.addEventListener("storage", function (event) {
 /////////////////////////////////
 //Gérer les tableaux des noeuds//
 /////////////////////////////////
-
 function createTableau(jsonData) {
-  
   //Anomalie, un noeud n'a pas de couleur, on en génère une et on modifie le localStorage
   if(!jsonData.couleur){
     jsonData.couleur = genererCouleur();
@@ -238,6 +264,7 @@ function createTableau(jsonData) {
 
     tbl.appendChild(rowLabels);
 
+    tbl.appendChild(rowLabels);
 
     //Contenu checkpoints
     for (var i = 0; i < $nbIndex; i++) {
@@ -357,28 +384,19 @@ function downloadJSON() {
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
   // Convertissez l'objet en chaîne JSON
   const jsonData = JSON.stringify(cacheCacheData, null, 2);
-
-  // Créez un objet Blob avec le contenu JSON
   const blob = new Blob([jsonData], { type: 'application/json' });
-
-  // Créez un objet URL pour le Blob
   const url = URL.createObjectURL(blob);
-
-  // Créez un élément <a> pour le téléchargement
   const a = document.createElement('a');
   a.href = url;
   a.download = 'cacheCacheData.json';
-
-  // Ajoutez l'élément <a> à la page et déclenchez le téléchargement
   document.body.appendChild(a);
   a.click();
-
-  // Supprimez l'élément <a> de la page
   document.body.removeChild(a);
-
-  // Révoquez l'URL de l'objet Blob
   URL.revokeObjectURL(url);
 }
+
+
+
 
 //////////
 //Autres//
@@ -429,7 +447,38 @@ function creerClassementPopUp() {
   });
 
   // Afficher le classement
-  const classementContent = document.getElementById('classementContent');
+  
+  // on affiche le classement de TOUT joueurs classement.length
+  for (let i = 0; i < 3 ; i++) {
+    const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
+    const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
+    const joueur = classement[i];
+    const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
+    
+    joueurNameHtml.innerHTML = joueur.joueurId;
+    // joueur possede l'attribut couleur qui contient l'hexa de la couleur
+    // console.log(joueur.couleur);
+    // if (i % 3 === 0) {
+    //   joueurColorHtml.classList.add('square');
+      
+    // } else if (i % 3 === 1) {
+    //   joueurColorHtml.classList.add('circle');
+      
+    // } else {
+    //   joueurColorHtml.classList.add('triangle');
+      
+    // }
+  
+    joueurColorHtml.style.backgroundColor = joueur.couleur;
+  
+  }
+  return classement;
+}
+
+function creerClassementPopUp(classement) {
+
+  // Afficher le classement
+  const classementContent = document.getElementById('classementContent-pop-up');
   classementContent.innerHTML += '<h2>Classement Cache-Cache</h2>';
   titleclassemnt = ["Premier", "Deuxième", "Troisième"];
   // on affiche le classement des 3 premiers joueurs
@@ -447,47 +496,163 @@ function creerClassementPopUp() {
   return classement;
 }
 
-
-// ================================== A MODIFIER ==================================
-// function creerPions(){
-// event listener on load page
-// window.addEventListener('load', function() {
-//   var monElement = document.getElementById('0');
-//   console.log(monElement);
-
-// });
-// }
-
-$(document).ready(function () {
-  window.addEventListener('load', function () {
-    // Récupérez l'élément <td> avec l'id "0"
-    var tdElement = document.getElementById('0');
-
-    var divElement = document.createElement('div');
-    // Créez un nouvel élément <div>
-    divElement.style.display = "flex";
-
-    // Récupérez les valeurs du localStorage
-    var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor')) || [];
-    console.log(cacheCacheData);
-    // Boucle pour créer et ajouter de nouvelles div avec des IDs basées sur les valeurs du localStorage
-    for (var i = 0; i < cacheCacheData.length; i++) {
-      var nouvelleDiv = document.createElement('div');
-      nouvelleDiv.id = cacheCacheData[i].node;  // Utilisez la valeur du localStorage pour l'ID
-      tdElement.appendChild(divElement);
-      divElement.appendChild(nouvelleDiv);
-
-      // Ajoutez une classe à chaque nouvelle div en fonction de la logique existante
-      if (i % 3 === 0) {
-        nouvelleDiv.classList.add('square');
-      } else if (i % 3 === 1) {
-        nouvelleDiv.classList.add('circle');
-      } else {
-        nouvelleDiv.classList.add('triangle');
+function créerPions() {
+    nbTargets = getTaillePlateau();
+    var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+    var ListJoueurs = Object.keys(cacheCacheData);
+    var tabCouleurs = [];
+    for (const joueur in cacheCacheData) {
+      const couleur = cacheCacheData[joueur].couleur;
+      tabCouleurs.push(couleur);
+    }
+    nbJoueurs = getNbJoueurs();
+    // Récupérer le tableau
+    var table = document.getElementById("gameTable");
+    // recupérer tous les tr du tableau
+    var tr = table.getElementsByTagName("tr");
+    // pour chaque tr on récupère les td
+    for (var i = 0; i < tr.length; i++) {
+      var td = tr[i].getElementsByTagName("td");
+      // pour chaque td on créer autant de div que de joueurs
+      for (var j = 0; j < td.length; j++) {
+        //pour chaque joueur on créer une div
+        for (var k = 0; k < nbJoueurs; k++) {
+          var nouvelleDiv = document.createElement('div');
+          nouvelleDiv.id = ListJoueurs[k];  // la node du localStorage est utilisé pour l'ID
+          td[j].appendChild(nouvelleDiv);
+          // Ajoute une classe à chaque nouvelle div
+          if (k % 3 === 0) {
+            nouvelleDiv.classList.add('square');
+            nouvelleDiv.style.backgroundColor = tabCouleurs[k];
+            nouvelleDiv.style.display = "none";
+          } else if (k % 3 === 1) {
+            nouvelleDiv.classList.add('circle');
+            nouvelleDiv.style.backgroundColor = tabCouleurs[k];
+            nouvelleDiv.style.display = "none";
+          } else {
+            nouvelleDiv.classList.add('triangle');
+            nouvelleDiv.style.borderBottomColor = tabCouleurs[k];
+            nouvelleDiv.style.display = "none";
+          }
+        }
       }
     }
+  };
+
+function afficherPions() {
+  var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  const ListJoueurs = Object.keys(cacheCacheData);
+
+  for (node in ListJoueurs) {
+    for (var i = 0; i < nbTargets; i++) {
+      var pionAfficher = document.getElementById(i).children[node];
+      pionAfficher.style.display = "none";
+    }
+  }
+
+  for (var i = 0; i < ListJoueurs.length; i++) {
+    const positionPion = getCapteursTrouvés(ListJoueurs[i]);
+    var numeroLigne = Math.floor(positionPion / 5);
+    var ligne = document.getElementsByTagName('tr')["row-" + numeroLigne]
+    var cellules = ligne.getElementsByTagName('td');
+    var cellule = Array.from(cellules).find(cellule => parseInt(cellule.id) === positionPion);
+    var pion = cellule.getElementsByTagName('div')[i];
+    pion.style.display = "block";
+  }
+}
+
+$(document).ready(function () {
+  $('#genererPDF').on('click', function () {
+    // appel de la fonction qui genere le classement pour etre sur que le classement est a jour
+    const classement = creerClassement();
+    console.log('Générer PDF');
+    
+
+    var content = [
+    { text: 'Date: ' + new Date().toLocaleDateString() },
+    { text: 'Heure: ' + new Date().toLocaleTimeString() },
+    { text: 'Par Loïs PACQUETEAU\n' },
+    { text: 'Compte rendu', fontSize: 16, bold: true, alignment: 'center' },
+    // saut de ligne
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    // tableau
+    { text: 'Score de la course:', fontSize: 14, margin: [0, 10, 0, 5] },
+    {
+    style: 'tableExample',
+    table: {
+      widths: ['*', '*', '*', '*'],
+      body: [
+        ['Position', 'Joueur', 'Temps', 'Balises trouvées'],
+        ...classement.map((joueur, index) => {
+          // ci dessous les milisecondes depassent pas 2 chiffres apres la virgule (d'ou le toFixed(2))
+          const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${(joueur.tempsTotal).toFixed(2)} secondes`;
+          return [index + 1, joueur.joueurId, tempsTotalText, joueur.balisesTrouvees];
+        })
+      ]
+    }
+    },
+    // bas de page
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    // ajouter le logo de l'iut 
+    // { image: '../assets/images/Logo_IUT_Blagnac.png', width: 100, height: 100, alignment: 'center' },
+    { text: 'Cache-Cache LocURa4IoT sae-3-01devapp-g3a-5', fontSize: 12, alignment: 'center' },
+    { text: '© 2024', fontSize: 12, alignment: 'center' }
+    ];
+
+    pdfMake.createPdf({ content }).download('compte_rendu_LocURa4IoT.pdf');
   });
 });
+
+// faire une fonction qui active la fonction openModal() quand tout les elements d'une liste target sont trouvés (times != 0)
+// on parcours toute la liste des joueurs si un joueur a un temps = 0 on passe au joueur suivant si on arrive à la fin de la liste et que toute les joueurs ont au mois un temps = 0 on return false
+function estFinDuJeu() {
+  // Récupérer les données du localStorage
+  const jeuData = getJeuDataFromLocalStorage();
+  // Vérifier si tous les temps pour au moins un nœud sont différents de zéro
+  for (const nodeId in jeuData) {
+    const node = jeuData[nodeId];
+    const tempsNonZero = node.times.every(time => time !== 0);
+
+    // Si tous les temps pour un nœud sont différents de zéro, le jeu est terminé
+    if (tempsNonZero) {
+      return true;
+    }
+  }
+
+  // Si aucun nœud n'a tous les temps différents de zéro, le jeu n'est pas terminé
+  return false;
+}
+
+
+function getCapteursTrouvés(node) {
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  const joueurData = cacheCacheData[node];
+  const targets = joueurData.targets;
+  const times = joueurData.times;
+  const capteursTrouvés = [];
+  for (let i = 0; i < times.length; i++) {
+    if (times[i] > 0) {
+      capteursTrouvés.push(targets[i]);
+    }
+  }
+  return capteursTrouvés.length;
+}
+
+function activatedModal(){
+  if (estFinDuJeu()) {
+    openModal();
+  }
+}
+
 
 ////////////////////////////////
 ////////////////////////////////
