@@ -20,10 +20,27 @@ image::img/usecase.png[]
 == Déploiement du projet 
 
 === Prérequis
-Il faut télécharger Wamp pour déployer le projet sur sa propre machine, et l'héberger localement.
+Il faut télécharger Wamp pour déployer le projet sur sa propre machine, et l'héberger localement. N'importe quel autre serveur web peut être utilisé, mais Wamp est le plus simple à utiliser.
+
+https://www.wampserver.com/en/download-wampserver-64bits/#download-wrapper[Lien de telechargemnt wamp]
+
+
+
 
 === Lancement
-On peut télécharger une release du projet et la sauvegarder dans son dossier Wamp. On lance le serveur et on peut y accéder en tapant `localhost` dans sa barre de recherche Google Chrome.
+
+Une fois Wamp installé, il faut lancer l'application puis lancer le serveur en cliquant sur l'icône Wamp dans la barre des tâches, puis en cliquant sur "Start All Services".
+
+image::img/wamp.png[]
+
+ensuite il faut se rendre dans le dossier www de Wamp, et y créer un dossier "LocuraIoT". C'est dans ce dossier que l'on va placer le code source du projet.
+
+Le fichier code source est disponible ici: 
+https://www.github.com/LoisPacqueteau/LocuraIoT[Code source]
+
+Une fois le code source placé dans le dossier LocuraIoT, il faut se rendre sur la page `localhost/Code%20source/` dans son navigateur Google Chrome.
+
+l'application est maintenant déployée sur votre machine.
 
 > /!\ Le projet doit être utilisé avec Google Chrome pour être compatible.
 
