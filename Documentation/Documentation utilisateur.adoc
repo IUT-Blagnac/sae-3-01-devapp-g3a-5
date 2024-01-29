@@ -167,21 +167,6 @@ La liste des équipes étant disponibles depuis l'interface administrateur, il e
 image::img/viewteamdata.png[Données d'une équipe]
 
 ==== Interface Utilisateur/Spectateur
-
-===== Plateau Adaptation Taille
-
-La taille du plateau s'adapte automatiquement au nombre de checkpoints. En effet, lorsque l'on se trouve sur la page d'accueil (index), et qu'on souhaite accéder au plateau du jeu, le Javascript de la page d'accueil fournit au PHP de l'interface utilisateur le nombre de cases. Le plateau est en réalité un tableau PHP, dont l'apparance est modifiée avec du SCSS. Lorsque la page se charge, le PHP crée le tableau et lui attribue non seulement le bon nombre de case, mais aussi dans le bon ordre.
-
-image::img/plateau6.png[Plateau de taille 6]
-
-image::img/plateau11.png[Plateau de taille 11]
-
-===== Couleur Plateau
-
-En harmonie avec la taille du plateau, la couleur du plateau est très importante. Elle permet d'améliorer la visibilité et la compréhension du jeu, et surtout l'accessibilité. La couleur du plateau est une échelle de bleu, conformément à la charte graphique du client. Les cases partent d'un bleu clair, à un bleu foncé, pour revenir au clair. Cela fait une boucle.
-
-image::img/plateau6.png[Plateau de taille 6]
-
 ==== Divers
 
 Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
