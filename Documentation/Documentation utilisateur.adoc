@@ -21,10 +21,10 @@ A intervalle réguliers, les boitiers envoient des JSON contenant :
 ** Par exemple, si une équipe trouve un checkpoint au bout de 10 seconde de jeu, et un autre 15 secondes plus tard, le second checkpoint sera considéré comment ayant été trouvé au bout de 25 secondes.
 
 === 1. Localisation des Objets
-Les équipes s'affrontent pour retrouver des objets connectés disséminés sur la plateforme. Les informations de localisation des objets sont fournies par la plateforme LocURa4IoT.
+Le but du jeu est de retrouver des objets connectés disséminés sur la plateforme. Les informations de localisation des objets sont fournies par la plateforme LocURa4IoT.
 
 === 2. Règles de Recherche
-Chaque équipe possède doit trouver tous les checkpoints dans un ordre défini aléatoirement. (A noter qu'il est également possible de jouer à ce jeu en solitaire.) Chaque équipe doit trouver les checkpoints dans l'ordre qui lui est attribué. Les boitiers de recherche changent de couleur et clignotent de plus en plus vite lorsque l'équipe se rapproche de la balise.
+Chaque équipe doit trouver tous les checkpoints dans un ordre défini aléatoirement. (A noter qu'il est également possible de jouer à ce jeu en solitaire.) Chaque équipe doit trouver les checkpoints dans l'ordre qui lui est attribué. Les boitiers de recherche changent de couleur et clignotent de plus en plus vite lorsque l'équipe se rapproche de la balise.
 
 === 3. Conditions de Victoire
 Un chronomètre permet de mesurer le temps que chaque équipe mets pour trouver toutes les balises. L'équipe qui trouve toutes les balises en le moins de temps possible remporte la partie.
@@ -49,8 +49,7 @@ Pour utiliser le jeu, vous devez posséder un ordinateur avec chrome et l'applic
 === 2. Installation 
 
 
-== IV. Utilisation de l'application
-[.text-justify]
+
 
 === Lancement du Site web
 Ouvrez <<installation, l'application>>. 
@@ -88,7 +87,8 @@ Une fois le code source placé dans le dossier LocuraIoT, il faut se rendre sur 
 l'application est maintenant installé sur votre machine.
 
 
-
+== IV. Utilisation de l'application
+[.text-justify]
 
 === Navigation sur le Site
 
