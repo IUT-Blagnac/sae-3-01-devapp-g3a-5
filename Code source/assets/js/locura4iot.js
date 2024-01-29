@@ -24,41 +24,48 @@ var listNodeWithColor = {};
 /////////////////////////
 /////////////////////////
 
+const usedColors = ['#1DC2AF', '#18A090', '#137C70', '#0E5850', '#083530'];
+const generatedColors = new Set(usedColors);
+
 async function lirePortSerie() {
   try {
-    const port = await navigator.serial.requestPort(); // Demande la permission d'accéder au port série    
-    await port.open({ baudRate: 115200, dataBits: 8, stopBits: 1 }); // Ouvre le port série avec la configuration souhaitée  
-    // Configure le décodeur pour convertir les données JSON
+    const port = await navigator.serial.requestPort();
+    await port.open({ baudRate: 115200, dataBits: 8, stopBits: 1 });
+    
     const decoder = new TextDecoderStream('utf-8');
     const readableStreamClosed = port.readable.pipeTo(decoder.writable);
     const textStreamReader = decoder.readable.getReader();
-    let partialData = ''; // Stockage temporaire pour les fragments de données
-    // Lis les données en continu
+    let partialData = '';
+
     while (true) {
       const { value, done } = await textStreamReader.read();
       if (done) {
         console.log('Décodage terminé !');
         break;
       }
-      partialData += value; // Concatène les fragments de données
+      partialData += value;
       console.log(partialData);
-      const lines = partialData.split('\n'); // Sépare les données en lignes
-      // Traite chaque ligne (sauf la dernière, potentiellement incomplète)
+      const lines = partialData.split('\n');
+
       for (let i = 0; i < lines.length - 1; i++) {
         try {
-          const jsonData = JSON.parse(lines[i]); // Convertit la ligne en objet JSON
+          const jsonData = JSON.parse(lines[i]);
 
           const nodeExistante = jsonData.node in listNodeWithColor ? true : false;
-          //SI C'EST UNE NOUVELLE EQUIPE
+
           if (!nodeExistante) {
-            // Ajoute un attribut "couleur" avec une couleur générée
-            jsonData.couleur = '#' + ('000000' + (Math.random() * 0xFFFFFF << 0).toString(16)).slice(-6);
-            //admin : createTableau(jsonData);
+            // Génère une couleur unique qui n'est pas dans la liste usedColors
+            let uniqueColor;
+            do {
+              uniqueColor = '#' + ('000000' + (Math.random() * 0xFFFFFF << 0).toString(16)).slice(-6);
+            } while (generatedColors.has(uniqueColor) || usedColors.includes(uniqueColor));
+
+            jsonData.couleur = uniqueColor;
+
+            generatedColors.add(uniqueColor);
             listNodeWithColor[jsonData.node] = jsonData;
             localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
-          }
-          else {
-            // si les valeurs dans times sont différentes, on met à jour
+          } else {
             for (let j = 0; j < jsonData.times.length; j++) {
               if (jsonData.times[j] !== listNodeWithColor[jsonData.node].times[j]) {
                 listNodeWithColor[jsonData.node].times[j] = jsonData.times[j];
@@ -70,17 +77,16 @@ async function lirePortSerie() {
         } catch (jsonError) {
           console.error('Erreur lors de l\'analyse JSON :', jsonError);
         }
-        partialData = lines[lines.length - 1]; // Garde le dernier fragment potentiellement incomplet
+        partialData = lines[lines.length - 1];
       }
     }
-    textStreamReader.releaseLock(); // Ferme les flux après la lecture
+
+    textStreamReader.releaseLock();
     await readableStreamClosed;
-  }
-  catch (error) {
+  } catch (error) {
     console.error('Erreur lors de la demande ou de l\'ouverture du port série :', error);
   }
 };
-
 
 
 ////////////////////////////////
@@ -217,7 +223,7 @@ window.addEventListener("storage", function (event) {
 /////////////////////////////////
 function createTableau(jsonData) {
   //Anomalie, un noeud n'a pas de couleur, on en génère une et on modifie le localStorage
-  if(!jsonData.couleur){
+  if(!('couleur' in jsonData)){
     jsonData.couleur = genererCouleur();
     listNodeWithColor[jsonData.node] = jsonData;
     localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
@@ -562,7 +568,7 @@ function créerPions() {
       const couleur = cacheCacheData[joueur].couleur;
       tabCouleurs.push(couleur);
     }
-    nbJoueurs = getNbJoueurs();
+    var nbJoueurs = getNbJoueurs();
     // Récupérer le tableau
     var table = document.getElementById("gameTable");
     // recupérer tous les tr du tableau
