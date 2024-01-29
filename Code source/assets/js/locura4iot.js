@@ -31,7 +31,7 @@ async function lirePortSerie() {
   try {
     const port = await navigator.serial.requestPort();
     await port.open({ baudRate: 115200, dataBits: 8, stopBits: 1 });
-    
+
     const decoder = new TextDecoderStream('utf-8');
     const readableStreamClosed = port.readable.pipeTo(decoder.writable);
     const textStreamReader = decoder.readable.getReader();
@@ -116,40 +116,39 @@ window.addEventListener('load', function () {
  * Met à jour le jeu dès qu'un changement est détecté dans les équipes contenues dans le local storage
  */
 if (window.location.href.includes("IHM_admin.php")) {
-    
+
   window.addEventListener("storage", function (event) {
     if (event.key === "listNodeWithColor") {
       const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-      
+
       // creerClassement();
       // activatedModal();
 
       for (let joueurId in cacheCacheData) {
         var joueur = cacheCacheData[joueurId]
 
-      if(isEquipeDeconnectee(joueur.node)){
-        gererReconnection(joueur.node);
-      }
+        if (isEquipeDeconnectee(joueur.node)) {
+          gererReconnection(joueur.node);
+        }
 
-      //C'est une nouvelle équipe
-      if (!(joueur.node in listNodeWithColor)) {
-        console.log("Nouvelle équipe : " + joueur.node)
-        createTableau(joueur);
-        joueur.lastUpdate = Date.now();
-      }
+        //C'est une nouvelle équipe
+        if (!(joueur.node in listNodeWithColor)) {
+          console.log("Nouvelle équipe : " + joueur.node)
+          createTableau(joueur);
+          joueur.lastUpdate = Date.now();
+        }
 
         //C'est une maj
-        else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times) ) {
-
+        else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times)) {
           console.log(joueur.node + " : " + joueur.times.filter(temps => temps > 0).length + "/" + getNbCheckpoints())
           joueur.lastUpdate = Date.now();
           modifierTableau(joueur);
-          updatePopup(joueur, joueur.times.filter(temps => temps > 0).length);
+          updateMessage(joueur, joueur.times.filter(temps => temps > 0).length);
         }
-        else if (joueur.lastUpdate < 0) {
-            gererReconnection(joueur.node);
+        else if (isEquipeDeconnectee()) {
+          gererReconnection(joueur.node);
         }
-        
+
       }
 
       listNodeWithColor = cacheCacheData;
@@ -162,45 +161,45 @@ if (window.location.href.includes("IHM_admin.php")) {
 //Pour les pop-ups//
 ////////////////////
 
-function updatePopup(jsonData, nbBalises){
+function updateMopup(jsonData, nbBalises) {
 
   jsonData = JSON.parse(JSON.stringify(jsonData));
   let contenu = "";
 
-  if(nbBalises == Math.round(getNbCheckpoints()/2)){
+  if (nbBalises == Math.round(getNbCheckpoints() / 2)) {
     contenu = "L'équipe " + jsonData.node + " a trouvé la moitié des trésors !";
-    afficherPopup(contenu, true);
+    afficherMessage(contenu, true);
   }
-  else if(nbBalises == getNbCheckpoints()){
+  else if (nbBalises == getNbCheckpoints()) {
     contenu = "L'équipe " + jsonData.node + " a fini le jeu !";
-    afficherPopup(contenu, true);
-    
+    afficherMessage(contenu, true);
+
   }
 }
 
-function afficherPopup(contenu, auto) {
+function afficherMessage(contenu, auto) {
 
   if (!auto) {
     contenu = prompt("Veuillez saisir votre message :")
   }
 
-  localStorage.setItem("popupContent", contenu);
+  localStorage.setItem("messageContent", contenu);
 }
 
 window.addEventListener("storage", function (event) {
-  if (event.key === "popupContent") {
-    var popup = document.getElementById("popup");
-    var popupContent = document.getElementById("popupContent");
+  if (event.key === "messageContent") {
+    var message = document.getElementById("message");
+    var messageContent = document.getElementById("messageContent");
 
-    // Affichez la popup avec le contenu du localStorage
-    if(localStorage.getItem("popupContent") != ""){
-      popupContent.innerHTML = localStorage.getItem("popupContent");
-      popup.style.display = "block";
-      popup.style.animation = "deplacementInformation 5s";
+    // Affichez la message avec le contenu du localStorage
+    if (localStorage.getItem("messageContent") != "") {
+      messageContent.innerHTML = localStorage.getItem("messageContent");
+      message.style.display = "block";
+      message.style.animation = "deplacementInformation 5s";
     }
-    
+
     setTimeout(function () {
-      popup.style.display = "none";
+      message.style.display = "none";
     }, 5000);
   }
 });
@@ -210,7 +209,7 @@ window.addEventListener("storage", function (event) {
 /////////////////////////////////
 function createTableau(jsonData) {
   //Anomalie, un noeud n'a pas de couleur, on en génère une et on modifie le localStorage
-  if(!('couleur' in jsonData)){
+  if (!('couleur' in jsonData)) {
     jsonData.couleur = genererCouleur();
     listNodeWithColor[jsonData.node] = jsonData;
     localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
@@ -232,7 +231,7 @@ function createTableau(jsonData) {
 
     var cellNoeud = document.createElement("td");
     cellNoeud.classList.add("equipe");
-    
+
     if (isCouleurClaire(obj1.couleur)) {
       cellNoeud.style.color = "#242729";
     }
@@ -292,10 +291,10 @@ function createTableau(jsonData) {
     tabEquipesDiv.appendChild(tbl);
   }
   else {
-    if (!arraysEqual(obj1.times, listNodeWithColor[obj1.node].times)){
+    if (!arraysEqual(obj1.times, listNodeWithColor[obj1.node].times)) {
       modifierTableau(jsonData)
     }
-    
+
   }
 }
 
@@ -344,11 +343,11 @@ async function verifierDeconnection() {
 * @param {*} id du noeud déconnectée
 */
 function gererDeconnection(id) {
-  let popup = "L'équipe " + id + " est déconnectée !";
-  console.log(popup);
-  afficherPopup(popup, true)
+  let message = "L'équipe " + id + " est déconnectée !";
+  console.log(message);
+  afficherMessage(message, true)
 
-  
+
   document.getElementById(id).classList.add("deconnecte");
 
   //Modifier pion sur interface user ?
@@ -360,16 +359,16 @@ function gererDeconnection(id) {
 * @param {*} id du noeud déconnectée
 */
 function gererReconnection(id) {
-  let popup = "L'équipe " + id + " s'est reconnectée !";
-  console.log(popup);
-  afficherPopup(popup, true)
+  let message = "L'équipe " + id + " s'est reconnectée !";
+  console.log(message);
+  afficherMessage(message, true)
 
   document.getElementById(id).classList.remove("deconnecte");
 
   //Modifier pion sur interface user ?
 }
 
-function isEquipeDeconnectee(id){
+function isEquipeDeconnectee(id) {
   return document.getElementById(id).classList.contains("deconnecte")
 }
 
@@ -423,33 +422,33 @@ function creerClassementHTML() {
 
   // Calculer le score pour chaque joueur (nombre de balises trouvées)
   const classement = creerClassement();
-  
+
 
   // Afficher le classement
-  
+
   // on affiche le classement de TOUT joueurs classement.length
-  for (let i = 0; i < 3 ; i++) {
+  for (let i = 0; i < 3; i++) {
     const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
     const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
     const joueur = classement[i];
     const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
-    
+
     joueurNameHtml.innerHTML = joueur.joueurId;
     // joueur possede l'attribut couleur qui contient l'hexa de la couleur
     // console.log(joueur.couleur);
     // if (i % 3 === 0) {
     //   joueurColorHtml.classList.add('square');
-      
+
     // } else if (i % 3 === 1) {
     //   joueurColorHtml.classList.add('circle');
-      
+
     // } else {
     //   joueurColorHtml.classList.add('triangle');
-      
+
     // }
-  
+
     joueurColorHtml.style.backgroundColor = joueur.couleur;
-  
+
   }
   return classement;
 }
@@ -485,29 +484,29 @@ function creerClassement() {
 
 function creerClassementPopUp() {
   // Faire une querySelector pour récupérer la classe modal
-  
+
   // Afficher le classement
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     const classementContent = document.getElementById('classementContent-pop-up');
-  
-  console.log(classementContent);
-  classementContent.innerHTML += '<h2>Classement Cache-Cache</h2>';
-  titleclassemnt = ["Premier", "Deuxième", "Troisième"];
-  // on affiche le classement des 3 premiers joueurs
-  for (let i = 0; i < 3; i++) {
-    const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
-    const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
-    classement=creerClassement();
-    const joueur = classement[i];
-    const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
-    classementContent.innerHTML += `<p>${titleclassemnt[i]}: ${joueur.joueurId} (${joueur.balisesTrouvees} balises trouvées, ${tempsTotalText})</p>`;
-    joueurNameHtml.innerHTML = joueur.joueurId;
-    // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-    console.log(joueur.couleur);
-    joueurColorHtml.style.backgroundColor = joueur.couleur;
-  }
-  return classement;
-});
+
+    console.log(classementContent);
+    classementContent.innerHTML += '<h2>Classement Cache-Cache</h2>';
+    titleclassemnt = ["Premier", "Deuxième", "Troisième"];
+    // on affiche le classement des 3 premiers joueurs
+    for (let i = 0; i < 3; i++) {
+      const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
+      const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
+      classement = creerClassement();
+      const joueur = classement[i];
+      const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
+      classementContent.innerHTML += `<p>${titleclassemnt[i]}: ${joueur.joueurId} (${joueur.balisesTrouvees} balises trouvées, ${tempsTotalText})</p>`;
+      joueurNameHtml.innerHTML = joueur.joueurId;
+      // joueur possede l'attribut couleur qui contient l'hexa de la couleur
+      console.log(joueur.couleur);
+      joueurColorHtml.style.backgroundColor = joueur.couleur;
+    }
+    return classement;
+  });
 }
 
 // function creerClassement() {
@@ -535,8 +534,8 @@ function creerClassementPopUp() {
 //   });
 
 //   // Afficher le classement
-  
-  
+
+
 //   // on affiche le classement de TOUT joueurs classement.length
 //   for (let i = 0; i < 3; i++) {
 //     for (let i = 0; i < 3 ; i++) {
@@ -558,56 +557,56 @@ function creerClassementPopUp() {
 //       //   joueurColorHtml.classList.add('triangle');
 
 //       // }
-    
+
 //       joueurColorHtml.style.backgroundColor = joueur.couleur;
-    
+
 //     }
 //   }
 //   return classement;
 // }
 
 function créerPions() {
-    nbTargets = getTaillePlateau();
-    var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-    var ListJoueurs = Object.keys(cacheCacheData);
-    var tabCouleurs = [];
-    for (const joueur in cacheCacheData) {
-      const couleur = cacheCacheData[joueur].couleur;
-      tabCouleurs.push(couleur);
-    }
-    var nbJoueurs = getNbJoueurs();
-    // Récupérer le tableau
-    var table = document.getElementById("gameTable");
-    // recupérer tous les tr du tableau
-    var tr = table.getElementsByTagName("tr");
-    // pour chaque tr on récupère les td
-    for (var i = 0; i < tr.length; i++) {
-      var td = tr[i].getElementsByTagName("td");
-      // pour chaque td on créer autant de div que de joueurs
-      for (var j = 0; j < td.length; j++) {
-        //pour chaque joueur on créer une div
-        for (var k = 0; k < nbJoueurs; k++) {
-          var nouvelleDiv = document.createElement('div');
-          nouvelleDiv.id = ListJoueurs[k];  // la node du localStorage est utilisé pour l'ID
-          td[j].appendChild(nouvelleDiv);
-          // Ajoute une classe à chaque nouvelle div
-          if (k % 3 === 0) {
-            nouvelleDiv.classList.add('square');
-            nouvelleDiv.style.backgroundColor = tabCouleurs[k];
-            nouvelleDiv.style.display = "none";
-          } else if (k % 3 === 1) {
-            nouvelleDiv.classList.add('circle');
-            nouvelleDiv.style.backgroundColor = tabCouleurs[k];
-            nouvelleDiv.style.display = "none";
-          } else {
-            nouvelleDiv.classList.add('triangle');
-            nouvelleDiv.style.borderBottomColor = tabCouleurs[k];
-            nouvelleDiv.style.display = "none";
-          }
+  nbTargets = getTaillePlateau();
+  var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  var ListJoueurs = Object.keys(cacheCacheData);
+  var tabCouleurs = [];
+  for (const joueur in cacheCacheData) {
+    const couleur = cacheCacheData[joueur].couleur;
+    tabCouleurs.push(couleur);
+  }
+  var nbJoueurs = getNbJoueurs();
+  // Récupérer le tableau
+  var table = document.getElementById("gameTable");
+  // recupérer tous les tr du tableau
+  var tr = table.getElementsByTagName("tr");
+  // pour chaque tr on récupère les td
+  for (var i = 0; i < tr.length; i++) {
+    var td = tr[i].getElementsByTagName("td");
+    // pour chaque td on créer autant de div que de joueurs
+    for (var j = 0; j < td.length; j++) {
+      //pour chaque joueur on créer une div
+      for (var k = 0; k < nbJoueurs; k++) {
+        var nouvelleDiv = document.createElement('div');
+        nouvelleDiv.id = ListJoueurs[k];  // la node du localStorage est utilisé pour l'ID
+        td[j].appendChild(nouvelleDiv);
+        // Ajoute une classe à chaque nouvelle div
+        if (k % 3 === 0) {
+          nouvelleDiv.classList.add('square');
+          nouvelleDiv.style.backgroundColor = tabCouleurs[k];
+          nouvelleDiv.style.display = "none";
+        } else if (k % 3 === 1) {
+          nouvelleDiv.classList.add('circle');
+          nouvelleDiv.style.backgroundColor = tabCouleurs[k];
+          nouvelleDiv.style.display = "none";
+        } else {
+          nouvelleDiv.classList.add('triangle');
+          nouvelleDiv.style.borderBottomColor = tabCouleurs[k];
+          nouvelleDiv.style.display = "none";
         }
       }
     }
-  };
+  }
+};
 
 function afficherPions() {
   var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
@@ -636,46 +635,46 @@ $(document).ready(function () {
     // appel de la fonction qui genere le classement pour etre sur que le classement est a jour
     const classement = creerClassement();
     console.log('Générer PDF');
-    
+
 
     var content = [
-    { text: 'Date: ' + new Date().toLocaleDateString() },
-    { text: 'Heure: ' + new Date().toLocaleTimeString() },
-    { text: 'Par Loïs PACQUETEAU\n' },
-    { text: 'Compte rendu', fontSize: 16, bold: true, alignment: 'center' },
-    // saut de ligne
-    { text: '\n' },
-    { text: '\n' },
-    { text: '\n' },
-    { text: '\n' },
-    { text: '\n' },
-    { text: '\n' },
-    // tableau
-    { text: 'Score de la course:', fontSize: 14, margin: [0, 10, 0, 5] },
-    {
-    style: 'tableExample',
-    table: {
-      widths: ['*', '*', '*', '*'],
-      body: [
-        ['Position', 'Joueur', 'Temps', 'Balises trouvées'],
-        ...classement.map((joueur, index) => {
-          // ci dessous les milisecondes depassent pas 2 chiffres apres la virgule (d'ou le toFixed(2))
-          const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${(joueur.tempsTotal).toFixed(2)} secondes`;
-          return [index + 1, joueur.joueurId, tempsTotalText, joueur.balisesTrouvees];
-        })
-      ]
-    }
-    },
-    // bas de page
-    { text: '\n' },
-    { text: '\n' },
-    { text: '\n' },
-    { text: '\n' },
-    { text: '\n' },
-    // ajouter le logo de l'iut 
-    // { image: '../assets/images/Logo_IUT_Blagnac.png', width: 100, height: 100, alignment: 'center' },
-    { text: 'Cache-Cache LocURa4IoT sae-3-01devapp-g3a-5', fontSize: 12, alignment: 'center' },
-    { text: '© 2024', fontSize: 12, alignment: 'center' }
+      { text: 'Date: ' + new Date().toLocaleDateString() },
+      { text: 'Heure: ' + new Date().toLocaleTimeString() },
+      { text: 'Par Loïs PACQUETEAU\n' },
+      { text: 'Compte rendu', fontSize: 16, bold: true, alignment: 'center' },
+      // saut de ligne
+      { text: '\n' },
+      { text: '\n' },
+      { text: '\n' },
+      { text: '\n' },
+      { text: '\n' },
+      { text: '\n' },
+      // tableau
+      { text: 'Score de la course:', fontSize: 14, margin: [0, 10, 0, 5] },
+      {
+        style: 'tableExample',
+        table: {
+          widths: ['*', '*', '*', '*'],
+          body: [
+            ['Position', 'Joueur', 'Temps', 'Balises trouvées'],
+            ...classement.map((joueur, index) => {
+              // ci dessous les milisecondes depassent pas 2 chiffres apres la virgule (d'ou le toFixed(2))
+              const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${(joueur.tempsTotal).toFixed(2)} secondes`;
+              return [index + 1, joueur.joueurId, tempsTotalText, joueur.balisesTrouvees];
+            })
+          ]
+        }
+      },
+      // bas de page
+      { text: '\n' },
+      { text: '\n' },
+      { text: '\n' },
+      { text: '\n' },
+      { text: '\n' },
+      // ajouter le logo de l'iut 
+      // { image: '../assets/images/Logo_IUT_Blagnac.png', width: 100, height: 100, alignment: 'center' },
+      { text: 'Cache-Cache LocURa4IoT sae-3-01devapp-g3a-5', fontSize: 12, alignment: 'center' },
+      { text: '© 2024', fontSize: 12, alignment: 'center' }
     ];
 
     pdfMake.createPdf({ content }).download('compte_rendu_LocURa4IoT.pdf');
@@ -729,7 +728,7 @@ function getCapteursTrouvés(node) {
   return capteursTrouvés.length;
 }
 
-function activatedModal(){
+function activatedModal() {
   if (estFinDuJeu()) {
     openModal();
   }
@@ -799,10 +798,10 @@ function closeModal() {
 ///////////
 ///////////
 
-function getListText(mot, list){
+function getListText(mot, list) {
   let text = "";
 
-  for(let i in list){
+  for (let i in list) {
     text += mot + " " + list[i] + "<br>";
   }
 
@@ -863,19 +862,19 @@ function getNbCheckpoints() {
 
 function arraysEqual(arr1, arr2) {
   if (arr1.length !== arr2.length) {
-      return false;
+    return false;
   }
 
   for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-          return false;
-      }
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
   }
 
   return true;
 }
 
-function genererCouleur(){
+function genererCouleur() {
   return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
 }
 

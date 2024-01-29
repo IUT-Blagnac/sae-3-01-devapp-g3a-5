@@ -246,7 +246,7 @@ button#genererJson{
 
 /* POP UP */
 
-.popup {
+.message {
     display: none;
     position: fixed;
     top: 50%;
@@ -257,7 +257,7 @@ button#genererJson{
     padding: 20px;
 }
 
-.popup-content {
+.message-content {
     text-align: center;
 }
 
