@@ -47,6 +47,7 @@ Ordinateur sous Windows ou OS équivalent.
 
 
 == Cas de test
+
 === Fonctionnalités Panel Spectateur
 :lvl1: 1
 > Ces présents tests concernent l'IHM Spectateur - celle avec le parcours et les pions.
@@ -142,14 +143,14 @@ Ordinateur sous Windows ou OS équivalent.
 
 
 
-==== https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/54[Couleur Plateau]
+==== https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/54[Plateau]
 :lvl2: 2
 
 
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
 :num_test: 1
-:nom_test: Vérification Couleur Plateau
+:nom_test: Plateau Vérification Couleur
 :objectif: S'assurer que les couleurs sont conformes à la charte graphique
 
 // Ne pas toucher ⬇️
@@ -174,7 +175,7 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
 :num_test: 2
-:nom_test: Intégrité Couleur Plateau
+:nom_test: Plateau Intégrité Couleur
 :objectif: S'assurer que les couleurs du plateau ne changent jamais (qu'il n'y a pas d'aléatoire dans la fonction)
 
 // Ne pas toucher ⬇️
@@ -200,16 +201,9 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////////////////////////////////////////
 
 
-
-
-
-==== https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/58[Plateau Adaptation Taille]
-:lvl2: 3
-
-
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
-:num_test: 1
+:num_test: 3
 :nom_test: Plateau Adaptation Taille
 :objectif: Vérifier que la taille du plateau s'adapte au nombre de checkpoints connectés ou simulés
 
@@ -233,14 +227,76 @@ Ordinateur sous Windows ou OS équivalent.
 
 
 
+=== Fonctionnalités Panel Admin
+:lvl1: 2
+> Ces présents tests concernent l'IHM Administrateur - celle avec les différents tableaux.
 
-=== Fonctionnalités Diverses
-:lvl1: *
-> Ces présents tests sont divers car ils rentrent dans plusieurs ou aucune des catégories ci-dessus.
 
-==== https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/67[Accès Port Série]
+==== Menu Pause
 :lvl2: 1
 
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Bouton Pause
+:objectif: S'assurer que le bouton Pause est effectif
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Appuyer sur le bouton pause. ^|Le mode pause s'active. ^| Être sur la page admin, ne pas être en pause. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Appuyer sur le bouton pause. ^|Le mode pause s'arrête. ^| Être sur la page admin, être en pause. ^|{test_wt}
+5+|
+|====
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 2
+:nom_test: Fonctionnalités Pause
+:objectif: S'assurer que les fonctionnalités du mode Pause sont effectives
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Appuyer sur le bouton pause 2 fois, avec 10 secondes d'écart. ^|Cela ne dérègle pas le résultat des temps. ^| Être sur la page admin, ne pas être en pause. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Matraquer le bouton pause. ^|Cela ne dérègle pas le résultat des temps. ^| Être sur la page admin, ne pas être en pause. ^|{test_wt}
+
+5+|
+|====
+
+
+
+
+=== Fonctionnalités Accueil
+
+:lvl1: 3
+Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, avant de le lancer.
+
+==== https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/67[Accès Port Série]
+
+:lvl2: 1
 
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
@@ -303,26 +359,20 @@ Ordinateur sous Windows ou OS équivalent.
 
 
 
+=== Fonctionnalités Diverses
+:lvl1: *
 
 
 
-////
-
-COMMENTAIRE
-
-=== Fonctionnalités Panel Administrateur
-:lvl1: 1
-> Ces tests ne regardent que le panel des administrateurs.
-
-==== Gestion des joueurs
+==== Messages aux spectateurs
 :lvl2: 2
 
 
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
 :num_test: 1
-:nom_test: Création d'un nouveau client
-:objectif: Vérifier qu'il est possible de créer un nouveau client
+:nom_test: Envoi d'un message
+:objectif: S'assurer que le message est envoyé
 
 // Ne pas toucher ⬇️
 :test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
@@ -336,12 +386,38 @@ COMMENTAIRE
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Cliquer sur le bouton "Nouveau client". ^|La fenêtre de création des clients s'ouvre. ^| Aucune ^|{test_ko}
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Envoyer un message aux spectateurices. ^|Le message s'envoie. ^| Être sur la page admin. ^|{test_wt}
+5+|
+|====
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 2
+:nom_test: Réception d'un message
+:objectif: S'assurer que le message est correctement reçu
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
 5+|
 
-5+|Commentaire : Aucun commentaire.
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Envoyer un message "bonjour", puis se rendre sur la page des spectateurs. ^|Le message est visible sur la page des spectateurs. ^| Être sur la page admin. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Envoyer un message "Voix ambiguë d’un cœur qui, au zéphyr, préfère les jattes de kiwis.", puis se rendre sur la page des spectateurs. ^|Le message est visible sur la page des spectateurs, et ne comporte pas d'erreur UTF-8. ^| Être sur la page admin. ^|{test_wt}
+
+5+|
 |====
-// ///////////////////////////////////////////
 
 
-////
+
+
+
