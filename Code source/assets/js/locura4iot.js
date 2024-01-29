@@ -97,7 +97,7 @@ async function lirePortSerie() {
  * Dès le chargement du l'interface administrateur, on construit les tableaux de toutes les équipes qui ont eu le temps de se connecter. 
  */
 window.addEventListener('load', function () {
-  if (window.location.href.includes("IHM_admin.php")) {
+  if (window.location.href.includes("IHM_admin.html")) {
     let cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
     verifierDeconnection();
     for (const joueur in cacheCacheData) {
