@@ -150,7 +150,7 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
 :num_test: 1
-:nom_test: Vérification Couleur Plateau
+:nom_test: Plateau Vérification Couleur
 :objectif: S'assurer que les couleurs sont conformes à la charte graphique
 
 // Ne pas toucher ⬇️
@@ -175,7 +175,7 @@ Ordinateur sous Windows ou OS équivalent.
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
 :num_test: 2
-:nom_test: Intégrité Couleur Plateau
+:nom_test: Plateau Intégrité Couleur
 :objectif: S'assurer que les couleurs du plateau ne changent jamais (qu'il n'y a pas d'aléatoire dans la fonction)
 
 // Ne pas toucher ⬇️
@@ -203,7 +203,7 @@ Ordinateur sous Windows ou OS équivalent.
 
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
-:num_test: 1
+:num_test: 3
 :nom_test: Plateau Adaptation Taille
 :objectif: Vérifier que la taille du plateau s'adapte au nombre de checkpoints connectés ou simulés
 
