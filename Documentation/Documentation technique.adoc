@@ -98,16 +98,30 @@ Contient toutes les fonctions Javascript du projet.
 
 Le fichier JavaScript (`locura4iot.js`) utilise la Web Serial API pour établir une communication avec le matériel du jeu.
 
-== Adaptabilité du plateau de jeu
-Le plateau de jeu depends du nombre de balises cachées, il fonctionne avec un tableau html adapté en php. Le seul soucis rencontré a été la génération du tableau car elle se fait de gauche a droite,
-or notre plateau doit avoir une forme en serpentin si on a beaucoup de balise donc les lignes pair se gererait mal avec se fonctionnement, la fonction *position* sert donc a attribué l'ordre des 
-balises td correctement pour pouvoir donner le bon style a chaque td.
+== Adaptation plateau
+
+=== Taille plateau
+
+La taille du plateau s'adapte automatiquement au nombre de checkpoints. En effet, lorsque l'on se trouve sur la page d'accueil (index), et qu'on souhaite accéder au plateau du jeu, le Javascript de la page d'accueil fournit au PHP de l'interface utilisateur le nombre de cases. Le plateau est en réalité un tableau PHP, dont l'apparance est modifiée avec du SCSS. Lorsque la page se charge, le PHP crée le tableau et lui attribue non seulement le bon nombre de case, mais aussi dans le bon ordre.
+
+image::img/plateau6.png[Plateau de taille 6]
+
+image::img/plateau11.png[Plateau de taille 11]
+
+Le plateau de jeu depends du nombre de balises cachées, il fonctionne avec un tableau html adapté en php. Le seul soucis rencontré a été la génération du tableau car elle se fait de gauche a droite, or notre plateau doit avoir une forme en serpentin si on a beaucoup de balise donc les lignes pair se gererait mal avec se fonctionnement, la fonction *position* sert donc a attribué l'ordre des balises td correctement pour pouvoir donner le bon style a chaque td.
 
 Code de la generation du tableau:
 
 image:img/adaptationtable.png[width=420, height=420]
 
-(on peut voir ici que la boucle for depends de la valeur liste-size)
+
+=== Couleur Plateau
+
+En harmonie avec la taille du plateau, la couleur du plateau est très importante. Elle permet d'améliorer la visibilité et la compréhension du jeu, et surtout l'accessibilité. La couleur du plateau est une échelle de bleu, conformément à la charte graphique du client. Les cases partent d'un bleu clair, à un bleu foncé, pour revenir au clair. Cela fait une boucle.
+
+image::img/plateau6.png[Plateau de taille 6]
+
+
 
 == Couleur du plateau
 la fonction color retourne un string qui sert de classe dans le php afin que le css change la couleur du td  
