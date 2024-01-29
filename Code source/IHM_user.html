@@ -55,14 +55,7 @@
         <script>
             // JavaScript code to generate the game table dynamically
             var liste_size = getTaillePlateau()+1;
-			setInterval(() => {
-				creerClassement();
-                créerPions();
-				afficherPions();
-				
-			}, 1000);
-			openModal();// a changer par un if qui verifie si un joueur a gagner
-
+			
             var rep_max = Math.ceil(liste_size / 5);
             var color = 0;
             var increment = true;
@@ -174,6 +167,20 @@
             var lastCase = document.querySelector(".lastCase");
             lastCase.style.backgroundImage = "url('./assets/images/ligne-darrivee.png')";
             lastCase.style.backgroundSize = "cover";
+            
+            creerClassement();
+            creerClassementHTML();
+            créerPions();
+            // repeter la fonction afficherPions et la fonction creerClassementHTML toutes les 0.5 secondes
+            creerClassementPopUp();
+            window.addEventListener('load', function () {
+            setInterval(afficherPions, 500);
+            setInterval(creerClassementHTML, 500);
+            
+            openModal();
+            });
+            
+            // afficherPions();
         </script>
     </div>
 </body>

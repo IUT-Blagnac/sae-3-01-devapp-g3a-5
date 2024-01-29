@@ -261,6 +261,14 @@ button#genererJson{
     text-align: center;
 }
 
+.popup{
+    z-index: 999;
+}
+/* popup est au dessus de modal */
+.modal{
+    z-index: 1;
+}
+
 
 @keyframes deplacementInformation {
     0% {

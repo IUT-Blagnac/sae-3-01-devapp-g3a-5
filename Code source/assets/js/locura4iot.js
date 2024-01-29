@@ -156,21 +156,7 @@ if (window.location.href.includes("IHM_admin.php")) {
     }
   });
 }
-async function verifierDeconnection() {
-  setInterval(() => {
-    const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-    const currentTime = Date.now();
 
-    for (const joueurId in cacheCacheData) {
-      const joueurData = cacheCacheData[joueurId];
-
-      if (joueurData.lastUpdate > 0 && (currentTime - joueurData.lastUpdate) / 1000 > 5) {
-        gererDeconnection(joueurData.node);
-        joueurData.lastUpdate = -1;
-      }
-    }
-  }, 1000);
-}
 
 ////////////////////
 //Pour les pop-ups//
@@ -188,6 +174,7 @@ function updatePopup(jsonData, nbBalises){
   else if(nbBalises == getNbCheckpoints()){
     contenu = "L'équipe " + jsonData.node + " a fini le jeu !";
     afficherPopup(contenu, true);
+    
   }
 }
 
@@ -430,28 +417,13 @@ function togglepause() {
 ////////////////////////////////
 ////////////////////////////////
 
-function creerClassementPopUp() {
+function creerClassementHTML() {
   // Récupérer l'objet depuis le localStorage
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
   // Calculer le score pour chaque joueur (nombre de balises trouvées)
-  const classement = [];
-  for (const joueurId in cacheCacheData) {
-    const joueurData = cacheCacheData[joueurId];
-    const balisesTrouvees = joueurData.times.filter(temps => temps === 0).length;
-    const tempsTotal = joueurData.times.reduce((total, temps) => total + temps, 0);
-    const couleur = joueurData.couleur;
-    classement.push({ joueurId, balisesTrouvees, tempsTotal, couleur });
-  }
-
-  // Trier les joueurs en fonction du nombre de balises trouvées et du temps total
-  classement.sort((a, b) => {
-    if (a.balisesTrouvees !== b.balisesTrouvees) {
-      return b.balisesTrouvees - a.balisesTrouvees; // Trie par nombre de balises trouvées décroissant
-    } else {
-      return a.tempsTotal - b.tempsTotal; // En cas d'égalité, trie par temps total croissant
-    }
-  });
+  const classement = creerClassement();
+  
 
   // Afficher le classement
   
@@ -482,27 +454,6 @@ function creerClassementPopUp() {
   return classement;
 }
 
-function creerClassementPopUp(classement) {
-
-  // Afficher le classement
-  const classementContent = document.getElementById('classementContent-pop-up');
-  classementContent.innerHTML += '<h2>Classement Cache-Cache</h2>';
-  titleclassemnt = ["Premier", "Deuxième", "Troisième"];
-  // on affiche le classement des 3 premiers joueurs
-  for (let i = 0; i < 3; i++) {
-    const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
-    const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
-    const joueur = classement[i];
-    const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
-    classementContent.innerHTML += `<p>${titleclassemnt[i]}: ${joueur.joueurId} (${joueur.balisesTrouvees} balises trouvées, ${tempsTotalText})</p>`;
-    joueurNameHtml.innerHTML = joueur.joueurId;
-    // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-    console.log(joueur.couleur);
-    joueurColorHtml.style.backgroundColor = joueur.couleur;
-  }
-  return classement;
-}
-
 function creerClassement() {
   // Récupérer l'objet depuis le localStorage
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
@@ -522,42 +473,98 @@ function creerClassement() {
   classement.sort((a, b) => {
     if (a.balisesTrouvees !== b.balisesTrouvees) {
       return b.balisesTrouvees - a.balisesTrouvees; // Trie par nombre de balises trouvées décroissant
-    } else {
+    }
+    else {
       return a.tempsTotal - b.tempsTotal; // En cas d'égalité, trie par temps total croissant
     }
   });
-
-  // Afficher le classement
-  
-  
-  // on affiche le classement de TOUT joueurs classement.length
-  for (let i = 0; i < 3; i++) {
-    for (let i = 0; i < 3 ; i++) {
-      const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
-      const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
-      const joueur = classement[i];
-      const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
-
-      joueurNameHtml.innerHTML = joueur.joueurId;
-      // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-      // console.log(joueur.couleur);
-      // if (i % 3 === 0) {
-      //   joueurColorHtml.classList.add('square');
-
-      // } else if (i % 3 === 1) {
-      //   joueurColorHtml.classList.add('circle');
-
-      // } else {
-      //   joueurColorHtml.classList.add('triangle');
-
-      // }
-    
-      joueurColorHtml.style.backgroundColor = joueur.couleur;
-    
-    }
-  }
   return classement;
 }
+
+
+
+function creerClassementPopUp() {
+  // Faire une querySelector pour récupérer la classe modal
+  
+  // Afficher le classement
+  document.addEventListener("DOMContentLoaded", function() {
+    const classementContent = document.getElementById('classementContent-pop-up');
+  
+  console.log(classementContent);
+  classementContent.innerHTML += '<h2>Classement Cache-Cache</h2>';
+  titleclassemnt = ["Premier", "Deuxième", "Troisième"];
+  // on affiche le classement des 3 premiers joueurs
+  for (let i = 0; i < 3; i++) {
+    const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
+    const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
+    classement=creerClassement();
+    const joueur = classement[i];
+    const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
+    classementContent.innerHTML += `<p>${titleclassemnt[i]}: ${joueur.joueurId} (${joueur.balisesTrouvees} balises trouvées, ${tempsTotalText})</p>`;
+    joueurNameHtml.innerHTML = joueur.joueurId;
+    // joueur possede l'attribut couleur qui contient l'hexa de la couleur
+    console.log(joueur.couleur);
+    joueurColorHtml.style.backgroundColor = joueur.couleur;
+  }
+  return classement;
+});
+}
+
+// function creerClassement() {
+//   // Récupérer l'objet depuis le localStorage
+//   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+
+//   // Calculer le score pour chaque joueur (nombre de balises trouvées)
+//   const classement = [];
+//   for (const joueurId in cacheCacheData) {
+//     const joueurData = cacheCacheData[joueurId];
+//     const balisesTrouvees = joueurData.times.filter(temps => temps != 0).length;
+//     const targets = joueurData.targets;
+//     const tempsTotal = joueurData.times.reduce((total, temps) => total + temps, 0);
+//     const couleur = joueurData.couleur;
+//     classement.push({ joueurId, balisesTrouvees, targets, tempsTotal, couleur });
+//   }
+
+//   // Trier les joueurs en fonction du nombre de balises trouvées et du temps total
+//   classement.sort((a, b) => {
+//     if (a.balisesTrouvees !== b.balisesTrouvees) {
+//       return b.balisesTrouvees - a.balisesTrouvees; // Trie par nombre de balises trouvées décroissant
+//     } else {
+//       return a.tempsTotal - b.tempsTotal; // En cas d'égalité, trie par temps total croissant
+//     }
+//   });
+
+//   // Afficher le classement
+  
+  
+//   // on affiche le classement de TOUT joueurs classement.length
+//   for (let i = 0; i < 3; i++) {
+//     for (let i = 0; i < 3 ; i++) {
+//       const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
+//       const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
+//       const joueur = classement[i];
+//       const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
+
+//       joueurNameHtml.innerHTML = joueur.joueurId;
+//       // joueur possede l'attribut couleur qui contient l'hexa de la couleur
+//       // console.log(joueur.couleur);
+//       // if (i % 3 === 0) {
+//       //   joueurColorHtml.classList.add('square');
+
+//       // } else if (i % 3 === 1) {
+//       //   joueurColorHtml.classList.add('circle');
+
+//       // } else {
+//       //   joueurColorHtml.classList.add('triangle');
+
+//       // }
+    
+//       joueurColorHtml.style.backgroundColor = joueur.couleur;
+    
+//     }
+//   }
+//   return classement;
+// }
 
 function créerPions() {
     nbTargets = getTaillePlateau();
