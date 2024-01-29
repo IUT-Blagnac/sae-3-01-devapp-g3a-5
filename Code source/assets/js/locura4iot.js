@@ -64,6 +64,7 @@ async function lirePortSerie() {
                 listNodeWithColor[jsonData.node].times[j] = jsonData.times[j];
               }
             }
+            localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
           }
           console.log(listNodeWithColor);
         } catch (jsonError) {
@@ -496,6 +497,62 @@ function creerClassementPopUp(classement) {
   return classement;
 }
 
+function creerClassement() {
+  // Récupérer l'objet depuis le localStorage
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+
+  // Calculer le score pour chaque joueur (nombre de balises trouvées)
+  const classement = [];
+  for (const joueurId in cacheCacheData) {
+    const joueurData = cacheCacheData[joueurId];
+    const balisesTrouvees = joueurData.times.filter(temps => temps != 0).length;
+    const targets = joueurData.targets;
+    const tempsTotal = joueurData.times.reduce((total, temps) => total + temps, 0);
+    const couleur = joueurData.couleur;
+    classement.push({ joueurId, balisesTrouvees, targets, tempsTotal, couleur });
+  }
+
+  // Trier les joueurs en fonction du nombre de balises trouvées et du temps total
+  classement.sort((a, b) => {
+    if (a.balisesTrouvees !== b.balisesTrouvees) {
+      return b.balisesTrouvees - a.balisesTrouvees; // Trie par nombre de balises trouvées décroissant
+    } else {
+      return a.tempsTotal - b.tempsTotal; // En cas d'égalité, trie par temps total croissant
+    }
+  });
+
+  // Afficher le classement
+  
+  
+  // on affiche le classement de TOUT joueurs classement.length
+  for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3 ; i++) {
+      const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
+      const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
+      const joueur = classement[i];
+      const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
+
+      joueurNameHtml.innerHTML = joueur.joueurId;
+      // joueur possede l'attribut couleur qui contient l'hexa de la couleur
+      // console.log(joueur.couleur);
+      // if (i % 3 === 0) {
+      //   joueurColorHtml.classList.add('square');
+
+      // } else if (i % 3 === 1) {
+      //   joueurColorHtml.classList.add('circle');
+
+      // } else {
+      //   joueurColorHtml.classList.add('triangle');
+
+      // }
+    
+      joueurColorHtml.style.backgroundColor = joueur.couleur;
+    
+    }
+  }
+  return classement;
+}
+
 function créerPions() {
     nbTargets = getTaillePlateau();
     var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
@@ -632,6 +689,18 @@ function estFinDuJeu() {
   return false;
 }
 
+function getTaillePlateau() {
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  const cachecacheTable = [];
+  for (const joueurId in cacheCacheData) {
+    const joueurData = cacheCacheData[joueurId];
+
+    const targets = joueurData.targets;
+
+    cachecacheTable.push({ targets });
+  }
+  return cachecacheTable[0].targets.length;
+}
 
 function getCapteursTrouvés(node) {
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));

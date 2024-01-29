@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="utf-8" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
@@ -15,7 +14,6 @@
     <div class="nav-bar">
         <h1> Bienvenue sur la carte de la course LocURa4IoT!</h1>
     </div>
-
     <!-- For notifications -->
     <div class="popup" id="popup">
         <div class="popup-content" id="popupContent">
@@ -50,22 +48,17 @@
                 <button id="genererJson" onclick="downloadJSON()">Générer JSON</button>
             </div>
         </div>
-        <script>
-            
-            
-        </script>
         <div class="centered-div">
             <table id="gameTable">
-                <!-- JavaScript -->
             </table>
         </div>
-
         <script>
             // JavaScript code to generate the game table dynamically
             var liste_size = getTaillePlateau()+1;
 			setInterval(() => {
-				// creerClassement();
-				// afficherPions();
+				creerClassement();
+                créerPions();
+				afficherPions();
 				
 			}, 1000);
 			openModal();// a changer par un if qui verifie si un joueur a gagner
@@ -174,15 +167,6 @@
                     }
                 }
             }
-			// var lastCase = document.querySelector(".lastCase");
-			// // mettre une image dans la derniere case
-			// var img = document.createElement("img");
-			// img.style.width = "40px";
-			// img.style.height = "40px";
-			// img.src = "./assets/images/ligne-darrivee.png";
-			
-			// lastCase.appendChild(img);
-			// // // mettre une image dans la premiere case
 			var firstCase = document.querySelector(".firstCase");
 			firstCase.style.backgroundImage = "url('./assets/images/depart.png')";
             firstCase.style.backgroundSize = "cover";
@@ -190,11 +174,7 @@
             var lastCase = document.querySelector(".lastCase");
             lastCase.style.backgroundImage = "url('./assets/images/ligne-darrivee.png')";
             lastCase.style.backgroundSize = "cover";
-
-
-			
         </script>
     </div>
 </body>
-
 </html>
