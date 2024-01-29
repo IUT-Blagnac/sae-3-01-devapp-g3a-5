@@ -421,3 +421,13 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 
 
+== Tests À ajouter :
+* "Fusion des fonctionnalités"
+* "Rafraichissement Index" 
+* "Rapport de partie"
+* "Cohérence des temps des sniffeurs"
+* "Cohérence des couleurs de joueurs"
+* "Fonctionnement de la coche 'trouvé' "
+* "Avancement des pions"
+* "Intégrité de taille du tableau"
+
