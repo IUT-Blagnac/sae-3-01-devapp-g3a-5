@@ -161,9 +161,48 @@ Resultat:
 
 image:img/json.png[width=250, height=250]
 
+
 == Données Admin
 
 Dans le local storage sont sauvegardées les données des équipes (utilisables par les admins) et écrites par la page index (cf. Accès Port Série) ci-dessous.
+Les données (sous forme de JSon) sont toutes sauvegardés dans la variable "listNodeWithColor".
+
+image:img/localstorage.png[]
+
+=== Contrôle du jeu en continu
+Dès qu'un changement est détecté dans la listNodeWithColors contenue dans le local storage, une fonction s'active permettant d'identifier la nature de ces changements et d'agir en conséquence : 
+
+* Si c'est une nouvelle équipe,
+* Si une équipe a trouvé une nouvelle balise,
+* Si une équipe s'est déconnectée,
+* Si une équipe s'est reconnectée.
+
+image:img/doc_tech_admin/control_admin.png[]
+
+=== Création des tableaux 
+
+Lorsqu'une nouvelle équipe se connecte, on créée son tableau récapitulatif qui sera affiché en temps réel (sans rafraîchissement de la page) sur l'interface administrateur. Pour savoir si une équipe est nouvelle, on vérifie si sa node est utilisée comme clé de la variable listNodeWithColor contenue dans le localstorage. Le cas échéant, on créée sa table de a à z :
+
+image:img/doc_tech_admin/createTab1.png[]
+
+On créée la première colonne qui affiche le nom de l'équipe (avec sa couleur) et l première ligne contenant les labels des colonnes.
+
+image:img/doc_tech_admin/createTab2.png[]
+
+Maintenant, on rempli le tableau. Dans la première colonne, on insère les ids des nodes, dans la deuxième, une symbole "check" si elle a été trouvé, et le temps si elle a été trouvé. Dans le cas contraire, on affiche "--:--" dans la colonne des temps. On affecte à chaque cellule un id unique qui nous servira à modifier le tableau pour correspondre au progrès de l'équipe.
+
+Voici le résultat final :
+
+image:img/doc_tech_admin/tableau.png[]
+
+=== Modification des tableaux 
+
+On récupère le Json de l'équipe qui a trouvé un ou plusieurs nouveaux capteurs. Pour chaque ligne, on récupère la cellule de la colonne trouvé et la cellule contenant le temps correspondantes.
+Si le temps est supérier à 0, alors on insère le temps et on affiche une icône checked.
+
+image:img/doc_tech_admin/tableauModif.png[]
+image:img/doc_tech_admin/modifierTab.png[]
+
 
 === Couleur aléatoire des joueurs
 Compare la node qui vient d'être récupéré avec un tableau contenant les nodes ayant déjà une couleur. Si la node est déjà existante il ne se passe rien. Sinon une couleur est générer de manière aléatoire. Ensuite cette couleur est ajouter au json de la node et la node est ajouté au tableau des nodes avec couleurs. 
