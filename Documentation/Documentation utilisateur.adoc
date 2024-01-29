@@ -48,30 +48,18 @@ Pour utiliser le jeu, vous devez posséder un ordinateur avec chrome et l'applic
 
 === 2. Installation 
 
-
-
-
-=== Lancement du Site web
-Ouvrez <<installation, l'application>>. 
-Vous arriverez sur la page index. Cliquez sur "Lancer lecture des données" et sélectionnez le port utilisé pour la carte programmable lectrice de données.
-
-=== Navigation sur le Site
-Pour accéder à l'interface administrateur, cliquez sur le bouton "Commencer la partie" présent sur la page index.
-
-
 Pour lancer l'application, il faut télécharger Wamp pour déployer le projet sur sa propre machine, et l'héberger localement. N'importe quel autre serveur web peut être utilisé, mais Wamp est le plus simple à utiliser.
 
 https://www.wampserver.com/en/download-wampserver-64bits/#download-wrapper[Lien de telechargement wamp]
 
 image::img/installwamp.PNG[]
 
-
 Vous devriez obtenir un fichier comme cela :
 image::img/wampsetup.PNG[]
 Lancez-le et suivez les instructions pour installer Wamp.
 
 
-=== Lancement
+=== 3. Lancement
 
 Une fois Wamp installé, il faut lancer l'application Wamp puis lancer le serveur en cliquant sur l'icône Wamp dans la barre des tâches, puis en cliquant sur "Start All Services".
 
@@ -84,15 +72,19 @@ https://www.github.com/LoisPacqueteau/LocuraIoT[Code source]
 
 Une fois le code source placé dans le dossier LocuraIoT, il faut se rendre sur la page `localhost/Code%20source/` dans son navigateur Google Chrome.
 
-l'application est maintenant installé sur votre machine.
+L'application est maintenant installé sur votre machine.
+
 
 
 == IV. Utilisation de l'application
 [.text-justify]
 
-=== Navigation sur le Site
+=== Lancement du Site web
+Ouvrez <<installation, l'application>>. 
+Vous arriverez sur la page index. Cliquez sur "Lancer lecture des données" et sélectionnez le port utilisé pour la carte programmable lectrice de données.
 
-Une barre des taches sur l'IHM Administateur permet de naviguer entre les différentes pages du site.
+=== Navigation sur le Site
+Pour accéder à l'interface administrateur, cliquez sur le bouton "Commencer la partie" présent sur la page index.
 
 image::img/commencerpartie.PNG[]
 
