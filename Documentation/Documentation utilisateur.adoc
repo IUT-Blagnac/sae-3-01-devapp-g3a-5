@@ -46,7 +46,7 @@ Pour utiliser le jeu, vous devez posséder un ordinateur avec chrome et l'applic
 
 > /!\ Le projet doit être utilisé avec Google Chrome pour être compatible.
 
-=== 2. Installation 
+=== 2. Installation de Wamp
 
 Pour lancer l'application, il faut télécharger Wamp pour déployer le projet sur sa propre machine, et l'héberger localement. N'importe quel autre serveur web peut être utilisé, mais Wamp est le plus simple à utiliser.
 
@@ -59,8 +59,8 @@ image::img/wampsetup.PNG[]
 Lancez-le et suivez les instructions pour installer Wamp.
 
 
-=== 3. Lancement
-
+=== 3. Installation de l'application
+[[installation]]
 Une fois Wamp installé, il faut lancer l'application Wamp puis lancer le serveur en cliquant sur l'icône Wamp dans la barre des tâches, puis en cliquant sur "Start All Services".
 
 image::img/wamp.png[]
@@ -79,7 +79,7 @@ L'application est maintenant installé sur votre machine.
 == IV. Utilisation de l'application
 [.text-justify]
 
-=== Lancement du Site web
+=== 1. Lancement du Site web
 Ouvrez <<installation, l'application>>. 
 Vous arriverez sur la page index. Cliquez sur "Lancer lecture des données" et sélectionnez le port utilisé pour la carte programmable lectrice de données.
 
@@ -88,7 +88,7 @@ Pour accéder à l'interface administrateur, cliquez sur le bouton "Commencer la
 
 image::img/commencerpartie.PNG[]
 
-/!\ Ne pas fermer la page index ! C'est elle qui se charge de la lecture des données.
+> /!\ Ne pas fermer la page index ! C'est elle qui se charge de la lecture des données.
 
 Depuis la page administrateur, vous pouvez accéder à l'interface utilisateur en cliquant sur le bouton "IHM User"
 
@@ -96,7 +96,7 @@ image::img/btnihmuser.PNG[]
 
 === Interactions sur le Jeu
 
-La majeure partie des interactions avec le jeu se réalisent à travers l'interface administrateur.
+La majeure partie des interactions avec le jeu se réalisent à travers <<ihmadmin, l'interface administrateur>>.
 
 ==== Index
 
@@ -108,15 +108,15 @@ image::img/refreshbutton.png[Bouton de rafraîchissement]
 
 Exemple - Avant rafraîchissement
 
-image::img/beforerefresh.png[]
+image::img/beforerefresh.png[Liste des équipes avant rafraîchissement]
 
-// On ne voit que l'équipe A par exemple
+// On ne voit aucune équipe
 
 Exemple - Après rafraîchissement
 
-image::img/afterrefresh.png[]
+image::img/afterrefresh.png[Liste des équipes après rafraîchissement]
 
-// On voit l'équipe A et B par exemple
+// On voit les équipes
 
 ===== Accès Interface Admin
 
@@ -132,24 +132,27 @@ image::img/viewcheckpoints.png[Exemple de liste de checkpoints]
 
 ===== Voir Sniffeurs Connectés
 
-Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index/
+Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index.
 
 image::img/afterrefresh.png[Exemple de liste de sniffeurs connectés]
 
 ==== Interface administrateur
+[[ihmadmin]]
 
 ===== Afficher Message
 
 Vous trouverez un bouton "message". Si vous cliquez dessus, une pop-up vous demandera le contenu de votre message. Confirmez, et il sera affiché sur l'écran des utilisateurs.
-Cette fonction est utile pour informer les joueurs que la partie se termine bientôt ou alerter une équipe qu'elle s'est trop éloignée par exemple.
+Cette fonction est utile pour informer les joueurs que la partie se termine bientôt par exemple.
 
 image::img/btnmessage.png[Bouton Message]
 
 image::img/messagedisplay.png[Affichage du message]
 
+> /!\ Des messages automatiques sont programmés, pour prévenir qu'une équipe a trouvé la moitié des capteurs, a fini la partie ou s'est déconnectée/reconnectée.
+
 ===== Menu Pause
 
-Il est possible de mettre le jeu en pause grâce au bouton associé. Cela permet d'indiquer aux joueurs, sur l'interface utilisateur, qu'ils doivent arrêter leurs recherches. Le bouton pause n'a pas de réelle fonctionnalité, il est purement esthétique, il faut compter sur la bonne foi des joueurs de ne pas continuer à jouer lorsque le jeu est en pause
+Il est possible de mettre le jeu en pause grâce au bouton associé. Cela permet d'indiquer aux joueurs, sur l'interface utilisateur, qu'ils doivent arrêter leurs recherches. Le bouton pause n'a pas de réelle fonctionnalité, il est purement esthétique, il faut compter sur la bonne foi des joueurs de ne pas continuer à jouer lorsque le jeu est en pause. Pour relancer la partie, cliquez sur l'icône pause.
 
 image::img/pausebutton.png[Bouton Pause]
 
@@ -159,7 +162,7 @@ image::img/pausemode.png[Affichage du mode pause]
 
 ===== Voir Données Equipes
 
-La liste des équipes étant disponibles depuis l'interface administrateur, il est possible facilement de s'intéresser à leur détails de progression. On peut notamment observer quels checkpoints ont été trouvés, et en combien de temps.
+La liste des équipes étant disponibles depuis l'interface administrateur, il est possible facilement de s'intéresser aux détails de leur progression. On peut notamment observer quels checkpoints ont été trouvés, et en combien de temps.
 
 image::img/viewteamdata.png[Données d'une équipe]
 
@@ -204,7 +207,6 @@ image::img/afterrefresh.png[Index]
 ===== Déconnexion d'une équipe
 
 Lorsqu'une équipe se déconnecte (Joueur hors de portée, noeud déchargé...) les participants au jeu en sont informés : un message est lancé automatiquement sur l'interface utilisateur et le tableau correspondant à l'équipe dans l'interface utilisateur est mit en transparence.
-
 
 image::img/tabdeco.png[Tableau déconnecté]
 
