@@ -43,6 +43,8 @@ Une fois VSCode installé, il  suffit de cloner le dépôt GitHub dans un dossie
 
 == Architecture Système
 
+Une seperation "back" et "front" est impossible car nous n'utilisons pas de base de données pour ce projet
+
 image::img/architecture.png[width=500, height=375]
 
 === Dossier du Code Source (`CodeSource`)
