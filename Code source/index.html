@@ -8,19 +8,35 @@
 	<script src="./assets/js/locura4iot.js" defer></script>
 </head>
 <body>
-		<h1> LocURa4IoT - Chasse au trésor</h1>
-
+	<h1> LocURa4IoT - Chasse au trésor</h1>
 		<h4> Joueurs : <span id='nbJoueurs'>0</span> <span id="toggleJoueurs" class="rotate" onclick="afficherJoueurs()">▲</span>  </h4>
-		<div id="listJoueurs" class="listIndex">
-		</div>
+		<div id="listJoueurs" class="listIndex"></div>
 
 		<h4> Capteurs : <span id='nbCheckpoints'>0</span> <span id="toggleCheckpoints" class="rotate" onclick="afficherCheckpoints()">▲</span>  </h4>
-		<div id="listCheckpoints" class="listIndex">
-			
-		</div>
-
+		<div id="listCheckpoints" class="listIndex"></div>
+		
 		<button class="mainbutton" onclick="rafraichir()" id="rafraichir">Lancer lecture des données</button>
 		<button class="mainbutton" style="display: none;" id="commencerPartie" onclick="window.open('IHM_admin.html');">Commencer la partie !</button>
-	
+		<button class="mainbutton" onclick="clearStorage()"> Clear storage</button>
+		
+		<div id="listeJson-content">./App/Console: <br> Veuillez lancer la lecture des données</div>
+		<script>
+			function clearStorage() {
+				localStorage.clear();
+				location.reload();
+			}
+
+			async function afficherConsole(){
+				setInterval(function(){ 
+					var json = JSON.parse(localStorage.getItem("listNodeWithColor"));
+					if (json == null) {
+						json = ["0","0","0","0","0","0","0","0","0","0","0","0","0","0",];
+					}	
+					var listeJson = document.getElementById("listeJson-content");
+					// allez a la ligne
+					listeJson.innerHTML = "./App/Console: <br>"+JSON.stringify(json);	
+				}, 500);
+			}
+		</script>
 </body>
 </html>

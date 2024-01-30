@@ -18,6 +18,7 @@ body{
     font-family: muli,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
     margin: 0;
     height: 100%;
+    overflow: hidden;
 }
 
 html{
@@ -25,10 +26,9 @@ html{
 }
 
 div.nav-bar{
-    background-color: rgba(70, 70, 70, 0.503);
     padding: 0px;
-    color: aliceblue;
-    
+    background-color: rgba(44, 42, 42, 1);
+    color: #5CBDBF;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -41,7 +41,7 @@ td.hidden{
 }
 
 
-table{
+table:not(#content-classement-table){
     border-collapse: collapse;
 }
 
@@ -132,9 +132,16 @@ td.color-5{
 td.joueur-name{
     border: 0;
 }
-.lastcase{
-    background-image: url("./images/ligne-darrivee.png");
-    background-size: contain;
+
+canvas {
+    position: absolute;
+    top: 0;
+    
+}
+.classconfetti{
+    position: absolute;
+    top: 0;
+    z-index: 1;
 }
 
 
@@ -206,10 +213,6 @@ button#genererJson{
 
 }
 
-
-
-
-
 /* Styles pour le bouton de fermeture de la fenêtre modale */
 .close-button {
     cursor: pointer;
@@ -241,12 +244,19 @@ button#genererJson{
     border-bottom: 8.66px solid;
 }  
 
-
-
+table#content-classement-table{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+    background-color: rgba(44, 42, 42, 1);
+    color: #5CBDBF;
+    border-radius: 10px;
+}
 
 /* POP UP */
-
-.message {
+.popup {
     display: none;
     position: fixed;
     top: 50%;
