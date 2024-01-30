@@ -140,6 +140,13 @@ le css:
 
 image:img/fonction-color3.png[]
 
+== Classement & Podium
+=== Classement
+
+=== Podium
+Le podium s'affiche automatiquement pendant, et à la fin de la partie. Une pop-up de fin de partie ainsi que des confettis apparaissent.
+
+
 == Génération du PDF de fin de partie
 
 image:img/genererpdf.png[]
@@ -161,7 +168,9 @@ Resultat:
 
 image:img/json.png[width=250, height=250]
 
+=== Console JSON
 
+[TEXTE]
 
 
 
@@ -181,6 +190,10 @@ Dès qu'un changement est détecté dans la listNodeWithColors contenue dans le 
 * Si une équipe s'est reconnectée.
 
 image:img/doc_tech_admin/control_admin.png[]
+
+=== Clear du Local Storage
+
+[TEXTE]
 
 == Gestion des tableaux
 
