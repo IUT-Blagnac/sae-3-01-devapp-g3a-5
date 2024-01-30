@@ -98,7 +98,7 @@ Contient toutes les fonctions Javascript du projet.
 
 Le fichier JavaScript (`locura4iot.js`) utilise la Web Serial API pour établir une communication avec le matériel du jeu.
 
-== Adaptation plateau
+== Plateau
 
 === Taille plateau
 
@@ -123,29 +123,49 @@ image::img/plateau6.png[Plateau de taille 6]
 
 
 
-== Couleur du plateau
-la fonction color retourne un string qui sert de classe dans le php afin que le css change la couleur du td  
+La fonction color retourne un string qui sert de classe dans le php afin que le css change la couleur de la balise HTML `td`.
 
-la fonction color: 
+La fonction color: 
 
 image:img/fonction-color.png[]
 
 
 
-l'utilisation dans le code:
+L'utilisation dans le code:
 
 image:img/fonction-color2.png[]
 
-le css:
+Le css:
 
 image:img/fonction-color3.png[]
+
+=== Pions
+
+==== Création des pions
+
+// Salut Thomas ! C'est ici que tu dois modifier la doc tech.
+Lorsqu'un joueur se connecte au jeu, un pion est créé, et est placé immédiatement sur la première case, *Start*. Il est important de noter qu'un joueur peut se connecter pendant une partie. Le pion doit donc pouvoir être ajouté en milieu de partie.
+
+image:img/createpioncode.png[]
+
+// Commentaire du code...
+
+==== Déplacement des pions
+
+Le déplacement est pions est une variable difficile à intégrer correctement au jeu, mais qui est tout de même importante. Les pions doivent se déplacer qu'une case à l'autre, *sans altérer la taille du plateau*. Cela peut-être très contraignant puisque par défaut, les tableaux HTML sont fait pour adapter leur taille à la quantité d'information que chacune de ses cellules contient.
+
+La solution trouvée pour résoudre ce problème est [DETAILLER LA SOLUTION].
+
+image:img/movepioncode.png[]
+
+// Commentaire du code...
 
 == Génération du PDF de fin de partie
 
 image:img/genererpdf.png[]
 
 
-pour generer le pdf on utilise la librairie pdfmake qui permet de generer un pdf facilement en javascript. On a donc un "event listener" sur le bouton qui permet de generer le pdf a partir des données du jeu.
+Pour generer le pdf on utilise la librairie pdfmake qui permet de generer un pdf facilement en javascript. On a donc un "event listener" sur le bouton qui permet de generer le pdf a partir des données du jeu.
 
 Résultat:
 
