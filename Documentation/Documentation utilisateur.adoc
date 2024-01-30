@@ -3,6 +3,8 @@
 :toc-title: Sommaire
 
 Créé par : Pacqueteau Loïs, Duppi Thomas, Demany Loélia, Barette Vincent
+Date : 30/01/2024
+Version : 2.0
 
 == I. Introduction
 [.text-justify]
