@@ -51,9 +51,9 @@ Pour utiliser le jeu, vous devez posséder un ordinateur avec Chrome (ou Edge, O
 === 2. Installation de l'application
 
 Le fichier code source est disponible ici: 
-https://www.github.com/LoisPacqueteau/LocuraIoT[Code source]
+https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/tree/master/Code%20source[Code source]
 
-Pour l'installer, rien de plus simple, téléchargez le code source et ouvrez le fichier `index.html` dans votre navigateur.
+Pour l'installer, rien de plus simple, téléchargez le code source (A DETAILLER) et ouvrez le fichier `index.html` dans votre navigateur.
 
 == IV. Utilisation de l'application
 [.text-justify]
