@@ -54,18 +54,18 @@ Il s'agit de la page d'accueil du projet. C'est elle qui demande l'accès au por
 
 ==== `IHM_admin.html`
 
-Fichier PHP responsable de l'interface utilisateur administrateur.
+Fichier HTML responsable de l'interface utilisateur administrateur.
 Gère l'affichage des informations administratives et des statistiques du jeu.
 Il permet d'accéder à l'IHM utilisateur.
 
 ==== `IHM_user.html`
 
-Fichier PHP responsable de l'interface utilisateur pour les joueurs.
+Fichier HTML responsable de l'interface utilisateur pour les joueurs.
 Gère l'affichage de l'interface de jeu, de la progression globale des joueurs, etc.
 
 ==== `index.html`
 
-Fichier PHP responsable du lancement du jeu.
+Fichier HTML responsable du lancement du jeu.
 Gère l'affichage des sniffeurs et checkpoints connectés, bouton pour démarrer le jeu.
 
 === `Assets`
@@ -96,13 +96,13 @@ Le fichier JavaScript (`locura4iot.js`) utilise la Web Serial API pour établir 
 
 === Taille plateau
 
-La taille du plateau s'adapte automatiquement au nombre de checkpoints. En effet, lorsque l'on se trouve sur la page d'accueil (index), et qu'on souhaite accéder au plateau du jeu, le Javascript de la page d'accueil fournit au PHP de l'interface utilisateur le nombre de cases. Le plateau est en réalité un tableau PHP, dont l'apparance est modifiée avec du SCSS. Lorsque la page se charge, le PHP crée le tableau et lui attribue non seulement le bon nombre de case, mais aussi dans le bon ordre.
+La taille du plateau s'adapte automatiquement au nombre de checkpoints. En effet, lorsque l'on se trouve sur la page d'accueil (index), et qu'on souhaite accéder au plateau du jeu, le Javascript de la page d'accueil fournit le nombre de cases. Le plateau est en réalité un tableau, dont l'apparance est modifiée avec du CSS. Lorsque la page se charge, le javascript crée le tableau et lui attribue non seulement le bon nombre de case, mais aussi dans le bon ordre.
 
 image::img/plateau6.png[Plateau de taille 6]
 
 image::img/plateau11.png[Plateau de taille 11]
 
-Le plateau de jeu depends du nombre de balises cachées, il fonctionne avec un tableau html adapté en php. Le seul soucis rencontré a été la génération du tableau car elle se fait de gauche a droite, or notre plateau doit avoir une forme en serpentin si on a beaucoup de balise donc les lignes pair se gererait mal avec se fonctionnement, la fonction *position* sert donc a attribué l'ordre des balises td correctement pour pouvoir donner le bon style a chaque td.
+Le plateau de jeu depends du nombre de balises cachées, il fonctionne avec un tableau html adapté en Javascript. Le seul soucis rencontré a été la génération du tableau car elle se fait de gauche a droite, or notre plateau doit avoir une forme en serpentin si on a beaucoup de balise donc les lignes pair se gererait mal avec se fonctionnement, la fonction *position* sert donc a attribué l'ordre des balises td correctement pour pouvoir donner le bon style a chaque td.
 
 Code de la generation du tableau:
 
@@ -117,7 +117,9 @@ image::img/plateau6.png[Plateau de taille 6]
 
 
 
-La fonction color retourne un string qui sert de classe dans le php afin que le css change la couleur de la balise HTML `td`.
+
+
+La fonction color retourne un string qui sert de classe dans le Javascript afin que le css change la couleur de la balise HTML `td`.
 
 La fonction color: 
 
@@ -157,16 +159,31 @@ La fonction prend en paramètre la node du joueur et donc l'id du pion. D'abord 
 == Classement & Podium
 === Classement
 
-=== Podium
-Le podium s'affiche automatiquement pendant, et à la fin de la partie. Une pop-up de fin de partie ainsi que des confettis apparaissent.
+Le classement est une fonctionnalité importante du jeu. Il permet aux joueurs de savoir où ils en sont dans la partie, et de se motiver à continuer. Il est donc important que le classement soit visible en permanence, et qu'il soit mis à jour en temps réel.
 
+On a donc une fonction creerClassement qui va calculer le classement de chaque joueur et les afficher dans l'ordre dans le tableau du classement. Pour calculer le classement on va trier le tableau des joueurs en fonction du nombre de capteur trouvé. En cas d'égalité on va trier en fonction du temps. 
+
+Le code de la fonction creerClassement:
+
+image:img/creerclassement.png[]
+
+Fonction pour l'affichage du classement dans l'hthml:
+
+image:img/creerclassementHTML.png[]
+
+=== Podium
+Le podium s'affiche automatiquement pendant la partie. A la fin de la partie? Une pop-up de score avec la posibilité de telecharger le PDF/JSON. Accesoirment, des confettis s'affichent sur l'écran a l'apparition de la popUp.On utilise la librairie *animejs*.
+
+image:img/confetti.png[]
+
+image:img/confetti2.png[]
 
 
 == Génération du PDF de fin de partie
 
 image:img/genererPDF.png[]
 
-
+Fonctionalité disponible dans l'interface utilisateur, elle permet de generer un pdf contenant les données de la partie en cours.
 Pour generer le pdf on utilise la librairie pdfmake qui permet de generer un pdf facilement en javascript. On a donc un "event listener" sur le bouton qui permet de generer le pdf a partir des données du jeu.
 
 Résultat:
@@ -177,7 +194,7 @@ image:img/pdf.png[width=300, height=300]
 
 image:img/genererJSON.png[width=300, height=300]
 
-cette fonctionnalité disponible dans l'interface administrateur permet de generer un fichier json contenant les données de la partie en cours. Meme principe que pour le pdf, on a un "event listener" sur le bouton qui permet de generer le json a partir du local storage.
+cette fonctionnalité disponible dans l'interface administrateur et user (à la fin) permet de générer un fichier json contenant les données de la partie en cours. Pour générer le json on utilise la fonction JSON.stringify() qui permet de convertir un objet javascript en json. On aura clairement pu mettre directement les données dans un objet json mais on a préféré faire comme ça pour que le code soit plus lisible( le json est mis a la ligne ).
 
 Resultat:
 
@@ -185,7 +202,15 @@ image:img/json.png[width=250, height=250]
 
 === Console JSON
 
-[TEXTE]
+La "console JSON" est en fait une div, elle permet de visualiser les données de la partie en cours. Elle est disponible dans l'index.  Elle est mise a jour chaque 5miniseconde par un setInterval. 
+
+le code:
+
+image:img/console2.png[]
+
+le resultat:
+
+image:img/console.png[]
 
 
 
@@ -208,7 +233,13 @@ image:img/doc_tech_admin/control_admin.PNG[]
 
 === Clear du Local Storage
 
-[TEXTE]
+un simple bouton qui permet de clear le local storage, il est disponible dans l'index.html
+
+le code:
+
+image:img/console2.png[]
+
+Resultat: ca vide le local storage et recharge la page.
 
 == Gestion des tableaux
 
@@ -298,5 +329,4 @@ image:img/choixPortSerie.png[]
 
 == Adaptabilité
 Le code javaScript est réalisé de manière à s'adapter à la taille d'une liste de balise. Plus il y a de balise, plus le plateau de jeu sera grand. La génération des couleurs se fait pour chaque joueur et une couleur ne peut pas être attribuée deux fois.
-
-
+ 

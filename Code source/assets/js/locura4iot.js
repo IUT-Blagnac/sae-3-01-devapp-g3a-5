@@ -418,7 +418,7 @@ function togglepause() {
 ////////////////////////////////
 
 function creerClassementHTML() {
-  // Récupérer l'objet depuis le localStorage
+  
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
   // Calculer le score pour chaque joueur (nombre de balises trouvées)
@@ -435,19 +435,6 @@ function creerClassementHTML() {
     const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
     
     joueurNameHtml.innerHTML = joueur.joueurId;
-    // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-    // console.log(joueur.couleur);
-    // if (i % 3 === 0) {
-    //   joueurColorHtml.classList.add('square');
-      
-    // } else if (i % 3 === 1) {
-    //   joueurColorHtml.classList.add('circle');
-      
-    // } else {
-    //   joueurColorHtml.classList.add('triangle');
-      
-    // }
-  
     joueurColorHtml.style.backgroundColor = joueur.couleur;
   
   }
@@ -455,10 +442,10 @@ function creerClassementHTML() {
 }
 
 function creerClassement() {
-  // Récupérer l'objet depuis le localStorage
+  
   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
-  // Calculer le score pour chaque joueur (nombre de balises trouvées)
+  // Calcul du score pour chaque joueur (nombre de balises trouvées)
   const classement = [];
   for (const joueurId in cacheCacheData) {
     const joueurData = cacheCacheData[joueurId];
@@ -469,7 +456,7 @@ function creerClassement() {
     classement.push({ joueurId, balisesTrouvees, targets, tempsTotal, couleur });
   }
 
-  // Trier les joueurs en fonction du nombre de balises trouvées et du temps total
+  // Tri des joueurs en fonction du nombre de balises trouvées et du temps total
   classement.sort((a, b) => {
     if (a.balisesTrouvees !== b.balisesTrouvees) {
       return b.balisesTrouvees - a.balisesTrouvees; // Trie par nombre de balises trouvées décroissant
