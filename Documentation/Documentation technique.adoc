@@ -143,22 +143,21 @@ image:img/fonction-color3.png[]
 
 ==== Création des pions
 
-// Salut Thomas ! C'est ici que tu dois modifier la doc tech.
-Lorsqu'un joueur se connecte au jeu, un pion est créé, et est placé immédiatement sur la première case, *Start*. Il est important de noter qu'un joueur peut se connecter pendant une partie. Le pion doit donc pouvoir être ajouté en milieu de partie.
+Lorsqu'un joueur se connecte au jeu, un pion est créé et une couleur est attribué au pion. Le pion est implémenté sous forme d'un cercle et est immédiatement placé sur la case *Start*. Il est important de noter qu'un joueur peut se connecter pendant une partie. Le pion doit donc pouvoir être ajouté en milieu de partie.
 
 image:img/createpioncode.png[]
 
-// Commentaire du code...
+La fonction prend en paramètre la case dans lequel le pion doit se trouver qui correspond au nombre de capteur trouvé et la node du joueur. La fonction va donc créer une div qui prend pour id la node du pion. Ensuite on récupère la casse dans laquelle le pion doit se trouver et on lui ajoute la div du pion. Enfin on ajoute la classe 'circle' afin de tranformer le pion en cercle puis on lui mets la couleur du joueur.
 
 ==== Déplacement des pions
 
 Le déplacement est pions est une variable difficile à intégrer correctement au jeu, mais qui est tout de même importante. Les pions doivent se déplacer qu'une case à l'autre, *sans altérer la taille du plateau*. Cela peut-être très contraignant puisque par défaut, les tableaux HTML sont fait pour adapter leur taille à la quantité d'information que chacune de ses cellules contient.
 
-La solution trouvée pour résoudre ce problème est [DETAILLER LA SOLUTION].
+La solution trouvée pour résoudre ce problème est de déplacer le de case en case sans duplication.
 
 image:img/movepioncode.png[]
 
-// Commentaire du code...
+La fonction prend en paramètre la node du joueur et donc l'id du pion. D'abord on récupère la case dans laquelle le pion se trouve puis on supprime le pion de cette case. Ensuite on appelle la fonction *createPion* pour créer le pion dans la case correspondant au nombre de capteur trouvé. Si le nombre de capteur trouvé à augmenter le pion est déplacé sinon il reste sur la même case.
 
 == Génération du PDF de fin de partie
 
