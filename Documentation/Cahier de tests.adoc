@@ -74,11 +74,8 @@ Ordinateur sous Windows ou OS équivalent.
 5+|
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter un sniffeur. ^|Le joueur apparaît après https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/33[raffraichissement]. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter plusieurs sniffeurs. ^|Les joueurs apparaissent après https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/33[raffraichissement]. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.3* ^|Connecter un sniffeur ^|Le sniffeur se lance sans problème, et apparait sur la page lors du rafraichissement (automatique que la page se lance...). ^| Ne PAS être sur la page index, disposer d'un sniffeur. ^|{test_wt}
-5+|
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter plusieurs sniffeurs. ^|Les joueurs apparaissent après https://github.com/IUT-Blagnac/sae-3-01-devapp-g3a-5/issues/33[raffraichissement]. ^| Être sur la page index, disposer d'un sniffeur. ^|{test_ok} 
+5+|image:img/test-detecter-pions.png[]
 |====
 
 
@@ -92,29 +89,12 @@ Ordinateur sous Windows ou OS équivalent.
 :test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
 // Ne pas toucher ⬆️
 
-[width="300%"]
-|====
->| Cas de test 4+| {test_id}
->| Titre 4+| {nom_test}
->| Objectif 4+| {objectif}
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter un sniffeur. ^|Le joueur apparaît dès lors qu'il trouve le premier trésor. ^| Être sur la page admin ou user, disposer d'un sniffeur. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Connecter plusieurs sniffeurs. ^|Les joueurs apparaissent dès lors qu'ils trouvent le premier trésor. ^| Être sur la page admin ou user, disposer d'un sniffeur. ^|{test_wt}
-5+|
-
-5+|Commentaire : Aucun commentaire.
-|====
-
-
 // ///////////////////////////////////////////
 
 
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
-:num_test: 3
+:num_test: 2
 :nom_test: Reset Joueur
 :objectif: S'assurer que le joueur se remette bien à 0 lorsque l'on veut rejouer
 
@@ -131,12 +111,12 @@ Ordinateur sous Windows ou OS équivalent.
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Déconnecter et reconnecter un sniffeur, puis trouver le 1er trésor. ^| Les scores et les temps sont remis à 0. ^| Ce sniffeur était connecté, mais n'avait pas encore trouvé le 1er trésor. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Déconnecter et reconnecter un sniffeur, puis trouver le 1er trésor. ^| Les scores et les temps sont remis à 0. ^| Ce sniffeur était en train de jouer. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.3* ^|Déconnecter et reconnecter un sniffeur, puis trouver le 1er trésor. ^| Les scores et les temps sont remis à 0. ^| Ce sniffeur avait terminé sa partie. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Déconnecter et reconnecter un sniffeur, puis trouver le 1er trésor. ^| Les scores et les temps sont remis à 0. ^| Ce sniffeur était connecté, mais n'avait pas encore trouvé le 1er trésor. ^|{test_ok}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Déconnecter et reconnecter un sniffeur, puis trouver le 1er trésor. ^| Les scores et les temps sont remis à 0. ^| Ce sniffeur était en train de jouer. ^|{test_ok}
+^|{lvl1}.{lvl2}.*{num_test}.3* ^|Déconnecter et reconnecter un sniffeur, puis trouver le 1er trésor. ^| Les scores et les temps sont remis à 0. ^| Ce sniffeur avait terminé sa partie. ^|{test_ok}
 5+|
 
-5+|Commentaire : Aucun commentaire.
+5+|Commentaire : Lorsqu'un capteur est déconnecté, l'envoie de données est réinitialisé. Par conséquent les temps sont remis à 0 et l'ordre des capteurs est modifié peu importe son état avant la déconnexion.
 |====
 // ///////////////////////////////////////////
 
@@ -166,9 +146,8 @@ Ordinateur sous Windows ou OS équivalent.
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau tend vers le foncé et revient vers du clair sur la dernière case. ^| 6 checkpoints sont connectés ou simulés (pour 6 cases). ^|{test_ok}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau tend vers le foncé et revient vers du clair et repart sur du foncé. ^| 11 checkpoints sont connectés ou simulés (pour 11 cases). ^|{test_ok}
-5+|
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau alterne deux couleurs. ^| Le plateau est généré. ^|{test_ok}
+5+|image:img/genererPlateau.png[]
 |====
 
 
@@ -194,7 +173,7 @@ Ordinateur sous Windows ou OS équivalent.
 ^|{lvl1}.{lvl2}.*{num_test}.1* ^|Ouvrir plusieurs pages utilisateur/spectateur. ^|Le plateau ressemble toujours à la même chose. ^| Au moins 1 checkpoint est connecté ou simulé. ^|{test_ok}
 5+|
 
-5+|Commentaire : Aucun commentaire.
+5+|Commentaire : Le plateau est toujours généré de la même manière par conséquent il ne changera jamais.
 |====
 
 
@@ -221,8 +200,40 @@ Ordinateur sous Windows ou OS équivalent.
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
 ^|{lvl1}.{lvl2}.*{num_test}.1* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau dispose de 6 cases. ^| 6 checkpoints sont connectés ou simulés (pour 6 cases). ^|{test_ok}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau dispose de 11 cases. ^| 11 checkpoints sont connectés ou simulés (pour 11 cases). ^|{test_ok}
+5+| image:img/genererPlateau.png[]
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Ouvrir la page utilisateur/spectateur. ^|Le plateau dispose de 10 cases. ^| 9 checkpoints sont connectés ou simulés (pour 10 cases). ^|{test_ok}
+5+|  image:img/plateau10.png[]
+|====
+
+
+==== Avancement des Pions
+:lvl2: 3
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Avancement des pions
+:objectif: S'assurer que les pions des joueurs avancent au fur et à mesure de leur progression.
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
 5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Trouver un checkpoint avec Sniffeur 1. ^|Le pion se déplace sur la case suivante. ^| Sniffeur 1 est connecté. ^|{test_ok}
+
+5+| Les pions sont sur la ligne de départ et quelques uns on déjà avancés image:img/pionStart.png[]
+
+5+| Tous les pions sont entrain d'avancés jusqu'à ce qu'il est trouvé tous les cpateurs image:img/pionBouger.png[]
 |====
 
 
@@ -255,40 +266,13 @@ Ordinateur sous Windows ou OS équivalent.
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Appuyer sur le bouton pause. ^|Le mode pause s'active. ^| Être sur la page admin, ne pas être en pause. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Appuyer sur le bouton pause. ^|Le mode pause s'arrête. ^| Être sur la page admin, être en pause. ^|{test_wt}
-5+|
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Appuyer sur le bouton pause. ^|Le mode pause s'active. ^| Être sur la page admin, ne pas être en pause. ^|{test_ok}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Appuyer sur le bouton pause. ^|Le mode pause s'arrête. ^| Être sur la page admin, être en pause. ^|{test_ok}
+5+| image:img/pause.png[]
+5+|Commentaire : Le bouton pause n'as pas de réel effet sur la partie. La lecture des données continue et les scores sont mis à jour. Seul l'affichage des données est stoppé. Lorsque l'on reclique sur le bouton pause, l'affichage des données reprend et l'interface admin est réutilisable.
 |====
-
 
 // ///////// DEBUT DE NOUVEAU TEST ///////////
-// Définissez les informations de votre test!
-:num_test: 2
-:nom_test: Fonctionnalités Pause
-:objectif: S'assurer que les fonctionnalités du mode Pause sont effectives
-
-// Ne pas toucher ⬇️
-:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
-// Ne pas toucher ⬆️
-
-[width="300%"]
-|====
->| Cas de test 4+| {test_id}
->| Titre 4+| {nom_test}
->| Objectif 4+| {objectif}
-5+|
-
-^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
-
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Appuyer sur le bouton pause 2 fois, avec 10 secondes d'écart. ^|Cela ne dérègle pas le résultat des temps. ^| Être sur la page admin, ne pas être en pause. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Matraquer le bouton pause. ^|Cela ne dérègle pas le résultat des temps. ^| Être sur la page admin, ne pas être en pause. ^|{test_wt}
-
-5+|
-|====
-
-
-
-
 === Fonctionnalités Accueil
 
 :lvl1: 3
@@ -317,9 +301,8 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Démarrer l'outil de sélection de port série avec le bouton puis choisir le port série (généralement COM3). ^|Des données apparaissent dans la console JS. ^|Être sur la page index, utiliser Google Chrome. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Démarrer l'outil de sélection de port série et annuler l'opération. ^|Cela ne déclenche Aucune erreur n'apparait dans la console JS. ^|Être sur la page index, utiliser Google Chrome. ^|{test_wt}
-5+|
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Démarrer l'outil de sélection de port série avec le bouton puis choisir le port série. ^|Des données apparaissent dans la console JS. ^|Être sur la page index, utiliser Google Chrome. ^|{test_ok}
+5+| image:img/console.png[]
 |====
 
 
@@ -346,10 +329,10 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter le port série au site web et ouvrir la console JS. ^|Les données apparaissent sous la forme d'un tableau complet et conforme. ^|Être sur la page index, utiliser Google Chrome. ^|{test_wt}
-5+|
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Connecter le port série au site web et ouvrir la console JS. ^|Les données apparaissent sous la forme d'un dictionnaire avec en clé la node et en value le json complet avec la couleur. ^|Être sur la page index, utiliser Google Chrome. ^|{test_ok}
+5+| image:img/affichageLocalStorage.png[]
 
-5+|Commentaire : Aucun commentaire.
+5+|Commentaire : La couleur est généré de manière aléatoire lors de la reception d'un nouveau joueur puis cette couleur est ajouté au json.
 |====
 
 
@@ -357,15 +340,99 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 
 
+==== Rapport JSON
+:lvl2: 3
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Téléchargement Rapport JSON/PDF
+:objectif: S'assurer que le rapport JSON/PDF se télécharge.
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Appuyer sur le bouton de téléchargement du JSON. ^|Le téléchargement est lancé. ^| Être sur la page admin, avoir une partie lancée et avancée. ^|{test_ok}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Appuyer sur le bouton de téléchargement du PDF. ^|Le PDF est téléchargé. ^| Être sur la page admin, avoir une partie lancée et avancée. Être connecté à Internet. ^|{test_ok}
+5+| Voici les boutons permettants de générer les rapports : image:img/boutonsPDF-JSON.png[]
+5+| Les rapports sont bien téléchargés après avoir cliqué sur les boutons : image:img/fichierTelecharge.png[]
+|====
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 2
+:nom_test: Qualité Rapport JSON
+:objectif: S'assurer que le rapport JSON est bien formaté.
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Lire manuellement les données d'un JSON. ^|Les données sont conformes aux besoins du client. ^| Avoir un JSON ouvert sur un outil de développement. ^|{test_ok}
+5+| Commentaire : Aucun commentaire.
+5+| Voici un exemple de JSON : image:img/json.png[]
+|====
+
+
+
+==== Fonctionnement case Trouvé
+:lvl2: 4
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Avancement des pions
+:objectif: S'assurer que les pions des joueurs avancent au fur et à mesure de leur progression.
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Trouver un checkpoint avec Sniffeur 1. ^|L'IHM indique sur le tableau que l'équipe correspondant au Sniffeur 1 a trouvé le premier checkpoint. ^| Sniffeur 1 est connecté. ^|{test_ok}
+
+
+5+| Voici le tableau avant la découverte du premier checkpoint : image:img/tableauCoche.png[]
+|====
 
 
 === Fonctionnalités Diverses
-:lvl1: *
+:lvl1: 4
 
 
 
 ==== Messages aux spectateurs
-:lvl2: 2
+:lvl2: 1
 
 
 // ///////// DEBUT DE NOUVEAU TEST ///////////
@@ -387,8 +454,8 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Envoyer un message aux spectateurices. ^|Le message s'envoie. ^| Être sur la page admin. ^|{test_wt}
-5+|
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Envoyer un message aux spectateurices. ^|Le message s'envoie. ^| Être sur la page admin. ^|{test_ok}
+5+| Choix du message : image:img/messageAdmin.png[]
 |====
 
 
@@ -411,23 +478,14 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Envoyer un message "bonjour", puis se rendre sur la page des spectateurs. ^|Le message est visible sur la page des spectateurs. ^| Être sur la page admin. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Envoyer un message "Voix ambiguë d’un cœur qui, au zéphyr, préfère les jattes de kiwis.", puis se rendre sur la page des spectateurs. ^|Le message est visible sur la page des spectateurs, et ne comporte pas d'erreur UTF-8. ^| Être sur la page admin. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Envoyer un message "coucou", puis se rendre sur la page des spectateurs. ^|Le message est visible sur la page des spectateurs. ^| Être sur la page admin. ^|{test_ok}
+5+| Réception du message : image:img/messageUser.png[]
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Envoyer un message "Voix ambiguë d’un cœur qui, au zéphyr, préfère les jattes de kiwis.", puis se rendre sur la page des spectateurs. ^|Le message est visible sur la page des spectateurs, et ne comporte pas d'erreur UTF-8. ^| Être sur la page admin. ^|{test_ok}
 
-5+|
+5+| Réception du message : image:img/testUTF8.png[]
 |====
 
 
 
 
-
-== Tests À ajouter :
-* "Fusion des fonctionnalités"
-* "Rafraichissement Index" 
-* "Rapport de partie"
-* "Cohérence des temps des sniffeurs"
-* "Cohérence des couleurs de joueurs"
-* "Fonctionnement de la coche 'trouvé' "
-* "Avancement des pions"
-* "Intégrité de taille du tableau"
 
