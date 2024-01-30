@@ -229,10 +229,11 @@ Ordinateur sous Windows ou OS équivalent.
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Trouver un checkpoint avec Sniffeur 1. ^|Le Sniffeur 1 se déplace sur la case suivante. ^| Sniffeur 1 est connecté. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Trouver un checkpoint avec Sniffeur 1. ^|Seul le Sniffeur 1 se déplace sur la case suivante. ^| Sniffeur 1 et Sniffeur 2 sont connectés. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Trouver un checkpoint avec Sniffeur 1. ^|Le pion se déplace sur la case suivante. ^| Sniffeur 1 est connecté. ^|{test_ok}
 
-5+| Commentaire : Aucun commentaire.
+5+| Les pions sont sur la ligne de départ et quelques uns on déjà avancés image:img/pionStart.png[]
+
+5+| Tous les pions sont entrain d'avancés jusqu'à ce qu'il est trouvé tous les cpateurs image:img/pionBouger.png[]
 |====
 
 
@@ -346,8 +347,8 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 // ///////// DEBUT DE NOUVEAU TEST ///////////
 // Définissez les informations de votre test!
 :num_test: 1
-:nom_test: Téléchargement Rapport JSON
-:objectif: S'assurer que le rapport JSON se télécharge.
+:nom_test: Téléchargement Rapport JSON/PDF
+:objectif: S'assurer que le rapport JSON/PDF se télécharge.
 
 // Ne pas toucher ⬇️
 :test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
@@ -362,9 +363,10 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Appuyer sur le bouton de téléchargement du JSON. ^|Le téléchargement est lancé. ^| Être sur la page admin, avoir une partie lancée et avancée. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Appuyer sur le bouton de téléchargement du JSON. ^|Le JSON est téléchargé. ^| Être sur la page admin, avoir une partie lancée et avancée. Ne pas être connecté à Internet. ^|{test_wt}
-5+| Commentaire : Aucun commentaire.
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Appuyer sur le bouton de téléchargement du JSON. ^|Le téléchargement est lancé. ^| Être sur la page admin, avoir une partie lancée et avancée. ^|{test_ok}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Appuyer sur le bouton de téléchargement du PDF. ^|Le PDF est téléchargé. ^| Être sur la page admin, avoir une partie lancée et avancée. Être connecté à Internet. ^|{test_ok}
+5+| Voici les boutons permettants de générer les rapports : image:img/boutonsPDF-JSON.png[]
+5+| Les rapports sont bien téléchargés après avoir cliqué sur les boutons : image:img/fichierTelecharge.png[]
 |====
 
 
@@ -387,8 +389,9 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Lire manuellement les données d'un JSON. ^|Les données sont conformes aux besoins du client. ^| Avoir un JSON ouvert sur un outil de développement. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Lire manuellement les données d'un JSON. ^|Les données sont conformes aux besoins du client. ^| Avoir un JSON ouvert sur un outil de développement. ^|{test_ok}
 5+| Commentaire : Aucun commentaire.
+5+| Voici un exemple de JSON : image:img/json.png[]
 |====
 
 
@@ -416,12 +419,10 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 ^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
 
-^|{lvl1}.{lvl2}.*{num_test}.1* ^|Trouver un checkpoint avec Sniffeur 1. ^|L'IHM indique sur le tableau que l'équipe correspondant au Sniffeur 1 a trouvé le premier checkpoint. ^| Sniffeur 1 est connecté. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.2* ^|Trouver un checkpoint avec Sniffeur 1. ^|Seul l'équipe de Sniffeur 1 est mise à jour sur le tableau. ^| Sniffeur 1 et Sniffeur 2 sont connectés. ^|{test_wt}
-^|{lvl1}.{lvl2}.*{num_test}.3* ^|Trouver un checkpoint avec Sniffeur 2. ^|L'IHM indique sur le tableau que l'équipe correspondant au Sniffeur 1 a trouvé le premier checkpoint. ^| Avoir effectué le test {lvl1}.{lvl2}.*{num_test}.2*. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Trouver un checkpoint avec Sniffeur 1. ^|L'IHM indique sur le tableau que l'équipe correspondant au Sniffeur 1 a trouvé le premier checkpoint. ^| Sniffeur 1 est connecté. ^|{test_ok}
 
 
-5+| Commentaire : Aucun commentaire.
+5+| Voici le tableau avant la découverte du premier checkpoint : image:img/tableauCoche.png[]
 |====
 
 
