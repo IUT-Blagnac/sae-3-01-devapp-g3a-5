@@ -11,6 +11,7 @@
 :test_ok: image:{badge}Test-Passé-blue.svg[]
 :test_ko: image:{badge}Test-Echoué-red.svg[]
 :test_wt: image:{badge}Test-En%20Attente-orange.svg[]
+:version: v2.0
 
 
 * Thomas Duppi
