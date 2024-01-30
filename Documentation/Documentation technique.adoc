@@ -144,7 +144,7 @@ image:img/fonction-color3.png[]
 === Classement
 
 === Podium
-Le podium s'affiche automatiquement pendant, et à la fin de la partie. Des confettis apparaissent.
+Le podium s'affiche automatiquement pendant, et à la fin de la partie. Une pop-up de fin de partie ainsi que des confettis apparaissent.
 
 
 == Génération du PDF de fin de partie
