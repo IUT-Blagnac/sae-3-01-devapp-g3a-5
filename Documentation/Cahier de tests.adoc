@@ -206,6 +206,36 @@ Ordinateur sous Windows ou OS équivalent.
 |====
 
 
+==== Avancement des Pions
+:lvl2: 3
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Avancement des pions
+:objectif: S'assurer que les pions des joueurs avancent au fur et à mesure de leur progression.
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Trouver un checkpoint avec Sniffeur 1. ^|Le Sniffeur 1 se déplace sur la case suivante. ^| Sniffeur 1 est connecté. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Trouver un checkpoint avec Sniffeur 1. ^|Seul le Sniffeur 1 se déplace sur la case suivante. ^| Sniffeur 1 et Sniffeur 2 sont connectés. ^|{test_wt}
+
+5+| Commentaire : Aucun commentaire.
+|====
+
+
 
 === Fonctionnalités Panel Admin
 :lvl1: 2
@@ -309,6 +339,90 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 
 
+==== Rapport JSON
+:lvl2: 3
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Téléchargement Rapport JSON
+:objectif: S'assurer que le rapport JSON se télécharge.
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Appuyer sur le bouton de téléchargement du JSON. ^|Le téléchargement est lancé. ^| Être sur la page admin, avoir une partie lancée et avancée. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Appuyer sur le bouton de téléchargement du JSON. ^|Le JSON est téléchargé. ^| Être sur la page admin, avoir une partie lancée et avancée. Ne pas être connecté à Internet. ^|{test_wt}
+5+| Commentaire : Aucun commentaire.
+|====
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 2
+:nom_test: Qualité Rapport JSON
+:objectif: S'assurer que le rapport JSON est bien formaté.
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Lire manuellement les données d'un JSON. ^|Les données sont conformes aux besoins du client. ^| Avoir un JSON ouvert sur un outil de développement. ^|{test_wt}
+5+| Commentaire : Aucun commentaire.
+|====
+
+
+
+==== Fonctionnement case Trouvé
+:lvl2: 4
+
+
+// ///////// DEBUT DE NOUVEAU TEST ///////////
+// Définissez les informations de votre test!
+:num_test: 1
+:nom_test: Avancement des pions
+:objectif: S'assurer que les pions des joueurs avancent au fur et à mesure de leur progression.
+
+// Ne pas toucher ⬇️
+:test_id: image:{badge}Test%20{lvl1}.{lvl2}-{num_test}-pink.svg[link=""]
+// Ne pas toucher ⬆️
+
+[width="300%"]
+|====
+>| Cas de test 4+| {test_id}
+>| Titre 4+| {nom_test}
+>| Objectif 4+| {objectif}
+5+|
+
+^|ID ^|Action ^|Comportement attendu ^|Pré-conditions ^|Résultat
+
+^|{lvl1}.{lvl2}.*{num_test}.1* ^|Trouver un checkpoint avec Sniffeur 1. ^|L'IHM indique sur le tableau que l'équipe correspondant au Sniffeur 1 a trouvé le premier checkpoint. ^| Sniffeur 1 est connecté. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.2* ^|Trouver un checkpoint avec Sniffeur 1. ^|Seul l'équipe de Sniffeur 1 est mise à jour sur le tableau. ^| Sniffeur 1 et Sniffeur 2 sont connectés. ^|{test_wt}
+^|{lvl1}.{lvl2}.*{num_test}.3* ^|Trouver un checkpoint avec Sniffeur 2. ^|L'IHM indique sur le tableau que l'équipe correspondant au Sniffeur 1 a trouvé le premier checkpoint. ^| Avoir effectué le test {lvl1}.{lvl2}.*{num_test}.2*. ^|{test_wt}
+
+
+5+| Commentaire : Aucun commentaire.
+|====
 
 
 === Fonctionnalités Diverses
@@ -373,10 +487,4 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 
 
 
-
-== Tests À ajouter :
-* "Rapport de partie/json"
-
-* "Fonctionnement de la coche 'trouvé' "
-* "Avancement des pions"
 
