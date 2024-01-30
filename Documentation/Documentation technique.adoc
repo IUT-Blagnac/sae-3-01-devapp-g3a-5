@@ -218,8 +218,9 @@ le port est fermé.
 
 image:img/lire-port-série.png[]
 
-== Evolutivité
-Le code php est réalisé de maniere a s'adapter a la taille d'une liste de balise. Plus il y a de balise, plus le plateau de 
-jeu sera grand. Pour l'instant on utilise une liste quelquonque mais lorsque la communication en webserial sera 
-réalisé on mettra une veritable liste de balise au deuxieme sprint. Si a l'avenir on souhaite faire un jeu comme ca avec beauucoup de 
-balise, l'ihm sera fonctionnel!
+Demander l'accès au port série :
+
+image:img/choixPortSerie.png[]
+
+== Adaptabilité
+Le code javaScript est réalisé de manière à s'adapter à la taille d'une liste de balise. Plus il y a de balise, plus le plateau de jeu sera grand. La génération des couleurs se fait pour chaque joueur et une couleur ne peut pas être attribuée deux fois.
