@@ -160,6 +160,12 @@ image:img/movepioncode.png[]
 
 // Commentaire du code...
 
+== Classement & Podium
+=== Classement
+
+=== Podium
+Le podium s'affiche automatiquement pendant, et à la fin de la partie. Des confettis apparaissent.
+
 == Génération du PDF de fin de partie
 
 image:img/genererpdf.png[]
@@ -181,6 +187,9 @@ Resultat:
 
 image:img/json.png[width=250, height=250]
 
+=== Console JSON
+
+[TEXTE]
 
 == Données Admin
 
@@ -198,6 +207,10 @@ Dès qu'un changement est détecté dans la listNodeWithColors contenue dans le 
 * Si une équipe s'est reconnectée.
 
 image:img/doc_tech_admin/control_admin.png[]
+
+=== Clear du Local Storage
+
+[TEXTE]
 
 === Création des tableaux 
 
