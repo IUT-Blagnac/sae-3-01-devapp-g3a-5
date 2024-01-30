@@ -12,17 +12,17 @@
 
 <body>
     <div class="classconfetti">
-        <canvas id="confettiCanvas"></canvas>
+        <!-- <canvas id="confettiCanvas"></canvas> -->
     </div>
     <div class="nav-bar">
         <h1> Bienvenue sur la carte de la course LocURa4IoT!</h1>
     </div>
-    <!-- For messages -->
-    <div class="message" id="message">
-        <div class="message-content" id="message">
+    <!-- For notifications -->
+    <div class="popup" id="popup">
+        <div class="popup-content" id="popupContent">
         </div>
     </div>
-
+    
     <div class="classMere">
         <div class="centered-div">
             <table id="content-classement-table">
@@ -46,6 +46,7 @@
             </table>
         </div>
         <div class="modal-background" id="myModal">
+            
             <div class="modal">
                 <span class="close-button" onclick="closeModal()">&times;</span>
                 <div id="classementContent-pop-up"></div>
@@ -60,57 +61,61 @@
 
             // Fonction pour créer un confetti
             function createConfetti() {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.backgroundColor = getRandomColor();
-                confetti.style.width = `${getRandomInRange(5, 20)}px`;
-                confetti.style.height = `${getRandomInRange(5, 20)}px`;
-                confetti.style.position = 'absolute';
-                confetti.style.left = `${getRandomInRange(0, window.innerWidth)}px`;
-                // ajouter le confeti en first child du body
-                document.body.insertBefore(confetti, document.body.firstChild);
+              const confetti = document.createElement('div');
+              confetti.className = 'confetti';
+              confetti.style.backgroundColor = getRandomColor();
+              confetti.style.width = `${getRandomInRange(5, 20)}px`;
+              confetti.style.height = `${getRandomInRange(5, 20)}px`;
+              confetti.style.position = 'absolute';
+              confetti.style.left = `${getRandomInRange(0, window.innerWidth)}px`;
+            //   getByClass('nav-bar')
+            // ajouter le confeti en first child du body
+              document.body.insertBefore(confetti, document.body.firstChild);
 
-                // Animation de la chute du confetti
-                anime({
-                    targets: confetti,
-                    translateY: window.innerHeight,
-                    translateX: getRandomInRange(-50, 50),
-                    rotate: () => getRandomInRange(0, 360),
-                    duration: () => getRandomInRange(1000, 2000),
-                    easing: 'easeInOutQuad',
-                    complete: () => {
-                    //   supprimer le confetti une fois qu'il a atteint le bas de l'écran
-                        confetti.parentNode.removeChild(confetti);
-                        initConfettiAlreadyExecuted = false;
-                        createConfetti();
-                    },
-                });
-            }
-
-            // Fonction pour obtenir une couleur aléatoire au format hexadécimal
-            function getRandomColor() {
-                const letters = '0123456789ABCDEF';
-                let color = '#';
-                for (let i = 0; i < 6; i++) {
-                    color += letters[Math.floor(Math.random() * 16)];
-                }
-                return color;
-            }
-
-            // Initialiser la pluie de confettis
-            function initConfetti() {
-                for (let i = 0; i < 10; i++) {
+              // Animation de la chute du confetti
+              anime({
+                targets: confetti,
+                translateY: window.innerHeight,
+                translateX: getRandomInRange(-50, 50),
+                rotate: () => getRandomInRange(0, 360),
+                duration: () => getRandomInRange(1000, 2000),
+                easing: 'easeInOutQuad',
+                complete: () => {
+                //   supprimer le confetti une fois qu'il a atteint le bas de l'écran
+                    confetti.parentNode.removeChild(confetti);
+                    initConfettiAlreadyExecuted = false;
                     createConfetti();
-                }
+                },
+              });
             }
-            interupt = false;
-            setInterval(() => {
-                if (estFinDuJeu()) {
-                    // executer la fonction initConfetti une seule fois   
-                    initConfetti();         
-                    activatedModal();  
-                }
-            }, 1000);
+
+    // Fonction pour obtenir une couleur aléatoire au format hexadécimal
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // Initialiser la pluie de confettis
+    function initConfetti() {
+      for (let i = 0; i < 10; i++) {
+        createConfetti();
+      }
+    }
+    interupt = false;
+    setInterval(() => {
+    if (estFinDuJeu()) {
+        // executer la fonction initConfetti une seule fois
+       
+        initConfetti();
+       
+        activatedModal();
+        
+    }
+    }, 1000);
         </script>
         <div class="centered-div">
             <table id="gameTable">
@@ -119,6 +124,7 @@
         <script>
             // JavaScript code to generate the game table dynamically
             var liste_size = getTaillePlateau()+1;
+			
             var rep_max = Math.ceil(liste_size / 5);
             var color = 0;
             var increment = true;
@@ -130,7 +136,9 @@
                     return 5 * i + 4 - j;
                 }
             }
+			// faire une classe qui active la fonction openModal au moment ou un joueur gagne c'est a dire quand il arrive a la fin du plateau
 			
+
             function fonctionColor() {
                 if (increment) {
                     color++;
@@ -256,9 +264,19 @@
             setInterval(creerClassementPopUp(), 500);
             setInterval(createTableau, 500);
             window.addEventListener('load', function () {
-                setInterval(creerClassementHTML, 10);
-                activatedModal();
+            setInterval(creerClassementHTML, 10);
+            activatedModal();
+            
+            // openModal();
             });
+            // teste 
+             // Fonction pour générer un nombre aléatoire dans une plage donnée
+    
+
+    // Appeler la fonction d'initialisation une fois que la fenêtre a été chargée
+    
+
+
         </script>
         <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1"></script>
     </div>
