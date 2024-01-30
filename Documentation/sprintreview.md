@@ -1,8 +1,17 @@
 # Sprint Review
 
-> Seul la review du sprint 3 a été faite.
+## Sprint 1
+Vincent a commencé à gérer la partie de connexion avec le port Serial. Du coup Thomas a prit le relai et s'en est bien sorti. Vincent s'est concentré sur la partie de gestion du projet.
+Loïs s'est occupé de la génération de tableaux (sans qu'ils ne soient pour autant modifiés par le JS).
+
+
+## Sprint 2
 
 ## Sprint 3
+Généralement :
+- Le PHP a été abandonné pour être remplacé par de l'HTML pur -> Plus besoin de WAMP.
+
+
 - Loïs
   - CSS du projet
   - A ajouté la console du json dans l'index
