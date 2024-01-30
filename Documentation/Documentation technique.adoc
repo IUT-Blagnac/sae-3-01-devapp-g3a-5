@@ -20,24 +20,18 @@ image::img/usecase.png[]
 == Déploiement du projet 
 
 === Prérequis
-Pour lancer l'application, il faut télécharger Wamp pour déployer le projet sur sa propre machine, et l'héberger localement. N'importe quel autre serveur web peut être utilisé, mais Wamp est le plus simple à utiliser.
+Pour developper l'application, il faut télécharger VScode pour déployer le projet sur sa propre machine, et l'héberger localement. N'importe quel autre IDE peut être utilisé, mais nous recommandons VScode.
 
-https://www.wampserver.com/en/download-wampserver-64bits/#download-wrapper[Lien de telechargemnt wamp]
 
+https://code.visualstudio.com/download[Lien de telechargemnt Visual Studio Code]
 
 
 
 === Lancement
 
-Une fois Wamp installé, il faut lancer l'application Wamp puis lancer le serveur en cliquant sur l'icône Wamp dans la barre des tâches, puis en cliquant sur "Start All Services".
+Une fois VSCode installé, il  suffit de cloner le dépôt GitHub dans un dossier, puis d'ouvrir ce dossier dans l'IDE. Ensuite, on peut telecharger l'extension Live Server pour Visual Studio Code, qui permet de lancer le projet sur un serveur local. Il suffit ensuite de cliquer sur "Go Live" dans la barre d'état de Visual Studio Code pour lancer le projet sur le serveur local. Le projet est maintenant déployé sur votre machine.
 
-image::img/wamp.png[]
 
-Ensuite, il faut se rendre dans le dossier www de Wamp, et y cloner le depot GitHub. Le dossier www se trouve dans le dossier d'installation de Wamp, par défaut `C:\wamp64\www`.
-
-Une fois le depot cloné dans le dossier www, il faut se rendre sur la page `localhost/sae-3-01-devapp-g3a-5/Code%20source/` dans son navigateur Google Chrome.
-
-l'application est maintenant déployée sur votre machine.
 
 > /!\ Le projet doit être utilisé avec Google Chrome pour être compatible.
 
@@ -170,7 +164,7 @@ Le podium s'affiche automatiquement pendant, et à la fin de la partie. Une pop-
 
 == Génération du PDF de fin de partie
 
-image:img/genererpdf.png[]
+image:img/genererPDF.png[]
 
 
 Pour generer le pdf on utilise la librairie pdfmake qui permet de generer un pdf facilement en javascript. On a donc un "event listener" sur le bouton qui permet de generer le pdf a partir des données du jeu.
@@ -200,7 +194,7 @@ image:img/json.png[width=250, height=250]
 Dans le local storage sont sauvegardées les données des équipes (utilisables par les admins) et écrites par la page index (cf. Accès Port Série) ci-dessous.
 Les données (sous forme de JSon) sont toutes sauvegardés dans la variable "listNodeWithColor".
 
-image:img/localstorage.png[]
+image:img/localstorage.PNG[]
 
 === Contrôle du jeu en continu
 Dès qu'un changement est détecté dans la listNodeWithColors contenue dans le local storage, une fonction s'active permettant d'identifier la nature de ces changements et d'agir en conséquence : 
@@ -210,7 +204,7 @@ Dès qu'un changement est détecté dans la listNodeWithColors contenue dans le 
 * Si une équipe s'est déconnectée,
 * Si une équipe s'est reconnectée.
 
-image:img/doc_tech_admin/control_admin.png[]
+image:img/doc_tech_admin/control_admin.PNG[]
 
 === Clear du Local Storage
 
@@ -241,7 +235,9 @@ image:img/doc_tech_admin/tableau.PNG[]
 === Modification des tableaux 
 
 On récupère le Json de l'équipe qui a trouvé un ou plusieurs nouveaux capteurs. Pour chaque ligne, on récupère la cellule de la colonne trouvé et la cellule contenant le temps correspondantes.
-Si le temps est supérier à 0, alors on insère le temps et on affiche une icône checked.
+Si le temps est supérier à 0, alors on insère le temps et on affiche une icône checked. 
+
+S'actualise au rechargement de la page.
 
 image:img/doc_tech_admin/tableauModif.PNG[]
 image:img/doc_tech_admin/modifierTab.PNG[]
@@ -279,6 +275,8 @@ Des messages automatiques sont affichés automatiquement, lorsque :
 * Une équipe trouve la totalité des checkpoints
 * Une équipe se déconnecte
 * Une équipe se reconnecte
+
+(non fonctionnel)
 
 == Couleur aléatoire des joueurs
 Compare la node qui vient d'être récupéré avec un tableau contenant les nodes ayant déjà une couleur. Si la node est déjà existante il ne se passe rien. Sinon une couleur est générer de manière aléatoire. Ensuite cette couleur est ajouter au json de la node et la node est ajouté au tableau des nodes avec couleurs. 
