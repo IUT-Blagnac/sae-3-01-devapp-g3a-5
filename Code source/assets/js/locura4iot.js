@@ -10,12 +10,11 @@ let joueursCaches = true;
 let rotationCheckpoints = 0;
 let CheckpointsCaches = true;
 var listNodeWithColor = {};
+const usedColors = ['#1DC2AF', '#18A090', '#137C70', '#0E5850', '#083530'];
+const generatedColors = new Set(usedColors);
 
 // Le listNodeWithColor est de la forme
-// [0:{node: "0xFD24", targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}]
-// Nous voulons le passer à la forme
-// {"0xFD24": {targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}}
-
+// [0xFD24:{node: "0xFD24", targets: ["0x35A1", "0x2EF4", "0x8C05", "0x907D", "0xBA89"], times: [23.0, 0.0, 0.0, 0.0, 0.0], couleur: "#FFFFFF"}]
 
 
 /////////////////////////
@@ -24,8 +23,6 @@ var listNodeWithColor = {};
 /////////////////////////
 /////////////////////////
 
-const usedColors = ['#1DC2AF', '#18A090', '#137C70', '#0E5850', '#083530'];
-const generatedColors = new Set(usedColors);
 
 async function lirePortSerie() {
   try {
@@ -40,11 +37,9 @@ async function lirePortSerie() {
     while (true) {
       const { value, done } = await textStreamReader.read();
       if (done) {
-        console.log('Décodage terminé !');
         break;
       }
       partialData += value;
-      console.log(partialData);
       const lines = partialData.split('\n');
 
       for (let i = 0; i < lines.length - 1; i++) {
@@ -73,7 +68,6 @@ async function lirePortSerie() {
             }
             localStorage.setItem('listNodeWithColor', JSON.stringify(listNodeWithColor));
           }
-          console.log(listNodeWithColor);
         } catch (jsonError) {
           console.error('Erreur lors de l\'analyse JSON :', jsonError);
         }
@@ -94,10 +88,6 @@ async function lirePortSerie() {
 //Fonctionnalités pour l'admin//
 ////////////////////////////////
 ////////////////////////////////
-
-////////////////////////////////////////////////////
-//Fonctions en continu (bon fonctionnement du jeu)//
-////////////////////////////////////////////////////
 
 /** Initialisation interface
  * Dès le chargement du l'interface administrateur, on construit les tableaux de toutes les équipes qui ont eu le temps de se connecter. 
@@ -121,36 +111,26 @@ if (window.location.href.includes("IHM_admin.php")) {
     if (event.key === "listNodeWithColor") {
       const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
 
-      // creerClassement();
-      // activatedModal();
-
       for (let joueurId in cacheCacheData) {
-        var joueur = cacheCacheData[joueurId]
-
-        if (isEquipeDeconnectee(joueur.node)) {
-          gererReconnection(joueur.node);
-        }
-
-        //C'est une nouvelle équipe
-        if (!(joueur.node in listNodeWithColor)) {
-          console.log("Nouvelle équipe : " + joueur.node)
-          createTableau(joueur);
-          joueur.lastUpdate = Date.now();
-        }
-
+        var joueur = cacheCacheData[joueurId];
+          if (isEquipeDeconnectee(joueur.node)) {
+            gererReconnection(joueur.node);
+          }
+          //C'est une nouvelle équipe
+          if (!(joueur.node in listNodeWithColor)) {
+              createTableau(joueur);
+            joueur.lastUpdate = Date.now();
+          }
         //C'est une maj
-        else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times)) {
-          console.log(joueur.node + " : " + joueur.times.filter(temps => temps > 0).length + "/" + getNbCheckpoints())
+        else if (!arraysEqual(joueur.times, listNodeWithColor[joueur.node].times) ) {
           joueur.lastUpdate = Date.now();
           modifierTableau(joueur);
           updateMessage(joueur, joueur.times.filter(temps => temps > 0).length);
         }
-        else if (isEquipeDeconnectee()) {
+        else if (joueur.lastUpdate < 0) {
           gererReconnection(joueur.node);
-        }
-
+        } 
       }
-
       listNodeWithColor = cacheCacheData;
     }
   });
@@ -343,14 +323,9 @@ async function verifierDeconnection() {
 * @param {*} id du noeud déconnectée
 */
 function gererDeconnection(id) {
-  let message = "L'équipe " + id + " est déconnectée !";
-  console.log(message);
-  afficherMessage(message, true)
-
-
+  let popup = "L'équipe " + id + " est déconnectée !";
+  afficherPopup(popup, true)
   document.getElementById(id).classList.add("deconnecte");
-
-  //Modifier pion sur interface user ?
 }
 
 /**
@@ -359,13 +334,9 @@ function gererDeconnection(id) {
 * @param {*} id du noeud déconnectée
 */
 function gererReconnection(id) {
-  let message = "L'équipe " + id + " s'est reconnectée !";
-  console.log(message);
-  afficherMessage(message, true)
-
+  let popup = "L'équipe " + id + " s'est reconnectée !";
+  afficherPopup(popup, true)
   document.getElementById(id).classList.remove("deconnecte");
-
-  //Modifier pion sur interface user ?
 }
 
 function isEquipeDeconnectee(id) {
@@ -387,9 +358,6 @@ function downloadJSON() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
-
-
-
 
 //////////
 //Autres//
@@ -422,10 +390,7 @@ function creerClassementHTML() {
 
   // Calculer le score pour chaque joueur (nombre de balises trouvées)
   const classement = creerClassement();
-
-
-  // Afficher le classement
-
+  
   // on affiche le classement de TOUT joueurs classement.length
   for (let i = 0; i < 3; i++) {
     const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
@@ -434,19 +399,6 @@ function creerClassementHTML() {
     const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
 
     joueurNameHtml.innerHTML = joueur.joueurId;
-    // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-    // console.log(joueur.couleur);
-    // if (i % 3 === 0) {
-    //   joueurColorHtml.classList.add('square');
-
-    // } else if (i % 3 === 1) {
-    //   joueurColorHtml.classList.add('circle');
-
-    // } else {
-    //   joueurColorHtml.classList.add('triangle');
-
-    // }
-
     joueurColorHtml.style.backgroundColor = joueur.couleur;
 
   }
@@ -483,203 +435,107 @@ function creerClassement() {
 
 
 function creerClassementPopUp() {
-  // Faire une querySelector pour récupérer la classe modal
-
   // Afficher le classement
   document.addEventListener("DOMContentLoaded", function () {
     const classementContent = document.getElementById('classementContent-pop-up');
-
-    console.log(classementContent);
-    classementContent.innerHTML += '<h2>Classement Cache-Cache</h2>';
+    classementContent.innerHTML += '<h2>Gagné!</h2>';
     titleclassemnt = ["Premier", "Deuxième", "Troisième"];
     // on affiche le classement des 3 premiers joueurs
     for (let i = 0; i < 3; i++) {
       const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
       const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
-      classement = creerClassement();
+      classement=creerClassement();
       const joueur = classement[i];
       const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
       classementContent.innerHTML += `<p>${titleclassemnt[i]}: ${joueur.joueurId} (${joueur.balisesTrouvees} balises trouvées, ${tempsTotalText})</p>`;
       joueurNameHtml.innerHTML = joueur.joueurId;
       // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-      console.log(joueur.couleur);
       joueurColorHtml.style.backgroundColor = joueur.couleur;
     }
     return classement;
   });
 }
 
-// function creerClassement() {
-//   // Récupérer l'objet depuis le localStorage
-//   const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+function lireLocalStorage() {
+  const cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  return cacheCacheData;
+}
 
-//   // Calculer le score pour chaque joueur (nombre de balises trouvées)
-//   const classement = [];
-//   for (const joueurId in cacheCacheData) {
-//     const joueurData = cacheCacheData[joueurId];
-//     const balisesTrouvees = joueurData.times.filter(temps => temps != 0).length;
-//     const targets = joueurData.targets;
-//     const tempsTotal = joueurData.times.reduce((total, temps) => total + temps, 0);
-//     const couleur = joueurData.couleur;
-//     classement.push({ joueurId, balisesTrouvees, targets, tempsTotal, couleur });
-//   }
-
-//   // Trier les joueurs en fonction du nombre de balises trouvées et du temps total
-//   classement.sort((a, b) => {
-//     if (a.balisesTrouvees !== b.balisesTrouvees) {
-//       return b.balisesTrouvees - a.balisesTrouvees; // Trie par nombre de balises trouvées décroissant
-//     } else {
-//       return a.tempsTotal - b.tempsTotal; // En cas d'égalité, trie par temps total croissant
-//     }
-//   });
-
-//   // Afficher le classement
-
-
-//   // on affiche le classement de TOUT joueurs classement.length
-//   for (let i = 0; i < 3; i++) {
-//     for (let i = 0; i < 3 ; i++) {
-//       const joueurNameHtml = document.getElementById('joueur' + (i + 1) + '-name');
-//       const joueurColorHtml = document.getElementById('joueur' + (i + 1) + '-color');
-//       const joueur = classement[i];
-//       const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${joueur.tempsTotal} secondes`;
-
-//       joueurNameHtml.innerHTML = joueur.joueurId;
-//       // joueur possede l'attribut couleur qui contient l'hexa de la couleur
-//       // console.log(joueur.couleur);
-//       // if (i % 3 === 0) {
-//       //   joueurColorHtml.classList.add('square');
-
-//       // } else if (i % 3 === 1) {
-//       //   joueurColorHtml.classList.add('circle');
-
-//       // } else {
-//       //   joueurColorHtml.classList.add('triangle');
-
-//       // }
-
-//       joueurColorHtml.style.backgroundColor = joueur.couleur;
-
-//     }
-//   }
-//   return classement;
-// }
-
-function créerPions() {
-  nbTargets = getTaillePlateau();
-  var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-  var ListJoueurs = Object.keys(cacheCacheData);
-  var tabCouleurs = [];
-  for (const joueur in cacheCacheData) {
-    const couleur = cacheCacheData[joueur].couleur;
-    tabCouleurs.push(couleur);
-  }
-  var nbJoueurs = getNbJoueurs();
-  // Récupérer le tableau
-  var table = document.getElementById("gameTable");
-  // recupérer tous les tr du tableau
-  var tr = table.getElementsByTagName("tr");
-  // pour chaque tr on récupère les td
-  for (var i = 0; i < tr.length; i++) {
-    var td = tr[i].getElementsByTagName("td");
-    // pour chaque td on créer autant de div que de joueurs
-    for (var j = 0; j < td.length; j++) {
-      //pour chaque joueur on créer une div
-      for (var k = 0; k < nbJoueurs; k++) {
-        var nouvelleDiv = document.createElement('div');
-        nouvelleDiv.id = ListJoueurs[k];  // la node du localStorage est utilisé pour l'ID
-        td[j].appendChild(nouvelleDiv);
-        // Ajoute une classe à chaque nouvelle div
-        if (k % 3 === 0) {
-          nouvelleDiv.classList.add('square');
-          nouvelleDiv.style.backgroundColor = tabCouleurs[k];
-          nouvelleDiv.style.display = "none";
-        } else if (k % 3 === 1) {
-          nouvelleDiv.classList.add('circle');
-          nouvelleDiv.style.backgroundColor = tabCouleurs[k];
-          nouvelleDiv.style.display = "none";
-        } else {
-          nouvelleDiv.classList.add('triangle');
-          nouvelleDiv.style.borderBottomColor = tabCouleurs[k];
-          nouvelleDiv.style.display = "none";
-        }
-      }
-    }
-  }
+function creerPion(idTd, idPion) {
+  var cacheCacheData = lireLocalStorage();
+  var nouvelleDiv = document.createElement("div");
+  nouvelleDiv.id = idPion;
+  div = document.getElementById(idTd);
+  div.appendChild(nouvelleDiv);
+  nouvelleDiv.classList.add('circle');
+  nouvelleDiv.style.backgroundColor = cacheCacheData[idPion].couleur;
 };
 
-function afficherPions() {
-  var cacheCacheData = JSON.parse(localStorage.getItem('listNodeWithColor'));
-  const ListJoueurs = Object.keys(cacheCacheData);
-
-  for (node in ListJoueurs) {
-    for (var i = 0; i < nbTargets; i++) {
-      var pionAfficher = document.getElementById(i).children[node];
-      pionAfficher.style.display = "none";
-    }
-  }
-
-  for (var i = 0; i < ListJoueurs.length; i++) {
-    const positionPion = getCapteursTrouvés(ListJoueurs[i]);
-    var numeroLigne = Math.floor(positionPion / 5);
-    var ligne = document.getElementsByTagName('tr')["row-" + numeroLigne]
-    var cellules = ligne.getElementsByTagName('td');
-    var cellule = Array.from(cellules).find(cellule => parseInt(cellule.id) === positionPion);
-    var pion = cellule.getElementsByTagName('div')[i];
-    pion.style.display = "block";
-  }
+function deplacerPion(idPion) {
+  pionAvant = document.getElementById(idPion).remove();
+  positionPion = getCapteursTrouvés(idPion);
+  creerPion(positionPion, idPion);
 }
 
 $(document).ready(function () {
   $('#genererPDF').on('click', function () {
     // appel de la fonction qui genere le classement pour etre sur que le classement est a jour
     const classement = creerClassement();
-    console.log('Générer PDF');
-
 
     var content = [
-      { text: 'Date: ' + new Date().toLocaleDateString() },
-      { text: 'Heure: ' + new Date().toLocaleTimeString() },
-      { text: 'Par Loïs PACQUETEAU\n' },
-      { text: 'Compte rendu', fontSize: 16, bold: true, alignment: 'center' },
-      // saut de ligne
-      { text: '\n' },
-      { text: '\n' },
-      { text: '\n' },
-      { text: '\n' },
-      { text: '\n' },
-      { text: '\n' },
-      // tableau
-      { text: 'Score de la course:', fontSize: 14, margin: [0, 10, 0, 5] },
-      {
-        style: 'tableExample',
-        table: {
-          widths: ['*', '*', '*', '*'],
-          body: [
-            ['Position', 'Joueur', 'Temps', 'Balises trouvées'],
-            ...classement.map((joueur, index) => {
-              // ci dessous les milisecondes depassent pas 2 chiffres apres la virgule (d'ou le toFixed(2))
-              const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${(joueur.tempsTotal).toFixed(2)} secondes`;
-              return [index + 1, joueur.joueurId, tempsTotalText, joueur.balisesTrouvees];
-            })
-          ]
-        }
-      },
-      // bas de page
-      { text: '\n' },
-      { text: '\n' },
-      { text: '\n' },
-      { text: '\n' },
-      { text: '\n' },
-      // ajouter le logo de l'iut 
-      // { image: '../assets/images/Logo_IUT_Blagnac.png', width: 100, height: 100, alignment: 'center' },
-      { text: 'Cache-Cache LocURa4IoT sae-3-01devapp-g3a-5', fontSize: 12, alignment: 'center' },
-      { text: '© 2024', fontSize: 12, alignment: 'center' }
+    { text: 'Date: ' + new Date().toLocaleDateString() },
+    { text: 'Heure: ' + new Date().toLocaleTimeString() },
+    { text: 'Par Loïs PACQUETEAU\n' },
+    { text: 'Compte rendu', fontSize: 16, bold: true, alignment: 'center' },
+    // saut de ligne
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    // tableau
+    { text: 'Score de la course:', fontSize: 14, margin: [0, 10, 0, 5] },
+    {
+    style: 'tableExample',
+    table: {
+      widths: ['*', '*', '*', '*'],
+      body: [
+        ['Position', 'Joueur', 'Temps', 'Balises trouvées'],
+        ...classement.map((joueur, index) => {
+          // ci dessous les milisecondes depassent pas 2 chiffres apres la virgule (d'ou le toFixed(2))
+          const tempsTotalText = joueur.tempsTotal === 0 ? "Temps non classé" : `${(joueur.tempsTotal).toFixed(2)} secondes`;
+          return [index + 1, joueur.joueurId, tempsTotalText, joueur.balisesTrouvees];
+        })
+      ]
+    }
+    },
+    // bas de page
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    { text: '\n' },
+    // ajouter le logo de l'iut 
+    // { image: '../assets/images/Logo_IUT_Blagnac.png', width: 100, height: 100, alignment: 'center' },
+    { text: 'Cache-Cache LocURa4IoT sae-3-01devapp-g3a-5', fontSize: 12, alignment: 'center' },
+    { text: ' © PAPI - 2024 ', fontSize: 12, alignment: 'center' }
     ];
 
     pdfMake.createPdf({ content }).download('compte_rendu_LocURa4IoT.pdf');
   });
 });
+
+function getJeuDataFromLocalStorage(){
+  cachecacheData = [];
+  const listNodeWithColor = JSON.parse(localStorage.getItem('listNodeWithColor'));
+  for (const joueurId in listNodeWithColor) {
+    const joueurData = listNodeWithColor[joueurId];
+    cachecacheData.push(joueurData);
+  }
+  return cachecacheData;
+
+}
 
 // faire une fonction qui active la fonction openModal() quand tout les elements d'une liste target sont trouvés (times != 0)
 // on parcours toute la liste des joueurs si un joueur a un temps = 0 on passe au joueur suivant si on arrive à la fin de la liste et que toute les joueurs ont au mois un temps = 0 on return false
@@ -692,11 +548,16 @@ function estFinDuJeu() {
     const tempsNonZero = node.times.every(time => time !== 0);
 
     // Si tous les temps pour un nœud sont différents de zéro, le jeu est terminé
-    if (tempsNonZero) {
+    if (tempsNonZero && interupt === false) {
+      
       return true;
     }
   }
-
+  // deleter toute les div avec la classe "confetti"
+  const confetti = document.getElementsByClassName("confetti");
+  while (confetti.length > 0) {
+    confetti[0].parentNode.removeChild(confetti[0]);
+  }
   // Si aucun nœud n'a tous les temps différents de zéro, le jeu n'est pas terminé
   return false;
 }
@@ -728,10 +589,12 @@ function getCapteursTrouvés(node) {
   return capteursTrouvés.length;
 }
 
-function activatedModal() {
-  if (estFinDuJeu()) {
-    openModal();
-  }
+function activatedModal(){
+  setInterval(() => {
+    if (estFinDuJeu()) {
+        openModal();
+    }
+  }, 100);
 }
 
 
@@ -782,6 +645,7 @@ function rafraichir() {
   document.getElementById('listJoueurs').innerHTML = getListText("Joueur", getListJoueurs());
   document.getElementById('nbCheckpoints').innerText = getNbCheckpoints();
   document.getElementById('listCheckpoints').innerHTML = getListText("Checkpoint", getListCheckpoints());
+  afficherConsole();
 }
 
 function openModal() {
@@ -789,6 +653,7 @@ function openModal() {
 }
 
 function closeModal() {
+  interupt = true;
   document.getElementById("myModal").style.display = "none";
 }
 
@@ -879,7 +744,6 @@ function genererCouleur() {
 }
 
 function isCouleurClaire(couleur) {
-  console.log(couleur);
   if (couleur && typeof couleur === 'string') {
     let r = parseInt(couleur.slice(1, 3), 16);
     let g = parseInt(couleur.slice(3, 5), 16);
