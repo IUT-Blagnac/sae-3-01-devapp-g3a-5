@@ -46,6 +46,8 @@ Pour utiliser le jeu, vous devez posséder un ordinateur avec Chrome (ou Edge, O
 
 > /!\ Le projet doit absolument être utilisé sur un des navigateurs cités, car ce sont à l'heure actuelle les seuls à supporter le webserial 
 
+> /!\ On utilise le microcontrolleur PROGRAMMÉ, le microcontrolleur standard ne fonctionne pas...  
+
 === 2. Installation de l'application
 
 Le fichier code source est disponible ici: 
