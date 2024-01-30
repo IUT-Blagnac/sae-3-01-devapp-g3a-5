@@ -182,9 +182,9 @@ Dès qu'un changement est détecté dans la listNodeWithColors contenue dans le 
 
 image:img/doc_tech_admin/control_admin.png[]
 
-=== Gestion des tableaux
+== Gestion des tableaux
 
-==== Création des tableaux 
+=== Création des tableaux 
 
 Au chargement de la page administrateur, on créée les tableaux de toutes les équipes stockées dans le local storage.
 
@@ -204,7 +204,7 @@ Voici le résultat final :
 
 image:img/doc_tech_admin/tableau.PNG[]
 
-==== Modification des tableaux 
+=== Modification des tableaux 
 
 On récupère le Json de l'équipe qui a trouvé un ou plusieurs nouveaux capteurs. Pour chaque ligne, on récupère la cellule de la colonne trouvé et la cellule contenant le temps correspondantes.
 Si le temps est supérier à 0, alors on insère le temps et on affiche une icône checked.
@@ -212,7 +212,7 @@ Si le temps est supérier à 0, alors on insère le temps et on affiche une icô
 image:img/doc_tech_admin/tableauModif.PNG[]
 image:img/doc_tech_admin/modifierTab.PNG[]
 
-==== Vérifier la connection des tableaux 
+=== Vérifier la connection des tableaux 
 
 La fonction "verifierDeconnection" est une fonction activée toutes les secondes qui permet de vérifier si une équipe est déconnectée. Une équipe est considérée déconnecté si on a pas reçu d'update depuis plus de 7 secondes.
 
@@ -229,18 +229,24 @@ Pour savoir si une l'équipe dont on a reçu le JSon s'est reconnectée, on rega
 image:img/doc_tech_admin/gererreco.PNG[]
 
 
-=== Envoyer un message
+== Envoyer un message
 
-==== Message customisé
+=== Message customisé
 
 Lorsque vous cliquez sur le bouton "message", un prompt va vous demandez le message que vous souhaitez communiquer. Si le message n'est pas vide, il sera affiché sur l'écran des utilisateurs.
 
 image:img/doc_tech_admin/displaypopup.PNG[]
 
-==== Messages programmés
+=== Messages programmés
 
+Des messages automatiques sont affichés automatiquement, lorsque :
 
-=== Couleur aléatoire des joueurs
+* Une équipe trouve la moitié des checkpoints
+* Une équipe trouve la totalité des checkpoints
+* Une équipe se déconnecte
+* Une équipe se reconnecte
+
+== Couleur aléatoire des joueurs
 Compare la node qui vient d'être récupéré avec un tableau contenant les nodes ayant déjà une couleur. Si la node est déjà existante il ne se passe rien. Sinon une couleur est générer de manière aléatoire. Ensuite cette couleur est ajouter au json de la node et la node est ajouté au tableau des nodes avec couleurs. 
 
 image:img/génération-couleur.png[]
@@ -255,7 +261,6 @@ le port est fermé.
 image:img/lire-port-série.png[]
 
 == Evolutivité
-Le code php est réalisé de maniere a s'adapter a la taille d'une liste de balise. Plus il y a de balise, plus le plateau de 
-jeu sera grand. Pour l'instant on utilise une liste quelquonque mais lorsque la communication en webserial sera 
-réalisé on mettra une veritable liste de balise au deuxieme sprint. Si a l'avenir on souhaite faire un jeu comme ca avec beauucoup de 
-balise, l'ihm sera fonctionnel!
+Le code js est réalisé de manière a adapter la taille du plateau au nombre de balise. Plus il y a de balise, plus le plateau de 
+jeu sera grand. On connait le nombre de checkpoints grâce à la communication en webserial. Si a l'avenir on souhaite faire un jeu comme cela avec beauucoup de 
+balise, l'ihm sera fonctionnelle et aura une forme de serpentin !
