@@ -52,7 +52,7 @@ Ce dossier contient l'ensemble du code source de l'app.
 
 === FICHIER HTML
 
-La gestion des données est réalisée en PHP. Les données sont stockées dans des fichiers JSON, eux memes stockés dans le local storage du navigateur.
+La gestion des données est réalisée en html. Les données sont stockées dans des fichiers JSON, eux memes stockés dans le local storage du navigateur.
 
 ==== `index.html`
 
@@ -88,7 +88,7 @@ Contient les images utilisées dans l'IHM, telles que des icônes, des logos, et
 
 ==== Dossier `js`
 
-Ce dossier contient les fichiers JavaScript nécessaires pour l'IHM.
+Ce dossier contient le fichier JavaScript nécessaires pour l'IHM.
 
 ===== `locura4iot.js`
 
@@ -139,6 +139,7 @@ Le css:
 
 image:img/fonction-color3.png[]
 
+
 === Pions
 
 ==== Création des pions
@@ -158,6 +159,14 @@ La solution trouvée pour résoudre ce problème est de déplacer le de case en 
 image:img/movepioncode.png[]
 
 La fonction prend en paramètre la node du joueur et donc l'id du pion. D'abord on récupère la case dans laquelle le pion se trouve puis on supprime le pion de cette case. Ensuite on appelle la fonction *createPion* pour créer le pion dans la case correspondant au nombre de capteur trouvé. Si le nombre de capteur trouvé à augmenter le pion est déplacé sinon il reste sur la même case.
+
+== Classement & Podium
+=== Classement
+
+=== Podium
+Le podium s'affiche automatiquement pendant, et à la fin de la partie. Une pop-up de fin de partie ainsi que des confettis apparaissent.
+
+
 
 == Génération du PDF de fin de partie
 
@@ -180,6 +189,11 @@ Resultat:
 
 image:img/json.png[width=250, height=250]
 
+=== Console JSON
+
+[TEXTE]
+
+
 
 == Données Admin
 
@@ -198,7 +212,17 @@ Dès qu'un changement est détecté dans la listNodeWithColors contenue dans le 
 
 image:img/doc_tech_admin/control_admin.png[]
 
+=== Clear du Local Storage
+
+[TEXTE]
+
+== Gestion des tableaux
+
 === Création des tableaux 
+
+Au chargement de la page administrateur, on créée les tableaux de toutes les équipes stockées dans le local storage.
+
+image:img/doc_tech_admin/init_admin.PNG[]
 
 Lorsqu'une nouvelle équipe se connecte, on créée son tableau récapitulatif qui sera affiché en temps réel (sans rafraîchissement de la page) sur l'interface administrateur. Pour savoir si une équipe est nouvelle, on vérifie si sa node est utilisée comme clé de la variable listNodeWithColor contenue dans le localstorage. Le cas échéant, on créée sa table de a à z :
 
@@ -222,8 +246,41 @@ Si le temps est supérier à 0, alors on insère le temps et on affiche une icô
 image:img/doc_tech_admin/tableauModif.PNG[]
 image:img/doc_tech_admin/modifierTab.PNG[]
 
+=== Vérifier la connection des tableaux 
 
-=== Couleur aléatoire des joueurs
+La fonction "verifierDeconnection" est une fonction activée toutes les secondes qui permet de vérifier si une équipe est déconnectée. Une équipe est considérée déconnecté si on a pas reçu d'update depuis plus de 7 secondes.
+
+image:img/doc_tech_admin/verifierdeco.PNG[]
+
+Pour savoir la date de dernière mise-à-jour, à chaque nouveau JSon reçu, on assimile à l'attribut "lastUpdate" le résultat de la fonction Date.now() 
+
+Ensuite, verifierDeconnection regare, pour chaque JSon présent dans le local storage, que l'écart entre lastUpdate et Date.now() est inférieur à 7000ms. Si c'est le cas, et que la table est marquée comme connectée, alors on lui attribue la classe "deconnecte" (qui baisse son opacité à 50%) et un message est également affiché sur l'écran des utilisateurs.
+
+image:img/doc_tech_admin/gererdeco.PNG[]
+
+Pour savoir si une l'équipe dont on a reçu le JSon s'est reconnectée, on regarde simplement si sa table associée possède la classe "deconnecte". Le cas échéant, on lui retire cette classe et on affiche un message pour informer que l'équipe s'est reconnectée.
+
+image:img/doc_tech_admin/gererreco.PNG[]
+
+
+== Envoyer un message
+
+=== Message customisé
+
+Lorsque vous cliquez sur le bouton "message", un prompt va vous demandez le message que vous souhaitez communiquer. Si le message n'est pas vide, il sera affiché sur l'écran des utilisateurs.
+
+image:img/doc_tech_admin/displaypopup.PNG[]
+
+=== Messages programmés
+
+Des messages automatiques sont affichés automatiquement, lorsque :
+
+* Une équipe trouve la moitié des checkpoints
+* Une équipe trouve la totalité des checkpoints
+* Une équipe se déconnecte
+* Une équipe se reconnecte
+
+== Couleur aléatoire des joueurs
 Compare la node qui vient d'être récupéré avec un tableau contenant les nodes ayant déjà une couleur. Si la node est déjà existante il ne se passe rien. Sinon une couleur est générer de manière aléatoire. Ensuite cette couleur est ajouter au json de la node et la node est ajouté au tableau des nodes avec couleurs. 
 
 image:img/génération-couleur.png[]
@@ -243,3 +300,5 @@ image:img/choixPortSerie.png[]
 
 == Adaptabilité
 Le code javaScript est réalisé de manière à s'adapter à la taille d'une liste de balise. Plus il y a de balise, plus le plateau de jeu sera grand. La génération des couleurs se fait pour chaque joueur et une couleur ne peut pas être attribuée deux fois.
+
+

@@ -26,7 +26,9 @@ html{
 }
 
 div.nav-bar{
+    /* background-color: rgba(70, 70, 70, 0.503); */
     padding: 0px;
+    /* color: aliceblue; */
     background-color: rgba(44, 42, 42, 1);
     color: #5CBDBF;
     margin: 0;
@@ -132,7 +134,10 @@ td.color-5{
 td.joueur-name{
     border: 0;
 }
-
+.lastcase{
+    /* background-image: url("./images/ligne-darrivee.png");
+    background-size: cover; */
+}
 canvas {
     position: absolute;
     top: 0;
@@ -213,6 +218,10 @@ button#genererJson{
 
 }
 
+
+
+
+
 /* Styles pour le bouton de fermeture de la fenêtre modale */
 .close-button {
     cursor: pointer;
@@ -255,7 +264,10 @@ table#content-classement-table{
     border-radius: 10px;
 }
 
+
+
 /* POP UP */
+
 .popup {
     display: none;
     position: fixed;
@@ -267,7 +279,7 @@ table#content-classement-table{
     padding: 20px;
 }
 
-.message-content {
+.popup-content {
     text-align: center;
 }
 
