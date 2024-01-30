@@ -42,49 +42,28 @@ Un chronomètre permet de mesurer le temps que chaque équipe mets pour trouver 
 
 === 1. Pré-requis
 [.text-justify]
-Pour utiliser le jeu, vous devez posséder un ordinateur avec chrome et l'application "WampServer". Vous devez également posséder les boitiers de recherche de balises ainsi que les balises. Il est aussi nécessaire d'avoir le pont qui permet de lire les données des balises et de les envoyer sur le site web.
+Pour utiliser le jeu, vous devez posséder un ordinateur avec Chrome (ou Edge, Opera...). Vous devez également posséder les boitiers de recherche de balises ainsi que les balises. Il est aussi nécessaire d'avoir le pont qui permet de lire les données des balises et de les envoyer sur le site web.
 
-> /!\ Le projet doit être utilisé avec Google Chrome pour être compatible.
+> /!\ Le projet doit absolument être utilisé sur un des navigateurs cités, car ce sont à l'heure actuelle les seuls à supporter le webserial 
 
-=== 2. Installation de Wamp
-
-Pour lancer l'application, il faut télécharger Wamp pour déployer le projet sur sa propre machine, et l'héberger localement. N'importe quel autre serveur web peut être utilisé, mais Wamp est le plus simple à utiliser.
-
-https://www.wampserver.com/en/download-wampserver-64bits/#download-wrapper[Lien de telechargement wamp]
-
-image::img/installwamp.PNG[]
-
-Vous devriez obtenir un fichier comme cela :
-image::img/wampsetup.PNG[]
-Lancez-le et suivez les instructions pour installer Wamp.
-
-
-=== 3. Installation de l'application
-[[installation]]
-Une fois Wamp installé, il faut lancer l'application Wamp puis lancer le serveur en cliquant sur l'icône Wamp dans la barre des tâches, puis en cliquant sur "Start All Services".
-
-image::img/wamp.png[]
-
-Ensuite, il faut se rendre dans le dossier www de Wamp, et y créer un dossier "LocuraIoT". C'est dans ce dossier que l'on va placer le code source du projet.
+=== 2. Installation de l'application
 
 Le fichier code source est disponible ici: 
 https://www.github.com/LoisPacqueteau/LocuraIoT[Code source]
 
-Une fois le code source placé dans le dossier LocuraIoT, il faut se rendre sur la page `localhost/Code%20source/` dans son navigateur Google Chrome.
-
-L'application est maintenant installé sur votre machine.
-
-
+Pour l'installer, rien de plus simple, téléchargez le code source et ouvrez le fichier `index.html` dans votre navigateur.
 
 == IV. Utilisation de l'application
 [.text-justify]
 
 === 1. Lancement du Site web
 Ouvrez <<installation, l'application>>. 
-Vous arriverez sur la page index. Cliquez sur "Lancer lecture des données" et sélectionnez le port utilisé pour la carte programmable lectrice de données.
+Vous arriverez sur la page index. Cliquez sur "Lancer lecture des données" et sélectionnez le port utilisé pour la carte programmable lectrice de données. Si vous avez ouvert le mauvais port, cliquez sur le bouton "Clear storage"
 
 === Navigation sur le Site
 Pour accéder à l'interface administrateur, cliquez sur le bouton "Commencer la partie" présent sur la page index.
+
+> Le bouton "Commencer la partie" dès qu'on détecte 1 joueur ou plus.
 
 image::img/commencerpartie.PNG[]
 
@@ -94,11 +73,31 @@ Depuis la page administrateur, vous pouvez accéder à l'interface utilisateur e
 
 image::img/btnihmuser.PNG[]
 
+
+
+
 === Interactions sur le Jeu
 
 La majeure partie des interactions avec le jeu se réalisent à travers <<ihmadmin, l'interface administrateur>>.
 
 ==== Index
+
+===== Voir Sniffeurs Connectés
+
+Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index.
+
+image::img/afterrefresh.png[Exemple de liste de sniffeurs connectés]
+
+===== Voir Checkpoints Connectés
+
+Il s'agit d'une fonctionnalité de lecture pour s'assurer que le jeu est prêt. En effet, elle permet de voir quels checkpoints sont connectés, avant de démarrer le jeu.
+
+image::img/viewcheckpoints.png[Exemple de liste de checkpoints]
+
+===== Lecture des données
+
+Lorsque vous arrivez sur le jeu, vous devez sélectionner le port connecté à la carte lisant des données. Une fois cela fait, le bouton disparaît et est remplacé par un bouton rafraîchir. Si vous avez sélectionné le mauvais port/aucun port, relancez la page.
+C'est la page index qui se charge de la lecture des données, par conséquence, *elle ne doit pas être fermée.*
 
 ===== Rafraîchissement
 
@@ -118,23 +117,21 @@ image::img/afterrefresh.png[Liste des équipes après rafraîchissement]
 
 // On voit les équipes
 
+===== Clear storage
+
+Le bouton "Clear storage" permet d'effacer les données des parties précédentes encore présente dans le local storage.
+
+===== Console
+
+Ici sont affichés tous les Json récupérés en temps réel. La console sert au débuggage.
+
 ===== Accès Interface Admin
 
 On peut accéder à l'interface d'administrateur du jeu depuis la page d'index. Ce bouton apparaît lorsqu'on détecte au moins 1 joueur.
 
 image::img/accessadmin.png[Bouton d'accès à l'interface admin]
 
-===== Voir Checkpoints Connectés
 
-Il s'agit d'une fonctionnalité de lecture pour s'assurer que le jeu est prêt. En effet, elle permet de voir quels checkpoints sont connectés, avant de démarrer le jeu.
-
-image::img/viewcheckpoints.png[Exemple de liste de checkpoints]
-
-===== Voir Sniffeurs Connectés
-
-Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index.
-
-image::img/afterrefresh.png[Exemple de liste de sniffeurs connectés]
 
 ==== Interface administrateur
 [[ihmadmin]]
@@ -142,13 +139,19 @@ image::img/afterrefresh.png[Exemple de liste de sniffeurs connectés]
 ===== Afficher Message
 
 Vous trouverez un bouton "message". Si vous cliquez dessus, une pop-up vous demandera le contenu de votre message. Confirmez, et il sera affiché sur l'écran des utilisateurs.
-Cette fonction est utile pour informer les joueurs que la partie se termine bientôt par exemple.
+Cette fonction est utile pour informer les joueurs en temps réel.
 
 image::img/btnmessage.png[Bouton Message]
 
 image::img/messagedisplay.png[Affichage du message]
 
 > /!\ Des messages automatiques sont programmés, pour prévenir qu'une équipe a trouvé la moitié des capteurs, a fini la partie ou s'est déconnectée/reconnectée.
+
+===== Télécharger JSon
+
+Vous pouvez télécharger le JSon contenant toutes les informations de la partie à l'heure actuelle à tout moment.
+
+image::img/btnjson.png[Bouton Message]
 
 ===== Menu Pause
 
@@ -166,15 +169,30 @@ La liste des équipes étant disponibles depuis l'interface administrateur, il e
 
 image::img/viewteamdata.png[Données d'une équipe]
 
-==== Interface Utilisateur/Spectateur
-==== Divers
+
+
+==== Interface Utilisateur
+
+===== Plateau de jeu
+
+L'intérêt principal de l'interface utilisateur est le plateau de jeu. Projeté sur un écran visible de tous, il permet aux joueurs et aux spectateurs d'avoir un aperçu global de la partie.
+
+Le tableau est adaptatif, il se génère en fonction du nombre de capteurs en forme de serpentin.
+
+> Le nombre de case est égal au nombre de checkpoints à trouver + 1 (pour le départ)
+
+===== Podium
+
+En haut de la page se trouve le podium avec les 3 joueurs les plus avancés (ceux ayant trouvé le plus de capteur en moins de temps). Il est dynamique, il s'adapte en temps réel
+
+===== Pop-up de fin de partie
+
+Dès qu'un joueur trouve tous les capteurs, une pop-up nous en informe, affiche le podium et nous propose de télécharger le résumé de la partie en PDF et/ou en JSon.
+
+
+==== Autres
 
 Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
-
-===== Lecture des données
-
-Lorsque vous arrivez sur le jeu, vous devez sélectionner le port connecté à la carte lisant des données. Une fois cela fait, le bouton disparaît et est remplacé par un bouton rafraîchir. Si vous avez sélectionné le mauvais port/aucun port, relancez la page.
-C'est la page index qui se charge de la lecture des données, par conséquence, *elle ne doit pas être fermée.*
 
 ===== Equipe Connexion
 
@@ -187,7 +205,6 @@ Lorsqu'un sniffeur se connecte, il peut être vu depuis :
 image::img/viewteamdata.png[Interface administrateur]
 image::img/indexteamconnection.png[Interface utilisateur]
 image::img/afterrefresh.png[Index]
-
 
 ===== Déconnexion d'une équipe
 
