@@ -7,14 +7,16 @@
 
 Réalisé par *Thomas Duppi, Loïs Pacqueteau, Vincent Barette, Loélia Demany*
 
+Date : 31/01/2024
+
+Version : 2.0
+
 Documentation technique pour le projet de chasse au trésor LocuraIoT
 
 == Sommaire
 
 toc::[]
 
-date : 31/01/2024
-Version : 2.0
 
 == Cas d'utilisation général
 
