@@ -63,7 +63,7 @@ Vous arriverez sur la page index. Cliquez sur "Lancer lecture des données" et s
 === Navigation sur le Site
 Pour accéder à l'interface administrateur, cliquez sur le bouton "Commencer la partie" présent sur la page index.
 
-> Le bouton "Commencer la partie" dès qu'on détecte 1 joueur ou plus.
+> Le bouton "Commencer la partie" apparaît dès qu'on détecte 1 joueur ou plus.
 
 image::img/commencerpartie.PNG[]
 
@@ -219,6 +219,6 @@ image::img/afterrefresh.png[Index]
 
 Lorsqu'une équipe se déconnecte (Joueur hors de portée, noeud déchargé...) les participants au jeu en sont informés : un message est lancé automatiquement sur l'interface utilisateur et le tableau correspondant à l'équipe dans l'interface utilisateur est mit en transparence.
 
-image::img/tabdeco.png[Tableau déconnecté]
+image::img/tabdeco.PNG[Tableau déconnecté]
 
 Si l'équipe se reconnecte, l'apparence de l'équipe revient à la normale et un message est lancé sur l'interface user pour prévenir les joueurs.
