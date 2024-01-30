@@ -141,7 +141,7 @@ image::img/accessadmin.png[Bouton d'accès à l'interface admin]
 Vous trouverez un bouton "message". Si vous cliquez dessus, une pop-up vous demandera le contenu de votre message. Confirmez, et il sera affiché sur l'écran des utilisateurs.
 Cette fonction est utile pour informer les joueurs en temps réel.
 
-image::img/btnmessage.png[Bouton Message]
+image::img/btnmessage.PNG[Bouton Message]
 
 image::img/messagedisplay.png[Affichage du message]
 
@@ -151,7 +151,7 @@ image::img/messagedisplay.png[Affichage du message]
 
 Vous pouvez télécharger le JSon contenant toutes les informations de la partie à l'heure actuelle à tout moment.
 
-image::img/btnjson.png[Bouton Message]
+image::img/btnjson.PNG[Bouton Message]
 
 ===== Menu Pause
 
@@ -181,13 +181,22 @@ Le tableau est adaptatif, il se génère en fonction du nombre de capteurs en fo
 
 > Le nombre de case est égal au nombre de checkpoints à trouver + 1 (pour le départ)
 
+image::img/plateau6.png[Plateau pour 5 capteurs]
+
+image::img/plateau11.png[Plateau pour 10 capteurs]
+
 ===== Podium
 
 En haut de la page se trouve le podium avec les 3 joueurs les plus avancés (ceux ayant trouvé le plus de capteur en moins de temps). Il est dynamique, il s'adapte en temps réel
 
+image::img/plateau fini.png[Plateau de fin de jeu, avec le podium]
+
 ===== Pop-up de fin de partie
 
 Dès qu'un joueur trouve tous les capteurs, une pop-up nous en informe, affiche le podium et nous propose de télécharger le résumé de la partie en PDF et/ou en JSon.
+
+image::img/popupfin.png[Pop-up de fin]
+
 
 
 ==== Autres
