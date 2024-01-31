@@ -11,6 +11,11 @@ Version : 2.0
 Cette documentation à pour but de vous aider à comprendre le fonctionnement de l'interface de jeu.
 Ce projet à été creer dans le but d'aider le laboratoire de recherche LocURa4IoT !
 
+Les types d'utilisateurs sont :
+* Admin, il peut intéragir avec le jeu et accéder à des données avancées
+* Joueur, il s'agit de quelqu'un qui joue au jeu
+* Spectateur, un admin est un spectateur et un joueur est aussi un spectateur. Ils peuvent voir l'avancé générale du jeu
+
 == II. Règles du Jeu
 [.text-justify]
 
