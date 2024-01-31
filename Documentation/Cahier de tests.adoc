@@ -70,6 +70,7 @@ Ordinateur sous Windows ou OS équivalent.
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -106,6 +107,7 @@ Ordinateur sous Windows ou OS équivalent.
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -141,6 +143,7 @@ Ordinateur sous Windows ou OS équivalent.
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -165,6 +168,7 @@ Ordinateur sous Windows ou OS équivalent.
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -194,6 +198,7 @@ Ordinateur sous Windows ou OS équivalent.
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -224,6 +229,7 @@ Ordinateur sous Windows ou OS équivalent.
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -261,6 +267,7 @@ Ordinateur sous Windows ou OS équivalent.
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -296,6 +303,7 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -324,6 +332,7 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -358,6 +367,7 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -384,6 +394,7 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -414,6 +425,7 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -449,6 +461,7 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
@@ -473,6 +486,7 @@ Il s'agit du panel par défaut, qui permet de s'assurer que le jeu est prêt, av
 [width="300%"]
 |====
 >| Cas de test 4+| {test_id}
+>| Version 4+| {version}
 >| Titre 4+| {nom_test}
 >| Objectif 4+| {objectif}
 5+|
