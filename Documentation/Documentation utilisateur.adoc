@@ -9,6 +9,7 @@ Version : 2.0
 == I. Introduction
 [.text-justify]
 Cette documentation a pour but de vous aider à comprendre le fonctionnement de l'interface de jeu.
+
 == II. Règles du Jeu
 [.text-justify]
 
