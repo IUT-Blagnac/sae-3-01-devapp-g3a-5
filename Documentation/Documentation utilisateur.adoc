@@ -8,8 +8,8 @@ Version : 2.0
 
 == I. Introduction
 [.text-justify]
-Cette documentation a pour but de vous aider à comprendre le fonctionnement de l'interface de jeu.
-Ce projet a été creer dans le but d'aider le laboratoire de recherche LocURa4IoT !
+Cette documentation à pour but de vous aider à comprendre le fonctionnement de l'interface de jeu.
+Ce projet à été creer dans le but d'aider le laboratoire de recherche LocURa4IoT !
 
 == II. Règles du Jeu
 [.text-justify]
