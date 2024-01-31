@@ -9,6 +9,7 @@ Version : 2.0
 == I. Introduction
 [.text-justify]
 Cette documentation a pour but de vous aider à comprendre le fonctionnement de l'interface de jeu.
+Ce projet a été creer dans le but d'aider le laboratoire de recherche LocURa4IoT !
 
 == II. Règles du Jeu
 [.text-justify]
@@ -18,27 +19,27 @@ A intervalle réguliers, les boitiers envoient des JSON contenant :
 
 * L'id du noeud (de la forme '0x????')
 * Les id des checkpoints, dans l'ordre dans lequel le joueur doit les trouver
-** A noter que les joueurs doivent trouver les même checkpoints, dans un ordre différent, excepté pour le checkpoint final qui est le même pour toutes les équipes.
+** A noter que les joueurs doivent trouver les même checkpoints, dans un ordre différent, excepté pour le checkpoint final qui est le même pour toutes les joueurs.
 * Le temps mit pour trouver chaque checkpoint, depuis le début de la partie 
-** Par exemple, si une équipe trouve un checkpoint au bout de 10 seconde de jeu, et un autre 15 secondes plus tard, le second checkpoint sera considéré comment ayant été trouvé au bout de 25 secondes.
+** Par exemple, si un joueur trouve un checkpoint au bout de 10 seconde de jeu, et un autre 15 secondes plus tard, le second checkpoint sera considéré comment ayant été trouvé au bout de 25 secondes.
 
 === 1. Localisation des Objets
 Le but du jeu est de retrouver des objets connectés disséminés sur la plateforme. Les informations de localisation des objets sont fournies par la plateforme LocURa4IoT.
 
 === 2. Règles de Recherche
-Chaque équipe doit trouver tous les checkpoints dans un ordre défini aléatoirement. (A noter qu'il est également possible de jouer à ce jeu en solitaire.) Chaque équipe doit trouver les checkpoints dans l'ordre qui lui est attribué. Les boitiers de recherche changent de couleur et clignotent de plus en plus vite lorsque l'équipe se rapproche de la balise.
+Chaque joueur doit trouver tous les checkpoints dans un ordre défini aléatoirement. (A noter qu'il est également possible de jouer à ce jeu en solitaire.) Chaque joueur doit trouver les checkpoints dans l'ordre qui lui est attribué. Les boitiers de recherche changent de couleur et clignotent de plus en plus vite lorsque le joueur se rapproche de la balise.
 
 === 3. Conditions de Victoire
-Un chronomètre permet de mesurer le temps que chaque équipe mets pour trouver toutes les balises. L'équipe qui trouve toutes les balises en le moins de temps possible remporte la partie.
+Un chronomètre permet de mesurer le temps que chaque joueur mets pour trouver toutes les balises. L'joueur qui trouve toutes les balises en le moins de temps possible remporte la partie.
 
 === 4. Déroulement du Jeu
-1. Les équipes se rassemblent à la balise de départ.
-2. Chaque équipe reçoit un boitier qui détecte les balises.
-3. Les équipes partent ensuite à la recherche des objets dans la zone où ils ont été cachés.
+1. Les joueurs se rassemblent à la balise de départ.
+2. Chaque joueur reçoit un boitier qui détecte les balises.
+3. Les joueurs partent ensuite à la recherche des objets dans la zone où ils ont été cachés.
 4. Si un boitier se trouve à moins de 30cm de distance pendant 5 secondes, il est considéré trouvé.
 5. La plateforme met à jour régulièrement les informations de localisation pour maintenir le défi.
-6. Une fois que toutes les équipes ont trouvées tout les checkpoints, les équipes retournent à la balise de départ pour la déclaration des résultats.
-7. L'équipe avec le temps le plus court remporte la partie.
+6. Une fois que toutes les joueurs ont trouvées tout les checkpoints, les joueurs retournent à la balise de départ pour la déclaration des résultats.
+7. L'joueur avec le temps le plus court remporte la partie.
 
 == III. Installation du jeu
 
@@ -88,7 +89,7 @@ La majeure partie des interactions avec le jeu se réalisent à travers <<ihmadm
 
 ===== Voir Sniffeurs Connectés
 
-Liste des sniffeurs (AKA équipes) connectées, depuis la page d'index.
+Liste des sniffeurs (AKA joueurs) connectées, depuis la page d'index.
 
 image::img/afterrefresh.png[Exemple de liste de sniffeurs connectés]
 
@@ -111,15 +112,15 @@ image::img/refreshbutton.png[Bouton de rafraîchissement]
 
 Exemple - Avant rafraîchissement
 
-image::img/beforerefresh.png[Liste des équipes avant rafraîchissement]
+image::img/beforerefresh.png[Liste des joueurs avant rafraîchissement]
 
-// On ne voit aucune équipe
+// On ne voit aucune joueur
 
 Exemple - Après rafraîchissement
 
-image::img/afterrefresh.png[Liste des équipes après rafraîchissement]
+image::img/afterrefresh.png[Liste des joueurs après rafraîchissement]
 
-// On voit les équipes
+// On voit les joueurs
 
 ===== Clear storage
 
@@ -149,7 +150,7 @@ image::img/btnmessage.PNG[Bouton Message]
 
 image::img/messagedisplay.png[Affichage du message]
 
-> /!\ Des messages automatiques sont programmés, pour prévenir qu'une équipe a trouvé la moitié des capteurs, a fini la partie ou s'est déconnectée/reconnectée.
+> /!\ Des messages automatiques sont programmés, pour prévenir qu'une joueur a trouvé la moitié des capteurs, a fini la partie ou s'est déconnectée/reconnectée.
 
 ===== Télécharger JSon
 
@@ -171,7 +172,7 @@ image::img/pausemode.png[Affichage du mode pause]
 
 La liste des joueurs étant disponibles depuis l'interface administrateur, il est possible facilement de s'intéresser aux détails de leur progression. On peut notamment observer quels checkpoints ont été trouvés, et en combien de temps.
 
-image::img/viewteamdata.png[Données d'une équipe]
+image::img/viewteamdata.png[Données d'une joueur]
 
 
 
@@ -211,7 +212,7 @@ Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
 
 Lorsqu'un sniffeur se connecte, il peut être vu depuis :
 
-* l'interface admin (comme une équipe) ;
+* l'interface admin (comme une joueur) ;
 * l'interface utilisateur (comme un pion) ;
 * la page d'index (dans la liste).
 
@@ -219,10 +220,10 @@ image::img/viewteamdata.png[Interface administrateur]
 image::img/indexteamconnection.png[Interface utilisateur]
 image::img/afterrefresh.png[Index]
 
-===== Déconnexion d'une équipe
+===== Déconnexion d'une joueur
 
-Lorsqu'une équipe se déconnecte (Joueur hors de portée, noeud déchargé...) les participants au jeu en sont informés : un message est lancé automatiquement sur l'interface utilisateur et le tableau correspondant à l'équipe dans l'interface utilisateur est mit en transparence.
+Lorsqu'une joueur se déconnecte (Joueur hors de portée, noeud déchargé...) les participants au jeu en sont informés : un message est lancé automatiquement sur l'interface utilisateur et le tableau correspondant à l'joueur dans l'interface utilisateur est mit en transparence.
 
 image::img/tabdeco.PNG[Tableau déconnecté]
 
-Si l'équipe se reconnecte, l'apparence de l'équipe revient à la normale et un message est lancé sur l'interface user pour prévenir les joueurs.
+Si l'joueur se reconnecte, l'apparence de l'joueur revient à la normale et un message est lancé sur l'interface user pour prévenir les joueurs.
