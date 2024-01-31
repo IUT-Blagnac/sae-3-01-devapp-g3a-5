@@ -9,7 +9,6 @@ Version : 2.0
 == I. Introduction
 [.text-justify]
 Cette documentation a pour but de vous aider à comprendre le fonctionnement de l'interface de jeu.
-
 == II. Règles du Jeu
 [.text-justify]
 
@@ -17,8 +16,8 @@ Cette documentation a pour but de vous aider à comprendre le fonctionnement de 
 A intervalle réguliers, les boitiers envoient des JSON contenant :
 
 * L'id du noeud (de la forme '0x????')
-* Les id des checkpoints, dans l'ordre dans lequel l'équipe doit les trouver
-** A noter que les équipes doivent trouver les même checkpoints, dans un ordre différent, excepté pour le checkpoint final qui est le même pour toutes les équipes.
+* Les id des checkpoints, dans l'ordre dans lequel le joueur doit les trouver
+** A noter que les joueurs doivent trouver les même checkpoints, dans un ordre différent, excepté pour le checkpoint final qui est le même pour toutes les équipes.
 * Le temps mit pour trouver chaque checkpoint, depuis le début de la partie 
 ** Par exemple, si une équipe trouve un checkpoint au bout de 10 seconde de jeu, et un autre 15 secondes plus tard, le second checkpoint sera considéré comment ayant été trouvé au bout de 25 secondes.
 
@@ -167,9 +166,9 @@ image::img/nopausemode.png[Sans mode pause]
 
 image::img/pausemode.png[Affichage du mode pause]
 
-===== Voir Données Equipes
+===== Voir Données Joueurs
 
-La liste des équipes étant disponibles depuis l'interface administrateur, il est possible facilement de s'intéresser aux détails de leur progression. On peut notamment observer quels checkpoints ont été trouvés, et en combien de temps.
+La liste des joueurs étant disponibles depuis l'interface administrateur, il est possible facilement de s'intéresser aux détails de leur progression. On peut notamment observer quels checkpoints ont été trouvés, et en combien de temps.
 
 image::img/viewteamdata.png[Données d'une équipe]
 
@@ -207,7 +206,7 @@ image::img/popupfin.png[Pop-up de fin]
 
 Pour les fonctionnalités qui ne rentrent dans aucune, ou plusieurs catégories.
 
-===== Equipe Connexion
+===== Joueur Connexion
 
 Lorsqu'un sniffeur se connecte, il peut être vu depuis :
 
